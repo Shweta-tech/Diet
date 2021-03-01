@@ -1,0 +1,408 @@
+{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}{% load wagtailcore_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>jQuery Show Hide Elements Using Select Box</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <style>
+        body {
+            background: aliceblue;
+        }
+        
+        form span {
+            color: red;
+            font-size: 15px;
+        }
+        /*         
+        h1 {
+            background-color: #066f95;
+            padding: 20px 20px 20px 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            font-weight: bolder;
+            padding-bottom: 10px;
+        } */
+        
+        .button {
+            width: 20%;
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #066f95;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px #999;
+        }
+        
+        .button:hover {
+            background-color: #568088
+        }
+        
+        #map {
+            width: 1000px;
+            height: 600px;
+        }
+        
+        .button:active {
+            background-color: #55a5b5;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+        
+        h2 {
+            padding-bottom: 10px;
+            padding-top: 10px;
+            color: #066f95;
+            text-decoration: underline;
+            font-weight: 400;
+            text-align: center;
+        }
+        
+        h3 {
+            padding-top: 20px;
+        }
+        
+        label {
+            font-weight: bold;
+            font-size: 20px;
+            color: black;
+        }
+        
+        #calculate {
+            cursor: pointer;
+            text-align: center;
+            width: 200px;
+            padding: 5px;
+            margin: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #999;
+            border-radius: 10px;
+            background: rgb(245, 243, 243);
+            background: -moz-linear-gradient(top, #FFD119, #E6B800);
+            font-weight: bold;
+            height: 28px;
+        }
+        
+        #calculate:hover {
+            background: -webkit-gradient(linear, left top, left bottom, from(#E6B800), to(#FFD119));
+            background: -moz-linear-gradient(top, #E6B800, #FFD119);
+            margin-top: 13px;
+            height: 25px;
+        }
+        
+        #calculate:active {
+            background: #403300;
+            padding-top: 10px;
+            height: 20px;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            color: rgb(39, 22, 22);
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 4px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $("#lang").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
+</head>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div><label>Select Language:</label>
+    <select id="lang">
+            <option>Choose Language</option>
+            <option value="english">English</option>
+            <option value="hindi">Hindi</option>
+            <option value="marathi">Marathi</option>
+        </select>
+</div>
+<div class="english box">
+    <form action="">
+        <h2>
+            Personal Information  
+        </h2>
+        <table border="0" align="center" cellspacing="10">
+           
+            <tr>
+                <td>Unique ID:</td>
+                <td><input type="text" name="uniqueid" id="studentuid" readonly></td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td> <input type="text" name="name" placeholder="Name" id = name/></td>
+            </tr>
+            <tr>
+                <td>Date of Birth:</td>
+                <td><input type="date" id="birth_date" name="dob" placeholder="Date of Birth" required/></td>
+                <td> <span id="calculate">Calculate the age</span></td>
+            </tr>
+            <!-- <span id="calculate">Calculate the age</span> -->
+
+            <tr>
+                <td>Age in years:</td>
+                <td><input id="yage" name="age" onkeypress="return (event.charCode > 47 && event.charCode < 58)"></td>
+            </tr>
+            <tr>
+                <td>Age in months:</td>
+                <td><input id="mnthage" name="age_in_months" onkeypress="return (event.charCode > 47 && event.charCode < 58)"></td>
+            </tr>
+            <tr>
+                <td>Age in days:</td>
+                <td><input id="dage" name="age_in_days" onkeypress="return (event.charCode > 47 && event.charCode < 58)"></td>
+            </tr>
+            <tr>
+                <td>Father's Name:</td>
+                <td><input type="text" name="fname" placeholder="Father's Name" /></td>
+            </tr>
+            <tr>
+                <td>Mother's Name:</td>
+                <td><input type="text" name="mname" placeholder="Mother's Name" /></td>
+            </tr>
+            <tr>
+                <td>Contact Number:</td>
+                <td><input type="number" name="contact" placeholder="Contact Number" />
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input type="email" name="email" placeholder="Email" /></td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td><input type="text" name="address" placeholder="Address" /></td>
+            </tr>
+            <tr>
+                <td>Profile Picture:</td>
+                <td><input type="file" name="pp" placeholder="Profile Picture" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div class="hindi box">
+    <form action="">
+        <h2>
+            व्यक्तिगत जानकारी
+        </h2>
+        <table border="0" align="center" cellspacing="10">
+            <tr>
+                <td>एक अलग पहचान:</td>
+                <td><input type="text" name="uniqueid" id="uid" readonly></td>
+            </tr>
+            <tr>
+                <td>नाम:</td>
+                <td> <input type="text" name="name" placeholder="नाम" /></td>
+            </tr>
+            <tr>
+                <td>जन्म की तारीख:</td>
+                <td><input type="date" id="birth_date" name="dob" placeholder="जन्म की तारीख" required/></td>
+                <td> <span id="calculate">Calculate the age</span></td>
+            </tr>
+            <!-- <span id="calculate">Calculate the age</span> -->
+
+            <tr>
+                <td>आयु वर्षों में:</td>
+                <td><input id="yage" name="age" onkeypress="return (event.charCode > 47 && event.charCode < 58)"></td>
+            </tr>
+            <tr>
+                <td>महीनों में आयु:</td>
+                <td><input id="mnthage" name="age_in_months" onkeypress="return (event.charCode > 47 && event.charCode < 58)"></td>
+            </tr>
+            <tr>
+                <td>दिनों में आयु:</td>
+                <td><input id="dage" name="age_in_days" onkeypress="return (event.charCode > 47 && event.charCode < 58)"></td>
+            </tr>
+            <tr>
+                <td>पिता का नाम:</td>
+                <td><input type="text" name="fname" placeholder="पिता का नाम" /></td>
+            </tr>
+            <tr>
+                <td>माता का नाम:</td>
+                <td><input type="text" name="mname" placeholder="माता का नाम" /></td>
+            </tr>
+            <tr>
+                <td>संपर्क संख्या:</td>
+                <td><input type="number" name="contact" placeholder="संपर्क संख्या" />
+            </tr>
+            <tr>
+                <td>ईमेल:</td>
+                <td><input type="email" name="email" placeholder="ईमेल" /></td>
+            </tr>
+            <tr>
+                <td>पता:</td>
+                <td><input type="text" name="address" placeholder="पता" /></td>
+            </tr>
+            <tr>
+                <td>प्रोफ़ाइल फोटो:</td>
+                <td><input type="file" name="pp" placeholder="प्रोफ़ाइल फोटो" /></td>
+            </tr>
+
+        </table>
+    </form>
+
+</div>
+<div class="marathi box">
+    <form action="">
+
+        <table border="0" align="center" cellspacing="10">
+
+
+            <h2>
+                वैयक्तिक माहिती
+            </h2>
+
+
+
+            <tr>
+                <td>युनिक आयडी:</td>
+                <td><input type="text" name="uniqueid" id="uid" readonly></td>
+            </tr>
+            <tr>
+                <td>नाव:</td>
+                <td> <input type="text" name="name" placeholder="नाम" /></td>
+            </tr>
+            <tr>
+                <td>जन्म तारीख:</td>
+                <td><input type="date" id="birth_date" name="dob" placeholder="जन्म की तारीख" required/></td>
+                <td> <span id="calculate">वयाची गणना करा</span></td>
+            </tr>
+            <!-- <span id="calculate">Calculate the age</span> -->
+
+            <tr>
+                <td>वर्षांमध्ये वय:</td>
+                <td><input id="yage" name="age" onkeypress="return (event.charCode > 47 && event.charCode < 58)"></td>
+            </tr>
+            <tr>
+                <td>महिन्यांत वय:</td>
+                <td><input id="mnthage" name="age_in_months" onkeypress="return (event.charCode > 47 && event.charCode < 58)"></td>
+            </tr>
+            <tr>
+                <td>दिवसांमध्ये वय:</td>
+                <td><input id="dage" name="age_in_days" onkeypress="return (event.charCode > 47 && event.charCode < 58)"></td>
+            </tr>
+            <tr>
+                <td>वडिलांचे नाव:</td>
+                <td><input type="text" name="fname" placeholder="पिता का नाम" /></td>
+            </tr>
+            <tr>
+                <td>आईचे नाव:</td>
+                <td><input type="text" name="mname" placeholder="माता का नाम" /></td>
+            </tr>
+            <tr>
+                <td>संपर्क क्रमांक:</td>
+                <td><input type="number" name="contact" placeholder="संपर्क संख्या" />
+            </tr>
+            <tr>
+                <td>ईमेल:</td>
+                <td><input type="email" name="email" placeholder="ईमेल" /></td>
+            </tr>
+            <tr>
+                <td>पत्ता:</td>
+                <td><input type="text" name="address" placeholder="पता" /></td>
+            </tr>
+            <tr>
+                <td>परिचय चित्र:</td>
+                <td><input type="file" name="pp" placeholder="प्रोफ़ाइल फोटो" /></td>
+            </tr>
+
+        </table>
+
+    </form>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#calculate").click(function() {
+            var mdate = $("#birth_date").val().toString();
+            var yearThen = parseInt(mdate.substring(0, 4), 10);
+            var monthThen = parseInt(mdate.substring(5, 7), 10);
+            var dayThen = parseInt(mdate.substring(8, 10), 10);
+
+            var today = new Date();
+            var birthday = new Date(yearThen, monthThen - 1, dayThen);
+
+            var differenceInMilisecond = today.valueOf() - birthday.valueOf();
+
+            var year_age = Math.floor(differenceInMilisecond / 31536000000);
+            console.log(year_age)
+            var day_age = Math.floor((differenceInMilisecond % 31536000000) / 86400000);
+
+            if ((today.getMonth() == birthday.getMonth()) && (today.getDate() == birthday.getDate())) {
+                alert("Happy B'day!!!");
+            }
+
+            var month_age = Math.floor(day_age / 30);
+
+
+
+            $('#yage').val(year_age);
+            $('#mnthage').val(month_age);
+            $('#dage').val(day_age);
+        });
+    });
+    $(function() {
+        var $docName = $('#name').val();
+        console.log($docName)
+        $("#name").on('change', function() {
+            var val = $("#name").val();
+
+            var $name = {
+                'id': $(this).val()
+            }
+            var $endpoint = window.location.href // or localhost/interface
+            $.ajax({
+                method: "GET",
+                url: $endpoint,
+                data: $id,
+                success: handleFormSuccess,
+                error: handleFormError,
+            })
+        })
+
+        function handleFormSuccess(data) {
+            console.log(data.id);
+            $("#studentuid").val(data.username);
+            // $("#ward").val(data.unit);
+        }
+
+        function handleFormError(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR)
+            console.log(textStatus)
+            console.log(errorThrown)
+        }
+    })
+
+
+
+</script>
+
+</html>{% endblock %}}

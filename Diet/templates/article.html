@@ -1,0 +1,71 @@
+{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Minimal Django File Upload Example</title>
+    <style>
+        .myform {
+            margin-top: 200px;
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: rgb(11, 11, 36);
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<body class="myform">
+    <!-- List of uploaded documents -->
+    <h1>Articles</h1>
+    {% if documents %}
+    <ul>
+        {% for document in documents %}
+        <li>
+            <h5>{{document.title}}</h5>
+        </li>
+
+        <a href="{{ document.Document.url }}">View/Download</a> {% endfor %}
+    </ul>
+    {% else %}
+    <p>No documents.</p>
+    {% endif %}
+    <h1>Media</h1>
+    {% if image %}
+    <ul>
+        {% for img in image %}
+        <li>
+            <h5>{{img.title}}</h5>
+        </li>
+
+        <a href="{{ img.image.url }}">View/Download</a> {% endfor %}
+    </ul>
+    {% else %}
+    <p>No Images.</p>
+    {% endif %}
+    <!-- <div class="myform">
+        <center><a href="/list/" class="btn btn-info">Upload Article</a></center>
+    </div> -->
+    <!-- <h2>Upload Article</h2> -->
+    <!-- Upload form. Note enctype attribute! -->
+    <!-- <form action="{% url 'list' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>{{ form.non_field_errors }}</p>
+        <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+        <p>
+            {{ form.docfile.errors }} {{ form.docfile }}
+        </p>
+        <p><button type="submit"> Upload</button></p>
+    </form> -->
+</body>
+<script>
+    console.log("{{ document.docfile.name }}")
+</script>
+
+</html>{% endblock %}

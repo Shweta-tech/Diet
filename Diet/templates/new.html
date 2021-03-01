@@ -1,0 +1,68 @@
+{% extends 'base.html' %} {% load static%} {% block content %}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Registration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="">
+
+<style>
+    .myform {
+        margin-top: 200px;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+    
+    h1 {
+        text-align: center;
+        color: rgb(36, 36, 68);
+        font-weight: bolder;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="navbar">
+    <a class="active" href="/personal/"><i class="fa fa-fw fa-user-md "></i> Personal</a>
+    <a href="/daily_schedule/"><i class="fa fa-fw fa-clock-o"></i> Daily Schedule</a>
+    <a href="/body/"><i class="fa fa-fw fa-child"></i> Know Your Body</a>
+    <a href="/eat_today/"><i class=" fa fa-fw fa-cutlery "></i> What do you eat usually?</a>
+    <a href="/dietrecall/"><i class=" fa fa-fw fa-cutlery "></i> Diet Recall</a>
+</div>
+
+<div>
+    {% csrf_token %}
+
+    {% for message in messages %}
+    <h3>{{message}}</h3>{% endfor %}
+
+</div>
+<script>
+    // var $Name = $('.name');
+    // $Name.change(function() {
+    //     var $user = {
+    //         'user': $(this).val()
+    //     }
+    //     var $endpoint = window.location.href // or localhost/interface
+    //     $.ajax({
+    //         method: "GET",
+    //         url: $endpoint,
+    //         data: $name,
+    //         success: handleFormSuccess,
+    //         error: handleFormError,
+    //     })
+    // })
+
+    // function handleFormSuccess(data) {
+    //     console.log(data);
+    //     $("#contact").val(data.mobile);
+    //     $("#ward").val(data.unit);
+    // }
+
+    // function handleFormError(jqXHR, textStatus, errorThrown) {
+    //     console.log(jqXHR)
+    //     console.log(textStatus)
+    //     console.log(errorThrown)
+    // }
+</script>
+{% endblock %}

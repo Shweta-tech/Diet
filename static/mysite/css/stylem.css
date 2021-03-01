@@ -1,0 +1,14 @@
+body {
+    margin: 0;
+  }
+  html, body, #map {
+    height: 100%;
+  }
+  
+  .popup-table {
+    width: 100%;
+  }
+  
+  .popup-table-row {
+    background-color: grey;
+  }

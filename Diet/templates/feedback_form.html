@@ -1,0 +1,175 @@
+{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}{% load wagtailcore_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Body Form</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <style>
+        /* body {
+            margin-top: 100px;
+            background: aliceblue;
+        }
+        
+        form {
+            margin: auto;
+            width: 85%;
+            box-shadow: 5px 10px #bdbcbc;
+            border-radius: 10px;
+            padding: 40px 40px 40px 40px;
+            border-style: solid;
+            border-color: rgb(190, 186, 186);
+            margin-top: 100px;
+            color: #403300;
+            align-items: center;
+        } */
+        
+        form span {
+            color: red;
+            font-size: 15px;
+        }
+        /*         
+        h1 {
+            background-color: #066f95;
+            padding: 20px 20px 20px 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            font-weight: bolder;
+            padding-bottom: 10px;
+        } */
+        
+        .button {
+            width: 20%;
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #066f95;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px #999;
+        }
+        
+        .button:hover {
+            background-color: #568088
+        }
+        
+        #map {
+            width: 1000px;
+            height: 600px;
+        }
+        
+        .button:active {
+            background-color: #55a5b5;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+        
+        h2 {
+            padding-bottom: 10px;
+            padding-top: 10px;
+            color: #066f95;
+            text-decoration: underline;
+            font-weight: 400;
+            text-align: center;
+        }
+        
+        h3 {
+            padding-top: 20px;
+        }
+        
+        label {
+            font-weight: bold;
+            font-size: 20px;
+            color: black;
+        }
+        
+        #calculate {
+            cursor: pointer;
+            text-align: center;
+            width: 200px;
+            padding: 5px;
+            margin: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #999;
+            border-radius: 10px;
+            background: rgb(245, 243, 243);
+            background: -moz-linear-gradient(top, #FFD119, #E6B800);
+            font-weight: bold;
+            height: 28px;
+        }
+        
+        #calculate:hover {
+            background: -webkit-gradient(linear, left top, left bottom, from(#E6B800), to(#FFD119));
+            background: -moz-linear-gradient(top, #E6B800, #FFD119);
+            margin-top: 13px;
+            height: 25px;
+        }
+        
+        #calculate:active {
+            background: #403300;
+            padding-top: 10px;
+            height: 20px;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            color: rgb(39, 22, 22);
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 4px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+    </head>
+
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  
+    <div class="english box">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <h2>
+               FeedBack
+            </h2>
+            <table border="0" align="center" cellspacing="10">
+                <tr>
+                    <td>Name : </td>
+                    <td><input type="text" class="fieldlabels" placeholder="Name" style="width: 90%;" name="name" id="name"> </td>
+                </tr>
+                <tr>
+                    <td>Issues : </td>
+                    <td><textarea placeholder="Issues" style="width: 90%;" name="issues" id="issues" rows="5" cols="5"></textarea> </td>
+               
+                <tr>
+                    <td>Suggestions : </td>
+                    <td><textarea placeholder="Suggestions" style="width: 90%"; name ="suggestions" id = "suggestions" cols="5" rows="5"></textarea></td>
+                    
+                </tr>
+
+              
+
+            </table>
+            <center><input type="submit" value="Submit" class="button"></center>
+
+        </form>
+    </div>
+   
+</body>
+<script>
+</script>
+
+</html> {% endblock %}

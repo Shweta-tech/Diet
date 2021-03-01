@@ -1,0 +1,673 @@
+{% extends 'base.html' %} {% load static%} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title> Diet Diversity</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <style>
+        form span {
+            color: red;
+            font-size: 15px;
+        }
+        /*         
+        h1 {
+            background-color: #066f95;
+            padding: 20px 20px 20px 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            font-weight: bolder;
+            padding-bottom: 10px;
+        } */
+        
+        .button {
+            width: 20%;
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #066f95;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px #999;
+        }
+        
+        .button:hover {
+            background-color: #568088
+        }
+        
+        #map {
+            width: 1000px;
+            height: 600px;
+        }
+        
+        .button:active {
+            background-color: #55a5b5;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+        
+        h2 {
+            padding-bottom: 10px;
+            padding-top: 10px;
+            color: #066f95;
+            text-decoration: underline;
+            font-weight: 400;
+            text-align: center;
+        }
+        
+        h3 {
+            padding-top: 20px;
+        }
+        
+        label {
+            font-weight: bold;
+            font-size: 20px;
+            color: black;
+        }
+        
+        #calculate {
+            cursor: pointer;
+            text-align: center;
+            width: 200px;
+            padding: 5px;
+            margin: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #999;
+            border-radius: 10px;
+            background: rgb(245, 243, 243);
+            background: -moz-linear-gradient(top, #FFD119, #E6B800);
+            font-weight: bold;
+            height: 28px;
+        }
+        
+        #calculate:hover {
+            background: -webkit-gradient(linear, left top, left bottom, from(#E6B800), to(#FFD119));
+            background: -moz-linear-gradient(top, #E6B800, #FFD119);
+            margin-top: 13px;
+            height: 25px;
+        }
+        
+        #calculate:active {
+            background: #403300;
+            padding-top: 10px;
+            height: 20px;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            color: rgb(39, 22, 22);
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 4px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+
+</head>
+{% for group in user.groups.all %} {% if group.name == 'Project_coordinator' %}
+<div class="selectContainer">
+    <select id="proc">
+        <option value="" selected>- Select -</option>
+        <option value="Projectmanager" >Project Manager</option>
+        <option value="Headmentor" >Technical Expert</option>
+        <option value="Headmentor" > Head Mentor</option>
+        <option value="Nutritionexpert" > Nutrition Expert</option>
+        <option value="Supportmentor" >Support Mentor</option>
+        <option value="Schoolcoordinator" >School Coordinator</option>
+        <option value="School" >School</option>
+        <option value="Mukhyasevika">Mukhya Sevika</option>
+        <option value="Aanganwadi" >Aanganwadi Worker</option>
+        <option value="Students">Students</option>
+    </select>
+</div>
+
+{% endif %} {% endfor %}{% for group in user.groups.all %} {% if group.name == 'Project_manager' %}
+<div class="selectContainer">
+    <select id="pro">
+        <option value="" selected>- Select -</option>
+        <option value="Headmentor" >Head Mentor</option>
+        <option value="Supportmentor" >Support Mentor</option>
+        <option value="Schoolcoordinator" >School Coordinator</option>
+        <option value="School" >School</option>
+        <option value="Mukhyasevika">Mukhya Sevika</option>
+        <option value="Aanganwadi" >Aanganwadi Worker</option>
+        <option value="Students">Students</option>
+    </select>
+</div>
+{% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'Head_mentor' %}
+<div class="selectContainer">
+    <select id="head">
+        <option value="" selected>- Select -</option>
+        <option value="Supportmentor">Support Mentor</option>
+        <option value="Schoolcoordinator">School Coordinator</option>
+        <option value="School">School</option>
+        <option value="Mukhyasevika">Mukhya Sevika</option>
+        <option value="Aanganwadi">Aanganwadi Worker</option>
+        <option value="Students">Students</option>
+    </select>
+</div>
+{% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'School' %}
+<div class="selectContainer">
+    <select id="school">
+        <option value="" selected>- Select -</option>
+      
+        <option value="Schoolcoordinator">School Coordinator</option>
+        <option value="MukhyaSevika">Mukhya Sevika</option>
+        <option value="Aanganwadi">Aanganwadi Worker</option>
+        <option value="Students">Students</option>
+    </select>
+</div>
+
+{% endif %} {% endfor %}{% for group in user.groups.all %} {% if group.name == 'School_Coordinator' %}
+
+<div class="selectContainer">
+    <select id="schc">
+        <option value="" selected>- Select -</option>
+        <option value="MukhyaSevika">Mukhya Sevika</option>
+        <option value="Aanganwadi">Aanganwadi Worker</option>
+        <option value="Students">Students</option>
+    </select>
+</div>
+
+
+
+{% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'MukhyaSevika' %}
+
+<div class="selectContainer">
+    <select id="mukh">
+        <option value="" selected>- Select -</option>
+        <option value="Aanganwadi" >Aanganwadi Worker</option>
+        <option value="Students">Students</option>
+    </select>
+</div>
+{% endif %} {% endfor %}{% for group in user.groups.all %} {% if group.name == 'AnganwadiWorker' %}
+
+<h2>Students Details</h2>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-sm" id="myTable">
+        <thead class="thead-dark">
+
+            <tr>
+                <th>User Id</th>
+                <th>Contact</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in stu %}
+
+            <tr id="somerow">
+                <td>{{i.uid}}</td>
+                <td>{{i.contact}}</td>
+                <td>
+                    <a href="/edit/{{ i.track_id }}" style="color: rgb(168, 4, 4);"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+                    <a href="/delete/{{ i.track_id }}" style="color: rgb(122, 23, 23);">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <nav>
+        <ul class="pagination"></ul>
+    </nav>
+</div>
+{% endif %} {% endfor %}
+<!-- Project Manager Division -->
+<div class="hidden isProjectmanager">
+
+
+    <div class="input col-md-6">
+        <select class="form-control" name="state" id="maxRows">
+          <option value="5000">Show ALL Rows</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+    </div>
+    <h2>Project Manager Details</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-sm" id="myTable">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th>User</th>
+                    <th>Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in pm %}
+
+                <tr id="somerow">
+                    <td>{{i.user}}</td>
+                    <td>{{i.contact}}</td>
+                    <td>
+                        <a href="/edit/{{ i.track_id }}" style="color: rgb(168, 4, 4);"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+                        <a href="/delete/{{ i.track_id }}" style="color: rgb(122, 23, 23);">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination"></ul>
+        </nav>
+    </div>
+
+</div>
+<!-- Head Mentor Division -->
+<div class="hidden isHeadmentor">
+
+
+    <div class="input col-md-6">
+        <select class="form-control" name="state" id="maxRows">
+          <option value="5000">Show ALL Rows</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+    </div>
+    <h2>Head Mentor Details</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-sm" id="myTable">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th>User</th>
+                    <th>Contact</th>
+                    <th>Address</th>
+                    <th>Mentor Type</th>
+                    <th>Institute</th>
+                    <th>Qualification</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in hm %}
+
+                <tr id="somerow">
+                    <td>{{i.user}}</td>
+                    <td>{{i.contact}}</td>
+                    <td>{{i.address}}</td>
+                    <td>{{i.mentortype}}</td>
+                    <td>{{i.institute}}</td>
+                    <td>{{i.qualification}}</td>
+                    <td>
+                        <a href="/edit/{{ i.track_id }}" style="color: rgb(168, 4, 4);"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+                        <a href="/delete/{{ i.track_id }}" style="color: rgb(122, 23, 23);">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination"></ul>
+        </nav>
+    </div>
+
+</div>
+<!-- Support Mentor Division -->
+<div class="hidden isSupportmentor">
+
+
+    <div class="input col-md-6">
+        <select class="form-control" name="state" id="maxRows">
+      <option value="5000">Show ALL Rows</option>
+      <option value="10">10</option>
+      <option value="20">20</option>
+      <option value="50">50</option>
+    </select>
+    </div>
+    <h2>Support Mentor Details</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-sm" id="myTable">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th>User</th>
+                    <th>Contact</th>
+                    <th>Mentor Type</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in sm %}
+
+                <tr id="somerow">
+                    <td>{{i.user}}</td>
+                    <td>{{i.contact}}</td>
+                    <td>{{i.mentortype}}</td>
+                    <td>{{i.category}}</td>
+                    <td>
+                        <a href="/edit/{{ i.track_id }}" style="color: rgb(168, 4, 4);"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+                        <a href="/delete/{{ i.track_id }}" style="color: rgb(122, 23, 23);">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination"></ul>
+        </nav>
+    </div>
+
+</div>
+<!-- School Coordinator Division -->
+<div class="hidden isSchoolcoordinator">
+
+
+    <div class="input col-md-6">
+        <select class="form-control" name="state" id="maxRows">
+      <option value="5000">Show ALL Rows</option>
+      <option value="10">10</option>
+      <option value="20">20</option>
+      <option value="50">50</option>
+    </select>
+    </div>
+    <h2>School Coordinator Details</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-sm" id="myTable">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th>User</th>
+                    <th>Contact</th>
+                    <th>School Name</th>
+                    <th>Personal Address </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in sc %}
+
+                <tr id="somerow">
+                    <td>{{i.user}}</td>
+                    <td>{{i.contact}}</td>
+                    <td>{{i.schoolname}}</td>
+                    <td>{{i.personaladdress}}</td>
+                    <td>
+                        <a href="/edit/{{ i.track_id }}" style="color: rgb(168, 4, 4);"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+                        <a href="/delete/{{ i.track_id }}" style="color: rgb(122, 23, 23);">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination"></ul>
+        </nav>
+    </div>
+
+</div>
+<!-- School Division -->
+<div class="hidden isSchool">
+
+
+    <div class="input col-md-6">
+        <select class="form-control" name="state" id="maxRows">
+          <option value="5000">Show ALL Rows</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+    </div>
+    <h2>School Details</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-sm" id="myTable">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th>User</th>
+                    <th>Contact</th>
+                    <th>Name</th>
+                    <th>Institute</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in sch %}
+
+                <tr id="somerow">
+                    <td>{{i.user}}</td>
+                    <td>{{i.contact}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.institute}}</td>
+                    <td>
+                        <a href="/edit/{{ i.track_id }}" style="color: rgb(168, 4, 4);"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+                        <a href="/delete/{{ i.track_id }}" style="color: rgb(122, 23, 23);">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination"></ul>
+        </nav>
+    </div>
+
+</div>
+<!-- Aanganwadi Division -->
+<div class="hidden isAanganwadi">
+
+
+    <div class="input col-md-6">
+        <select class="form-control" name="state" id="maxRows">
+              <option value="5000">Show ALL Rows</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+            </select>
+    </div>
+    <h2>Aanganwadi Workers Details</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-sm" id="myTable">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th>User</th>
+                    <th>Contact</th>
+                    <th>Aanganwadi Name</th>
+                    <th>Personal Address</th>
+                    <th>Aanganwadi Aaddress </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in aw %}
+
+                <tr id="somerow">
+                    <td>{{i.user}}</td>
+                    <td>{{i.contact}}</td>
+                    <td>{{i.anganwadiname}}</td>
+                    <td>{{i.personaladdress}}</td>
+                    <td>{{i.anganwadiaddress}}</td>
+                    <td>
+                        <a href="/edit/{{ i.track_id }}" style="color: rgb(168, 4, 4);"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+                        <a href="/delete/{{ i.track_id }}" style="color: rgb(122, 23, 23);">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination"></ul>
+        </nav>
+    </div>
+
+</div>
+<!-- Mukhya Sevika Division -->
+<div class="hidden isMukhyasevika">
+
+
+    <div class="input col-md-6">
+        <select class="form-control" name="state" id="maxRows">
+          <option value="5000">Show ALL Rows</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+    </div>
+    <h2>Mukhya Sevika Details</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-sm" id="myTable">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th>User</th>
+                    <th>Contact</th>
+                    <th>Personal Address</th>
+                    <th>Aanganwadi Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in aw %}
+
+                <tr id="somerow">
+                    <td>{{i.user}}</td>
+                    <td>{{i.contact}}</td>
+                    <td>{{i.personaladdress}}</td>
+                    <td>{{i.anganwadinumber}}</td>
+                    <td>
+                        <a href="/edit/{{ i.track_id }}" style="color: rgb(168, 4, 4);"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+                        <a href="/delete/{{ i.track_id }}" style="color: rgb(122, 23, 23);">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination"></ul>
+        </nav>
+    </div>
+
+</div>
+
+<!-- Students Division -->
+
+<div class="hidden isStudents">
+
+
+    <div class="input col-md-6">
+        <select class="form-control" name="state" id="maxRows">
+              <option value="5000">Show ALL Rows</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+            </select>
+    </div>
+    <h2>Students Details</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-sm" id="myTable">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th>User Id</th>
+                    <th>Contact Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in stu %}
+
+                <tr id="somerow">
+                    <td>{{i.uid}}</td>
+                    <td>{{i.contact}}</td>
+                    <td>
+                        <a href="/edit/{{ i.track_id }}" style="color: rgb(168, 4, 4);"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+                        <a href="/delete/{{ i.track_id }}" style="color: rgb(122, 23, 23);">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination"></ul>
+        </nav>
+    </div>
+</div>
+<script>
+    $("#proc").change(function() {
+        var value = $("#proc option:selected").val();
+        var theDiv = $(".is" + value);
+
+        theDiv.slideDown().removeClass("hidden");
+        theDiv.siblings('[class*=is]').slideUp(function() {
+            $(this).addClass("hidden");
+        });
+    });
+    $("#pro").change(function() {
+        var value = $("#pro option:selected").val();
+        var theDiv = $(".is" + value);
+
+        theDiv.slideDown().removeClass("hidden");
+        theDiv.siblings('[class*=is]').slideUp(function() {
+            $(this).addClass("hidden");
+        });
+    });
+    $("#mukh").change(function() {
+        var value = $("#mukh option:selected").val();
+        var theDiv = $(".is" + value);
+
+        theDiv.slideDown().removeClass("hidden");
+        theDiv.siblings('[class*=is]').slideUp(function() {
+            $(this).addClass("hidden");
+        });
+    });
+    $("#head").change(function() {
+        var value = $("#head option:selected").val();
+        var theDiv = $(".is" + value);
+
+        theDiv.slideDown().removeClass("hidden");
+        theDiv.siblings('[class*=is]').slideUp(function() {
+            $(this).addClass("hidden");
+        });
+    });
+    $("#school").change(function() {
+        var value = $("#school option:selected").val();
+        var theDiv = $(".is" + value);
+
+        theDiv.slideDown().removeClass("hidden");
+        theDiv.siblings('[class*=is]').slideUp(function() {
+            $(this).addClass("hidden");
+        });
+    });
+    $("#schc").change(function() {
+        var value = $("#schc option:selected").val();
+        var theDiv = $(".is" + value);
+
+        theDiv.slideDown().removeClass("hidden");
+        theDiv.siblings('[class*=is]').slideUp(function() {
+            $(this).addClass("hidden");
+        });
+    });
+
+    function myFunction() {
+        var checkBox = document.getElementById("myCheck");
+        var text = document.getElementById("text");
+        if (checkBox.checked == true) {
+            text.style.display = "block";
+        } else {
+            text.style.display = "none";
+        }
+    }
+</script>
+
+</html>{% endblock %}}

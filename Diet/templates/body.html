@@ -1,0 +1,308 @@
+{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}{% load wagtailcore_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Body Form</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <style>
+        /* body {
+            margin-top: 100px;
+            background: aliceblue;
+        }
+        
+        form {
+            margin: auto;
+            width: 85%;
+            box-shadow: 5px 10px #bdbcbc;
+            border-radius: 10px;
+            padding: 40px 40px 40px 40px;
+            border-style: solid;
+            border-color: rgb(190, 186, 186);
+            margin-top: 100px;
+            color: #403300;
+            align-items: center;
+        } */
+        
+        form span {
+            color: red;
+            font-size: 15px;
+        }
+        /*         
+        h1 {
+            background-color: #066f95;
+            padding: 20px 20px 20px 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            font-weight: bolder;
+            padding-bottom: 10px;
+        } */
+        
+        .button {
+            width: 20%;
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #066f95;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px #999;
+        }
+        
+        .button:hover {
+            background-color: #568088
+        }
+        
+        #map {
+            width: 1000px;
+            height: 600px;
+        }
+        
+        .button:active {
+            background-color: #55a5b5;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+        
+        h2 {
+            padding-bottom: 10px;
+            padding-top: 10px;
+            color: #066f95;
+            text-decoration: underline;
+            font-weight: 400;
+            text-align: center;
+        }
+        
+        h3 {
+            padding-top: 20px;
+        }
+        
+        label {
+            font-weight: bold;
+            font-size: 20px;
+            color: black;
+        }
+        
+        #calculate {
+            cursor: pointer;
+            text-align: center;
+            width: 200px;
+            padding: 5px;
+            margin: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #999;
+            border-radius: 10px;
+            background: rgb(245, 243, 243);
+            background: -moz-linear-gradient(top, #FFD119, #E6B800);
+            font-weight: bold;
+            height: 28px;
+        }
+        
+        #calculate:hover {
+            background: -webkit-gradient(linear, left top, left bottom, from(#E6B800), to(#FFD119));
+            background: -moz-linear-gradient(top, #E6B800, #FFD119);
+            margin-top: 13px;
+            height: 25px;
+        }
+        
+        #calculate:active {
+            background: #403300;
+            padding-top: 10px;
+            height: 20px;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            color: rgb(39, 22, 22);
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 4px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $("#lang").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
+</head>
+
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <div><label>Select Language:</label>
+        <select id="lang">
+            <option>Choose Language</option>
+            <option value="english">English</option>
+            <option value="hindi">Hindi</option>
+            <option value="marathi">Marathi</option>
+        </select>
+    </div>
+    <div class="english box">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <h2>
+                Know Your Body :
+            </h2>
+            <table border="0" align="center" cellspacing="10">
+                <tr>
+                    <td>Weight : </td>
+                    <td><input type="number" class="fieldlabels" placeholder="in kgs/lbs" style="width: 90%;" name="weight" id="weight"> </td>
+                    <td><select id="unit" name="weightunit" onchange="weightconverter(this.value)">
+                        <option value="none">Weight Unit</option>
+                        <option value="kgs">kgs</option>
+                        <option value="lbs">lbs</option>
+                       
+                      </select>
+                    </td>
+                    <p style="display: none;">Kilograms: <span id="outputGrams"></span></p>
+                </tr>
+                <tr>
+                    <td>Height : </td>
+                    <td> <input type="number" class="fieldlabels" placeholder=" in feet, inches, cms, meters" style="width: 90%;" name="height" id="height">
+                        <td> <select id="height" name="heightunit" onchange="lengthconverter(this.value)">
+                        <option value="none">Height Unit</option><option value="feet">feet</option>
+                                <option value="inches">inch</option>
+                                <option value="cms">cms</option>
+                                <option value="meters">meters</option>
+                              </select>
+
+                        </td>
+                        <p style="display: none;">Meters: <span id="outputMeters"></span></p>
+                        <tr>
+                            <td>BMI :</td>
+                            <td><input type="number" class="fieldlabels" name="bmi" id="bmi" style="width:90%;" readonly> </td>
+                            <td><a href="https://www.excel-easy.com/examples/bmi-calculator.html">BMI Calculator</a><br></td>
+                        </tr>
+                </tr>
+                <tr>
+                    <td>Waist Circumference : </td>
+                    <td> <input type="number" class="fieldlabels" placeholder="in cms or inches" name="waist" style="width: 90%;" id="waist"> </td>
+                    <td><select id="waistunit" name="waistunit" onchange="waistconverter(this.value)">
+                        <option value="none">Waist Unit</option><option value="cms">cms</option>
+                        <option value="inches">inches</option>
+                       
+                      </select></td>
+                    <p style="display: none;">cms: <span id="waistcms"></span></p>
+                    <td> <a href="https://calculators-hp.com/waist-to-hip-ratio/">To measure</a></td>
+
+                </tr>
+
+                <tr>
+                    <td>Hip Circumference</td>
+                    <td><input type="number" class="fieldlabels" placeholder=" in cms or inches" style="width: 90%;" name="hip" id="hip"> </td>
+                    <td> <select id="hipunit" name="hipunit" onchange="hipconverter(this.value)">
+                        <option value="none">Hip Unit</option><option value="cms">cms</option>
+                        <option value="inches">inches</option>
+                      </select>
+                    </td>
+                    <p style="display: none;">cms: <span id="hipcms"></span></p>
+                </tr>
+                <tr>
+                    <td>Waist to Hip Ratio</td>
+                    <td><input type="number" class="fieldlabels" id="whratio" name="whratio" style="width: 90%;" placeholder="in cms"></td>
+                    <td><a href="https://www.youtube.com/watch?v=WR1AwrmE7I0&feature=youtu.be">String method to understand weight status </a></td>
+                </tr>
+
+            </table>
+            <center><input type="submit" value="Submit" class="button"></center>
+
+        </form>
+    </div>
+   
+</body>
+<script>
+    function weightconverter(valnum) {
+        var bla = $('#weight').val();
+        if (valnum == "lbs") {
+            document.getElementById("outputGrams").innerHTML = (bla / 2.2046).toFixed(2);
+        } else {
+            document.getElementById("outputGrams").innerHTML = bla;
+        }
+    }
+
+    function SetTime(LoadEvent) {
+        var Now = new Date();
+        var Seconds = Now.getSeconds();
+        var Minutes = Now.getMinutes() + Seconds / 60;
+        var Hours = Now.getHours() + Minutes / 60;
+        document.getElementById("seconds").setAttribute('transform', 'rotate(' + (Seconds * 6) + ')');
+        document.getElementById("minutes").setAttribute('transform', 'rotate(' + (Minutes * 6) + ')');
+        document.getElementById("hours").setAttribute('transform', 'rotate(' + (Hours * 15) + ')');
+    }
+
+    function waistconverter(valnum) {
+        var wst = $('#waist').val();
+        if (valnum == "inches") {
+            document.getElementById("hipcms").innerHTML = (wst * 2.54).toFixed(2);
+        } else {
+            document.getElementById("hipcms").innerHTML = wst;
+        }
+    }
+
+    function hipconverter(valnum) {
+        var hp = $('#hip').val();
+        if (valnum == "inches") {
+            document.getElementById("waistcms").innerHTML = (hp * 2.54).toFixed(2);
+        } else {
+            document.getElementById("waistcms").innerHTML = hp;
+        }
+        var wcm = $("#waistcms").text();
+        console.log(wcm)
+        var hcm = $("#hipcms").text();
+        console.log(hcm)
+
+        var wrh = (wcm / hcm).toFixed(3);
+        $('#whratio').val(wrh);
+    }
+
+    function lengthconverter(vallen) {
+        var len = $('#height').val();
+
+        if (vallen == "feet") {
+
+            document.getElementById("outputMeters").innerHTML = (len / 3.281).toFixed(2);
+        } else if (vallen == "inches") {
+
+            document.getElementById("outputMeters").innerHTML = (len / 100).toFixed(2);
+        } else if (vallen == "cms") {
+
+            document.getElementById("outputMeters").innerHTML = (len / 39.37).toFixed(2);
+        } else {
+            document.getElementById("outputMeters").innerHTML = len;
+        }
+
+        var kg = $("#outputGrams").text();
+        console.log(kg)
+        var mtr = $("#outputMeters").text();
+        console.log(mtr)
+
+        var calbmi = (kg / (mtr * mtr)).toFixed(3);
+        $('#bmi').val(calbmi);
+    }
+</script>
+
+</html> {% endblock %}

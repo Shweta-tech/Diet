@@ -1,0 +1,142 @@
+{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Awesome Analog Clock</title>
+
+    <style>
+        .section {
+            background-color: #FFF;
+            padding: 20px;
+            width: 550px;
+            border-radius: 5px;
+            margin: 0 auto;
+            margin-top: 30px;
+            display: grid;
+            justify-content: center;
+        }
+        
+        text {
+            font-weight: bold;
+        }
+        
+        #analogClock {
+            display: grid;
+            justify-items: center;
+            align-items: center;
+        }
+        
+        #myCircle {
+            stroke: rgb(19, 24, 92);
+            stroke-width: 7;
+        }
+        
+        .section>image {
+            position: absolute;
+            left: 50%;
+            margin-left: 64px;
+            top: 50%;
+            margin-top: -64px;
+            z-index: 2;
+        }
+        
+        .section>svg {
+            z-index: 1;
+        }
+        
+        #myCircle circle {
+            stroke: #f00;
+            stroke-width: 1%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="section">
+        <div id="">
+            <svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" onload="SetTime(evt)" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
+        <title>Simple 24-hour SVG Analogue Clock </title>
+        <desc> The current time from the system is converted to a 24-hour analogue display.  Version 1.1 Added seconds/minutes figures. © 2013-2017 by Victor Poole.</desc>
+        <script type="text/ecmascript" xlink:href="../fakesmile/smil.user.js"/>
+        <defs>
+            <clipPath id="myCircle">
+                <circle cx="100" cy="100" r="80" />
+               <!-- <circle cx="250" cy="145" r="125" fill="#FFFFFF" /> -->
+            </clipPath>
+         </defs>
+         <image width="200" height="195" xlink:href="{% static 'img/circle.png/' %}" clip-path="url(#myCircle)" style="stroke: #f00; stroke-width:1%;"/>
+            <script type="text/javascript">
+              <![CDATA[    
+                function SetTime(LoadEvent)
+                  {
+                    var Now = new Date();           
+                    var Seconds = Now.getSeconds();
+                    var Minutes = Now.getMinutes() + Seconds / 60;
+                    var Hours = Now.getHours() + Minutes / 60;       
+                    document.getElementById("seconds").setAttribute('transform', 'rotate(' + (Seconds * 6) + ')');
+                    document.getElementById("minutes").setAttribute('transform', 'rotate(' + (Minutes * 6) + ')');
+                    document.getElementById("hours").setAttribute('transform', 'rotate(' + (Hours * 15) + ')');
+                  }        
+              ]]>
+            </script>
+         
+        <!-- <circle cx="100" cy="100" r="94" style="fill:#000;stroke:#000;stroke-width:3;"/>   -->
+        <!-- <circle cx="100" cy="100" r="80" fill="url(#image)" style="stroke:rgb(19, 24, 92);stroke-width:7;"/> -->
+                <text x="94" y="36" font-size="12px" fill="#000">24</text>
+                <text x="113" y="38" font-size="12px" fill="#000">1</text>
+                <text x="130" y="45" font-size="12px" fill="#000">2</text>
+                <text x="145" y="55" font-size="12px" fill="#000">3</text>
+                <text x="156" y="70" font-size="12px" fill="#000">4</text>
+                <text x="164" y="88" font-size="12px" fill="#000">5</text>
+                <text x="166" y="105" font-size="12px" fill="#000">6</text>
+                <text x="165" y="123" font-size="12px" fill="#000">7</text>
+                <text x="157" y="139" font-size="12px" fill="#000">8</text>
+                <text x="147" y="153" font-size="12px" fill="#000">9</text>
+                <text x="127" y="164" font-size="12px" fill="#000">10</text>
+                <text x="111" y="171" font-size="12px" fill="#000">11</text>	
+                <text x="93" y="174" font-size="12px" fill="#000">12</text>
+                <text x="77" y="172" font-size="12px" fill="#000">13</text>
+                <text x="60" y="165" font-size="12px" fill="#000">14</text>
+                <text x="44" y="154" font-size="12px" fill="#000">15</text>
+                <text x="33" y="140" font-size="12px" fill="#000">16</text>
+                <text x="25" y="123" font-size="12px" fill="#000">17</text>
+                <text x="23" y="106" font-size="12px" fill="#000">18</text>
+                <text x="25" y="87" font-size="12px" fill="#000">19</text>
+                <text x="34" y="71" font-size="12px" fill="#000">20</text>
+                <text x="44" y="57" font-size="12px" fill="#000">21</text>
+                <text x="59" y="46" font-size="12px" fill="#000">22</text>
+                <text x="76" y="36" font-size="12px" fill="#000">23</text>
+                <!-- <text x="97" y="17" font-size="10px" fill="#f00">0</text>
+                <text x="141" y="29" font-size="10px" fill="#f00">5</text>
+                <text x="171" y="62" font-size="10px" fill="#f00">10</text>
+                <text x="181" y="102" font-size="10px" fill="#f00">15</text>
+                <text x="171" y="146" font-size="10px" fill="#f00">20</text>
+                <text x="138" y="179" font-size="10px" fill="#f00">25</text>
+                <text x="95" y="190" font-size="10px" fill="#f00">30</text>
+                <text x="52" y="179" font-size="10px" fill="#f00">35</text>
+                <text x="20" y="147" font-size="10px" fill="#f00">40</text>
+                <text x="8" y="103" font-size="10px" fill="#f00">45</text>
+                <text x="19" y="61" font-size="10px" fill="#f00">50</text>
+                <text x="52" y="28" font-size="10px" fill="#f00">55</text> -->
+            <g transform="translate(100 100)">		
+            <g>
+                <circle r="57" fill="none" stroke-width="3" stroke="#000" stroke-dasharray="2,12.98" transform="rotate(-1.8)"/>
+                <!-- <circle r="78" fill="none" stroke-width="2" stroke="#f00" stroke-dasharray="1,7.17" transform="rotate(-0.9)"/>
+                <circle r="78" fill="none" stroke-width="3" stroke="#000" stroke-dasharray="2,38.8" transform="rotate(-0.9)"/>	 -->
+            </g>	
+                <g id="hours">
+                <line x1="0" y1="0" x2="0" y2="-52" style="stroke-width:5;stroke:rgb(55, 240, 18);stroke-linecap:round;">
+                <animateTransform attributeName="transform" type="rotate" dur="86400s" values="0;360" repeatCount="indefinite"/></line></g>
+                <g id="minutes">
+                <line x1="0" y1="0" x2="0" y2="-74" style="stroke-width:3;stroke:rgb(225, 240, 17);stroke-linecap:round;">
+                <animateTransform attributeName="transform" type="rotate" dur="3600s" values="0;360" repeatCount="indefinite"/></line></g>
+                <g id="seconds"><line x1="0" y1="0" x2="0" y2="-76" style="stroke-width:1;stroke:#f00;stroke-linecap:round;">
+                <animateTransform attributeName="transform" type="rotate" dur="60s" values="0;360" repeatCount="indefinite"/></line></g></g>
+                <circle cx="100" cy="100" r="2" style="fill:#f00;stroke:#f00;"/>
+        </svg>
+        </div>
+    </div>
+</body>
+
+</html>{% endblock %}

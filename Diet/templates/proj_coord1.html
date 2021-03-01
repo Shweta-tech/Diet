@@ -1,0 +1,527 @@
+{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Minimal Django File Upload Example</title>
+    <style>
+        .myform {
+            margin-top: 200px;
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: rgb(254, 254, 255);
+            font-weight: bolder;
+        }
+        
+        html {
+            font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+        
+        .card {
+            margin-top: 100px;
+            font-size: 1em;
+            overflow: hidden;
+            padding: 0;
+            border: none;
+            border-radius: .28571429rem;
+            box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+        }
+        
+        .card-block {
+            font-size: 1em;
+            position: relative;
+            margin: 0;
+            padding: 1em;
+            border: none;
+            border-top: 1px solid rgba(34, 36, 38, .1);
+            box-shadow: none;
+        }
+        
+        .card-img-top {
+            display: block;
+            width: 100%;
+            height: 12rem;
+        }
+        
+        .card-title {
+            font-size: 1.28571429em;
+            font-weight: 700;
+            line-height: 1.2857em;
+        }
+        
+        .card-text {
+            clear: both;
+            margin-top: .5em;
+            color: rgba(0, 0, 0, .68);
+        }
+        
+        .card-footer {
+            font-size: 1em;
+            position: static;
+            top: 0;
+            left: 0;
+            max-width: 100%;
+            padding: .75em 1em;
+            color: rgba(0, 0, 0, .4);
+            border-top: 1px solid rgba(0, 0, 0, .05) !important;
+            background: #fff;
+        }
+        
+        .card-inverse .btn {
+            border: 1px solid rgba(0, 0, 0, .05);
+        }
+        
+        h5 {
+            font-weight: bolder;
+            margin-top: 80px;
+            text-align: center;
+            color: darkslategrey;
+        }
+        
+        .container {
+            align-items: center;
+        }
+        
+        .profile {
+            position: absolute;
+            top: -12px;
+            display: inline-block;
+            overflow: hidden;
+            box-sizing: border-box;
+            width: 25px;
+            height: 25px;
+            margin: 0;
+            border: 1px solid #fff;
+            border-radius: 50%;
+        }
+        
+        .profile-avatar {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+        
+        .profile-inline {
+            position: relative;
+            top: 0;
+            display: inline-block;
+        }
+        
+        .profile-inline~.card-title {
+            display: inline-block;
+            margin-left: 4px;
+            vertical-align: top;
+        }
+        
+        .text-bold {
+            font-weight: 700;
+        }
+        
+        .meta {
+            font-size: 1em;
+            color: rgba(0, 0, 0, .4);
+        }
+        
+        .meta a {
+            text-decoration: none;
+            color: rgba(0, 0, 0, .4);
+        }
+        
+        .meta a:hover {
+            color: rgba(0, 0, 0, .87);
+        }
+        
+        h3 {
+            margin-top: 30%;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        /* Float four columns side by side */
+        
+        .column {
+            float: left;
+            width: 25%;
+            padding: 0 10px;
+        }
+        /* Remove extra left and right margins, due to padding */
+        
+        .row {
+            margin: 0 -5px;
+        }
+        /* Clear floats after the columns */
+        
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        /* Responsive columns */
+        
+        @media screen and (max-width: 600px) {
+            .column {
+                width: 80%;
+                display: block;
+                margin-bottom: 20px;
+            }
+        }
+        /* Style the counter cards */
+        
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding: 16px;
+            text-align: center;
+            background-color: #f1f1f1;
+        }
+    </style>
+
+</head>
+<center>
+    {% for group in user.groups.all %} {% if group.name == 'Project_coordinator' %}
+
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/PM.jpg' %} " class="card-img-top" alt="... ">
+
+                <h3>Project Manager</h3>
+
+                <a href="/proj_manager_register/ " class="btn btn-info ">Continue</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/tE.jpg' %}" class="card-img-top" alt="... ">
+
+                <h3>Technical Experts</h3>
+
+                <a href="/tech_expert_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/mentor.jpg' %}" class="card-img-top" alt="... ">
+
+                <h3>Head Mentor</h3>
+
+                <a href="/head_mentor_register/ " class="btn btn-info ">Continue</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/nutriexpert.png' %} " class="card-img-top" alt="... ">
+
+                <h3>Nutrition Expert</h3>
+
+                <a href="/nutri_expert_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/school.png' %} " class="card-img-top" alt="... ">
+                <h3>School</h3>
+                <a href="/school_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/sc.png' %}" class="card-img-top" alt="... ">
+                <h3>School Coordinator</h3>
+                <a href="/school_coordinator_register/ " class="btn btn-info ">Continue</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/aw.png' %} " class="card-img-top" alt="... ">
+
+                <h3>Mukhya Sevika</h3>
+
+                <a href="/mukhya_sevika_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/aw1.png' %} " class="card-img-top" alt="... ">
+
+                <h3>Anganwadi Workers</h3>
+
+                <a href="/anganwadi_workers_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/images.jpeg' %}" class="card-img-top" alt="... ">
+
+                <h3>Student</h3>
+
+                <a href="/student_register/ " class="btn btn-info ">Continue</a>
+            </div>
+        </div>
+
+    </div>
+
+    {% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'Head_mentor' %}
+    <div class="row">
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/school.png' %} " class="card-img-top" alt="... ">
+                <h3>School</h3>
+                <a href="/school_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/sc.png' %}" class="card-img-top" alt="... ">
+                <h3>School Coordinator</h3>
+                <a href="/school_coordinator_register/ " class="btn btn-info ">Continue</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/aw.png' %} " class="card-img-top" alt="... ">
+
+                <h3>Mukhya Sevika</h3>
+
+                <a href="/mukhya_sevika_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/nutriexpert.png' %} " class="card-img-top" alt="... ">
+
+                <h3>Nutrition Expert</h3>
+
+                <a href="/nutri_expert_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/images.jpeg' %}" class="card-img-top" alt="... ">
+
+                <h3>Student</h3>
+
+                <a href="/student_register/ " class="btn btn-info ">Continue</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/aw1.png' %} " class="card-img-top" alt="... ">
+
+                <h3>Anganwadi Workers</h3>
+
+                <a href="/anganwadi_workers_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+    </div>
+
+    {% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'Project_manager' %}
+    <div class="row">
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/mentor.jpg' %}" class="card-img-top" alt="... ">
+
+                <h3>Head Mentor</h3>
+
+                <a href="/head_mentor_register/ " class="btn btn-info ">Continue</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/nutriexpert.png' %} " class="card-img-top" alt="... ">
+
+                <h3>Nutrition Expert</h3>
+
+                <a href="/nutri_expert_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/school.png' %} " class="card-img-top" alt="... ">
+                <h3>School</h3>
+                <a href="/school_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/sc.png' %}" class="card-img-top" alt="... ">
+                <h3>School Coordinator</h3>
+                <a href="/school_coordinator_register/ " class="btn btn-info ">Continue</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/aw.png' %} " class="card-img-top" alt="... ">
+
+                <h3>Mukhya Sevika</h3>
+
+                <a href="/mukhya_sevika_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/aw1.png' %} " class="card-img-top" alt="... ">
+
+                <h3>Anganwadi Workers</h3>
+
+                <a href="/anganwadi_workers_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/images.jpeg' %}" class="card-img-top" alt="... ">
+
+                <h3>Student</h3>
+
+                <a href="/student_register/ " class="btn btn-info ">Continue</a>
+            </div>
+        </div>
+
+    </div>
+    {% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'School' %}
+    <div class="row">
+
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/sc.png' %}" class="card-img-top" alt="... ">
+                <h3>School Coordinator</h3>
+                <a href="/school_coordinator_register/ " class="btn btn-info ">Continue</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/aw.png' %} " class="card-img-top" alt="... ">
+
+                <h3>Mukhya Sevika</h3>
+
+                <a href="/mukhya_sevika_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/aw1.png' %} " class="card-img-top" alt="... ">
+
+                <h3>Anganwadi Workers</h3>
+
+                <a href="/anganwadi_workers_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/images.jpeg' %}" class="card-img-top" alt="... ">
+
+                <h3>Student</h3>
+
+                <a href="/student_register/ " class="btn btn-info ">Continue</a>
+            </div>
+        </div>
+    </div>
+
+    {% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'School_Coordinator' %}
+    <div class="row">
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/aw.png' %} " class="card-img-top" alt="... ">
+
+                <h3>Mukhya Sevika</h3>
+
+                <a href="/mukhya_sevika_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/aw1.png' %} " class="card-img-top" alt="... ">
+
+                <h3>Anganwadi Workers</h3>
+
+                <a href="/anganwadi_workers_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/images.jpeg' %}" class="card-img-top" alt="... ">
+
+                <h3>Student</h3>
+
+                <a href="/student_register/ " class="btn btn-info ">Continue</a>
+            </div>
+        </div>
+    </div>
+
+    {% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'MukhyaSevika' %}
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/aw1.png' %} " class="card-img-top" alt="... ">
+
+                <h3>Anganwadi Workers</h3>
+
+                <a href="/anganwadi_workers_register/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/images.jpeg' %}" class="card-img-top" alt="... ">
+
+                <h3>Student</h3>
+
+                <a href="/student_register/ " class="btn btn-info ">Continue</a>
+            </div>
+        </div>
+    </div>
+    {% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'AnganwadiWorker' %}
+    <div class="row">
+
+        <div class="column">
+            <div class="card">
+                <img src="{% static 'img/images.jpeg' %}" class="card-img-top" alt="... ">
+
+                <h3>Student</h3>
+
+                <a href="/student_register/ " class="btn btn-info ">Continue</a>
+            </div>
+        </div>
+    </div>
+    {% endif %} {% endfor %}
+</center>{% endblock %}

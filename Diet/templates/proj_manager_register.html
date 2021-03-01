@@ -1,0 +1,70 @@
+{% extends 'base.html' %} {% load static%} {% block content %}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Registration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="">
+
+<style>
+    .myform {
+        margin-top: 200px;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+    
+    h1 {
+        text-align: center;
+        color: rgb(36, 36, 68);
+        font-weight: bolder;
+    }
+</style>
+<form action="/tech_expert_register/" method="POST">
+    {% csrf_token %}
+
+    <div class="myform">
+        <h1>Register</h1>
+        <table>{{form.as_table}}{{profile_form.as_table}}</table>
+        <button type="submit" class="btn btn-info">Submit</button>
+        <br>
+        <br>
+        <!-- <span>New User?</span>
+        <a href="/register/">Create new account</a> -->
+    </div>
+</form>
+
+
+<div>
+    {% for message in messages %}
+    <h3>{{message}}</h3>{% endfor %}
+
+</div>
+<script>
+    // var $Name = $('.name');
+    // $Name.change(function() {
+    //     var $user = {
+    //         'user': $(this).val()
+    //     }
+    //     var $endpoint = window.location.href // or localhost/interface
+    //     $.ajax({
+    //         method: "GET",
+    //         url: $endpoint,
+    //         data: $name,
+    //         success: handleFormSuccess,
+    //         error: handleFormError,
+    //     })
+    // })
+
+    // function handleFormSuccess(data) {
+    //     console.log(data);
+    //     $("#contact").val(data.mobile);
+    //     $("#ward").val(data.unit);
+    // }
+
+    // function handleFormError(jqXHR, textStatus, errorThrown) {
+    //     console.log(jqXHR)
+    //     console.log(textStatus)
+    //     console.log(errorThrown)
+    // }
+</script>
+{% endblock %}

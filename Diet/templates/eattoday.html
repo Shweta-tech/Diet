@@ -1,0 +1,325 @@
+{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}{% load wagtailcore_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Eat Today Form</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" />
+    <style>
+        /* body {
+            margin-top: 100px;
+            background: aliceblue;
+        } */
+        
+        /* form {
+            margin: auto;
+            width: 85%;
+            box-shadow: 5px 10px #bdbcbc;
+            border-radius: 10px;
+            padding: 40px 40px 40px 40px;
+            border-style: solid;
+            border-color: rgb(190, 186, 186);
+            margin-top: 100px;
+            color: #403300;
+            align-items: center;
+        } */
+        
+        form span {
+            
+            font-size: 15px;
+        }
+        /*         
+        h1 {
+            background-color: #066f95;
+            padding: 20px 20px 20px 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            font-weight: bolder;
+            padding-bottom: 10px;
+        } */
+        
+        .button {
+            width: 20%;
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #066f95;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px #999;
+        }
+        
+        .button:hover {
+            background-color: #568088
+        }
+        
+        #map {
+            width: 1000px;
+            height: 600px;
+        }
+        
+        .button:active {
+            background-color: #55a5b5;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+        
+        h2 {
+            padding-bottom: 10px;
+            padding-top: 10px;
+            color: #066f95;
+            text-decoration: underline;
+            font-weight: 400;
+            text-align: center;
+        }
+        
+        h3 {
+            padding-top: 20px;
+        }
+        
+        label {
+            font-weight: bold;
+            font-size: 20px;
+            color: black;
+        }
+        
+        #calculate {
+            cursor: pointer;
+            text-align: center;
+            width: 200px;
+            padding: 5px;
+            margin: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #999;
+            border-radius: 10px;
+            background: rgb(245, 243, 243);
+            background: -moz-linear-gradient(top, #FFD119, #E6B800);
+            font-weight: bold;
+            height: 28px;
+        }
+        
+        #calculate:hover {
+            background: -webkit-gradient(linear, left top, left bottom, from(#E6B800), to(#FFD119));
+            background: -moz-linear-gradient(top, #E6B800, #FFD119);
+            margin-top: 13px;
+            height: 25px;
+        }
+        
+        #calculate:active {
+            background: #403300;
+            padding-top: 10px;
+            height: 20px;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            color: rgb(39, 22, 22);
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 4px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $("#lang").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+
+            $("#foodallergies").select2({
+                placeholder:' Please Select Food Allergies...',
+                closeOnSelect : false
+
+            });
+            $("#foodallergies").on('change',function(){
+                var txtdisplay = $('#foodallergies option:selected').text();
+                $("#txtfoodallergies").val(txtdisplay);
+            });
+
+
+        });
+    </script>
+</head>
+
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- <div class="navbar">
+        <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Personal Information</a>
+        <a href="daily_schedule.html"><i class="fa fa-fw fa-search"></i> Daily Schedule</a>
+        <a href="#"><i class="fa fa-fw fa-envelope"></i> Body</a>
+        <a href="#"><i class="fa fa-fw fa-user"></i> Eat Today</a>
+        <a href="#"><i class="fa fa-fw fa-user"></i> Diet Recall</a>
+    </div> -->
+    <div><label>Select Language:</label>
+        <select id="lang">
+            <option>Choose Language</option>
+            <option value="english">English</option>
+            <option value="hindi">Hindi</option>
+            <option value="marathi">Marathi</option>
+        </select>
+    </div>
+    <div class="english box">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <h2>
+                What did you eat today :
+            </h2>
+            <table border="0" align="center" cellspacing="10">
+                <tr>
+                    <td>Food Habbits :</td>
+                    <td><select class="drop-down" name = "foodhabbits">
+                        <option value="">--- Please Select ---</option>
+                        <option value="Vegan">I eat only vegetables, no milk, no eggs, no chicken, no mutton, no fish.</option>
+                        <option value="Eggitarian">I eat only eggs and vegetables, no milk, no chicken, no mutton, no fish.</option>
+                        <option value="Lacto-vegetarian">I eat only milk and vegetables. No chicken, no mutton, no eggs or fish. </option>
+                        <option value="Lacto-ovo-vegetarian">I eat vegetables, milk and eggs. No chicken, no mutton or fish. </option>
+                        <option value="Non-vegetarian">I eat eggs, chicken, mutton and fish.</option>
+                </select></td>
+                </tr>
+                <tr>
+                    <td>Food Allergies : </td>
+                    <td><select id="foodallergies" multiple style="width: 250px;">
+                        <option value="Peanuts"> Peanuts/Groundnuts </option>
+                        <option value="Milk"> Milk </option>
+                        <option value="Egg"> Egg </option>
+                        <option value="Pistas"> Pistas </option>
+                        <option value="Fish"> Fish </option>
+                        <option value="ShellFish"> ShellFish </option>
+                        <option value="Soybeans"> Soybeans </option>
+                        <option value="Almonds"> Almonds </option>
+                        <option value="Wallnuts"> Wallnuts </option>
+                      </select>
+                      <input type="text" id = "txtfoodallergies"  name = "foodallergies" style="width: 250px; display: none;">
+                    </td>
+                   
+                </tr>
+                <!-- <center><input type="submit" value="Submit" class="button"></center> -->
+
+            </table>
+            <center><input type="submit" value="Submit" class="button"></center>
+
+        </form>
+    </div>
+    <div class="hindi box">
+        <form action="">
+            <h2>
+                तुमने आज क्या खाया :
+            </h2>
+            <table border="0" align="center" cellspacing="10">
+                <tr>
+                    <td>खाने की आदत :</td>
+                    <td><select class="drop-down">
+                        <option value="">-----</option>
+                        <option value="Vegan">मैं केवल सब्जियां खाता हूं, न दूध, न अंडे, न चिकन, न मटन, न मछली।</option>
+                        <option value="Eggitarian">मैं केवल अंडे और सब्जियां खाता हूं, न दूध, न चिकन, न मटन, न मछली।</option>
+                        <option value="Lacto-vegetarian">मैं केवल दूध और सब्जियां खाती हूं। न मुर्गी, न मटन, न अंडा और न मछली। </option>
+                        <option value="Lacto-ovo-vegetarian">मैं सब्जियां, दूध और अंडे खाती हूं। न चिकन, न मटन या मछली। </option>
+                        <option value="Non-vegetarian">मैं अंडे, चिकन, मटन और मछली खाता हूं।</option>
+                </select></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td> <input type="checkbox" id="myCheck" value="yes" onclick="myFunction()"></td>
+                    <td>
+                        <div id="text" style="display:none" class="fieldlabels">
+                            <input type="checkbox" name="peanuts"> Peanuts/Groundnuts <br>
+                            <input type="checkbox" name="Milk"> Milk <br>
+                            <input type="checkbox" name="Egg"> Egg <br>
+                            <input type="checkbox" name="Pistas"> Pistas <br>
+                            <input type="checkbox" name="Fish"> Fish <br>
+                            <input type="checkbox" name="ShellFish"> ShellFish <br>
+                            <input type="checkbox" name="Wheat"> Wheat <br>
+                            <input type="checkbox" name="Soybeans"> Soybeans <br>
+                            <input type="checkbox" name="Almonds"> Almonds <br>
+                            <input type="checkbox" name="Wallnuts"> Wallnuts
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+            <center><input type="submit" value="Submit" class="button"></center>
+
+        </form>
+
+    </div>
+    <div class="marathi box">
+        <form action="">
+
+            <table border="0" align="center" cellspacing="10">
+
+
+                <h2>
+                    तू आज काय खाल्लस :
+                </h2>
+
+
+
+                <tr>
+                    <td>खाण्याच्या सवयी:</td>
+                    <td><select class="drop-down">
+                        <option value="">-----</option>
+                        <option value="Vegan">मी फक्त भाज्या, दूध, अंडी, कोंबडी, कोणतेही मटण, मासेच खात नाही.</option>
+                        <option value="Eggitarian">मी फक्त अंडी आणि भाज्या खातो, दूध नाही, कोंबडी नाही, मटण नाही, मासे नाही.</option>
+                        <option value="Lacto-vegetarian">मी फक्त दूध आणि भाज्या खातो. कोंबडी नाही, मटण नाही, अंडी किंवा मासे नाहीत. </option>
+                        <option value="Lacto-ovo-vegetarian">मी भाज्या, दूध आणि अंडी खातो. कोंबडी नाही, मटण किंवा मासे नाही. </option>
+                        <option value="Non-vegetarian">मी अंडी, कोंबडी, मटण आणि मासे खातो.</option>
+                </select></td>
+                </tr>
+                <tr>
+                    <td>Food Allergies : </td>
+                    <td> <input type="checkbox" id="myCheck" value="yes" onclick="myFunction()"></td>
+                    <td>
+                        <div id="text" style="display:none" class="fieldlabels">
+                            <input type="checkbox" name="peanuts"> Peanuts/Groundnuts <br>
+                            <input type="checkbox" name="Milk"> Milk <br>
+                            <input type="checkbox" name="Egg"> Egg <br>
+                            <input type="checkbox" name="Pistas"> Pistas <br>
+                            <input type="checkbox" name="Fish"> Fish <br>
+                            <input type="checkbox" name="ShellFish"> ShellFish <br>
+                            <input type="checkbox" name="Wheat"> Wheat <br>
+                            <input type="checkbox" name="Soybeans"> Soybeans <br>
+                            <input type="checkbox" name="Almonds"> Almonds <br>
+                            <input type="checkbox" name="Wallnuts"> Wallnuts
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+</body>
+<script>
+    function myFunction() {
+        var checkBox = document.getElementById("myCheck");
+        var text = document.getElementById("text");
+        if (checkBox.checked == true) {
+            text.style.display = "block";
+        } else {
+            text.style.display = "none";
+        }
+    }
+</script>
+
+</html> {% endblock %}

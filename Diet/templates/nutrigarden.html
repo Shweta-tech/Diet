@@ -1,0 +1,288 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<title>Nutri Garden</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'css/nutrigarden.css' %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+body {font-size:16px;}
+.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+.w3-half img:hover{opacity:1}
+@import url(https://fonts.googleapis.com/css?family=Varela+Round);
+
+.slides {
+    padding: 0;
+    width: 609px;
+    height: 420px;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+}
+
+.slides * {
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+.slides input { display: none; }
+
+
+
+.slide {
+    top: 0;
+    opacity: 0;
+    width: 609px;
+    height: 420px;
+    display: block;
+    position: absolute;
+
+    transform: scale(0);
+
+    transition: all .7s ease-in-out;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+}
+
+.nav label {
+    width: 200px;
+    height: 100%;
+    display: none;
+    position: absolute;
+
+	  opacity: 0;
+    z-index: 9;
+    cursor: pointer;
+
+    transition: opacity .2s;
+
+    color: #FFF;
+    font-size: 156pt;
+    text-align: center;
+    line-height: 380px;
+    font-family: "Varela Round", sans-serif;
+    background-color: rgba(255, 255, 255, .3);
+    text-shadow: 0px 0px 15px rgb(119, 119, 119);
+}
+
+.slide:hover + .nav label { opacity: 0.5; }
+
+.nav label:hover { opacity: 1; }
+
+.nav .next { right: 0; }
+
+input:checked + .slide-container  .slide {
+    opacity: 1;
+
+    transform: scale(1);
+
+    transition: opacity 1s ease-in-out;
+}
+
+input:checked + .slide-container .nav label { display: block; }
+
+.nav-dots {
+	width: 100%;
+	bottom: 9px;
+	height: 11px;
+	display: block;
+	position: absolute;
+	text-align: center;
+}
+
+.nav-dots .nav-dot {
+	top: -5px;
+	width: 11px;
+	height: 11px;
+	margin: 0 4px;
+	position: relative;
+	border-radius: 100%;
+	display: inline-block;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.nav-dots .nav-dot:hover {
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+input#img-1:checked ~ .nav-dots label#img-dot-1,
+input#img-2:checked ~ .nav-dots label#img-dot-2,
+input#img-3:checked ~ .nav-dots label#img-dot-3,
+input#img-4:checked ~ .nav-dots label#img-dot-4,
+input#img-5:checked ~ .nav-dots label#img-dot-5,
+input#img-6:checked ~ .nav-dots label#img-dot-6 {
+	background: rgba(0, 0, 0, 0.8);
+}
+</style>
+<body>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+  <div class="w3-container">
+    <h3 class="w3-padding-64" style="font-size: large ;"><b>What is Nutri Garden <br>and Poshan Vatika</b></h3>
+  </div>
+  <div class="w3-bar-block">
+    <a href="/" class="w3-bar-item w3-button w3-hover-white">Home</a> 
+    <a href="#"  class="w3-bar-item w3-button w3-hover-white">Resources</a> 
+    <a href="#"  class="w3-bar-item w3-button w3-hover-white">Services</a> 
+    
+  </div>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
+  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
+  <span>Company Name</span>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
+  <div class="w3-container" id="services" style="margin-top:75px">
+       <ul class="slides">
+      <input type="radio" name="radio-btn" id="img-1" checked />
+      <li class="slide-container">
+      <div class="slide">
+        <img src="{% static 'images/n1.jpeg' %}" />
+          </div>
+      <div class="nav">
+        <label for="img-6" class="prev">&#x2039;</label>
+        <label for="img-2" class="next">&#x203a;</label>
+      </div>
+      </li>
+  
+      <input type="radio" name="radio-btn" id="img-2" />
+      <li class="slide-container">
+          <div class="slide">
+            <img src="{% static 'images/n.jpeg' %}" />
+          </div>
+      <div class="nav">
+        <label for="img-1" class="prev">&#x2039;</label>
+        <label for="img-3" class="next">&#x203a;</label>
+      </div>
+      </li>
+  
+      <input type="radio" name="radio-btn" id="img-3" />
+      <li class="slide-container">
+          <div class="slide">
+            <img src="{% static 'images/n1.jpeg' %}" />
+          </div>
+      <div class="nav">
+        <label for="img-2" class="prev">&#x2039;</label>
+        <label for="img-4" class="next">&#x203a;</label>
+      </div>
+      </li>
+  
+      <input type="radio" name="radio-btn" id="img-4" />
+      <li class="slide-container">
+          <div class="slide">
+            <img src="{% static 'images/n2.jpeg' %}" />
+          </div>
+      <div class="nav">
+        <label for="img-3" class="prev">&#x2039;</label>
+        <label for="img-5" class="next">&#x203a;</label>
+      </div>
+      </li>
+  
+      <input type="radio" name="radio-btn" id="img-5" />
+      <li class="slide-container">
+          <div class="slide">
+            <img src="{% static 'images/n3.jpeg' %}" />
+          </div>
+      <div class="nav">
+        <label for="img-4" class="prev">&#x2039;</label>
+        <label for="img-6" class="next">&#x203a;</label>
+      </div>
+      </li>
+  
+      <input type="radio" name="radio-btn" id="img-6" />
+      <li class="slide-container">
+          <div class="slide">
+            <img src="{% static 'images/n4.jpeg' %}" />
+          </div>
+      <div class="nav">
+        <label for="img-5" class="prev">&#x2039;</label>
+        <label for="img-1" class="next">&#x203a;</label>
+      </div>
+      </li>
+  
+      <li class="nav-dots">
+        <label for="img-1" class="nav-dot" id="img-dot-1"></label>
+        <label for="img-2" class="nav-dot" id="img-dot-2"></label>
+        <label for="img-3" class="nav-dot" id="img-dot-3"></label>
+        <label for="img-4" class="nav-dot" id="img-dot-4"></label>
+        <label for="img-5" class="nav-dot" id="img-dot-5"></label>
+        <label for="img-6" class="nav-dot" id="img-dot-6"></label>
+      </li>
+  </ul>
+  </div>
+  
+  
+  
+  
+
+  
+  <div class="w3-container" id="services" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-red" style="color: black;"><b>Nutri Garden</b></h1>
+    <hr style="width:50px;border:5px solid rgb(5, 5, 5)" class="w3-round">
+    <p style="text-align: justify;">A nutritional garden is a nutrient-giving garden to a family, which keeps on producing something throughout the year, be it greens, fruits, tubers or roots, seeds or drumstick leaves. This produce gives children in the family all the necessary nutrients, such as protein, minerals and other micro-elements, due to the diversity in the diet.These nutrients are very important for the physical and mental development of children. Lentils and rice fill the stomach of the child, but his body does not fill. The subtle elements and variety of diet are essential for the development of the body, especially for the large section of the society, which is vegetarian. Children of non-vegetarian families who eat meat, fish or eggs, get these subtle elements more or less, but vegetarian children do not get these elements naturally. The number of such families is in lakhs and it is difficult for them to get financial assistance to set up nutritional plants anywhere else except government funds.
+    </p>
+  </div>
+  
+ 
+  <div class="w3-container" id="designers" style="margin-top:75px">
+    <h1 class="w3-xxxlarge" style=" color: black;"><b>Poshan Vatika</b></h1>
+    <hr style="width:50px;border:5px solid black" class="w3-round">
+    <p style="text-align: justify;">Posha Vatika means that small piece of land where the people of the house grow vegetables to make sure that all in the family specially children and women should not become victim of mal-nutrition. The main objective is to ensure supply of nutrition through organically home grown vegetables and fruits simultaneously ensuring that the soil must also remain healthy. </p>
+    
+    </div>
+
+  
+
+  
+        
+    
+  </div>
+  
+ 
+
+<!-- End page content -->
+</div>
+
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+</script>
+
+</body>
+</html>

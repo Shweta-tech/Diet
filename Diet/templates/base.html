@@ -1,0 +1,276 @@
+{% load static %} {% load static wagtailuserbar %} {% load wagtailcore_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+
+    <title>CDD</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!--
+Ramayana CSS Template
+https://templatemo.com/tm-529-ramayana
+-->
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'css/select2.min.css' %}">
+</head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Main -->
+        <div id="main">
+            <div class="inner">
+
+                <!-- Header -->
+                <header id="header">
+                    <div class="logo">
+                        <a href="/">Community Diet Diversity</a>
+                    </div>
+                </header>
+                {% block content %} {% block feature %}
+                <!-- Banner -->
+                <section class="main-banner">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="banner-content">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="banner-caption">
+                                                <h4>Hello,Welcome to <em>Community</em> Diet Diversity.</h4>
+                                                <p>Prompting <strong>Food Diversity</strong> -The key to <strong>Community Health.</strong></p>
+                                                <div class="primary-button">
+                                                    {% if user.is_authenticated %}
+                                                    <a href="/redirected/{{user.username}}" class="btn-get-started">Get Started</a> {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                {% endblock %} {% endblock %}
+
+              
+                <!-- Top Image -->
+                <br>
+                <section class="top-image">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- <img src="{% static 'assets/images/top-image.jpg' %}" alt=""> -->
+                                <div class="down-content" id="overview">
+                                    <h4>Overview</h4>
+                                    <p>The central aim of this project is to focus on innovative strategies for creating awareness using online Nutrition Education Programs (e-NEP) and door-step delivery of vitamin and mineral rich leafy vegetables from community based nutri-garden/ microgreens to overcome the urgent need of micronutrients to combat malnutrition and anaemia among ICDS beneficiaries by using a WEBGIS platform and involvement of school children. </p>
+                                    <!-- <div class="primary-button">
+                                        <a href="#">Read More</a>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Left Image -->
+                <section class="left-image">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="{% static 'assets/images/school.jpg' %}" alt="">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="right-content">
+                                    <h4>School</h4>
+                                    <p>Schools would be approached to identify and educate school-going children. Trained Nutri-educators and Mentors will ensure and monitor the participation of schools. These trainings will be conducted using e-Nutrition Education Programs (e-NEP) for the mukhya sevikas, anganwadi workers and school children.
+                                    </p>
+                                    <!-- <div class="primary-button">
+                                        <a href="#">Read More</a>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Right Image -->
+                <section class="right-image">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="left-content">
+                                    <h4>Nutri Graden(Poshan Vatika)</h4>
+                                    <p>This is a multi-approach pilot project which involves innovative strategies  will create Nutri-Monitors. These children would be appointed as Nutri-Leaders (10-16 years of age) who have been educated in these concepts of nutri-gardening, microgreens cultivation, nutrition, health and hygiene. These nutri-leaders will, in turn, share the produce with selected Anganwadis teachers who in turn will distribute its precious cargo to selected ICDS beneficiaries (children with SAM, MAM and anemic women and adolescent girls).</p>
+                                    <!-- <div class="primary-button">
+                                        <a href="#">Read More</a>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="{% static 'assets/images/Nutri_gardens.jpg' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="left-image">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="{% static 'assets/images/icds.gif' %}"  alt="">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="right-content">
+                                    <h4>ICDS</h4>
+                                    <p>The ICDS cadre (Mukhya sevikas and Anganwadi workers) will be trained in the concepts of nutrition mentioned above. The beneficiaries will have direct and quick access where their queries and feedback will reach the anganwadi workers and mentors. 
+                                    </p>
+                                    <!-- <div class="primary-button">
+                                        <a href="#">Read More</a>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div id="sidebar">
+
+            <div class="inner">
+
+                <!-- Search Box -->
+                <section id="search" class="alt">
+                    <form method="get" action="#">
+                        <input type="text" name="search" id="search" placeholder="Search..." />
+                    </form>
+                </section>
+
+                <!-- Menu -->
+                <nav id="menu">
+                    <ul>
+                        <li><span class="opener" href="/">Home</span><ul> <li><a href="/#overview">About Us</a></li>
+                            <li><a href="/">Contact Us</a></li></ul></li>
+                       
+                        <li>
+                            <span class="opener">School Project</span>
+                            <ul>
+                                <li><a href="https://docs.google.com/document/d/1xkjbumYrgpHqPpwkTLYU95h08ecN_QYi3KeKC83zeaU/edit?usp=sharing">Concept Note</a></li>
+                                <li>
+                                    <a href="/register/">Partners</a>
+                                </li>
+                                <li><a href="/login/">Narrative</a></li>
+                                <li><a href="/map/">Maps</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="opener">Resources</span>
+                            <ul>
+                                <li><a href="/article/">All Leaning Resources</a></li>
+                                <!-- <li> -->
+                                
+                                    <!-- <span class="opener">Knowlegde</span>
+                                    <ul> -->
+                                        <li><a href="/list/">Articles</a></li>
+                                        <li><a href="/image/">Images</a></li>
+                                        <li><a href="/list/">Videos</a></li>
+                                    <!-- </ul> -->
+                                <!-- </li> -->
+                                <li><a href="/">Policy Documents</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="opener">Nutri-Garden Project</span>
+                            <ul>
+                                <!-- <li><a href="https://poshanvatika.communitygis.net/">Poshan Vatika Website </a></li> -->
+                                <li><a href="/">Training Materials </a></li>
+                                <li>
+                                    <a href="/">Partners</a>
+                                </li>
+                                <li><a href="/">Narrative</a></li>
+                                <li><a href="https://poshanvatika.communitygis.net/">Maps</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="https://www.google.com">ICDS Project</a></li>
+                        {% if user.is_authenticated %}
+
+                        <!-- <li class="active"><a href="/map/">Maps</li> -->
+                        <li class="active"><a href="/logout/">Logout</li>
+                            {% else %}
+                            <li><a href="/login/">Login/Register</a></li>
+                        {% endif %}
+
+                    </ul>
+                </nav>
+
+                <!-- Featured Posts -->
+                <!-- <div class="featured-posts">
+                    <div class="heading">
+                        <h2>Featured Posts</h2>
+                    </div>
+                    <div class="owl-carousel owl-theme">
+                        <a href="#">
+                            <div class="featured-item">
+                                <img src="{% static 'assets/images/featured_post_01.jpg' %}" alt="featured one">
+                                <p>Aliquam egestas convallis eros sed gravida. Curabitur consequat sit.</p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="featured-item">
+                                <img src="{% static 'assets/images/featured_post_01.jpg' %}" alt="featured two">
+                                <p>Donec a scelerisque massa. Aliquam non iaculis quam. Duis arcu turpis.</p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="featured-item">
+                                <img src="{% static 'assets/images/featured_post_01.jpg' %}" alt="featured three">
+                                <p>Suspendisse ac convallis urna, vitae luctus ante. Donec sit amet.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div> -->
+
+                <!-- Footer -->
+                <footer id="footer">
+                    <!-- <p class="copyright">Copyright &copy; Glenmark -->
+                        <!-- <br>Designed by <a rel="nofollow" href="https://www.facebook.com/templatemo">Template Mo</a></p> -->
+                </footer>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/select2.min.js' %}"></script>
+    <script src="{% static 'assets/js/browser.min.js' %}"></script>
+    <script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+    <script src="{% static 'assets/js/transition.js' %}"></script>
+    <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+</body>
+
+
+</body>
+
+</html>

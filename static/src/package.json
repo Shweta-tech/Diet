@@ -1,0 +1,16 @@
+{
+  "title": "Material demo",
+  "description": "https://github.com/mui-org/material-ui/blob/master/docs/src/pages/demos/expansion-panels/CustomizedExpansionPanel.js",
+  "dependencies": {
+    "@material-ui/core": "3.8.2",
+    "@material-ui/lab": "3.0.0-alpha.28",
+    "leaflet": "1.4.0",
+    "leaflet-sidebar-v2": "3.0.4",
+    "namor": "1.1.1",
+    "rc-slider": "8.6.4",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-step-range-slider": "1.4.1",
+    "react-table": "6.8.6"
+  }
+}

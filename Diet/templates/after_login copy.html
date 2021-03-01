@@ -1,0 +1,797 @@
+{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<head>
+    <meta charset="utf-8">
+    <title>Minimal Django File Upload Example</title>
+    <style>
+        #myDIV {
+            width: 100%;
+            padding: 50px 0;
+            text-align: center;
+            background-color: lightblue;
+            margin-top: 20px;
+        }
+        
+      
+        .dropbtn {
+            background-color: #3498DB;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            min-width: 260px;
+        }
+        
+        .dropbtn:hover,
+        .dropbtn:focus {
+            background-color: #2980B9;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            min-width: 260px;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 260px;
+            overflow: auto;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown a:hover {
+            background-color: #ddd;
+        }
+        
+        .show {
+            display: block;
+        }
+    </style>
+    <script>
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        function individual() {
+            document.getElementById("individual").classList.toggle("show");
+        }
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+        $(document).ready(function() {
+            $("#myDropdown").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+
+            function userprof() {
+                var x = document.getElementById("myDIV");
+                if (x.style.display === "none") {
+                    x.style.display = "none";
+                } else {
+                    x.style.display = "block";
+                }
+            }
+        });
+    </script>
+</head>
+{% for group in user.groups.all %} {% if group.name == 'principal_investigator' %}
+
+<div class="container">
+    <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">View Data</button>
+    <button class="dropbtn" onclick="openPage('About', this, 'orange')"></button>
+    <!-- <div class="dropdown"> -->
+    <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button>
+    <button class="dropbtn" onclick="openPage('About', this, 'orange')">User Profile</button>
+</div>
+
+<div id="About" class="tabcontent">
+    <h1>User Profile</h1>
+
+</div>
+{% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'project_manager' %}
+<div class="container">
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="">Mentor</a>
+            <a href="/mentor_bulk/">School Coordinator</a>
+            <a href=" /student_register/">Student</a>
+            <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
+            <a href="/mentor_bulk/">Anganwadi Worker</a>
+           <a href="/anemic_woman_registration/">Anemic Women</a>
+            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
+            <a href="/pregnant_woman_registration/">Pregnant Women</a>
+            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+            <a href=" #about">Nutri-garden Expert</a>
+            <a href="#contact">Parents</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button onclick="individual()" class="dropbtn">Individual Register</button>
+        <div id="individual" class="dropdown-content">
+            <a href="">Mentor</a>
+            <a href="/mentor_bulk/">School Coordinator</a>
+            <a href=" /student_register/">Student</a>
+            <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
+            <a href="/mentor_bulk/">Anganwadi Worker</a>
+            <a href="/anemic_woman_registration/">Anemic Women</a>
+            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
+            <a href="/pregnant_woman_registration/">Pregnant Women</a>
+            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+            <a href=" #about">Nutri-garden Expert</a>
+            <a href="#contact">Parents</a>
+        </div>
+    </div>
+    <!-- <div class="dropdown"> -->
+    <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button>
+    <button class="dropbtn" onclick="openPage('About', this, 'orange')">User Profile</button>
+</div>
+
+<div id="About" class="tabcontent">
+    <h1>Your Profile</h1>
+    
+       
+    
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
+    
+          
+    
+            <p></p>
+            <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
+            <br> {% endfor %}
+            <h2>Registered</h2>
+    
+    
+            <table class="table table-striped table-bordered table-sm">
+                <thead class="thead-dark">
+    
+                    <tr>
+                        <th>Username </th>
+                   
+                      
+                        <th>Email Address</th>
+                
+                        <th>Contact Number</th>
+          
+                       
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+    
+                    <tr id="somerow">
+                        <td>{{i.username}}</td>
+                        <!-- <td type>{{i.id}}</td> -->
+                        <td>{{i.email}}</td>
+                        
+                        <td>{{i.userprofile.contact}}</td>
+                        
+                        <!-- <td>{{i.ventbed}}</td> -->
+                        <!--<td>{{i.oxybed}}</td> -->
+                        <td>
+                            <a href="/change_pass/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
+                            <!-- <a href="/destroy/{{ i.id }}">Delete</a> -->
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    
+    
+           
+        </form>
+  
+ 
+</div>{% endif %} {% endfor %}{% for group in user.groups.all %} {% if group.name == 'mentor' %}
+<div class="container">
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="/mentor_bulk/">School Coordinator</a>
+            <a href=" /student_register/">Student</a>
+            <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
+            <a href="/mentor_bulk/">Anganwadi Worker</a>
+           <a href="/anemic_woman_registration/">Anemic Women</a>
+            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
+            <a href="/pregnant_woman_registration/">Pregnant Women</a>
+            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+            <a href=" #about">Nutri-garden Expert</a>
+            <a href="#contact">Parents</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button onclick="individual()" class="dropbtn">Individual Register</button>
+        <div id="individual" class="dropdown-content">
+            <a href="/mentor_bulk/">School Coordinator</a>
+            <a href=" /student_register/">Student</a>
+            <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
+            <a href="/mentor_bulk/">Anganwadi Worker</a>
+           <a href="/anemic_woman_registration/">Anemic Women</a>
+            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
+            <a href="/pregnant_woman_registration/">Pregnant Women</a>
+            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+            <a href=" #about">Nutri-garden Expert</a>
+            <a href="#contact">Parents</a>
+        </div>
+    </div>
+    <!-- <div class="dropdown"> -->
+    <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button>
+    <button class="dropbtn" onclick="openPage('About', this, 'orange')">User Profile</button>
+</div>
+
+<div id="About" class="tabcontent">
+    <h1>User Profile</h1>
+
+</div>
+{% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'nutrition_expert' %}
+<div class="container">
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="/mentor_bulk/">School Coordinator</a>
+            <a href=" /student_register/">Student</a>
+            <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
+            <a href="/mentor_bulk/">Anganwadi Worker</a>
+           <a href="/anemic_woman_registration/">Anemic Women</a>
+            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
+            <a href="/pregnant_woman_registration/">Pregnant Women</a>
+            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+            <a href=" #about">Nutri-garden Expert</a>
+            <a href="#contact">Parents</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button onclick="individual()" class="dropbtn">Individual Register</button>
+        <div id="individual" class="dropdown-content">
+            <a href="/mentor_bulk/">School Coordinator</a>
+            <a href=" /student_register/">Student</a>
+            <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
+            <a href="/mentor_bulk/">Anganwadi Worker</a>
+           <a href="/anemic_woman_registration/">Anemic Women</a>
+            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
+            <a href="/pregnant_woman_registration/">Pregnant Women</a>
+            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+            <a href=" #about">Nutri-garden Expert</a>
+            <a href="#contact">Parents</a>
+        </div>
+    </div>
+    <!-- <div class="dropdown"> -->
+    <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button>
+    <button class="dropbtn" onclick="openPage('About', this, 'orange')">User Profile</button>
+</div>
+
+<div id="About" class="tabcontent">
+    <h1>Your Profile</h1>
+    
+       
+    
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
+    
+          
+    
+            <p></p>
+            <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
+            <br> {% endfor %}
+            <h2>Registered</h2>
+    
+    
+            <table class="table table-striped table-bordered table-sm">
+                <thead class="thead-dark">
+    
+                    <tr>
+                        <th>Username </th>
+                   
+                      
+                        <th>Email Address</th>
+                
+                        <th>Contact Number</th>
+          
+                       
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+    
+                    <tr id="somerow">
+                        <td>{{i.username}}</td>
+                        <!-- <td type>{{i.id}}</td> -->
+                        <td>{{i.email}}</td>
+                        
+                        <td>{{i.userprofile.contact}}</td>
+                        
+                        <!-- <td>{{i.ventbed}}</td> -->
+                        <!--<td>{{i.oxybed}}</td> -->
+                        <td>
+                            <a href="/change_pass/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
+                            <!-- <a href="/destroy/{{ i.id }}">Delete</a> -->
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    
+    
+           
+        </form>
+  
+ 
+</div>{% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'webgis_expert' %}
+<div class="container">
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="/mentor_bulk/">School Coordinator</a>
+            <a href=" /student_register/">Student</a>
+            <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
+            <a href="/mentor_bulk/">Anganwadi Worker</a>
+           <a href="/anemic_woman_registration/">Anemic Women</a>
+            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
+            <a href="/pregnant_woman_registration/">Pregnant Women</a>
+            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+            <a href=" #about">Nutri-garden Expert</a>
+            <a href="#contact">Parents</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button onclick="individual()" class="dropbtn">Individual Register</button>
+        <div id="individual" class="dropdown-content">
+            <a href="/mentor_bulk/">School Coordinator</a>
+            <a href=" /student_register/">Student</a>
+            <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
+            <a href="/mentor_bulk/">Anganwadi Worker</a>
+           <a href="/anemic_woman_registration/">Anemic Women</a>
+            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
+            <a href="/pregnant_woman_registration/">Pregnant Women</a>
+            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+            <a href=" #about">Nutri-garden Expert</a>
+            <a href="#contact">Parents</a>
+        </div>
+    </div>
+    <!-- <div class="dropdown"> -->
+    <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button>
+    <button class="dropbtn" onclick="openPage('About', this, 'orange')">User Profile</button>
+</div>
+
+<div id="About" class="tabcontent">
+    <h1>Your Profile</h1>
+    
+       
+    
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
+    
+          
+    
+            <p></p>
+            <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
+            <br> {% endfor %}
+            <h2>Registered</h2>
+    
+    
+            <table class="table table-striped table-bordered table-sm">
+                <thead class="thead-dark">
+    
+                    <tr>
+                        <th>Username </th>
+                   
+                      
+                        <th>Email Address</th>
+                
+                        <th>Contact Number</th>
+          
+                       
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+    
+                    <tr id="somerow">
+                        <td>{{i.username}}</td>
+                        <!-- <td type>{{i.id}}</td> -->
+                        <td>{{i.email}}</td>
+                        
+                        <td>{{i.userprofile.contact}}</td>
+                        
+                        <!-- <td>{{i.ventbed}}</td> -->
+                        <!--<td>{{i.oxybed}}</td> -->
+                        <td>
+                            <a href="/change_pass/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
+                            <!-- <a href="/destroy/{{ i.id }}">Delete</a> -->
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    
+    
+           
+        </form>
+  
+ 
+</div>{% endif %} {% endfor %}
+<div class="container">
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="/mentor_bulk/">School Coordinator</a>
+            <a href=" /student_register/">Student</a>
+            <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
+            <a href="/mentor_bulk/">Anganwadi Worker</a>
+           <a href="/anemic_woman_registration/">Anemic Women</a>
+            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
+            <a href="/pregnant_woman_registration/">Pregnant Women</a>
+            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+            <a href=" #about">Nutri-garden Expert</a>
+            <a href="#contact">Parents</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button onclick="individual()" class="dropbtn">Individual Register</button>
+        <div id="individual" class="dropdown-content">
+            <a href="/mentor_bulk/">School Coordinator</a>
+            <a href=" /student_register/">Student</a>
+            <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
+            <a href="/anganwadi_workers_register/">Anganwadi Worker</a>
+           <a href="/anemic_woman_registration/">Anemic Women</a>
+            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
+            <a href="/pregnant_woman_registration/">Pregnant Women</a>
+            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+            <a href=" #about">Nutri-garden Expert</a>
+            <a href="#contact">Parents</a>
+        </div>
+    </div>
+    <!-- <div class="dropdown"> -->
+    <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button>
+    <button class="dropbtn" onclick="openPage('About', this, 'orange')">Your Profile</button>
+</div>
+
+<div id="About" class="tabcontent">
+    <h1>Your Profile</h1>
+    
+       
+    
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
+    
+          
+    
+            <p></p>
+            <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
+            <br> {% endfor %}
+            <h2>Registered</h2>
+    
+    
+            <table class="table table-striped table-bordered table-sm">
+                <thead class="thead-dark">
+    
+                    <tr>
+                        <th>Username </th>
+                   
+                      
+                        <th>Email Address</th>
+                
+                        <th>Contact Number</th>
+          
+                       
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+    
+                    <tr id="somerow">
+                        <td>{{i.username}}</td>
+                        <!-- <td type>{{i.id}}</td> -->
+                        <td>{{i.email}}</td>
+                        
+                        <td>{{i.userprofile.contact}}</td>
+                        
+                        <!-- <td>{{i.ventbed}}</td> -->
+                        <!--<td>{{i.oxybed}}</td> -->
+                        <td>
+                            <a href="/change_pass/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
+                            <!-- <a href="/destroy/{{ i.id }}">Delete</a> -->
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    
+    
+           
+        </form>
+  
+ 
+</div> {% for group in user.groups.all %} {% if group.name == 'school_coordinator' %}
+<div class="container">
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href=" /student_register/">Student</a>
+            <!-- <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
+            <a href="/mentor_bulk/">Anganwadi Worker</a>
+           <a href="/anemic_woman_registration/">Anemic Women</a>
+            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
+            <a href="/pregnant_woman_registration/">Pregnant Women</a>
+            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+            <a href=" #about">Nutri-garden Expert</a>
+            <a href="#contact">Parents</a> -->
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button onclick="individual()" class="dropbtn">Individual Register</button>
+        <div id="individual" class="dropdown-content">
+           
+            <a href=" /student_register/">Student</a>
+          
+        </div>
+    </div>
+    <!-- <div class="dropdown"> -->
+    <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button>
+    <button class="dropbtn" onclick="openPage('About', this, 'orange')">User Profile</button>
+</div>
+
+<div id="About" class="tabcontent">
+    <h1>User Profile</h1>
+
+</div>{% endif %} {% endfor %}{% for group in user.groups.all %} {% if group.name == 'mukhya_sevika' %}
+<div class="container">
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
+        <div id="myDropdown" class="dropdown-content">
+           
+            <a href="/mentor_bulk/">Anganwadi Worker</a>
+           <a href="/anemic_woman_registration/">Anemic Women</a>
+            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
+            <a href="/pregnant_woman_registration/">Pregnant Women</a>
+            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+
+            <a href="#contact">Parents</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button onclick="individual()" class="dropbtn">Individual Register</button>
+        <div id="individual" class="dropdown-content">
+        
+            <a href="/mentor_bulk/">Anganwadi Worker</a>
+           <a href="/anemic_woman_registration/">Anemic Women</a>
+            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
+            <a href="/pregnant_woman_registration/">Pregnant Women</a>
+            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+          
+            <a href="#contact">Parents</a>
+        </div>
+    </div>
+    <!-- <div class="dropdown"> -->
+    <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button>
+    <button class="dropbtn" onclick="openPage('About', this, 'orange')">User Profile</button>
+</div>
+
+<div id="About" class="tabcontent">
+    <h1>Your Profile</h1>
+    
+       
+    
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
+    
+          
+    
+            <p></p>
+            <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
+            <br> {% endfor %}
+            <h2>Registered</h2>
+    
+    
+            <table class="table table-striped table-bordered table-sm">
+                <thead class="thead-dark">
+    
+                    <tr>
+                        <th>Username </th>
+                   
+                      
+                        <th>Email Address</th>
+                
+                        <th>Contact Number</th>
+          
+                       
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+    
+                    <tr id="somerow">
+                        <td>{{i.username}}</td>
+                        <!-- <td type>{{i.id}}</td> -->
+                        <td>{{i.email}}</td>
+                        
+                        <td>{{i.userprofile.contact}}</td>
+                        
+                        <!-- <td>{{i.ventbed}}</td> -->
+                        <!--<td>{{i.oxybed}}</td> -->
+                        <td>
+                            <a href="/change_pass/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
+                            <!-- <a href="/destroy/{{ i.id }}">Delete</a> -->
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    
+    
+           
+        </form>
+  
+ 
+</div>{% endif %} {% endfor %}{% for group in user.groups.all %} {% if group.name == 'anganwadi_worker' %}
+<div class="container">
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
+        <div id="myDropdown" class="dropdown-content">
+           
+           <a href="/anemic_woman_registration/">Anemic Women</a>
+            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
+            <a href="/pregnant_woman_registration/">Pregnant Women</a>
+            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+          
+            <a href="#contact">Parents</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button onclick="individual()" class="dropbtn">Individual Register</button>
+        <div id="individual" class="dropdown-content">
+            
+           <a href="/anemic_woman_registration/">Anemic Women</a>
+            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
+            <a href="/pregnant_woman_registration/">Pregnant Women</a>
+            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+            
+            <a href="#contact">Parents</a>
+        </div>
+    </div>
+    <!-- <div class="dropdown"> -->
+    <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button>
+    <button class="dropbtn" onclick="openPage('About', this, 'orange')">User Profile</button>
+</div>
+
+<div id="About" class="tabcontent">
+    <h1>Your Profile</h1>
+    
+       
+    
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
+    
+          
+    
+            <p></p>
+            <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
+            <br> {% endfor %}
+            <h2>Registered</h2>
+    
+    
+            <table class="table table-striped table-bordered table-sm">
+                <thead class="thead-dark">
+    
+                    <tr>
+                        <th>Username </th>
+                   
+                      
+                        <th>Email Address</th>
+                
+                        <th>Contact Number</th>
+          
+                       
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+    
+                    <tr id="somerow">
+                        <td>{{i.username}}</td>
+                        <!-- <td type>{{i.id}}</td> -->
+                        <td>{{i.email}}</td>
+                        
+                        <td>{{i.userprofile.contact}}</td>
+                        
+                        <!-- <td>{{i.ventbed}}</td> -->
+                        <!--<td>{{i.oxybed}}</td> -->
+                        <td>
+                            <a href="/change_pass/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
+                            <!-- <a href="/destroy/{{ i.id }}">Delete</a> -->
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    
+    
+           
+        </form>
+  
+ 
+</div>{% endif %} {% endfor %}
+<script>
+    function openPage(pageName, elmnt, color) {
+        // Hide all elements with class="tabcontent" by default */
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Remove the background color of all tablinks/buttons
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+        }
+        $(this).closest("stubr").remove();
+        // Show the specific tab content
+        document.getElementById(pageName).style.display = "block";
+        $(this).closest("stubr").remove();
+
+        // Add the specific color to the button used to open the tab content
+        // elmnt.style.backgroundColor = color;
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+
+    $('.close-div').on('click', function() {
+        $(this).closest("Home").remove();
+    });
+</script>{% endblock %}

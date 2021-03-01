@@ -1,0 +1,637 @@
+{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Minimal Django File Upload Example</title>
+    <style>
+        .myform {
+            margin-top: 200px;
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: rgb(254, 254, 255);
+            font-weight: bolder;
+        }
+        
+        html {
+            font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+        
+        .card {
+            margin-top: 100px;
+            font-size: 1em;
+            overflow: hidden;
+            padding: 0;
+            border: none;
+            border-radius: .28571429rem;
+            box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+        }
+        
+        .card-block {
+            font-size: 1em;
+            position: relative;
+            margin: 0;
+            padding: 1em;
+            border: none;
+            border-top: 1px solid rgba(34, 36, 38, .1);
+            box-shadow: none;
+        }
+        
+        .card-img-top {
+            display: block;
+            width: 100%;
+            height: 20rem;
+        }
+        
+        .card-title {
+            font-size: 1.28571429em;
+            font-weight: 700;
+            line-height: 1.2857em;
+        }
+        
+        .card-text {
+            clear: both;
+            margin-top: .5em;
+            color: rgba(0, 0, 0, .68);
+        }
+        
+        .card-footer {
+            font-size: 1em;
+            position: static;
+            top: 0;
+            left: 0;
+            max-width: 100%;
+            padding: .75em 1em;
+            color: rgba(0, 0, 0, .4);
+            border-top: 1px solid rgba(0, 0, 0, .05) !important;
+            background: #fff;
+        }
+        
+        .card-inverse .btn {
+            border: 1px solid rgba(0, 0, 0, .05);
+        }
+        
+        h5 {
+            font-weight: bolder;
+            margin-top: 80px;
+            text-align: center;
+            color: darkslategrey;
+        }
+        
+        .container {
+            align-items: center;
+        }
+        
+        .profile {
+            position: absolute;
+            top: -12px;
+            display: inline-block;
+            overflow: hidden;
+            box-sizing: border-box;
+            width: 25px;
+            height: 25px;
+            margin: 0;
+            border: 1px solid #fff;
+            border-radius: 50%;
+        }
+        
+        .profile-avatar {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+        
+        .profile-inline {
+            position: relative;
+            top: 0;
+            display: inline-block;
+        }
+        
+        .profile-inline~.card-title {
+            display: inline-block;
+            margin-left: 4px;
+            vertical-align: top;
+        }
+        
+        .text-bold {
+            font-weight: 700;
+        }
+        
+        .meta {
+            font-size: 1em;
+            color: rgba(0, 0, 0, .4);
+        }
+        
+        .meta a {
+            text-decoration: none;
+            color: rgba(0, 0, 0, .4);
+        }
+        
+        .meta a:hover {
+            color: rgba(0, 0, 0, .87);
+        }
+        
+        h3 {
+            margin-top: 30%;
+        }
+    </style>
+
+</head>
+<center>
+    {% for group in user.groups.all %} {% if group.name == 'Project_coordinator' %}
+
+    <div class="container">
+        <div class="row" style="margin-top: 150px;">
+
+            <!-- <div class="row"> -->
+            <div class="col-sm-4">
+                <div class="card" style="width: 25rem; ">
+                    <img src="{% static 'img/PM.jpg' %}" style="height: 20rem;" class=" card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">Project Manager</h5>
+                        <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                        <a href="/upload_pm/ " class="btn btn-info ">Continue</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4 ">
+                <div class="card " style="width: 25rem;">
+                    <img src="{% static 'img/tE.jpg' %} " style="height: 20rem;" class="card-img-top " alt="... ">
+                    <div class="card-body">
+                        <h5 class="card-title ">Tech Expert</h5>
+                        <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                        <a href="/upload_te/ " class="btn btn-info">Continue</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="row"> -->
+            <div class="col-sm-4">
+                <div class="card" style="width: 25rem; ">
+                    <img src="{% static 'img/mentor.jpg' %}" class=" card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">Head Mentor</h5>
+                        <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                        <a href="/upload_hm/ " class="btn btn-info ">Continue</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" style="margin-top: 150px;">
+
+            <div class="col-sm-4 ">
+                <div class="card " style="width: 25rem;">
+                    <img src="{% static 'img/nutriexpert.png' %} " class="card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">Nutrition Expert</h5>
+                        <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                        <a href="/upload_hm/ " class="btn btn-info">Continue</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 ">
+                <div class="card " style="width: 18rem; ">
+                    <img src="{% static 'img/edit1.png' %} " class="card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">School</h5>
+                        <a href="/upload_s/ " class="btn btn-info">Continue</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- <div class="row"> -->
+            <div class="col-sm-4">
+                <div class="card" style="width: 25rem; ">
+                    <img src="{% static 'img/PM.jpg' %}" style="height: 20rem;" class=" card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">School Coordinator</h5>
+                        <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                        <a href="/upload_sc/ " class="btn btn-info ">Continue</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 150px;">
+
+            <div class="col-sm-4 ">
+                <div class="card " style="width: 25rem;">
+                    <img src="{% static 'img/tE.jpg' %} " style="height: 20rem;" class="card-img-top " alt="... ">
+                    <div class="card-body">
+                        <h5 class="card-title ">Mukhya Sevika</h5>
+                        <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                        <a href="/upload_ms/ " class="btn btn-info">Continue</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 ">
+                <div class="card " style="width: 18rem; ">
+                    <img src="{% static 'img/edit1.png' %} " class="card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">Anaganwadi Worker</h5>
+                        <a href="/upload_aw/ " class="btn btn-info">Continue</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- <div class="row"> -->
+            <div class="col-sm-4">
+                <div class="card" style="width: 25rem; ">
+                    <img src="{% static 'img/PM.jpg' %}" style="height: 20rem;" class=" card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">Student</h5>
+                        <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                        <a href="/upload_stu/ " class="btn btn-info ">Continue</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- <div class="col-sm-4 ">
+                <div class="card " style="width: 25rem;">
+                    <img src="{% static 'img/tE.jpg' %} " style="height: 20rem;" class="card-img-top " alt="... ">
+                    <div class="card-body">
+                        <h5 class="card-title ">Support Mentor</h5>
+            <a href="/support_mentor_register/ " class="btn btn-info">Continue</a>
+        </div>
+    </div>
+    </div> -->
+        <!-- <div class="col-sm-4 ">
+                <div class="card " style="width: 18rem; ">
+                    <img src="{% static 'img/edit1.png' %} " class="card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">Anaganwadi Worker</h5>
+                        <a href="/upload_aw/ " class="btn btn-info">Continue</a>
+                    </div>
+                </div>
+            </div> -->
+
+    </div>
+    {% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'Head_mentor' %}
+    <div class="container">
+        <div class="row" style="margin-top: 150px;">
+
+
+            <div class="col-sm-4 ">
+                <div class="card " style="width: 18rem; ">
+                    <img src="{% static 'img/edit1.png' %} " class="card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">School</h5>
+                        <a href="/upload_s/ " class="btn btn-info">Continue</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" style="margin-top: 150px;">
+
+            <!-- <div class="row"> -->
+            <div class="col-sm-4">
+                <div class="card" style="width: 25rem; ">
+                    <img src="{% static 'img/PM.jpg' %}" style="height: 20rem;" class=" card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">School Coordinator</h5>
+                        <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                        <a href="/upload_sc/ " class="btn btn-info ">Continue</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4 ">
+                <div class="card " style="width: 25rem;">
+                    <img src="{% static 'img/tE.jpg' %} " style="height: 20rem;" class="card-img-top " alt="... ">
+                    <div class="card-body">
+                        <h5 class="card-title ">Mukhya Sevika</h5>
+                        <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                        <a href="/upload_ms/ " class="btn btn-info">Continue</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 ">
+                <div class="card " style="width: 18rem; ">
+                    <img src="{% static 'img/edit1.png' %} " class="card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">Anaganwadi Worker</h5>
+                        <a href="/upload_aw/ " class="btn btn-info">Continue</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" style="margin-top: 150px;">
+
+            <!-- <div class="row"> -->
+            <div class="col-sm-4">
+                <div class="card" style="width: 25rem; ">
+                    <img src="{% static 'img/PM.jpg' %}" style="height: 20rem;" class=" card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">Student</h5>
+                        <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                        <a href="/upload_stu/ " class="btn btn-info ">Continue</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="col-sm-4 ">
+                <div class="card " style="width: 18rem; ">
+                    <img src="{% static 'img/edit1.png' %} " class="card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">View Data</h5>
+            <a href="/show/ " class="btn btn-info">Continue</a>
+        </div>
+    </div>
+    </div> -->
+
+        </div>
+        {% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'Project_manager' %}
+        <div class="container">
+            <div class="row" style="margin-top: 150px;">
+
+                <!-- <div class="row"> -->
+                <div class="col-sm-4">
+                    <div class="card" style="width: 25rem; ">
+                        <img src="{% static 'img/mentor.jpg' %}" class=" card-img-top " alt="... ">
+                        <div class="card-body ">
+                            <h5 class="card-title ">Head Mentor</h5>
+                            <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                            <a href="/upload_hm/ " class="btn btn-info ">Continue</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 ">
+                    <div class="card " style="width: 25rem;">
+                        <img src="{% static 'img/nutriexpert.png' %} " class="card-img-top " alt="... ">
+                        <div class="card-body ">
+                            <h5 class="card-title ">Nutrition Expert</h5>
+                            <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                            <a href="/upload_hm/ " class="btn btn-info">Continue</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 ">
+                    <div class="card " style="width: 18rem; ">
+                        <img src="{% static 'img/edit1.png' %} " class="card-img-top " alt="... ">
+                        <div class="card-body ">
+                            <h5 class="card-title ">School</h5>
+                            <a href="/upload_s/ " class="btn btn-info">Continue</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" style="margin-top: 150px;">
+
+                <!-- <div class="row"> -->
+                <div class="col-sm-4">
+                    <div class="card" style="width: 25rem; ">
+                        <img src="{% static 'img/PM.jpg' %}" style="height: 20rem;" class=" card-img-top " alt="... ">
+                        <div class="card-body ">
+                            <h5 class="card-title ">School Coordinator</h5>
+                            <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                            <a href="/upload_sc/ " class="btn btn-info ">Continue</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 ">
+                    <div class="card " style="width: 25rem;">
+                        <img src="{% static 'img/tE.jpg' %} " style="height: 20rem;" class="card-img-top " alt="... ">
+                        <div class="card-body">
+                            <h5 class="card-title ">Mukhya Sevika</h5>
+                            <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                            <a href="/upload_ms/ " class="btn btn-info">Continue</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 ">
+                    <div class="card " style="width: 18rem; ">
+                        <img src="{% static 'img/edit1.png' %} " class="card-img-top " alt="... ">
+                        <div class="card-body ">
+                            <h5 class="card-title ">Anaganwadi Worker</h5>
+                            <a href="/upload_aw/ " class="btn btn-info">Continue</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" style="margin-top: 150px;">
+
+                <!-- <div class="row"> -->
+                <div class="col-sm-4">
+                    <div class="card" style="width: 25rem; ">
+                        <img src="{% static 'img/PM.jpg' %}" style="height: 20rem;" class=" card-img-top " alt="... ">
+                        <div class="card-body ">
+                            <h5 class="card-title ">Student</h5>
+                            <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                            <a href="/upload_stu/ " class="btn btn-info ">Continue</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="col-sm-4 ">
+                    <div class="card " style="width: 18rem; ">
+                        <img src="{% static 'img/edit1.png' %} " class="card-img-top " alt="... ">
+                        <div class="card-body ">
+                            <h5 class="card-title ">View Data</h5>
+                <a href="/show/ " class="btn btn-info">Continue</a>
+            </div>
+        </div>
+        </div> -->
+
+            </div>
+            {% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'School' %}
+            <div class="container">
+
+                <div class="row" style="margin-top: 150px;">
+
+                    <!-- <div class="row"> -->
+                    <div class="col-sm-4">
+                        <div class="card" style="width: 25rem; ">
+                            <img src="{% static 'img/PM.jpg' %}" style="height: 20rem;" class=" card-img-top " alt="... ">
+                            <div class="card-body ">
+                                <h5 class="card-title ">School Coordinator</h5>
+                                <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                <a href="/upload_sc/ " class="btn btn-info ">Continue</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 ">
+                        <div class="card " style="width: 25rem;">
+                            <img src="{% static 'img/tE.jpg' %} " style="height: 20rem;" class="card-img-top " alt="... ">
+                            <div class="card-body">
+                                <h5 class="card-title ">Mukhya Sevika</h5>
+                                <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                <a href="/upload_ms/ " class="btn btn-info">Continue</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <div class="card " style="width: 18rem; ">
+                            <img src="{% static 'img/edit1.png' %} " class="card-img-top " alt="... ">
+                            <div class="card-body ">
+                                <h5 class="card-title ">Anaganwadi Worker</h5>
+                                <a href="/upload_aw/ " class="btn btn-info">Continue</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row" style="margin-top: 150px;">
+
+                    <!-- <div class="row"> -->
+                    <div class="col-sm-4">
+                        <div class="card" style="width: 25rem; ">
+                            <img src="{% static 'img/PM.jpg' %}" style="height: 20rem;" class=" card-img-top " alt="... ">
+                            <div class="card-body ">
+                                <h5 class="card-title ">Student</h5>
+                                <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                <a href="/upload_stu/ " class="btn btn-info ">Continue</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-sm-4 ">
+                <div class="card " style="width: 18rem; ">
+                    <img src="{% static 'img/edit1.png' %} " class="card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">View Data</h5>
+            <a href="/show/ " class="btn btn-info">Continue</a>
+        </div>
+    </div>
+    </div> -->
+
+                </div>
+                {% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'School_Coordinator' %}
+                <div class="container">
+                    <div class="row" style="margin-top: 150px;">
+
+                        <div class="col-sm-4 ">
+                            <div class="card " style="width: 25rem;">
+                                <img src="{% static 'img/tE.jpg' %} " style="height: 20rem;" class="card-img-top " alt="... ">
+                                <div class="card-body">
+                                    <h5 class="card-title ">Mukhya Sevika</h5>
+                                    <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                    <a href="/upload_ms/ " class="btn btn-info">Continue</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 ">
+                            <div class="card " style="width: 18rem; ">
+                                <img src="{% static 'img/edit1.png' %} " class="card-img-top " alt="... ">
+                                <div class="card-body ">
+                                    <h5 class="card-title ">Anaganwadi Worker</h5>
+                                    <a href="/upload_aw/ " class="btn btn-info">Continue</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row" style="margin-top: 150px;">
+
+                        <!-- <div class="row"> -->
+                        <div class="col-sm-4">
+                            <div class="card" style="width: 25rem; ">
+                                <img src="{% static 'img/PM.jpg' %}" style="height: 20rem;" class=" card-img-top " alt="... ">
+                                <div class="card-body ">
+                                    <h5 class="card-title ">Student</h5>
+                                    <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                    <a href="/upload_stu/ " class="btn btn-info ">Continue</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-sm-4 ">
+                <div class="card " style="width: 18rem; ">
+                    <img src="{% static 'img/edit1.png' %} " class="card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">View Data</h5>
+            <a href="/show/ " class="btn btn-info">Continue</a>
+        </div>
+    </div>
+    </div> -->
+
+                    </div>
+                    {% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'MukhyaSevika' %}
+                    <div class="container">
+                        <div class="row" style="margin-top: 150px;">
+
+                            <div class="col-sm-4 ">
+                                <div class="card " style="width: 18rem; ">
+                                    <img src="{% static 'img/edit1.png' %} " class="card-img-top " alt="... ">
+                                    <div class="card-body ">
+                                        <h5 class="card-title ">Anaganwadi Worker</h5>
+                                        <a href="/upload_aw/ " class="btn btn-info">Continue</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row" style="margin-top: 150px;">
+
+                            <!-- <div class="row"> -->
+                            <div class="col-sm-4">
+                                <div class="card" style="width: 25rem; ">
+                                    <img src="{% static 'img/PM.jpg' %}" style="height: 20rem;" class=" card-img-top " alt="... ">
+                                    <div class="card-body ">
+                                        <h5 class="card-title ">Student</h5>
+                                        <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                        <a href="/upload_stu/ " class="btn btn-info ">Continue</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="col-sm-4 ">
+                <div class="card " style="width: 18rem; ">
+                    <img src="{% static 'img/edit1.png' %} " class="card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">View Data</h5>
+            <a href="/show/ " class="btn btn-info">Continue</a>
+        </div>
+    </div>
+    </div> -->
+
+                        </div>
+                        {% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'AanganwadiWorker' %}
+                        <div class="container">
+                            <div class="row" style="margin-top: 150px;">
+
+
+                                <!-- <div class="row"> -->
+                                <div class="col-sm-4">
+                                    <div class="card" style="width: 25rem; ">
+                                        <img src="{% static 'img/PM.jpg' %}" style="height: 20rem;" class=" card-img-top " alt="... ">
+                                        <div class="card-body ">
+                                            <h5 class="card-title ">Student</h5>
+                                            <!-- <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                            <a href="/upload_stu/ " class="btn btn-info ">Continue</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="col-sm-4 ">
+                <div class="card " style="width: 18rem; ">
+                    <img src="{% static 'img/edit1.png' %} " class="card-img-top " alt="... ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">View Data</h5>
+            <a href="/show/ " class="btn btn-info">Continue</a>
+        </div>
+    </div>
+    </div> -->
+
+                            </div>
+                            {% endif %} {% endfor %}
+</center>{% endblock %}

@@ -1,0 +1,647 @@
+{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}{% load wagtailcore_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Diet Recall Form</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <style>
+        body {
+            margin-top: 100px;
+            background: aliceblue;
+        }
+        
+        form {
+            margin: auto;
+            width: 85%;
+            box-shadow: 5px 10px #bdbcbc;
+            border-radius: 10px;
+            padding: 40px 40px 40px 40px;
+            border-style: solid;
+            border-color: rgb(190, 186, 186);
+            margin-top: 100px;
+            color: #403300;
+            align-items: center;
+        }
+        
+        form span {
+            color: red;
+            font-size: 15px;
+        }
+        /*         
+        h1 {
+            background-color: #066f95;
+            padding: 20px 20px 20px 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            font-weight: bolder;
+            padding-bottom: 10px;
+        } */
+        
+        .button {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #066f95;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px #999;
+        }
+        
+        .button:hover {
+            background-color: #568088
+        }
+        
+        #map {
+            width: 1000px;
+            height: 600px;
+        }
+        
+        .button:active {
+            background-color: #55a5b5;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+        
+        h2 {
+            padding-bottom: 10px;
+            padding-top: 10px;
+            color: #066f95;
+            text-decoration: underline;
+            font-weight: 400;
+            text-align: center;
+        }
+        
+        h3 {
+            padding-top: 20px;
+        }
+        
+        label {
+            font-weight: bold;
+            font-size: 20px;
+            color: black;
+        }
+        
+        #calculate {
+            cursor: pointer;
+            text-align: center;
+            width: 200px;
+            padding: 5px;
+            margin: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #999;
+            border-radius: 10px;
+            background: rgb(245, 243, 243);
+            background: -moz-linear-gradient(top, #FFD119, #E6B800);
+            font-weight: bold;
+            height: 28px;
+        }
+        
+        #calculate:hover {
+            background: -webkit-gradient(linear, left top, left bottom, from(#E6B800), to(#FFD119));
+            background: -moz-linear-gradient(top, #E6B800, #FFD119);
+            margin-top: 13px;
+            height: 25px;
+        }
+        
+        #calculate:active {
+            background: #403300;
+            padding-top: 10px;
+            height: 20px;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            color: rgb(39, 22, 22);
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 4px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        #hidden_div {
+            display: none;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $("#lang").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
+</head>
+
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <div><label>Select Language:</label>
+        <select id="lang">
+            <option>Choose Language</option>
+            <option value="english">English</option>
+            <option value="hindi">Hindi</option>
+            <option value="marathi">Marathi</option>
+        </select>
+    </div>
+    <div class="english box">
+        <form action="" method="POST">
+            <h2>
+
+            </h2>
+            <table border="0" align="center" cellspacing="10">
+                {% csrf_token %}
+                <tr>
+                    <td>Meal Type</td>
+                    <td>
+                        <!-- <input type="number" class="form-control" name="oxybed" id="exampleInputPassword1" placeholder="in cms" disabled> -->
+                        <select class="drop-down" name = "mealtype">
+                            <option value="">--- Please Select ---</option>
+                            <option value="early_morning">Early Morning</option>
+                            <option value="breakfast">Breakfast</option>
+                            <option value="mid_morning">Mid-Morning</option>
+                            <option value="lunch">Lunch</option>
+                            <option value="afternoon">Afternoon</option>
+                            <option value="evening_snacks">Evening Snacks</option>
+                            <option value="dinner">Dinner</option>
+                            <option value="bed_time">Bed Time</option>
+                            <option value="late_night">Late Night</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td> Time : </td>
+                    <td> <input type='textbox' placeholder='Time From' name = "timefrom"> </td>
+                    <td> <input type='textbox' placeholder='Time To'  name = "timeto"> </td>
+                </tr>
+                <tr>
+                    <td>Recipies :</td>
+                    <td>
+                        <select id="rec" multiple>
+                            <option value="">--- Please Select ---</option>
+                            <option value="Roti">Roti</option>
+                            <option value="Rice">Rice</option>
+                            <option value="Poha">Poha</option>
+                            <option value="Upma">Upma</option>
+                            <option value="Tea">Tea</option>
+                            <option value="Coffee">Coffee</option>
+                            <option value="Milk">Milk</option>
+                            <option value="Vada">Vada</option>
+                            <option value="Biscuit">Biscuit</option>
+                            <option value="Dal">Dal</option>
+                            <option value="Gujrati_Dal">Gujrati Dal</option>
+                            <option value="Toor_Dal">Toor Dal</option>
+                            <option value="Moong_Dal">Moong Dal</option>
+                            <option value="Palak">Palak</option>
+                        </select></td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="roticontainer" style="display:none;">
+                            <label> Roti</label>
+                            <label class="fieldlabels">Quantity</label>
+                            <select class="drop-down" name =  "rotiquantity" >
+                                <option value="">--- Please Select ---</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+
+                            </select>
+                            <br>
+                            <label class="fieldlabels">Unit</label>
+                            <select class="drop-down" name = "rotiunit">
+                                <option value="">--- Please Select ---</option>
+                                <option value="plate">Plate</option>
+
+                            </select>
+
+                            <div id="ricecontainer" style="display:none;">
+                                <label>Rice</label>
+                                <label class="fieldlabels">Quantity</label>
+                                <select class="drop-down" name = "ricequantity">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="1/2">1/2</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+
+                                </select>
+                                <br>
+                                <label class="fieldlabels">Unit</label>
+
+                                <select class="drop-down" name = "riceunit">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="bowl">Bowl</option>
+                                    <option value="plate">Plate</option>
+                                    <option value="katori">Katori</option>
+                                </select>
+
+                            </div>
+                            <div id="pohacontainer" style="display:none;">
+                                <label>Poha</label>
+                                <label class="fieldlabels">Quantity</label>
+                                <select class="drop-down"  name = "pohaquantity">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="1/2">1/2</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+
+                                </select>
+                                <br>
+                                <label class="fieldlabels">Unit</label>
+                                <select class="drop-down" name = "pohaunit" >
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="bowl">Bowl</option>
+                                    <option value="plate">Plate</option>
+                                    <option value="katori">Katori</option>
+                                </select>
+
+                            </div>
+                            <div id="upmacontainer" style="display:none;">
+                                <label>Upma</label>
+                                <label class="fieldlabels">Quantity</label>
+                                <select class="drop-down" name = "upmaquantity">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="1/2">1/2</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+
+                                </select>
+                                <br>
+                                <label class="fieldlabels">Unit</label>
+                                <select class="drop-down" name="upmaunit">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="bowl">Bowl</option>
+                                    <option value="plate">Plate</option>
+                                    <option value="katori">Katori</option>
+                                </select>
+
+                            </div>
+                            <div id="teacontainer" style="display:none;">
+                                <label>Tea</label>
+                                <label class="fieldlabels">Quantity</label>
+                                <select class="drop-down" name = "teaquantity">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="1/2">1/2</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+
+                                </select>
+                                <br>
+                                <label class="fieldlabels">Unit</label>
+                                <select class="drop-down" name= "teaunit">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="cup">Cup</option>
+                                    <option value="glass">Glass</option>
+
+                                </select>
+
+                            </div>
+                            <div id="coffeecontainer" style="display:none;">
+                                <label>Coffee</label>
+                                <label class="fieldlabels">Quantity</label>
+                                <select class="drop-down" name= "coffeequantity">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="1/2">1/2</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+
+                                </select>
+                                <br>
+                                <label class="fieldlabels">Unit</label>
+                                <select class="drop-down" name = "coffeeunit">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="cup">Cup</option>
+                                    <option value="glass">Glass</option>
+
+                                </select>
+
+                            </div>
+
+                            <div id="milkcontainer" style="display:none;">
+                                <label> Milk</label>
+                                <label class="fieldlabels">Quantity</label>
+                                <select class="drop-down" name = "milkquantity">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="1/2">1/2</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+
+                                </select>
+                                <br>
+                                <label class="fieldlabels">Unit</label>
+                                <select class="drop-down" name = "milkunit">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="cup">Cup</option>
+                                    <option value="glass">Glass</option>
+
+                                </select>
+
+                            </div>
+                            <div id="vadacontainer" style="display:none;">
+                                <label> Vada</label>
+                                <label class="fieldlabels" name = "vadaquantity">Quantity</label>
+                                <select class="drop-down">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+
+                                </select>
+
+                            </div>
+                            <div id="biscuitcontainer" style="display:none;">
+                                <label>Biscuit</label>
+                                <label class="fieldlabels">Quantity</label>
+                                <select class="drop-down" name = "biscuitquantity">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+
+                                </select>
+
+                            </div>
+                            <div id="dalcontainer" style="display:none;">
+                                <label>Dal</label>
+                                <label class="fieldlabels">Quantity</label>
+                                <select class="drop-down" name = "dalquantity">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="1/2">1/2</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+
+                                </select>
+                                <br>
+                                <label class="fieldlabels">Unit</label>
+                                <select class="drop-down" name = "dalunit">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="bowl">Bowl</option>
+                                    <option value="katori">Katori</option>
+                                </select>
+
+                            </div>
+                            <div id="gujratidalcontainer" style="display:none;">
+                                <label>Gujrati Dal</label>
+                                <label class="fieldlabels">Quantity</label>
+                                <select class="drop-down" name="gujratidalquantity">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="1/2">1/2</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+
+                                </select>
+                                <br>
+                                <label class="fieldlabels">Unit</label>
+                                <select class="drop-down" name = "gujratidalunit">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="bowl">Bowl</option>
+                                    <option value="katori">Katori</option>
+                                </select>
+
+                            </div>
+
+                            <div id="toordalcontainer" style="display:none;">
+                                <label>Toor Dal</label>
+                                <label class="fieldlabels">Quantity</label>
+                                <select class="drop-down" name = "toordalquantity">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="1/2">1/2</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+
+                                </select>
+                                <br>
+                                <label class="fieldlabels">Unit</label>
+                                <select class="drop-down" name = "toordalunit">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="bowl">Bowl</option>
+                                    <option value="katori">Katori</option>
+                                </select>
+
+                            </div>
+                            <div id="moongdalcontainer" style="display:none;">
+                                <label>Moong Dal</label>
+                                <label class="fieldlabels">Quantity</label>
+                                <select class="drop-down" name = "moongdalquantity">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="1/2">1/2</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+
+                                </select>
+                                <br>
+                                <label class="fieldlabels">Unit</label>
+                                <select class="drop-down"  name = "moongdalunit">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="bowl">Bowl</option>
+                                    <option value="katori">Katori</option>
+                                </select>
+
+                            </div>
+                            <div id="palakcontainer" style="display:none;">
+                                <label>Palak</label>
+                                <label class="fieldlabels">Quantity</label>
+                                <select class="drop-down"  name = "palakquantity">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="1/2">1/2</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+
+                                </select>
+                                <br>
+                                <label class="fieldlabels">Unit</label>
+                                <select class="drop-down"  name = "palakunit">
+                                    <option value="">--- Please Select ---</option>
+                                    <option value="bowl">Bowl</option>
+                                    <option value="katori">Katori</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+            <center><input type="submit" value="Submit" class="button"></center>
+        </form>
+    </div>
+    <div class="hindi box">
+
+        <h2>
+            आहार याद :
+        </h2>
+        <table border="0" align="center" cellspacing="10">
+            <tr>
+                <td>दिनांक और समय:</td>
+                <td><input type="number" class="form-control" name="hours" id="exampleInputPassword1"></td>
+            </tr>
+            <tr>
+                <td>भोजन प्रकार</td>
+                <td>
+                    <!-- <input type="number" class="form-control" name="oxybed" id="exampleInputPassword1" placeholder="in cms" disabled> -->
+                    <select class="drop-down">
+                        <option value="बहुत सवेरे">बहुत सवेरे</option>
+                        <option value="सुबह का नाश्ता">सुबह का नाश्ता</option>
+                        <option value="मध्य सुबह">मध्य सुबह</option>
+                        <option value="दोपहर का भोजन">दोपहर का भोजन</option>
+                        <option value="दोपहर">दोपहर</option>
+                        <option value="इवनिंग स्नैक्स">इवनिंग स्नैक्स</option>
+                        <option value="रात का खाना">रात का खाना</option>
+                        <option value="बिस्तर का समय">बिस्तर का समय</option>
+                        <option value="देर रात">देर रात</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td>रेसिपीज:</td>
+
+            </tr>
+        </table>
+        </form>
+
+    </div>
+    <div class="marathi box">
+        <form action="">
+
+            <table border="0" align="center" cellspacing="10">
+
+
+                <h2>
+                    आहार आठवणे
+                </h2>
+
+
+
+
+            </table>
+        </form>
+    </div>
+</body>
+<script>
+    $(document).ready(function() {
+        $('#rec').on('change', function() {
+            // alert( this.value );
+            $(this).val()
+            if (this.value == "Roti") {
+                $('#roticontainer').show();
+
+            }
+            if (this.value == "Rice") {
+
+                $('#ricecontainer').show();
+
+            }
+            if (this.value == "Poha") {
+
+                $('#pohacontainer').show();
+
+            }
+            if (this.value == "Upma") {
+
+                $('#upmacontainer').show();
+
+            }
+            if (this.value == "Tea") {
+
+                $('#teacontainer').show();
+
+            }
+            if (this.value == "Coffee") {
+
+                $('#coffeecontainer').show();
+
+            }
+            if (this.value == "Milk") {
+
+                $('#milkcontainer').show();
+
+            }
+            if (this.value == "Vada") {
+
+                $('#vadacontainer').show();
+
+            }
+            if (this.value == "Biscuit") {
+
+                $('#biscuitcontainer').show();
+
+            }
+            if (this.value == "Dal") {
+
+                $('#dalcontainer').show();
+
+            }
+            if (this.value == "Gujrati_Dal") {
+
+                $('#gujratidalcontainer').show();
+
+            }
+            if (this.value == "Toor_Dal") {
+
+                $('#toordalcontainer').show();
+
+            }
+            if (this.value == "Palak") {
+
+                $('#palakcontainer').show();
+
+            }
+            if (this.value == "Moong_Dal") {
+
+                $('#moongdalcontainer').show();
+
+            }
+        });
+
+    });
+</script>
+
+</html> {% endblock %}
