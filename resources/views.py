@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from .forms import DocumentForm,ImageForm
 from .models import Document,image_up
+from django.contrib import messages
+from django.shortcuts import redirect
+# from .get_lat_lon_exif_pil import ImageMetaData
 
 # Create your views here.
 def article(request):
@@ -30,7 +33,7 @@ def image(request):
         form = ImageForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
-            messages.info(request,"Image is saved.")
+            # messages.info(request,"Image is saved.")
             return redirect('/image/')
     else:
         form = ImageForm() # A empty, unbound form

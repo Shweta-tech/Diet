@@ -465,9 +465,9 @@ def mentor_bulk(request):
         print(imported_data)
         user=User.objects.all()
         for data in imported_data:
-            id=data[0]
+            id=data[6]
             print(id)
-            new=encrypt(data[0])
+            new=encrypt(data[6])
             print(new)
             print(decrypt(new))
             if User.objects.filter(username=data[3]).exists():
@@ -475,12 +475,12 @@ def mentor_bulk(request):
             
             
             else:
-                value = User.objects.create_user(id=encrypt(data[0]),first_name=encrypt(data[1]),last_name=encrypt(data[2]),username=data[3],email=data[4],password=data[5]) 
+                value = User.objects.create_user(id=data[0],first_name=data[1],last_name=data[2],username=data[3],email=data[4],password=data[5]) 
                 
                 value.save()
                 my_group = Group.objects.get(name='school_coordinator') 
                 my_group.user_set.add(value)
-                contact=SchoolCoordinator(contact=data[6],schoolname=data[7],personaladdress=data[8],user=value)
+                contact=SchoolCoordinator(contact=data[7],schoolname=data[8],personaladdress=data[9],user=value)
                 contact.save()
                 messages.info(request,"User created")
                 print('user created')
@@ -491,7 +491,7 @@ def mentor_bulk(request):
                 send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
-        return render(request,"bulk_reg_pm.html")
+        return render(request,"after_login copy.html")
     else:
         return render(request,"bulk_reg_pm.html")
 
@@ -507,7 +507,7 @@ def simple_upload_s(request):
 
         imported_data = dataset.load(bulk.read(),format='xlsx')
         print(imported_data)
-        user=User.objects.all();
+        user=User.objects.all()
         for data in imported_data:
             if User.objects.filter(username=data[3]).exists():
                 messages.info(request,"Username already entered")
@@ -529,7 +529,7 @@ def simple_upload_s(request):
                 send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
-        return render(request,"bulk_reg_pm.html")
+        return render(request,"after_login copy.html")
     else:
         return render(request,"bulk_reg_pm.html")
     
@@ -567,7 +567,7 @@ def simple_upload_stu(request):
                 send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
-        return render(request,"bulk_reg_pm.html")
+        return render(request,"after_login copy.html")
     else:
         return render(request,"bulk_reg_pm.html")
 
@@ -605,7 +605,7 @@ def simple_upload_aw(request):
                 send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
-        return render(request,"bulk_reg_pm.html")
+        return render(request,"after_login copy.html")
     else:
         return render(request,"bulk_reg_pm.html")
 
@@ -643,7 +643,7 @@ def simple_upload_ms(request):
                 send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
-        return render(request,"bulk_reg_pm.html")
+        return render(request,"after_login copy.html")
     else:
         return render(request,"bulk_reg_pm.html")
 
@@ -681,6 +681,6 @@ def simple_upload_hm(request):
                 send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
-        return render(request,"bulk_reg_pm.html")
+        return render(request,"after_login copy.html")
     else:
         return render(request,"bulk_reg_pm.html")

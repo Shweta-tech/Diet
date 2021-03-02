@@ -85,9 +85,9 @@ class SupportMentor(models.Model):
 class   SchoolCoordinator(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    contact=models.CharField(max_length=10,blank=True)
-    schoolname=  models.CharField(max_length=200)
-    personaladdress = models.CharField(max_length=200,null=True)
+    contact=models.CharField(max_length=1000,blank=True)
+    schoolname=  models.CharField(max_length=2000)
+    personaladdress = models.CharField(max_length=2000,null=True)
 
 class School(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

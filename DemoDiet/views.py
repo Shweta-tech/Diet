@@ -16,7 +16,7 @@ import openpyxl
 from django.contrib.auth.models import Group
 from django.core.mail import send_mail
 from django.contrib.auth.models import Group
-# from .get_lat_lon_exif_pil import ImageMetaData
+from .get_lat_lon_exif_pil import ImageMetaData
 from django.http import HttpResponse
 # from .resources import bulkResource
 # import exiftool

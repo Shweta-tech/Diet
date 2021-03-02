@@ -120,7 +120,52 @@
 
 <div id="About" class="tabcontent">
     <h1>User Profile</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
 
+      
+
+        <p></p>
+        <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
+        <br> {% endfor %}
+ 
+
+
+        <table class="table table-striped table-bordered table-sm">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th>Username </th>
+                    <th>Email Address</th>
+                    <th>Contact Number</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+             
+
+                <tr id="somerow">
+                    <td>{{user.username}}</td>
+                    <!-- <td type>{{user.id}}</td> -->
+                    <td>{{user.email}}</td>
+                    
+                    <td>{{user.schoolcoordinator.contact}}</td>
+                    
+                    <!-- <td>{{i.ventbed}}</td> -->
+                    <!--<td>{{i.oxybed}}</td> -->
+                    <td>
+                        <a href="/change_pass/{{ user.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
+                        <!-- <a href="/destroy/{{ user.id }}">Delete</a> -->
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table>
+
+
+       
+    </form>
 </div>
 {% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'project_manager' %}
 <div class="container">
@@ -163,61 +208,55 @@
 </div>
 
 <div id="About" class="tabcontent">
-    <h1>Your Profile</h1>
-    
+  
        
     
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
-    
-          
-    
-            <p></p>
-            <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
-            <br> {% endfor %}
-            <h2>Registered</h2>
-    
-    
-            <table class="table table-striped table-bordered table-sm">
-                <thead class="thead-dark">
-    
-                    <tr>
-                        <th>Username </th>
-                   
-                      
-                        <th>Email Address</th>
-                
-                        <th>Contact Number</th>
-          
-                       
-                        <th>Update</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in data %}
-    
-                    <tr id="somerow">
-                        <td>{{i.username}}</td>
-                        <!-- <td type>{{i.id}}</td> -->
-                        <td>{{i.email}}</td>
-                        
-                        <td>{{i.userprofile.contact}}</td>
-                        
-                        <!-- <td>{{i.ventbed}}</td> -->
-                        <!--<td>{{i.oxybed}}</td> -->
-                        <td>
-                            <a href="/change_pass/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
-                            <!-- <a href="/destroy/{{ i.id }}">Delete</a> -->
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-    
-    
-           
-        </form>
+       <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
+
+      
+
+        <p></p>
+        <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
+        <br> {% endfor %}
+ 
+
+
+        <table class="table table-striped table-bordered table-sm">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th>Username </th>
+                    <th>Email Address</th>
+                    <th>Contact Number</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+             
+
+                <tr id="somerow">
+                    <td>{{user.username}}</td>
+                    <!-- <td type>{{user.id}}</td> -->
+                    <td>{{user.email}}</td>
+                    
+                    <td>{{user.schoolcoordinator.contact}}</td>
+                    
+                    <!-- <td>{{i.ventbed}}</td> -->
+                    <!--<td>{{i.oxybed}}</td> -->
+                    <td>
+                        <a href="/change_pass/{{ user.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
+                        <!-- <a href="/destroy/{{ user.id }}">Delete</a> -->
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table>
+
+
+       
+    </form>
   
  
 </div>{% endif %} {% endfor %}{% for group in user.groups.all %} {% if group.name == 'mentor' %}
@@ -260,7 +299,52 @@
 
 <div id="About" class="tabcontent">
     <h1>User Profile</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
 
+      
+
+        <p></p>
+        <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
+        <br> {% endfor %}
+ 
+
+
+        <table class="table table-striped table-bordered table-sm">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th>Username </th>
+                    <th>Email Address</th>
+                    <th>Contact Number</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+             
+
+                <tr id="somerow">
+                    <td>{{user.username}}</td>
+                    <!-- <td type>{{user.id}}</td> -->
+                    <td>{{user.email}}</td>
+                    
+                    <td>{{user.schoolcoordinator.contact}}</td>
+                    
+                    <!-- <td>{{i.ventbed}}</td> -->
+                    <!--<td>{{i.oxybed}}</td> -->
+                    <td>
+                        <a href="/change_pass/{{ user.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
+                        <!-- <a href="/destroy/{{ user.id }}">Delete</a> -->
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table>
+
+
+       
+    </form>
 </div>
 {% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'nutrition_expert' %}
 <div class="container">
@@ -301,61 +385,55 @@
 </div>
 
 <div id="About" class="tabcontent">
-    <h1>Your Profile</h1>
-    
+  
        
     
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
-    
-          
-    
-            <p></p>
-            <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
-            <br> {% endfor %}
-            <h2>Registered</h2>
-    
-    
-            <table class="table table-striped table-bordered table-sm">
-                <thead class="thead-dark">
-    
-                    <tr>
-                        <th>Username </th>
-                   
-                      
-                        <th>Email Address</th>
-                
-                        <th>Contact Number</th>
-          
-                       
-                        <th>Update</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in data %}
-    
-                    <tr id="somerow">
-                        <td>{{i.username}}</td>
-                        <!-- <td type>{{i.id}}</td> -->
-                        <td>{{i.email}}</td>
-                        
-                        <td>{{i.userprofile.contact}}</td>
-                        
-                        <!-- <td>{{i.ventbed}}</td> -->
-                        <!--<td>{{i.oxybed}}</td> -->
-                        <td>
-                            <a href="/change_pass/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
-                            <!-- <a href="/destroy/{{ i.id }}">Delete</a> -->
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-    
-    
-           
-        </form>
+       <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
+
+      
+
+        <p></p>
+        <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
+        <br> {% endfor %}
+ 
+
+
+        <table class="table table-striped table-bordered table-sm">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th>Username </th>
+                    <th>Email Address</th>
+                    <th>Contact Number</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+             
+
+                <tr id="somerow">
+                    <td>{{user.username}}</td>
+                    <!-- <td type>{{user.id}}</td> -->
+                    <td>{{user.email}}</td>
+                    
+                    <td>{{user.schoolcoordinator.contact}}</td>
+                    
+                    <!-- <td>{{i.ventbed}}</td> -->
+                    <!--<td>{{i.oxybed}}</td> -->
+                    <td>
+                        <a href="/change_pass/{{ user.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
+                        <!-- <a href="/destroy/{{ user.id }}">Delete</a> -->
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table>
+
+
+       
+    </form>
   
  
 </div>{% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'webgis_expert' %}
@@ -397,160 +475,59 @@
 </div>
 
 <div id="About" class="tabcontent">
-    <h1>Your Profile</h1>
-    
+  
        
     
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
-    
-          
-    
-            <p></p>
-            <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
-            <br> {% endfor %}
-            <h2>Registered</h2>
-    
-    
-            <table class="table table-striped table-bordered table-sm">
-                <thead class="thead-dark">
-    
-                    <tr>
-                        <th>Username </th>
-                   
-                      
-                        <th>Email Address</th>
-                
-                        <th>Contact Number</th>
-          
-                       
-                        <th>Update</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in data %}
-    
-                    <tr id="somerow">
-                        <td>{{i.username}}</td>
-                        <!-- <td type>{{i.id}}</td> -->
-                        <td>{{i.email}}</td>
-                        
-                        <td>{{i.userprofile.contact}}</td>
-                        
-                        <!-- <td>{{i.ventbed}}</td> -->
-                        <!--<td>{{i.oxybed}}</td> -->
-                        <td>
-                            <a href="/change_pass/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
-                            <!-- <a href="/destroy/{{ i.id }}">Delete</a> -->
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-    
-    
-           
-        </form>
+       <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
+
+      
+
+        <p></p>
+        <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
+        <br> {% endfor %}
+ 
+
+
+        <table class="table table-striped table-bordered table-sm">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th>Username </th>
+                    <th>Email Address</th>
+                    <th>Contact Number</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+             
+
+                <tr id="somerow">
+                    <td>{{user.username}}</td>
+                    <!-- <td type>{{user.id}}</td> -->
+                    <td>{{user.email}}</td>
+                    
+                    <td>{{user.schoolcoordinator.contact}}</td>
+                    
+                    <!-- <td>{{i.ventbed}}</td> -->
+                    <!--<td>{{i.oxybed}}</td> -->
+                    <td>
+                        <a href="/change_pass/{{ user.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
+                        <!-- <a href="/destroy/{{ user.id }}">Delete</a> -->
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table>
+
+
+       
+    </form>
   
  
 </div>{% endif %} {% endfor %}
-<div class="container">
-    <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
-        <div id="myDropdown" class="dropdown-content">
-            <a href="/mentor_bulk/">School Coordinator</a>
-            <a href=" /student_register/">Student</a>
-            <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
-            <a href="/mentor_bulk/">Anganwadi Worker</a>
-           <a href="/anemic_woman_registration/">Anemic Women</a>
-            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
-            <a href="/pregnant_woman_registration/">Pregnant Women</a>
-            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
-            <a href=" #about">Nutri-garden Expert</a>
-            <a href="#contact">Parents</a>
-        </div>
-    </div>
-
-    <div class="dropdown">
-        <button onclick="individual()" class="dropbtn">Individual Register</button>
-        <div id="individual" class="dropdown-content">
-            <a href="/mentor_bulk/">School Coordinator</a>
-            <a href=" /student_register/">Student</a>
-            <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
-            <a href="/anganwadi_workers_register/">Anganwadi Worker</a>
-           <a href="/anemic_woman_registration/">Anemic Women</a>
-            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
-            <a href="/pregnant_woman_registration/">Pregnant Women</a>
-            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
-            <a href=" #about">Nutri-garden Expert</a>
-            <a href="#contact">Parents</a>
-        </div>
-    </div>
-    <!-- <div class="dropdown"> -->
-    <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button>
-    <button class="dropbtn" onclick="openPage('About', this, 'orange')">Your Profile</button>
-</div>
-
-<div id="About" class="tabcontent">
-    <h1>Your Profile</h1>
-    
-       
-    
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
-    
-          
-    
-            <p></p>
-            <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
-            <br> {% endfor %}
-            <h2>Registered</h2>
-    
-    
-            <table class="table table-striped table-bordered table-sm">
-                <thead class="thead-dark">
-    
-                    <tr>
-                        <th>Username </th>
-                   
-                      
-                        <th>Email Address</th>
-                
-                        <th>Contact Number</th>
-          
-                       
-                        <th>Update</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in data %}
-    
-                    <tr id="somerow">
-                        <td>{{i.username}}</td>
-                        <!-- <td type>{{i.id}}</td> -->
-                        <td>{{i.email}}</td>
-                        
-                        <td>{{i.userprofile.contact}}</td>
-                        
-                        <!-- <td>{{i.ventbed}}</td> -->
-                        <!--<td>{{i.oxybed}}</td> -->
-                        <td>
-                            <a href="/change_pass/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
-                            <!-- <a href="/destroy/{{ i.id }}">Delete</a> -->
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-    
-    
-           
-        </form>
-  
- 
-</div> {% for group in user.groups.all %} {% if group.name == 'school_coordinator' %}
+{% for group in user.groups.all %} {% if group.name == 'school_coordinator' %}
 <div class="container">
     <div class="dropdown">
         <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
@@ -581,7 +558,55 @@
 </div>
 
 <div id="About" class="tabcontent">
-    <h1>User Profile</h1>
+  
+       
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
+
+      
+
+        <p></p>
+        <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
+        <br> {% endfor %}
+ 
+
+
+        <table class="table table-striped table-bordered table-sm">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th>Username </th>
+                    <th>Email Address</th>
+                    <th>Contact Number</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+             
+
+                <tr id="somerow">
+                    <td>{{user.username}}</td>
+                    <!-- <td type>{{user.id}}</td> -->
+                    <td>{{user.email}}</td>
+                    
+                    <td>{{user.schoolcoordinator.contact}}</td>
+                    
+                    <!-- <td>{{i.ventbed}}</td> -->
+                    <!--<td>{{i.oxybed}}</td> -->
+                    <td>
+                        <a href="/change_pass/{{ user.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
+                        <!-- <a href="/destroy/{{ user.id }}">Delete</a> -->
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table>
+
+
+       
+    </form>
 
 </div>{% endif %} {% endfor %}{% for group in user.groups.all %} {% if group.name == 'mukhya_sevika' %}
 <div class="container">
@@ -618,61 +643,55 @@
 </div>
 
 <div id="About" class="tabcontent">
-    <h1>Your Profile</h1>
-    
+  
        
     
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
-    
-          
-    
-            <p></p>
-            <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
-            <br> {% endfor %}
-            <h2>Registered</h2>
-    
-    
-            <table class="table table-striped table-bordered table-sm">
-                <thead class="thead-dark">
-    
-                    <tr>
-                        <th>Username </th>
-                   
-                      
-                        <th>Email Address</th>
-                
-                        <th>Contact Number</th>
-          
-                       
-                        <th>Update</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in data %}
-    
-                    <tr id="somerow">
-                        <td>{{i.username}}</td>
-                        <!-- <td type>{{i.id}}</td> -->
-                        <td>{{i.email}}</td>
-                        
-                        <td>{{i.userprofile.contact}}</td>
-                        
-                        <!-- <td>{{i.ventbed}}</td> -->
-                        <!--<td>{{i.oxybed}}</td> -->
-                        <td>
-                            <a href="/change_pass/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
-                            <!-- <a href="/destroy/{{ i.id }}">Delete</a> -->
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-    
-    
-           
-        </form>
+       <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
+
+      
+
+        <p></p>
+        <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
+        <br> {% endfor %}
+ 
+
+
+        <table class="table table-striped table-bordered table-sm">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th>Username </th>
+                    <th>Email Address</th>
+                    <th>Contact Number</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+             
+
+                <tr id="somerow">
+                    <td>{{user.username}}</td>
+                    <!-- <td type>{{user.id}}</td> -->
+                    <td>{{user.email}}</td>
+                    
+                    <td>{{user.schoolcoordinator.contact}}</td>
+                    
+                    <!-- <td>{{i.ventbed}}</td> -->
+                    <!--<td>{{i.oxybed}}</td> -->
+                    <td>
+                        <a href="/change_pass/{{ user.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
+                        <!-- <a href="/destroy/{{ user.id }}">Delete</a> -->
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table>
+
+
+       
+    </form>
   
  
 </div>{% endif %} {% endfor %}{% for group in user.groups.all %} {% if group.name == 'anganwadi_worker' %}
@@ -708,61 +727,55 @@
 </div>
 
 <div id="About" class="tabcontent">
-    <h1>Your Profile</h1>
-    
+  
        
     
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
-    
-          
-    
-            <p></p>
-            <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
-            <br> {% endfor %}
-            <h2>Registered</h2>
-    
-    
-            <table class="table table-striped table-bordered table-sm">
-                <thead class="thead-dark">
-    
-                    <tr>
-                        <th>Username </th>
-                   
-                      
-                        <th>Email Address</th>
-                
-                        <th>Contact Number</th>
-          
-                       
-                        <th>Update</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in data %}
-    
-                    <tr id="somerow">
-                        <td>{{i.username}}</td>
-                        <!-- <td type>{{i.id}}</td> -->
-                        <td>{{i.email}}</td>
-                        
-                        <td>{{i.userprofile.contact}}</td>
-                        
-                        <!-- <td>{{i.ventbed}}</td> -->
-                        <!--<td>{{i.oxybed}}</td> -->
-                        <td>
-                            <a href="/change_pass/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
-                            <!-- <a href="/destroy/{{ i.id }}">Delete</a> -->
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-    
-    
-           
-        </form>
+       <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3 style="font-weight: bolder; color:darkslategrey;text-align: center;">Hello! {{user.username}}</h3>
+
+      
+
+        <p></p>
+        <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
+        <br> {% endfor %}
+ 
+
+
+        <table class="table table-striped table-bordered table-sm">
+            <thead class="thead-dark">
+
+                <tr>
+                    <th>Username </th>
+                    <th>Email Address</th>
+                    <th>Contact Number</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+             
+
+                <tr id="somerow">
+                    <td>{{user.username}}</td>
+                    <!-- <td type>{{user.id}}</td> -->
+                    <td>{{user.email}}</td>
+                    
+                    <td>{{user.schoolcoordinator.contact}}</td>
+                    
+                    <!-- <td>{{i.ventbed}}</td> -->
+                    <!--<td>{{i.oxybed}}</td> -->
+                    <td>
+                        <a href="/change_pass/{{ user.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
+                        <!-- <a href="/destroy/{{ user.id }}">Delete</a> -->
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table>
+
+
+       
+    </form>
   
  
 </div>{% endif %} {% endfor %}
