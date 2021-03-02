@@ -34,23 +34,28 @@ Category = [
             ('Student', 'Student'),
 
 ]
+nutirleader = [
+    ('Nutri-Leader','Nutri-Leader'),
+    ('School-Student','School-Student')
+]
 
 # Create your models here.
 class AdolescentGirlRegistration(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    uid =models.CharField(primary_key=True,max_length=100)
     contact=models.CharField(max_length=10,blank=True)
 
 class AnemicWomanRegistration(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    uid =models.CharField(primary_key=True,max_length=100)
     contact=models.CharField(max_length=10,blank=True)
 
 class PregnantWomanRegistration(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    uid =models.CharField(primary_key=True,max_length=100)
     contact=models.CharField(max_length=10,blank=True)
 
-class SMMotherRegistration(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    contact=models.CharField(max_length=10,blank=True)
+
 class ProjectCoordinator(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     contact=models.CharField(max_length=10,blank=True)
@@ -98,6 +103,7 @@ class School(models.Model):
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     uid =models.CharField(primary_key=True,max_length=100)
+    nutrileader = models.CharField(choices=nutirleader,default=False,max_length=20)
     contact=encrypt(models.CharField(max_length=1000,blank=True))
     # personaladdress = models.CharField(max_length=200,null=True)
 class bulk_reg(models.Model):
@@ -106,7 +112,10 @@ class bulk_reg(models.Model):
     dob= models.DateField(auto_now=False, auto_now_add=False,null=True)
 class AnganwadiWorker(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
+    dob = models.DateField(default=datetime.now, blank=True)
+    age= models.CharField(max_length=6,null = True,default = 0)
+    age_in_months= models.CharField(max_length=6,null = True,default = 0)
+    age_in_days= models.CharField(max_length=6,null = True,default=0)
     contact=models.CharField(max_length=10,blank=True)
     anganwadiname = models.CharField(max_length=200, null=True)
     personaladdress = models.CharField(max_length=200,null=True)
@@ -114,7 +123,33 @@ class AnganwadiWorker(models.Model):
 
 class MukhyaSevika(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
     contact=models.CharField(max_length=10,blank=True)
+    dob = models.DateField(default=datetime.now, blank=True)
+    age= models.CharField(max_length=6,null = True,default = 0)
+    age_in_months= models.CharField(max_length=6,null = True,default = 0)
+    age_in_days= models.CharField(max_length=6,null = True,default=0)
     personaladdress = models.CharField(max_length=200,null = True)
     anganwadinumber = models.IntegerField(default=False)
+
+
+class SMChildRegistration(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    uid =models.CharField(primary_key=True,max_length=100,default = 1)
+    contact=models.CharField(max_length=10,blank=True)
+
+class SMChildParentsDetails(models.Model):
+    user = models.OneToOneField(User, on_delete = models.CASCADE)
+    cuid  = models.CharField(max_length = 10)
+    mothername = models.CharField(max_length = 50)
+    fathername = models.CharField(max_length = 50)
+    mage = models.IntegerField()
+    fage = models.IntegerField()
+    fatheroccupation = models.CharField(max_length = 100)
+    education = models.CharField(max_length = 50,null = True)
+    monthlyincome = models.CharField(max_length = 50)
+
+class NutriGardenExpert(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    contact=models.CharField(max_length=10,blank=True)
+class ConcentForm(models.Model):
+    concent = models.CharField(max_length = 10)

@@ -1,0 +1,271 @@
+{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}{% load wagtailcore_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>SAM MAM Parents Form</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <style>
+        /* body {
+            margin-top: 100px;
+            background: aliceblue;
+        } */
+        
+        /* form {
+            margin: auto;
+            width: 85%;
+            box-shadow: 5px 10px #bdbcbc;
+            border-radius: 10px;
+            padding: 40px 40px 40px 40px;
+            border-style: solid;
+            border-color: rgb(190, 186, 186);
+            margin-top: 100px;
+            color: #403300;
+            align-items: center;
+        } */
+        
+        form span {
+            color: red;
+            font-size: 15px;
+        }
+        /*         
+        h1 {
+            background-color: #066f95;
+            padding: 20px 20px 20px 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            font-weight: bolder;
+            padding-bottom: 10px;
+        } */
+        
+        .button {
+            width: 20%;
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #066f95;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px #999;
+        }
+        
+        .button:hover {
+            background-color: #568088
+        }
+        
+        #map {
+            width: 1000px;
+            height: 600px;
+        }
+        
+        .button:active {
+            background-color: #55a5b5;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+        
+        h2 {
+            padding-bottom: 10px;
+            padding-top: 10px;
+            color: #066f95;
+            text-decoration: underline;
+            font-weight: 400;
+            text-align: center;
+        }
+        
+        h3 {
+            padding-top: 20px;
+        }
+        
+        label {
+            font-weight: bold;
+            font-size: 20px;
+            color: black;
+        }
+        
+        #calculate {
+            cursor: pointer;
+            text-align: center;
+            width: 200px;
+            padding: 5px;
+            margin: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #999;
+            border-radius: 10px;
+            background: rgb(245, 243, 243);
+            background: -moz-linear-gradient(top, #FFD119, #E6B800);
+            font-weight: bold;
+            height: 28px;
+        }
+        
+        #calculate:hover {
+            background: -webkit-gradient(linear, left top, left bottom, from(#E6B800), to(#FFD119));
+            background: -moz-linear-gradient(top, #E6B800, #FFD119);
+            margin-top: 13px;
+            height: 25px;
+        }
+        
+        #calculate:active {
+            background: #403300;
+            padding-top: 10px;
+            height: 20px;
+        }
+        
+        input,
+        select {
+            
+            color: rgb(39, 22, 22);
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 4px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $("#lang").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+    </script>
+</head>
+
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- <div class="navbar">
+        <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Personal Information</a>
+        <a href="daily_schedule.html"><i class="fa fa-fw fa-search"></i> Daily Schedule</a>
+        <a href="#"><i class="fa fa-fw fa-envelope"></i> Body</a>
+        <a href="#"><i class="fa fa-fw fa-user"></i> Eat Today</a>
+        <a href="#"><i class="fa fa-fw fa-user"></i> Diet Recall</a>
+    </div> -->
+   
+        <form action="/sam_mam_child_parents_details_form/" method = "POST">
+            {% csrf_token %}
+            <h2>
+                SAM MAM Parents Details:
+            </h2>
+            <table border="0" align="center" cellspacing="10">
+                <tr>
+                    <td>Child ID:</td>
+                    <td colspan="2"><input type="text" name="cuid" id="cid" placeholder="Child id"></td>
+                </tr>
+                <tr>
+                    <td>First Name:</td>
+                    <td> <input type="text" name="first_name"  id = "firstname"/></td>
+                </tr>
+                <tr>
+                    <td>Last Name:</td>
+                    <td> <input type="text" name="last_name" class="validate" id = "lastname"/></td>
+                </tr>
+                <tr>
+                    <td>Username:</td>
+                    <td> <input type="text" name="username" class="validate"  id = "username"/></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td> <input type="password" name="password1" class="validate" id = "password1"/></td>
+                </tr>
+                <tr>
+                    <td>Password Confirmation:</td>
+                    <td> <input type="password" name="password2" class="validate" id = "password2"/></td>
+                </tr>
+                <tr>
+                    <td>Mother's Name:</td>
+                    <td colspan="2"><input type="text" name="mothername" id="mname" placeholder="Name"></td>
+                </tr>
+                <tr>
+                    <td>Father's Name :</td>
+                    <td colspan="2"><input type="text" name="fathername" id="fathername" placeholder="Name"></td>
+                </tr>
+                <tr>
+                    <td>Mother's Age : </td>
+                    <td colspan="2"> <input type="number" class="fieldlabels" placeholder="Age" name="mage" style="width: 90%;" id="mage"> </td>
+                </tr>
+                <tr>
+                    <td>Father's Age : </td>
+                    <td colspan="2"> <input type="number" class="fieldlabels" placeholder="Age" name="fage" style="width: 90%;" id="fage"> </td>
+                </tr>
+                <tr>
+                    <td>Father's Occupation :</td>
+                    <td><select id = "foccupation" name= "fatheroccupation">
+                        <option value="none">---Please Select---</option>
+                        <option value="Legislators">Legislators,Senior Officials & Managers</option>
+                        <option value="Professionals">Professionals</option> 
+                        <option value="Technicians">Technicians and Associate Professionals </option>
+                        <option value="Clerks">Clerks </option>
+                        <option value="Skilled workers">Skilled workers and Shop & Market sales workers </option>
+                        <option value="Skilled Agricultural">Skilled Agricultural and Fishery workers</option>
+                        <option value="Craft ">Craft and Related Trade Workers</option>
+                        <option value="Plant and Machine Operators">Plant and Machine Operators and Assemblers </option>
+                        <option value="Elementary Occupation ">Elementary Occupation </option>
+                        <option value="Security guard">Security guard </option>
+                        <option value="Housekeeper or Housemaid">Housekeeper or Housemaid </option>
+                        <option value="Nurse">Nurse </option>
+                        <option value="Anganwadi Worker">Anganwadi Worker</option>
+                        <option value="Retired"> Retired</option>
+                        <option value="Others">Others</option>                  
+                    
+                    </select></td>
+                </tr>
+                                       
+                <tr>
+                    <td>Education of the parent/care-taker/guardian: </td>
+                    <td><select id="education" name="education">
+                        <option value="none">---Please Select---</option>
+                                <option value="Professionaldegree">Professional degree</option>
+                                <option value="graduate">Graduate (Bachelors)</option>
+                                <option value="middleschool">Middle school (5th to 10th std)</option>
+                                <option value="primaryschool">Primary school (1st to 4th std)</option>
+                                <option value="illiterate">Illiterate (No education)</option>
+                        </select><td>
+                                   
+                   
+                </tr>
+                <tr>
+                    <td>Monthly family income in rupees-: </td>
+                    <td><select id="monthlyincome" name="monthlyincome">
+                        <option value="none">---Please Select---</option>
+                                <option value=">199,862">>199,862</option>
+                                <option value="99,931-199,861">99,931-199,861</option>
+                                <option value="74,755-99,930">74,755-99,930</option>
+                                <option value="49,962-74,755">49,962-74,755</option>
+                                <option value="29,973-49,961">29,973-49,961</option>
+                                <option value="10,002-29,972">10,002-29,972</option>
+                                <option value="10,001">10,001</option>
+                        </select><td>
+                                    
+                   
+                </tr>
+                
+            </table>
+            <center><input type="submit" value="Submit" class="button"></center>
+
+        </form>
+   
+       
+</body>
+<script>
+   
+</script>
+</html>{% endblock %}}

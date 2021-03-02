@@ -38,8 +38,12 @@ urlpatterns = [
     url(r'^adolescent_girl_registration/', views.adolescent_girl_register, name='adolescent_girl_registration'),
     url(r'^pregnant_woman_registration/', views.pregnant_woman_registration, name='pregnant_woman_registration'),
     url(r'^anemic_woman_registration/', views.anemic_woman_registration, name='anemic_woman_registeration'),
-    url(r'^sam_mam_mother_registration/', views.sam_mam_mother_registration, name='sam_mam_mother_registration'),
-
+    url(r'^sam_mam_child/$', views.sam_mam_child, name='sam_mam_child'),
+    url(r'^sam_mam_child_parents_details_form/$',views.SMChildParentsDetails, name='sam_mam_child_parents_details_form'),
+    url(r'^sam_mam_child_registration/$', views.sam_mam_child_registration, name='sam_mam_child_registration'),
+    url(r'^nutri_garden_expert_register/$', views.nutri_garden_expert, name='nutri_garden_expert_register'),
+    url(r'^nutri_garden_expert_bulk/', views.nutri_garden_expert_bulk, name='nutri_garden_expert_bulk'),
+    url(r'^concentform/$', views.concentform, name='concentform'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
