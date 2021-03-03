@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.core import urls as wagtail_urls
+from wagtail.documents import urls as wagtaildocs_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,3 +29,16 @@ urlpatterns = [
     path('',include('data_feed.urls')),
     # path('',include('base.urls')),
 ]
+
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('',include('DemoDiet.urls')),
+    path('',include('login.urls')),
+    path('',include('base.urls')),
+    path('',include('registration.urls')),
+    path('',include('resources.urls')),
+    path('',include('data_feed.urls')),
+    path('',include('CMSResources.urls')),
+    # path('',include('base.urls')),
+] + wagtail_urlpatterns
