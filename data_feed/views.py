@@ -1,35 +1,11 @@
 from django.shortcuts import render
 from .forms import DailySchedule,BodyForm,EatTodayForm,DietForm,FeedbackForm
-from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel
+from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,PersonalInformationForms
 from registration.models import User
 from registration.forms import Form
 from django.shortcuts import redirect
 
 # Create your views here.
-def daily_schedule_function(request):
-    if request.method == 'POST':
-        form = DailySchedule(request.POST)
-        if form.is_valid():
-            form.save()
-            print("saved")
-        return render(request,'eattoday.html')  
-
-    else:
-        form = DailySchedule()
-    return render(request,'daily_schedule.html',{'form':form})
-
-def eattoday(request):
-    if request.method == 'POST':
-        form = EatTodayForm(request.POST)
-        print(form)
-        if form.is_valid():
-                form.save()
-                print("saved")
-        return render(request,'dietrecall.html')  
-
-    else:
-        form = EatTodayForm()
-    return render(request,'eattoday.html')
 def chng_pass(request, id):  
     data = User.objects.get(id=id)
     # docdata  = doctor.objects.get(id=id)  
@@ -69,42 +45,29 @@ def chng_pass_up(request, id):
     return render(request, 'pass_change.html', {'data': data}) 
 def body_function(request):
     if request.method == 'POST':
-        form = BodyForm(request.POST)
-        print("bodyfunction")
-        print(form)
-        if form.is_valid():
-                form.save()
-                print("saved")
-        return render(request,'daily_schedule.html')  
+        weight = request.POST.get("weight")
+        weightunit= request.POST.get("weightunit")
+        height= request.POST.get("height")
+        heightunit= request.POST.get("heightunit")
+        bmi= request.POST.get("bmi")
+        waist= request.POST.get("waist")
+        waistunit= request.POST.get("waistunit")
+        hip= request.POST.get("hip")
+        hipunit= request.POST.get("hipunit")
+        whratio= request.POST.get("whratio")
+        sub=BodyModel(weight=weight,weightunit=weightunit,height=height,heightunit=heightunit,bmi=bmi,waist=waist,waistunit=waistunit,hip=hip,hipunit=hipunit,whratio=whratio)
+        # if new_form.is_valid():
+        #     new_form.save() 
+        sub.save()
+        print('submitted')
+        return render(request,'eattoday.html')  
 
     else:
         form = BodyForm()
     return render(request,'body.html')
-def diet_recall_function(request):
-    if request.method == 'POST':
-        print("after post")
-        form = DietForm(request.POST)
-        print(form)
-        if form.is_valid():
-                form.save()
-                print("saved")
-        return render(request,'eattoday.html')  
 
-    else:
-        form = DietForm()
-    return render(request,'dietrecall.html',{'form':form})
 
 def adolescent_girls(request):
-    #  if request.method == 'POST':
-    #     form = EatTodayForm(request.POST)
-    #     print(form)
-    #     if form.is_valid():
-    #             form.save()
-    #             print("saved")
-    #     return render(request,'dietrecall.html')  
-
-    # else:
-    #     form = EatTodayForm()
     return render(request,'Adolescent_girls_form.html')
 def anemic_woman(request):
     return render(request,'Anemic_woman_form.html')
@@ -139,8 +102,29 @@ def personal(request):
         print(docinfo)
         jsondata =docinfo[0]
         return JsonResponse(jsondata)
+    if request.method== "POST":
+        uniqueid = request.POST.get("uniqueid")
+        name= request.POST.get("name")
+        dob= request.POST.get("dob")
+        age= request.POST.get("age")
+        age_in_months= request.POST.get("age_in_months")
+        age_in_days= request.POST.get("age_in_days")
+        fname= request.POST.get("fname")
+        mname= request.POST.get("mname")
+        contact= request.POST.get("contact")
+        email= request.POST.get("email")
+        address= request.POST.get("address")
+        pp= request.POST.get("pp")
+        
+        sub=PersonalInformationForms(uniqueid=uniqueid,name=name,dob=dob,year=age,month=age_in_months,days=age_in_days,fathername=fname,mothername=mname,contactnumber=contact,email=email,address=address,profileimage=pp)
+        # if new_form.is_valid():
+        #     new_form.save() 
+        sub.save()
+        print('submitted')
+        return render(request,'daily_schedule.html')
 
-    return render(request,'personal.html')
+    else:
+        return render(request,'personal.html')
 
 
 def dietRecallApp(request):
@@ -168,11 +152,24 @@ def dietRecallApp(request):
     return render(request,'dietrecall.html',context)
 def daily_schedule_function(request):
     if request.method == 'POST':
-        form = DailySchedule(request.POST)
-        if form.is_valid():
-            form.save()
-            print("saved")
-        return render(request,'eattoday.html')  
+        sleepfrom = request.POST.get("sleepfrom")
+        sleepto= request.POST.get("sleepto")
+        eatfrom= request.POST.get("eatfrom")
+        eatto= request.POST.get("eatto")
+        studyfrom= request.POST.get("studyfrom")
+        studyto= request.POST.get("studyto")
+        playfrom= request.POST.get("playfrom")
+        playto= request.POST.get("playto")
+        housework= request.POST.get("housework")
+        activities= request.POST.get("activities")
+        
+        
+        sub=DailyScheduleForm(sleepfrom=sleepfrom,sleepto=sleepto,eatfrom=eatfrom,eatto=eatto,studyfrom=studyfrom,studyto=studyto,playfrom=playfrom,playto=playto,housework=housework,activities=activities)
+        # if new_form.is_valid():
+        #     new_form.save() 
+        sub.save()
+        print('submitted')
+        return render(request,'body.html')  
 
     else:
         form = DailySchedule()
@@ -180,38 +177,65 @@ def daily_schedule_function(request):
 
 def eattoday(request):
     if request.method == 'POST':
-        form = EatTodayForm(request.POST)
-        print(form)
-        if form.is_valid():
-                form.save()
-                print("saved")
+        foodhabbits = request.POST.get("foodhabbits")
+        foodallergies= request.POST.get("foodallergies")
+        # eatfrom= request.POST.get("eatfrom")
+        # eatto= request.POST.get("eatto")
+        # studyfrom= request.POST.get("studyfrom")
+        # studyto= request.POST.get("studyto")
+        # playfrom= request.POST.get("playfrom")
+        # playto= request.POST.get("playto")
+        # housework= request.POST.get("housework")
+        # activities= request.POST.get("activities")
+        
+        
+        sub=EatTodayModel(foodhabbits=foodhabbits,foodallergies=foodallergies)
+        sub.save()
+        print('submitted')
         return render(request,'dietrecall.html')  
 
     else:
         form = EatTodayForm()
     return render(request,'eattoday.html')
 
-def body_function(request):
-    if request.method == 'POST':
-        form = BodyForm(request.POST)
-        print("bodyfunction")
-        print(form)
-        if form.is_valid():
-                form.save()
-                print("saved")
-        return render(request,'daily_schedule.html')  
 
-    else:
-        form = BodyForm()
-    return render(request,'body.html')
 def diet_recall_function(request):
     if request.method == 'POST':
-        print("after post")
-        form = DietForm(request.POST)
-        print(form)
-        if form.is_valid():
-                form.save()
-                print("saved")
+        mealtype = request.POST.get("mealtype")
+        timefrom= request.POST.get("timefrom")
+        timeto= request.POST.get("timeto")
+        recipe=request.POST.get("rec")
+        rotiquantity= request.POST.get("rotiquantity")
+        rotiunit= request.POST.get("rotiunit")
+        ricequantity= request.POST.get("ricequantity")
+        riceunit= request.POST.get("riceunit")
+        pohaquantity= request.POST.get("pohaquantity")
+        pohaunit= request.POST.get("pohaunit")
+        upmaquantity= request.POST.get("upmaquantity")
+        upmaunit = request.POST.get("upmaunit")
+        teaquantity= request.POST.get("teaquantity")
+        teaunit= request.POST.get("teaunit")
+        coffeequantity= request.POST.get("coffeequantity")
+        coffeeunit= request.POST.get("coffeeunit")
+        milkquantity= request.POST.get("milkquantity")
+        milkunit= request.POST.get("milkunit")
+        vadaquantity= request.POST.get("vadaquantity")
+        biscuitquantity= request.POST.get("biscuitquantity")
+        dalquantity= request.POST.get("dalquantity")
+        dalunit= request.POST.get("dalunit")
+        gujratidalquantity= request.POST.get("gujratidalquantity")
+        gujratidalunit= request.POST.get("gujratidalunit")
+        toordalquantity= request.POST.get("toordalquantity")
+        toordalunit= request.POST.get("toordalunit")
+        moongdalquantity= request.POST.get("moongdalquantity")
+        moongdalunit= request.POST.get("moongdalunit")
+        palakquantity= request.POST.get("palakquantity")
+        palakunit = request.POST.get("palakunit")
+        
+        
+        sub=EatTodayModel(mealtype=mealtype)
+        sub.save()
+        print('submitted')
         return render(request,'eattoday.html')  
 
     else:

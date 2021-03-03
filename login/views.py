@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .forms import StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,SupportMentorForm,HeadMentorForm,ProjectCoordinatorForm,TechnicalExpertForm,ProjectManagerForm,Form,AdolescentGirlRegistrationForm,AnemicWomanRegistrationForm,PregnantWomanRegistrationForm,SMMotherRegistrationForm
+from .forms import StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,SupportMentorForm,HeadMentorForm,ProjectCoordinatorForm,TechnicalExpertForm,ProjectManagerForm,Form,AdolescentGirlRegistrationForm,AnemicWomanRegistrationForm,PregnantWomanRegistrationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User,auth
 # from .models import bulk_reg,HeadMentor,SupportMentor,mukhya_sevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,Document,image_up,DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,SMMotherRegistration
@@ -64,7 +64,7 @@ def login(request):
                     return redirect('/after_login/')
                 if group.name ==  'student':
                     auth.login(request,user)
-                    return redirect('/student_login/')
+                    return redirect('/after_login/')
 
                 if group.name ==  'anganwadi_worker':
                     auth.login(request,user)
@@ -120,7 +120,7 @@ def redirectd(request,username):
                 if group.name ==  'parents':
                     return redirect('/after_login/')
                 if group.name ==  'student':
-                    return redirect('/student_login/')
+                    return redirect('/after_login/')
                 if group.name ==  'anganwadi_worker':
                     return redirect('/after_login/')
                 if group.name ==  'mukhya_sevika':

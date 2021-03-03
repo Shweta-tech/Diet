@@ -18,9 +18,12 @@ from django.urls import path, include
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
+from django.conf.urls.static import static
+from django.conf import settings
 
-urlpatterns = [
+urlpatterns =[
     path('admin/', admin.site.urls),
+    path('i18n/', include('django.conf.urls.i18n')),
     path('',include('DemoDiet.urls')),
     path('',include('login.urls')),
     path('',include('base.urls')),
@@ -28,17 +31,17 @@ urlpatterns = [
     path('',include('resources.urls')),
     path('',include('data_feed.urls')),
     # path('',include('base.urls')),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',include('DemoDiet.urls')),
-    path('',include('login.urls')),
-    path('',include('base.urls')),
-    path('',include('registration.urls')),
-    path('',include('resources.urls')),
-    path('',include('data_feed.urls')),
-    path('',include('CMSResources.urls')),
-    # path('',include('base.urls')),
-] + wagtail_urlpatterns
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('',include('DemoDiet.urls')),
+#     path('',include('login.urls')),
+#     path('',include('base.urls')),
+#     path('',include('registration.urls')),
+#     path('',include('resources.urls')),
+#     path('',include('data_feed.urls')),
+#     path('',include('CMSResources.urls')),
+#     # path('',include('base.urls')),
+# ] + wagtail_urlpatterns

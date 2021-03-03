@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 import random
 import string
 from django.forms import Textarea
-from registration.models import HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,SMSMChildRegistration,SMChildParentsDetails,NutriGardenExpert
+from registration.models import HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,SMChildRegistration,SMChildParentsDetails,NutriGardenExpert
 class Form(UserCreationForm):
     email=forms.EmailField(required=False)
     

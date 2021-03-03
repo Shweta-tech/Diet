@@ -177,7 +177,7 @@
         </select>
     </div>
     <div class="english box">
-        <form action="" method="POST">
+        <form action="/daily_schedule/" method="POST">
             {% csrf_token %}
             <h2>
                 Daily Schedule
@@ -256,7 +256,7 @@
             <table border="0" align="center" cellspacing="10">
                 <tr>
                     <td>Activities:</td>
-                    <td> <select id="activity">
+                    <td> <select id="activity" name="activity">
                         <option value="Activity">Activity </option>
                         <option value="Sleeping"> Sleeping </option>
                         <option value="Eating"> Eating </option>

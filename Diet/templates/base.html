@@ -1,5 +1,5 @@
 {% load static %} {% load static wagtailuserbar %} {% load wagtailcore_tags %}
-
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -166,9 +166,9 @@ https://templatemo.com/tm-529-ramayana
                 <!-- Menu -->
                 <nav id="menu">
                     <ul>
-                        <li><span class="opener" href="/">Home</span><ul> <li><a href="/#overview">About Us</a></li>
-                            <li><a href="/">Contact Us</a></li></ul></li>
-                       
+                        <li><a href="/">{% trans "Home" %}</a></li>
+                        <li><a href="/#about">{% trans "About Us" %}</a></li>
+                        <li><a href="/">Contact Us</a></li>
                         <li>
                             <span class="opener">School Project</span>
                             <ul>
@@ -209,6 +209,7 @@ https://templatemo.com/tm-529-ramayana
                             </ul>
                         </li>
                         <li><a href="https://www.google.com">ICDS Project</a></li>
+                    
                         {% if user.is_authenticated %}
 
                         <!-- <li class="active"><a href="/map/">Maps</li> -->
@@ -219,7 +220,29 @@ https://templatemo.com/tm-529-ramayana
 
                     </ul>
                 </nav>
-
+                <div class="header-content">
+            
+                    <form action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}" />
+                
+                        <select name="language" style="width: auto;" id="">
+                          {% get_current_language as LANGUAGE_CODE %}
+                          {% get_available_languages as LANGUAGES %}
+                          {% get_language_info_list for LANGUAGES as languages %}
+                          {% for language in languages %}
+                
+                              <option value="{{ language.code }}"
+                                {% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                                    {{ language.name_local }} ({{ language.code }})
+                              </option>         
+                          {% endfor %}
+                        </select>
+                        <input type = "submit" value ="Go">
+                    </form>
+                
+                </div>
+            </div>
                 <!-- Featured Posts -->
                 <!-- <div class="featured-posts">
                     <div class="heading">

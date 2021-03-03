@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}{% load wagtailcore_tags %}
+{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}{% load wagtailcore_tags %}{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -139,16 +139,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-<div><label>Select Language:</label>
+<!-- <div><label>Select Language:</label>
     <select id="lang">
             <option>Choose Language</option>
             <option value="english">English</option>
             <option value="hindi">Hindi</option>
             <option value="marathi">Marathi</option>
         </select>
-</div>
-<div class="english box">
-    <form action="">
+</div> -->
+<div >
+    <form action="/personal/" method="POST">
+        {% csrf_token %}
         <h2>
             Personal Information  
         </h2>
@@ -159,7 +160,7 @@
                 <td><input type="text" name="uniqueid" id="studentuid" readonly></td>
             </tr>
             <tr>
-                <td>Name:</td>
+                <td>{% trans "Name" %}:</td>
                 <td> <input type="text" name="name" placeholder="Name" id = name/></td>
             </tr>
             <tr>
@@ -206,6 +207,8 @@
                 <td><input type="file" name="pp" placeholder="Profile Picture" /></td>
             </tr>
         </table>
+        <center><input type="submit" value="Submit" class="button"></center>
+
     </form>
 </div>
 <div class="hindi box">

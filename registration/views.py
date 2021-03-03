@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .forms import bulkreg,StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,SupportMentorForm,HeadMentorForm,ProjectCoordinatorForm,TechnicalExpertForm,ProjectManagerForm,Form,AdolescentGirlRegistrationForm,AnemicWomanRegistrationForm,PregnantWomanRegistrationForm,SMChildRegistrationForm,SMChildParentsDetailsForm,ConcentForm,NutriGardenExpertForm
+from .forms import bulkreg,StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,SupportMentorForm,HeadMentorForm,ProjectCoordinatorForm,TechnicalExpertForm,ProjectManagerForm,Form,AdolescentGirlRegistrationForm,AnemicWomanRegistrationForm,PregnantWomanRegistrationForm,SMChildRegistration,SMChildParentsDetailsForm,ConcentForm,NutriGardenExpertForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User,auth
 from .models import bulk_reg,HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,SMChildRegistration,SMChildParentsDetails,ConcentForm,NutriGardenExpert
@@ -234,11 +234,11 @@ def student(request):
         if form.is_valid() and profile_form.is_valid():
             instance = form.save(commit=False)
             profile=profile_form.save(commit=False)
-            instance.first_name=f.encrypt(b"form.cleaned_data['first_name']")
-            instance.last_name=f.encrypt(b"form.cleaned_data['last_name']")
-            instance.email=f.encrypt(b"form.cleaned_data['email']")
-            instance.username=f.encrypt(b"form.cleaned_data['username']")
-            profile.contact=f.encrypt(b"form.cleaned_data['contact']")
+            # instance.first_name=f.encrypt(b"form.cleaned_data['first_name']")
+            # instance.last_name=f.encrypt(b"form.cleaned_data['last_name']")
+            # instance.email=f.encrypt(b"form.cleaned_data['email']")
+            # instance.username=f.encrypt(b"form.cleaned_data['username']")
+            # profile.contact=f.encrypt(b"form.cleaned_data['contact']")
             instance.save()
             print(instance.first_name)
             
