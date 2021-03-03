@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'modelcluster',
     'taggit',
     'Diet',
+    'CMSResources',
     'import_export',
     'django.contrib.gis',
     'base',
@@ -71,6 +72,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'Diet.urls'
@@ -167,3 +169,4 @@ MEDIA_URL = '/media/'
 # SESSION_EXPIRE_AFTER_LAST_ACTIVITY_GRACE_PERIOD = 2 # group by minute
 
 # SESSION_TIMEOUT_REDIRECT = '/logout/'
+WAGTAIL_SITE_NAME = 'Diet Diversity Website'

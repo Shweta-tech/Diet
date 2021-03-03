@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% load static%} {% block content %}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Registration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="">
+
+<style>
+    .myform {
+        margin-top: 200px;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+    
+    h1 {
+        text-align: center;
+        color: rgb(36, 36, 68);
+        font-weight: bolder;
+    }
+</style>
+<form action="/login/" method="POST">
+    {% csrf_token %}
+
+    <div class="myform">
+        <h1>Concent Form</h1>
+        <table>
+        <tr>
+            <td>Do you consent? </td>
+            <td><input type="radio" id="concent" name="concent" value="Yes"> Yes</td>
+            <td><input type="radio" id="concent" name="concent" value="No"> No </td>
+           
+        </tr>
+    </table>
+</form>
+
+
+
+<script>
+   
+</script>
+{% endblock %}

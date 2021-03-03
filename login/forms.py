@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 import random
 import string
 from django.forms import Textarea
-from registration.models import HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,SMMotherRegistration
+from registration.models import HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,SMSMChildRegistration,SMChildParentsDetails,NutriGardenExpert
 class Form(UserCreationForm):
     email=forms.EmailField(required=False)
     
@@ -69,20 +69,20 @@ class SchoolForm(forms.ModelForm):
         fields = ('contact','name','institute',)
 
 class StudentForm(forms.ModelForm):
-    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='DD'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='STU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
     class Meta:
         model = Student
-        fields = ('contact','uid',)
+        fields = ('contact','uid','nutrileader')
 
 class AnganwadiWorkerForm(forms.ModelForm):
     class Meta:
         model = AnganwadiWorker
-        fields = ('contact','anganwadiname','personaladdress','anganwadiaddress',)
+        fields = ('contact','dob','age','age_in_months','age_in_days','anganwadiname','personaladdress','anganwadiaddress',)
 
 class MukhyaSevikaForm(forms.ModelForm):
     class Meta:
         model = MukhyaSevika
-        fields = ('contact','personaladdress','anganwadinumber',)
+        fields = ('contact','dob','age','age_in_months','age_in_days','personaladdress','anganwadinumber',)
 # class bulkreg(forms.ModelForm):  
 #     class Meta:  
 #         model = bulk_reg  
@@ -98,24 +98,36 @@ class MukhyaSevikaForm(forms.ModelForm):
 #         help_text='max. 42 megabytes'
 #     )
 class AdolescentGirlRegistrationForm(forms.ModelForm):
+    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='ADG'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
     class Meta:
         model = AdolescentGirlRegistration
-        fields = ('contact',)
+        fields = ('contact','uid')
 
 class AnemicWomanRegistrationForm(forms.ModelForm):
+    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='ANW'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
     class Meta:
         model = AnemicWomanRegistration
-        fields = ('contact',)
+        fields = ('contact','uid')
 
 class PregnantWomanRegistrationForm(forms.ModelForm):
+    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='PREG'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
     class Meta:
         model = PregnantWomanRegistration
-        fields = ('contact',)
-class SMMotherRegistrationForm(forms.ModelForm):
+        fields = ('contact','uid')
+class SMChildRegistrationForm(forms.ModelForm):
+    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='SMC'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
     class Meta:
-        model = SMMotherRegistration
-        fields = ('contact',)
+        model = SMChildRegistration
+        fields = ('contact','uid')
 
 
+class SMChildParentsDetailsForm(forms.ModelForm):
+    class Meta:
+        model = SMChildParentsDetails
+        fields =  ['cuid','mothername','fathername','mage','fage','fatheroccupation','education','monthlyincome'] 
 
+class NutriGardenExpertForm(forms.ModelForm):
+    class Meta:
+        model = NutriGardenExpert
+        fields = ['contact'] 
 
