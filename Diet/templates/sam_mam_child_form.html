@@ -160,14 +160,15 @@
         <a href="#"><i class="fa fa-fw fa-user"></i> Diet Recall</a>
     </div> -->
    
-        <form action="">
+        <form action="/sam_mam_child_details/" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <h2>
                 SAM MAM Child Details:
             </h2>
             <table border="0" align="center" cellspacing="10">
                 <tr>
                     <td>Unique ID:</td>
-                    <td colspan="2"><input type="text" name="uniqueid" id="uid" readonly></td>
+                    <td colspan="2"><input type="text" name="uniqueid" id="uid"></td>
                 </tr>
                 <tr>
                     <td>Name :</td>
@@ -175,8 +176,8 @@
                 </tr>
                 <tr>
                     <td>Weight : </td>
-                    <td><input type="number" class="fieldlabels" placeholder="in kgs/lbs" style="width: 100%;" name="hours" id="weight"> </td>
-                    <td><select id="unit" name="unit" onchange="weightconverter(this.value)">
+                    <td><input type="number" class="fieldlabels" placeholder="in kgs/lbs" style="width: 100%;" name="weight" id="weight"> </td>
+                    <td><select id="unit" name="weightunit" onchange="weightconverter(this.value)">
                         <option value="none">Weight Unit</option>
                         <option value="kgs">kgs</option>
                         <option value="lbs">lbs</option>
@@ -188,7 +189,7 @@
                 <tr>
                     <td>Height : </td>
                     <td> <input type="number" class="fieldlabels" placeholder=" in feet, inches, cms, meters" style="width: 100%;" name="height" id="height">
-                        <td> <select id="length" name="length" onchange="lengthconverter(this.value)">
+                        <td> <select id="length" name="heightunit" onchange="lengthconverter(this.value)">
                         <option value="none">Height Unit</option><option value="feet">feet</option>
                                 <option value="inches">inch</option>
                                 <option value="cms">cms</option>
@@ -211,7 +212,7 @@
                 <tr>
                     <td>Hemoglobin Value :</td>
                     <td><input type="number" class="fieldlabels" name="hb" id="hb" style="width:90%;"> </td>
-                    <td>Date : <input type="number" class="fieldlabels" name="hb" id="date" style="width:60%;"><br></td>
+                    <td>Date : <input type="date" class="fieldlabels" name="hbdate" id="date" style="width:60%;"><br></td>
                 </tr>
                 <tr>
                     <td>Recommended Food :</td>
@@ -220,8 +221,8 @@
                 </tr>
                 <tr>
                     <td>Complication : </td>
-                    <td><input type="radio" id="marginal" name="anaemia" value="marginal"> Marginally Anaemic</td>
-                    <td><input type="radio" id="severe" name="anaemia" value="severe"> Severely Anaemic </td>
+                    <td><input type="radio" id="marginal" name="anemia" value="marginal"> Marginally Anaemic</td>
+                    <td><input type="radio" id="severe" name="anemia" value="severe"> Severely Anaemic </td>
                    
                    
                 </tr>
@@ -239,18 +240,17 @@
                 </tr>
                 <tr>
                     <td>Health Parameters :</td>
-                    <td colspan="2"><input type="text" class="fieldlabels" id="hp" name="hp" style="width: 90%;" placeholder="Heath Parameters"></td>
+                    <td colspan="2"><input type="text" class="fieldlabels" id="hp" name="health" style="width: 90%;" placeholder="Heath Parameters"></td>
                     
                 </tr>
                 <tr>
                     <td>Medical Advice :</td>
-                    <td colspan="2"><input type="text" class="fieldlabels" id="ma" name="ma" style="width: 90%;" placeholder="Medical Advice"></td>
+                    <td colspan="2"><input type="text" class="fieldlabels" id="ma" name="medical" style="width: 90%;" placeholder="Medical Advice"></td>
                     
                 </tr>
                 <tr>
                     <td>Upload Documents :</td>
                     <td> <input type="file" name="myfile" class="fieldlabels" id="file" style="width: 90%;"></td>
-                    <td><button type="submit">Upload</button></td>
                 </tr>
                 <tr>
                     <td>Feedback :</td>

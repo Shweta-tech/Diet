@@ -1,0 +1,28 @@
+{% load static %}
+{% load wagtailcore_tags wagtailimages_tags %}
+<style>
+.card{
+    margin-bottom: 15px;
+    
+}
+
+</style>
+{% for card in self.cards%}
+<div class="row">
+  <div class="col-sm-10">
+  <div class="card">
+    <div class="card-image">
+        {% image card.image max-320x320 %}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title" style="text-align: justify;"> Tittle : {{ card.title }}</h5>
+      <p class="card-text"> </p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" style="text-align: justify;"> Description : {{ card.description }}</li>              
+      </ul>
+    </div>
+
+  </div>
+</div>
+</div>
+  {%endfor%}

@@ -1,0 +1,11 @@
+{% extends 'base.html'%} 
+{% load wagtailcore_tags %}
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+    {% for block in page.content %}
+        {% include_block block %} 
+    {% endfor %} 
+</div>
+   
+
+{% endblock %}

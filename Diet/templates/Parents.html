@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>SAM MAM Parents Form</title>
+    <title>SAM MAM Parents Profile</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <style>
@@ -160,36 +160,12 @@
         <a href="#"><i class="fa fa-fw fa-user"></i> Diet Recall</a>
     </div> -->
    
-        <form action="/sam_mam_child_parents_details_form/" method = "POST">
+        <form action="/sam_mam_child_parents_profile/" method = "POST">
             {% csrf_token %}
             <h2>
-                SAM MAM Parents Details:
+                SAM MAM Parents Profile Details
             </h2>
             <table border="0" align="center" cellspacing="10">
-                <tr>
-                    <td>Child ID:</td>
-                    <td colspan="2"><input type="text" name="cuid" id="cid" placeholder="Child id"></td>
-                </tr>
-                <tr>
-                    <td>First Name:</td>
-                    <td> <input type="text" name="first_name"  id = "firstname"/></td>
-                </tr>
-                <tr>
-                    <td>Last Name:</td>
-                    <td> <input type="text" name="last_name" class="validate" id = "lastname"/></td>
-                </tr>
-                <tr>
-                    <td>Username:</td>
-                    <td> <input type="text" name="username" class="validate"  id = "username"/></td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td> <input type="password" name="password1" class="validate" id = "password1"/></td>
-                </tr>
-                <tr>
-                    <td>Password Confirmation:</td>
-                    <td> <input type="password" name="password2" class="validate" id = "password2"/></td>
-                </tr>
                 <tr>
                     <td>Mother's Name:</td>
                     <td colspan="2"><input type="text" name="mothername" id="mname" placeholder="Name"></td>

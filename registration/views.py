@@ -6,7 +6,7 @@ from django.contrib import messages
 from .forms import bulkreg,StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,SupportMentorForm,HeadMentorForm,ProjectCoordinatorForm,TechnicalExpertForm,ProjectManagerForm,Form,AdolescentGirlRegistrationForm,AnemicWomanRegistrationForm,PregnantWomanRegistrationForm,SMChildRegistration,SMChildParentsDetailsForm,ConcentForm,NutriGardenExpertForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User,auth
-from .models import bulk_reg,HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,SMChildRegistration,SMChildParentsDetails,ConcentForm,NutriGardenExpert
+from .models import bulk_reg,HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,SMChildRegistration,SMChildParentsDetails,ConcentForm,NutriGardenExpert,SMChildParentsRegister
 from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -445,11 +445,11 @@ def sam_mam_child_registration(request):
         profile_form= SMChildRegistrationForm()
     return render(request,"sam_mam_child_registration.html",{"profile_form":profile_form,"form":form})
 
-def SMChildParentsDetails(request):
+def SMChildParentsRegister(request):
     if request.method== "POST":
         form= Form(request.POST)
         print(form)
-        profile_form= SMChildParentsDetailsForm(request.POST)
+        profile_form= SMChildParentsRegisterForm(request.POST)
         print(profile_form)
         if form.is_valid() and profile_form.is_valid():
             user=form.save()
@@ -469,11 +469,12 @@ def SMChildParentsDetails(request):
                 # email=i.email }}
             
             print('user created')
-            return redirect('/sam_mam_child_parents_details_form/')
+            return redirect('/sam_mam_child_details/')
     else:
         form= Form(request.POST)
-        profile_form= SMChildParentsDetailsForm()
-    return render(request,"Parents.html",{"profile_form":profile_form,"form":form})
+        profile_form= SMChildParentsRegisterForm()
+    return render(request,"sam_mam_parent_registration.html",{"profile_form":profile_form,"form":form})
+
 
 def concentform(request):
     if request.method == 'POST':
@@ -489,8 +490,6 @@ def concentform(request):
         form = ConcentForm()
     return render(request,'concentform.html')
     
-def sam_mam_child(request):
-    return render(request,'sam_mam_child_form.html') 
 def nutri_garden_expert(request):
     if request.method== "POST":
         form= Form(request.POST)
@@ -792,3 +791,7 @@ def nutri_garden_expert_bulk(request):
         return render(request,"bulk_reg_nge.html")
     else:
         return render(request,"bulk_reg_nge.html")
+    
+
+
+    

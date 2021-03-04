@@ -111,46 +111,24 @@ class bulk_reg(models.Model):
     name= models.CharField( max_length=50)
     mobile= models.CharField(max_length=10)
     dob= models.DateField(auto_now=False, auto_now_add=False,null=True)
-class AnganwadiWorker(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    dob = models.DateField(default=datetime.now, blank=True)
-    age= models.CharField(max_length=6,null = True,default = 0)
-    age_in_months= models.CharField(max_length=6,null = True,default = 0)
-    age_in_days= models.CharField(max_length=6,null = True,default=0)
-    contact=models.CharField(max_length=10,blank=True)
-    anganwadiname = models.CharField(max_length=200, null=True)
-    personaladdress = models.CharField(max_length=200,null=True)
-    anganwadiaddress = models.CharField(max_length=200,null=True)
 
 class MukhyaSevika(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    contact=models.CharField(max_length=10,blank=True)
-    dob = models.DateField(default=datetime.now, blank=True)
-    age= models.CharField(max_length=6,null = True,default = 0)
-    age_in_months= models.CharField(max_length=6,null = True,default = 0)
-    age_in_days= models.CharField(max_length=6,null = True,default=0)
-    personaladdress = models.CharField(max_length=200,null = True)
+   
     anganwadinumber = models.IntegerField(default=False)
 
-
-class SMChildRegistration(models.Model):
+class AnganwadiWorker(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    uid =models.CharField(primary_key=True,max_length=100,default = 1)
-    contact=models.CharField(max_length=10,blank=True)
+    anganwadiname = models.CharField(max_length=200, null=True)
+    anganwadiaddress = models.CharField(max_length=200,null=True)
 
-class SMChildParentsDetails(models.Model):
+class SMChildParentsRegister(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
     cuid  = models.CharField(max_length = 10)
-    mothername = models.CharField(max_length = 50)
-    fathername = models.CharField(max_length = 50)
-    mage = models.IntegerField()
-    fage = models.IntegerField()
-    fatheroccupation = models.CharField(max_length = 100)
-    education = models.CharField(max_length = 50,null = True)
-    monthlyincome = models.CharField(max_length = 50)
-
 class NutriGardenExpert(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     contact=models.CharField(max_length=10,blank=True)
 class ConcentForm(models.Model):
     concent = models.CharField(max_length = 10)
+
+

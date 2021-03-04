@@ -1,0 +1,28 @@
+{% load static %}
+<style>
+.card{
+    margin-bottom: 15px;
+    
+}
+
+</style>
+{% for card in self.cards%}
+<div class="row">
+  <div class="col-sm-10">
+  <div class="card">
+    <img class="card-img-top" src="{% static 'images/doc.webp' %}" alt="image not avaliable "> 
+    <div class="card-body">
+      <h5 class="card-title" style="text-align: justify;"> Tittle : {{ card.title }}</h5>
+      <p class="card-text"> </p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" style="text-align: justify;"> Description : {{ card.description }}</li>
+        <li class="list-group-item" style="text-align: justify;"> Author : {{ card.author }}</li>
+        <li class="list-group-item" style="text-align: center;"> Download : Click Here.. {{ card.article }}</li>
+        
+      </ul>
+    </div>
+
+  </div>
+</div>
+</div>
+  {%endfor%}

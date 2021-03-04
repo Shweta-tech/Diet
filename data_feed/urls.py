@@ -28,14 +28,17 @@ urlpatterns = [
     url(r'^body/', views.body_function, name='body'),
     url(r'^dietrecall/', views.diet_recall_function, name='dietrecall'),
     url(r'^daily_schedule/', views.daily_schedule_function, name='daily_schedule'),
-    url(r'^adolescent_girls/', views.adolescent_girls, name='adolescent_girls'),
-    url(r'^pregnant_woman/', views.pregnant_woman, name='pregnant_woman'),
-    url(r'^anemic_woman/', views.anemic_woman, name='anemic_woman'),
-    url(r'^sam_mam_mother/', views.sam_mam_mother, name='sam_mam_mother'),
+    url(r'^anganwadi_workers_profile/', views.AnganwadiWorkerprofile, name='anganwadi_workers_profile'),
+    url(r'^mukhya_sevika_profile/', views.MukhyaSevikaprofile, name='mukhya_sevika_profile'),
+    url(r'^adolescent_anemic_girl_form/', views.adolescent_anemic_girl_form, name='adolescent_anemic_girl_form'),
+    url(r'^pregnant_woman_form/', views.pregnant_woman_form, name='pregnant_woman_form'),
+    url(r'^sam_mam_child_details/$', views.sam_mam_child_details,name='sam_mam_child_details'),
+    url(r'^sam_mam_child_parents_profile/$',views.SMChildParentsprofile, name='sam_mam_child_parents_profile'),
     url(r'^feedbackform/', views.feedbackform, name='feedbackform'),
     url(r'^nutrigarden/', views.nutrigarden, name='nutrigarden'),
     path('change_pass/<int:id>',views.chng_pass),
     path('change_pass_up/<int:id>',views.chng_pass_up),
+    
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
