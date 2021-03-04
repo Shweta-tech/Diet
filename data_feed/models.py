@@ -1,5 +1,39 @@
 from django.db import models
 
+
+fatheroccupation = [('Legislators,Senior Officials & Managers','Legislators,Senior Officials & Managers'),
+    ('Professionals','Professionals'),
+    ('Technicians and Associate Professionals','Technicians and Associate Professionals'),
+    ('Clerks','Clerks'),
+    ('Skilled workers and Shop & Market sales workers ','Skilled workers and Shop & Market sales workers '),
+    ('Skilled Agricultural','Skilled Agricultural and Fishery workers'), 
+    ('Craft and Related Trade Workers','Craft and Related Trade Workers'),
+    ('Plant and Machine Operators and Assemblers','Plant and Machine Operators and Assemblers'),
+    ('Elementary Occupation','Elementary Occupation'), 
+    ('Security guard','Security guard'),
+    ('Housekeeper or Housemaid','Housekeeper or Housemaid'),
+    ('Nurse','Nurse'),
+    ('Anganwadi Worker','Anganwadi Worker'),
+    ('Retired','Retired'),
+    ('Others','Others'),
+
+
+]
+education = [ ('Professionaldegree','Professionaldegree'),
+    ('Graduate','Graduate (Bachelors)'),
+    ('Middleschool','Middle school (5th to 10th std)'),
+    ('Primaryschool','Primary school (1st to 4th std)'),
+    ('Illiterate','Illiterate (No education)'),
+]
+monthlyincome =  [ ('199,862','199,862'),
+    ('99,931-199,861','99,931-199,861'),
+    ('74,755-99,930','74,755-99,930'),
+    ('49,962-74,755','49,962-74,755'),
+    ('29,973-49,961','29,973-49,961'),
+    ('10,002-29,97','10,002-29,97'),
+    ('10,001','10,001'),
+]
+
 # Create your models here.
 class PersonalInformationForms(models.Model):
     uniqueid = models.CharField(max_length=200)
@@ -86,22 +120,91 @@ class FeedbackModel(models.Model):
     issues = models.TextField(max_length = 2000)
     suggestions = models.TextField(max_length  = 2000)
 
-class AdolescentGirlsModel(models.Model):
-    uid = models.CharField(max_length = 100)
-    name = models.CharField(max_length = 2000)
+class AdolescentAnemicGirl(models.Model):
+    uniqueid = models.CharField(max_length = 50)
+    name = models.CharField(max_length = 50)
     weight = models.IntegerField()
-    weightunit = models.CharField(max_length=20)
+    weightunit = models.CharField(max_length = 50)
     height = models.IntegerField()
-    heightunit = models.CharField(max_length=20)
-    bmi = models.IntegerField()
+    heightunit = models.CharField(max_length = 50)
+    bmi= models.DecimalField(max_digits = 5,decimal_places = 2)
     age = models.IntegerField()
-    hemoglobinvalue = models.DecimalField(decimal_places  =2 , max_digits = 4)
-    date = models.DateField()
-    recommendedfood = models.CharField(max_length = 2000)
-    complication = models.CharField(max_length = 2000)
-    education = models.CharField(max_length = 2000)
-    medication = models.CharField(max_length = 2000)
-    healthparameters = models.CharField(max_length = 2000)
-    medicaladvice = models.CharField(max_length = 2000)
-    uploaddocuments = models.FileField(upload_to='documents/%Y/%m/%d')
-    deedback = models.CharField(max_length = 2000)
+    hemoglobinvalue = models.IntegerField()
+    hemoglobindate = models.DateField(default=datetime.now, blank=True)
+    food = models.CharField(max_length = 50)
+    complication = models.CharField(max_length = 50)
+    education= models.CharField(max_length = 50)
+    medication = models.CharField(max_length = 50)
+    health = models.CharField(max_length = 50)
+    medical= models.CharField(max_length = 50)
+    uploaded_file = models.FileField(upload_to='adolescentgirldocuments/%Y/%m/%d')
+    feedback = models.CharField(max_length = 100)
+
+class PregnantWoman(models.Model):
+    uniqueid = models.CharField(max_length = 50)
+    name = models.CharField(max_length = 50)
+    weight = models.IntegerField()
+    weightunit = models.CharField(max_length = 50)
+    height = models.IntegerField()
+    heightunit = models.CharField(max_length = 50)
+    bmi= models.DecimalField(max_digits = 5,decimal_places = 2)
+    age = models.IntegerField()
+    hemoglobinvalue = models.IntegerField()
+    hemoglobindate = models.DateField(default=datetime.now, blank=True)
+    food = models.CharField(max_length = 50, blank=True)
+    complication = models.CharField(max_length = 50)
+    medication = models.CharField(max_length = 50)
+    health = models.CharField(max_length = 50, blank = True)
+    medical= models.CharField(max_length = 50)
+    uploaded_file = models.FileField(upload_to='pregnantwomandocuments/%Y/%m/%d')
+    feedback = models.CharField(max_length = 100)
+
+
+class SMChildDetails(models.Model):
+    uniqueid = models.CharField(max_length = 50)
+    name = models.CharField(max_length = 50)
+    weight = models.IntegerField()
+    weightunit = models.CharField(max_length = 50)
+    height = models.IntegerField()
+    heightunit = models.CharField(max_length = 50)
+    bmi= models.DecimalField(max_digits = 5,decimal_places = 2)
+    age = models.IntegerField()
+    hemoglobinvalue = models.IntegerField()
+    hemoglobindate = models.DateField(default=datetime.now, blank=True)
+    food = models.CharField(max_length = 50, blank=True)
+    complication = models.CharField(max_length = 50)
+    education= models.CharField(max_length = 50, blank = True)
+    medication = models.CharField(max_length = 50)
+    health = models.CharField(max_length = 50, blank = True)
+    medical= models.CharField(max_length = 50)
+    uploaded_file = models.FileField(upload_to='smchilddocuments/%Y/%m/%d')
+    feedback = models.CharField(max_length = 100)
+
+class SMChildParentsDetails(models.Model):
+    mothername = models.CharField(max_length = 50)
+    fathername = models.CharField(max_length = 50)
+    motherage = models.IntegerField()
+    fatherage = models.IntegerField()
+    fatheroccupation = models.CharField(choices=fatheroccupation,max_length = 100)
+    education = models.CharField(choices=education,max_length = 50,null = True)
+    monthlyincome = models.CharField(choices=monthlyincome,max_length = 50)
+
+class MukhyaSevikaProfile(models.Model):
+    name = models.CharField(max_length = 100,blank = True)
+    contact=models.CharField(max_length=10,blank=True)
+    dob = models.DateField(default=datetime.now, blank=True)
+    age= models.CharField(max_length=6,null = True,default = 0)
+    age_in_months= models.CharField(max_length=6,null = True,default = 0)
+    age_in_days= models.CharField(max_length=6,null = True,default=0)
+    personaladdress = models.CharField(max_length=200,null = True)
+    uploaded_image = models.ImageField( upload_to='mukhyasevikaid/%Y/%m/%d')
+
+class AnganwadiWorkerProfile(models.Model):
+    name = models.CharField(max_length = 100)
+    dob = models.DateField(default=datetime.now)
+    age= models.CharField(max_length=6,)
+    age_in_months= models.CharField(max_length=6)
+    age_in_days= models.CharField(max_length=6)
+    contact=models.CharField(max_length=10)
+    personaladdress = models.CharField(max_length=200)
+    uploaded_image = models.ImageField( upload_to='anganwadiworkerid/%Y/%m/%d')

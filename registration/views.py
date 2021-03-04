@@ -6,7 +6,7 @@ from django.contrib import messages
 from .forms import bulkreg,StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,SupportMentorForm,HeadMentorForm,ProjectCoordinatorForm,TechnicalExpertForm,ProjectManagerForm,Form,AdolescentGirlRegistrationForm,AnemicWomanRegistrationForm,PregnantWomanRegistrationForm,SMChildRegistration,SMChildParentsDetailsForm,ConcentForm,NutriGardenExpertForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User,auth
-from .models import bulk_reg,HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,SMChildRegistration,SMChildParentsDetails,ConcentForm,NutriGardenExpert,AdolescentAnemicGirl,PregnantWoman,SMChildParentsRegister,SMChildDetails,SMChildParentsDetails,AnganwadiWorkerProfile,MukhyaSevikaProfile
+from .models import bulk_reg,HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,SMChildRegistration,SMChildParentsDetails,ConcentForm,NutriGardenExpert,SMChildParentsRegister
 from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -323,26 +323,6 @@ def anganwadi_workers_register(request):
         form= Form(request.POST)
         profile_form= AnganwadiWorkerForm()
     return render(request, "anganwadi_workers_register.html",{"profile_form":profile_form,"form":form})
-def AnganwadiWorkerprofile(request):
-    if request.method=="POST":
-        name = request.POST.get('name')
-        dob=request.POST.get('dob')
-        age=request.POST.get('age')
-        age_in_months=request.POST.get('age_in_months')
-        age_in_days= request.POST.get('age_in_days')
-        contact = request.POST.get('contact')
-        personaladdress = request.POST.get('personaladdress')
-        uploaded_image = request.FILES['myfile']
-        sub= AnganwadiWorkerProfile(name= name,dob=dob,age=age,age_in_months=age_in_months,age_in_days=age_in_days,contact=contact,personaladdress=personaladdress,uploaded_image=uploaded_image)
-        sub.save()
-        print('data submitted')
-    else:
-        return render(request,'anganwadi_workers_profile_form.html') 
-
-    return render(request,'anganwadi_workers_profile_form.html')
-
-
-
 
 def adolescent_girl_register(request):
     if request.method== "POST":
@@ -494,24 +474,6 @@ def SMChildParentsRegister(request):
         form= Form(request.POST)
         profile_form= SMChildParentsRegisterForm()
     return render(request,"sam_mam_parent_registration.html",{"profile_form":profile_form,"form":form})
-
-def SMChildParentsprofile(request):
-    if request.method=="POST":
-        mothername = request.POST.get('mothername')
-        fathername=request.POST.get('fathername')
-        motherage=request.POST.get('mage')
-        fatherage=request.POST.get('fage')
-        fatheroccupation= request.POST.get('fatheroccupation')
-        education = request.POST.get('education')
-        monthlyincome = request.POST.get('monthlyincome')
-        sub= SMChildParentsDetails(mothername=mothername,fathername=fathername,motherage=motherage,fatherage=fatherage,fatheroccupation=fatheroccupation,education=education,monthlyincome=monthlyincome)
-        sub.save()
-        print('data submitted')
-    else:
-        return render(request,'Parents.html') 
-
-    return render(request,'Parents.html')
-
 
 
 def concentform(request):
@@ -832,110 +794,4 @@ def nutri_garden_expert_bulk(request):
     
 
 
-    def MukhyaSevikaprofile(request):
-    if request.method=="POST":
-        name = request.POST.get('name')
-        dob=request.POST.get('dob')
-        age=request.POST.get('age')
-        age_in_months=request.POST.get('age_in_months')
-        age_in_days= request.POST.get('age_in_days')
-        contact = request.POST.get('contact')
-        personaladdress = request.POST.get('personaladdress')
-        uploaded_image = request.FILES['myfile']
-        sub= MukhyaSevikaProfile(name= name,dob=dob,age=age,age_in_months=age_in_months,age_in_days=age_in_days,contact=contact,personaladdress=personaladdress,uploaded_image=uploaded_image)
-        sub.save()
-        print('data submitted')
-    else:
-        return render(request,'mukhya_sevika_profile_form.html') 
-
-    return render(request,'mukhya_sevika_profile_form.html')
-
-def adolescent_anemic_girl_form(request):
-    if request.method=="POST":
-        uniqueid = request.POST.get('uniqueid')
-        name=request.POST.get('name')
-        weight=request.POST.get('weight')
-        weightunit=request.POST.get('weightunit')
-        height = request.POST.get('height')
-        heightunit= request.POST.get('heightunit')
-        bmi =request.POST.get('bmi')
-        age=request.POST.get('age')
-        hemoglobinvalue= request.POST.get('hb')
-        hemoglobindate = request.POST.get('hbdate')
-        food= request.POST.get('food')
-        complication= request.POST.get('anemia')
-        education= request.POST.get('education')
-        medication= request.POST.get('medication')
-        health= request.POST.get('health')
-        medical = request.POST.get('medical')
-        uploaded_file = request.FILES['myfile']
-        feedback = request.POST.get('fb')
-        print(name)
-        print(uploaded_file)
-        sub= AdolescentAnemicGirl(uniqueid=uniqueid,name=name,weight=weight,weightunit=weightunit,height=height,heightunit=heightunit,bmi=bmi,age=age,hemoglobinvalue=hemoglobinvalue,hemoglobindate=hemoglobindate,food = food,complication=complication,education=education,medication=medication,health=health,medical=medical,uploaded_file = uploaded_file,feedback=feedback)
-        sub.save()
-        print('submitted')
-    else:
-        return render(request,'adolescent_anemic_girl_form.html') 
-
-    return render(request,'adolescent_anemic_girl_form.html')
-def pregnant_woman_form(request):
-    if request.method=="POST":
-        uniqueid = request.POST.get('uniqueid')
-        name=request.POST.get('name')
-        weight=request.POST.get('weight')
-        weightunit=request.POST.get('weightunit')
-        height = request.POST.get('height')
-        heightunit= request.POST.get('heightunit')
-        bmi =request.POST.get('bmi')
-        age=request.POST.get('age')
-        hemoglobinvalue= request.POST.get('hb')
-        hemoglobindate = request.POST.get('hbdate')
-        food= request.POST.get('food')
-        complication= request.POST.get('anemia')
-        medication= request.POST.get('medication')
-        health= request.POST.get('health')
-        medical = request.POST.get('medical')
-        uploaded_file = request.FILES['myfile']
-        feedback = request.POST.get('fb')
-        print(name)
-        print(uploaded_file)
-        sub= PregnantWoman(uniqueid=uniqueid,name=name,weight=weight,weightunit=weightunit,height=height,heightunit=heightunit,bmi=bmi,age=age,hemoglobinvalue=hemoglobinvalue,hemoglobindate=hemoglobindate,complication=complication,medication=medication,health=health,medical=medical,uploaded_file = uploaded_file,feedback=feedback)
-        sub.save()
-        print('submitted')
-    else:
-        return render(request,'Pregnant_woman_form.html') 
-
-    return render(request,'Pregnant_woman_form.html')
-
-def sam_mam_child_details(request):
-    if request.method=="POST":
-        uniqueid = request.POST.get('uniqueid')
-        name=request.POST.get('name')
-        weight=request.POST.get('weight')
-        weightunit=request.POST.get('weightunit')
-        height = request.POST.get('height')
-        heightunit= request.POST.get('heightunit')
-        bmi =request.POST.get('bmi')
-        age=request.POST.get('age')
-        hemoglobinvalue= request.POST.get('hb')
-        hemoglobindate = request.POST.get('hbdate')
-        food= request.POST.get('food')
-        complication= request.POST.get('anemia')
-        education= request.POST.get('education')
-        medication= request.POST.get('medication')
-        health= request.POST.get('health')
-        medical = request.POST.get('medical')
-        uploaded_file = request.FILES['myfile']
-        feedback = request.POST.get('fb')
-        print(name)
-        print(uploaded_file)
-        sub= SMChildDetails(uniqueid=uniqueid,name=name,weight=weight,weightunit=weightunit,height=height,heightunit=heightunit,bmi=bmi,age=age,hemoglobinvalue=hemoglobinvalue,hemoglobindate=hemoglobindate,food = food,complication=complication,education=education,medication=medication,health=health,medical=medical,uploaded_file = uploaded_file,feedback=feedback)
-        sub.save()
-        print('data submitted')
-    else:
-        return render(request,'sam_mam_child_form.html') 
-
-    return render(request,'sam_mam_child_form.html')
-
-
+    
