@@ -2,7 +2,7 @@
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Registration</title>
+<title>Profile</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -126,13 +126,52 @@
             box-sizing: border-box;
         }
 </style>
-
-<form action="/mukhya_sevika_register/" method="POST">
+<form action="/anganwadi_workers_profile/" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
     <div class="myform">
-        <h1> Mukhya Sevika Registeration Form</h1>
-        <table>{{form.as_table}}{{profile_form.as_table}}</table>
+        <h1>Anganwadi Worker Profile</h1>
+        <table border="0" align="center" cellspacing="10">
+            <tr>
+                <td>Name:</td>
+                <td> <input type="text" name="name"  id = "firstname"/></td>
+            </tr>
+           
+           
+            <tr>
+                <td>Date of Birth:</td>
+                <td><input type="date" id="birth_date" name="dob" class="validate"  placeholder="Date of Birth" required/></td>
+                <td> <span id="calculate">Calculate the age</span></td>
+            </tr>
+            <!-- <span id="calculate">Calculate the age</span> -->
+
+            <tr>
+                <td>Age in years:</td>
+                <td><input id="yage" name="age" onkeypress="return (event.charCode > 47 && event.charCode < 58)"></td>
+            </tr>
+            <tr>
+                <td>Age in months:</td>
+                <td><input id="mnthage" name="age_in_months" onkeypress="return (event.charCode > 47 && event.charCode < 58)"></td>
+            </tr>
+            <tr>
+                <td>Age in days:</td>
+                <td><input id="dage" name="age_in_days" onkeypress="return (event.charCode > 47 && event.charCode < 58)"></td>
+            </tr>
+            <tr>
+                <td>Contact:</td>
+                <td> <input type="text" name="contact"  id = "contact"/></td>
+            </tr>
+            <tr>
+                <td>Personal Address:</td>
+                <td><input id="personaladdress" name="personaladdress"></td>
+            </tr>
+            <tr>
+                <td>Upload Indentity Proof :</td>
+                <td> <input type="file" name="myfile" class="fieldlabels" id="file" style="width: 90%;"></td>
+               
+            </tr>
+           
+        </table>
         <button type="submit" class="btn btn-info">Submit</button>
         <br>
         <br>
@@ -140,7 +179,6 @@
         <a href="/register/">Create new account</a> -->
     </div>
 </form>
-
 
 
 <div>
@@ -178,5 +216,6 @@
             $('#dage').val(day_age);
         });
     });
+  
 </script>
 {% endblock %}
