@@ -125,6 +125,7 @@ class AnganwadiWorker(models.Model):
 class SMChildParentsRegister(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
     cuid  = models.CharField(max_length = 10)
+    
 class NutriGardenExpert(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     contact=models.CharField(max_length=10,blank=True)

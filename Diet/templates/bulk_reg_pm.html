@@ -18,12 +18,14 @@
 
 <form method="post" enctype="multipart/form-data" class="myform">
     {% csrf_token %}
-    <h1>Bulk registration</h1>
+    <h1>Bulk registration for Project Manager</h1>
+        <a href="{% static 'xlsxforms/ProjectManagerForm.xlsx' %}" target="_blank">Download Project Manager Sample File</a>
     <br>
     <span>Please Upload Excel(.xlsx) File</span>
     <br>
     <br>
-    <input type="file" name="myFile"> <br> <br>
+    <input type="file" name="myFile"> <br> </br>
+   
     <button type="submit" class="btn btn-info">Upload file</button>
 </form>
 {% if messages %} {% for message in messages %}
