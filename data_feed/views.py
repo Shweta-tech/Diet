@@ -289,7 +289,7 @@ def SMChildParentsprofile(request):
         sub.save()
         print('data submitted')
     else:
-        return render(request,'Parents.html') 
+        return render(request,'sam_mam_child_form.html') 
 
     return render(request,'Parents.html')
 
