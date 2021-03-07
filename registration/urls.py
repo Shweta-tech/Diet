@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^school_register/', views.school, name='school_register'),
     url(r'^student_register/', views.student, name='student_register'),
     url(r'^school_coordinator_register/', views.school_coordinator_register, name='school_coordinator_register'),
+    url(r'^school_student_parent_register/', views.school_student_parent_register, name='school_student_parent_register'),
     url(r'^mukhya_sevika_register/', views.mukhya_sevika_register, name='mukhya_sevika_register'),
     url(r'^anganwadi_workers_register/', views.anganwadi_workers_register, name='anganwadi_workers_register'),
     url(r'^support_mentor_register/', views.support_mentor, name='support_mentor_register'),

@@ -4,7 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 import random
 import string
 from django.forms import Textarea
-from .models import bulk_reg,HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,ConcentForm,NutriGardenExpert,SMChildParentsRegister
+from bootstrap_datepicker_plus import DatePickerInput
+from .models import bulk_reg,HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,SchoolStudentParent,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,ConcentForm,NutriGardenExpert,SMChildParentsRegister
 class Form(UserCreationForm):
     email=forms.EmailField(required=False)
     
@@ -59,9 +60,22 @@ class SupportMentorForm(forms.ModelForm):
         fields = ('contact','mentortype','category',)
 
 class SchoolCoordinatorForm(forms.ModelForm):
+    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='SCU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
     class Meta:
         model = SchoolCoordinator
-        fields = ('contact','schoolname','personaladdress',)
+        fields = ('contact','schoolname','personaladdress','dob','age','schooladdress','schoolcontact','education','occupation','monthlyincome','profilephoto')
+        widgets = {
+                    'dob': DatePickerInput(format='%m/%d/%Y'), 
+                 }
+
+class SchoolStudentParentForm(forms.ModelForm):
+    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='STUP'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    class Meta:
+        model = SchoolStudentParent
+        fields = ('contact','schoolname','personaladdress','dob','age','schooladdress','schoolcontact','education','occupation','monthlyincome','schoolcoordinatorincharge','foodhabits','profilephoto')
+        widgets = {
+                    'dob': DatePickerInput(format='%m/%d/%Y'), 
+                 }
 
 class SchoolForm(forms.ModelForm):
     class Meta:
@@ -75,16 +89,22 @@ class StudentForm(forms.ModelForm):
         fields = ('contact','uid','nutrileader')
 
 class AnganwadiWorkerForm(forms.ModelForm):
+    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='AWU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
     class Meta:
         model = AnganwadiWorker
-        fields = ('anganwadiname','anganwadiaddress',)
-        
+        fields = ('anganwadiname','anganwadiaddress','contact','dob','age','education','occupation','monthlyincome','ICDSname','ICDScenteraddress','ICDScontact','profilephoto')
+        widgets = {
+                    'dob': DatePickerInput(format='%m/%d/%Y'), 
+                 }        
 
 class MukhyaSevikaForm(forms.ModelForm):
+    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='MSU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
     class Meta:
         model = MukhyaSevika
-        fields = ('anganwadinumber',)
-
+        fields = ('anganwadinumber','contact','dob','age','education','occupation','monthlyincome','ICDSname','ICDScenteraddress','ICDScontact','profilephoto')
+        widgets = {
+                    'dob': DatePickerInput(format='%m/%d/%Y'), 
+                 }
 
 class bulkreg(forms.ModelForm):  
     class Meta:  

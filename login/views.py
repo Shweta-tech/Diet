@@ -59,13 +59,15 @@ def login(request):
                 if group.name ==  'school_coordinator':
                     auth.login(request,user)
                     return redirect('/after_login/')
+                if group.name ==  'school_student_parent':
+                    auth.login(request,user)
+                    return redirect('/after_login/')
                 if group.name ==  'parents':
                     auth.login(request,user)
                     return redirect('/after_login/')
                 if group.name ==  'student':
                     auth.login(request,user)
                     return redirect('/after_login/')
-
                 if group.name ==  'anganwadi_worker':
                     auth.login(request,user)
                     return redirect('/after_login/')

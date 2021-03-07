@@ -3,10 +3,10 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .forms import bulkreg,StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,SupportMentorForm,HeadMentorForm,ProjectCoordinatorForm,TechnicalExpertForm,ProjectManagerForm,Form,AdolescentGirlRegistrationForm,AnemicWomanRegistrationForm,PregnantWomanRegistrationForm,ConcentForm,NutriGardenExpertForm,SMChildParentsRegisterForm
+from .forms import bulkreg,StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,SchoolStudentParentForm,SupportMentorForm,HeadMentorForm,ProjectCoordinatorForm,TechnicalExpertForm,ProjectManagerForm,Form,AdolescentGirlRegistrationForm,AnemicWomanRegistrationForm,PregnantWomanRegistrationForm,ConcentForm,NutriGardenExpertForm,SMChildParentsRegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User,auth
-from .models import bulk_reg,HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,ConcentForm,NutriGardenExpert,SMChildParentsRegister
+from .models import bulk_reg,HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,SchoolStudentParent,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,ConcentForm,NutriGardenExpert,SMChildParentsRegister
 from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -196,7 +196,7 @@ def school_coordinator_register(request):
     if request.method== "POST":
         form= Form(request.POST)
         print(form)
-        profile_form=SchoolCoordinatorForm(request.POST)
+        profile_form=SchoolCoordinatorForm(request.POST,request.FILES)
         print('not valid')
         if form.is_valid() and profile_form.is_valid():
             user=form.save()
@@ -221,10 +221,38 @@ def school_coordinator_register(request):
         form= Form()
         profile_form= SchoolCoordinatorForm()
     return render(request, "school_coordinator_register.html",{"profile_form":profile_form,"form":form})
-def student(request):
-               
-   
 
+def school_student_parent_register(request):
+    if request.method== "POST":
+        form= Form(request.POST)
+        print(form)
+        profile_form=SchoolStudentParentForm(request.POST,request.FILES)
+        print('not valid')
+        if form.is_valid() and profile_form.is_valid():
+            user=form.save()
+            print(user)
+            my_group = Group.objects.get(name='school_student_parent') 
+            my_group.user_set.add(user)
+            profile= profile_form.save(commit=False)
+            profile.user=user
+            profile.save() 
+            messages.info(request,"User created")
+            firstname=form.cleaned_data['first_name']
+            username=form.cleaned_data['username']
+            email=form.cleaned_data['email']
+            password= form.cleaned_data['password1']
+            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            print(stuff_in_string)
+                # email=i.email }}
+            
+            print('user created')
+            return redirect('/after_login/')
+    else:
+        form= Form()
+        profile_form= SchoolStudentParentForm()
+    return render(request, "school_student_parent_register.html",{"profile_form":profile_form,"form":form})
+
+def student(request):
     if request.method== "POST":
         form= Form(request.POST)
         # print(form)
@@ -268,7 +296,7 @@ def mukhya_sevika_register(request):
     if request.method== "POST":
         form= Form(request.POST)
         print(form)
-        profile_form=MukhyaSevikaForm(request.POST)
+        profile_form=MukhyaSevikaForm(request.POST,request.FILES)
         print('not valid')
         if form.is_valid() and profile_form.is_valid():
             user=form.save()
@@ -292,13 +320,13 @@ def mukhya_sevika_register(request):
     else:
         form= Form(request.POST)
         profile_form= MukhyaSevikaForm()
-    return render(request, "mukhya_Sevika_register.html",{"profile_form":profile_form,"form":form})
+    return render(request, "mukhya_sevika_register.html",{"profile_form":profile_form,"form":form})
 
 def anganwadi_workers_register(request):
     if request.method== "POST":
         form= Form(request.POST)
         print(form)
-        profile_form=AnganwadiWorkerForm(request.POST)
+        profile_form=AnganwadiWorkerForm(request.POST,request.FILES)
         print('not valid')
         if form.is_valid() and profile_form.is_valid():
             user=form.save()
