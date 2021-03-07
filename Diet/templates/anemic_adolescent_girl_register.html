@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% load static%} {% block content %}
+{% extends 'base.html' %} {% load static%}{% block content %} {% load bootstrap4 %}  {% bootstrap_css %}  {% bootstrap_javascript jquery='full' %} 
+
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,12 +20,12 @@
         font-weight: bolder;
     }
 </style>
-<form action="/support_mentor_register/" method="POST">
+<form action="/anemic_adolescent_girl_register/" method="POST"  enctype="multipart/form-data" >
     {% csrf_token %}
 
     <div class="myform">
-        <h1>Register</h1>
-        <table>{{form.as_table}}{{profile_form.as_table}}</table>
+        <h1> Anemic Adolescent Girl Register</h1>
+        <table>{{ profile_form.media }} {{form.as_table}}{{profile_form.as_table}}</table>
         <button type="submit" class="btn btn-info">Submit</button>
         <br>
         <br>

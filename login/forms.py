@@ -1,10 +1,11 @@
 from django import forms  
 from datetimepicker.widgets import DateTimePicker
+from bootstrap_datepicker_plus import DatePickerInput
 from django.contrib.auth.forms import UserCreationForm
 import random
 import string
 from django.forms import Textarea
-from registration.models import HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,NutriGardenExpert
+from registration.models import Mentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,PregnantWomanRegistration,NutriGardenExpert,PrincipalInvestigators,WebGISExpert,NutritionExpert
 class Form(UserCreationForm):
     email=forms.EmailField(required=False)
     
@@ -48,15 +49,11 @@ class TechnicalExpertForm(forms.ModelForm):
     class Meta:
         model = TechnicalExpert
         fields = ('contact',)
-class HeadMentorForm(forms.ModelForm):
+class MentorForm(forms.ModelForm):
+    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='MT'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
     class Meta:
-        model = HeadMentor
-        fields = ('contact','address','mentortype','institute','qualification')
-
-class SupportMentorForm(forms.ModelForm):
-    class Meta:
-        model = SupportMentor
-        fields = ('contact','mentortype','category',)
+        model = Mentor
+        fields = ('dob','age','contact','address','education')
 
 class SchoolCoordinatorForm(forms.ModelForm):
     class Meta:
@@ -97,17 +94,7 @@ class MukhyaSevikaForm(forms.ModelForm):
 #         label='Select a file',
 #         help_text='max. 42 megabytes'
 #     )
-class AdolescentGirlRegistrationForm(forms.ModelForm):
-    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='ADG'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-    class Meta:
-        model = AdolescentGirlRegistration
-        fields = ('contact','uid')
-
-class AnemicWomanRegistrationForm(forms.ModelForm):
-    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='ANW'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-    class Meta:
-        model = AnemicWomanRegistration
-        fields = ('contact','uid')
+# 
 
 class PregnantWomanRegistrationForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='PREG'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
@@ -126,8 +113,32 @@ class PregnantWomanRegistrationForm(forms.ModelForm):
 #         model = SMChildParentsDetails
 #         fields =  ['cuid','mothername','fathername','mage','fage','fatheroccupation','education','monthlyincome'] 
 
-class NutriGardenExpertForm(forms.ModelForm):
-    class Meta:
-        model = NutriGardenExpert
-        fields = ['contact'] 
 
+class PrincipalInvestigatorsForm(forms.ModelForm):
+    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='PI'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    class Meta:
+        model = PrincipalInvestigators
+        fields = ['dob','age','contact','uid']
+        widgets = {
+                    'dob': DatePickerInput(format='%m/%d/%Y'), # default date-format %m/%d/%Y will be used
+            
+        }
+class WebGISExpertForm(forms.ModelForm):
+    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='WGE'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    class Meta:
+        model =  WebGISExpert
+        fields = ['dob','age','contact','uid']
+        widgets = {
+                    'dob': DatePickerInput(format='%m/%d/%Y'), # default date-format %m/%d/%Y will be used
+            
+        }
+
+class NutritionExpertForm(forms.ModelForm):
+    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='NE'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    class Meta:
+        model =  NutritionExpert
+        fields = ['dob','age','contact','uid']
+        widgets = {
+                    'dob': DatePickerInput(format='%m/%d/%Y'), # default date-format %m/%d/%Y will be used
+            
+        }

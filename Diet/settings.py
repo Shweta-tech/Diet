@@ -30,7 +30,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
 # Application definition
 
 INSTALLED_APPS = [
@@ -64,6 +66,8 @@ INSTALLED_APPS = [
     'registration',
     'resources',
     'data_feed',
+    'bootstrap_datepicker_plus',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [
