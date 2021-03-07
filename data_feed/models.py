@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import datetime
 
 fatheroccupation = [('Legislators,Senior Officials & Managers','Legislators,Senior Officials & Managers'),
     ('Professionals','Professionals'),
@@ -158,7 +158,6 @@ class PregnantWoman(models.Model):
     medical= models.CharField(max_length = 50)
     uploaded_file = models.FileField(upload_to='pregnantwomandocuments/%Y/%m/%d')
     feedback = models.CharField(max_length = 100)
-
 
 class SMChildDetails(models.Model):
     uniqueid = models.CharField(max_length = 50)

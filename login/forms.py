@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 import random
 import string
 from django.forms import Textarea
-from registration.models import HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,SMChildRegistration,SMChildParentsDetails,NutriGardenExpert
+from registration.models import HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,NutriGardenExpert
 class Form(UserCreationForm):
     email=forms.EmailField(required=False)
     
@@ -77,12 +77,12 @@ class StudentForm(forms.ModelForm):
 class AnganwadiWorkerForm(forms.ModelForm):
     class Meta:
         model = AnganwadiWorker
-        fields = ('contact','dob','age','age_in_months','age_in_days','anganwadiname','personaladdress','anganwadiaddress',)
+        fields = ('anganwadiname','anganwadiaddress',)
 
 class MukhyaSevikaForm(forms.ModelForm):
     class Meta:
         model = MukhyaSevika
-        fields = ('contact','dob','age','age_in_months','age_in_days','personaladdress','anganwadinumber',)
+        fields = ('anganwadinumber',)
 # class bulkreg(forms.ModelForm):  
 #     class Meta:  
 #         model = bulk_reg  
@@ -114,17 +114,17 @@ class PregnantWomanRegistrationForm(forms.ModelForm):
     class Meta:
         model = PregnantWomanRegistration
         fields = ('contact','uid')
-class SMChildRegistrationForm(forms.ModelForm):
-    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='SMC'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-    class Meta:
-        model = SMChildRegistration
-        fields = ('contact','uid')
+# class SMChildRegistrationForm(forms.ModelForm):
+#     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='SMC'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+#     class Meta:
+#         model = SMChildRegistration
+#         fields = ('contact','uid')
 
 
-class SMChildParentsDetailsForm(forms.ModelForm):
-    class Meta:
-        model = SMChildParentsDetails
-        fields =  ['cuid','mothername','fathername','mage','fage','fatheroccupation','education','monthlyincome'] 
+# class SMChildParentsDetailsForm(forms.ModelForm):
+#     class Meta:
+#         model = SMChildParentsDetails
+#         fields =  ['cuid','mothername','fathername','mage','fage','fatheroccupation','education','monthlyincome'] 
 
 class NutriGardenExpertForm(forms.ModelForm):
     class Meta:
