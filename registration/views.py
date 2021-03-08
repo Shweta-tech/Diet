@@ -3,10 +3,10 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .forms import bulkreg,StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,SupportMentorForm,HeadMentorForm,ProjectCoordinatorForm,TechnicalExpertForm,ProjectManagerForm,Form,AdolescentGirlRegistrationForm,AnemicWomanRegistrationForm,PregnantWomanRegistrationForm,ConcentForm,NutriGardenExpertForm,SMChildParentsRegisterForm
+from .forms import bulkreg,StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,MentorForm,ProjectCoordinatorForm,TechnicalExpertForm,ProjectManagerForm,Form,AnemicPregnantWomanForm,ConcentForm,NutriGardenExpertForm,SMChildParentsRegisterForm,PrincipalInvestigatorsForm,WebGISExpertForm,NutritionExpertForm,AnemicLactatingMotherForm,AnemicAdolescentGirlForm,SMChildForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User,auth
-from .models import bulk_reg,HeadMentor,SupportMentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,ConcentForm,NutriGardenExpert,SMChildParentsRegister
+from .models import bulk_reg,Mentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AnemicPregnantWoman,ConcentForm,NutriGardenExpert,SMChildParentsRegister,PrincipalInvestigators,WebGISExpert,NutritionExpert,AnemicLactatingMother,AnemicAdolescentGirl,SMChild
 from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -70,9 +70,9 @@ def register(request):
         profile_form= SchoolForm()
         return render(request, "register.html",{"profile_form":profile_form})
 
-def nutri_expert(request):
+def nutrition_expert(request):
     if request.method== "POST":
-        form= Form(request.POST)
+        form= NutritionExpertForm(request.POST)
         print(form)
         profile_form=TechnicalExpertForm(request.POST)
         print('not valid')
@@ -97,7 +97,7 @@ def nutri_expert(request):
             return redirect('/after_login/')
     else:
         form= Form(request.POST)
-        profile_form= TechnicalExpertForm()
+        profile_form= NutritionExpertForm()
     return render(request, "nutri_expert_register.html",{"profile_form":profile_form,"form":form})
 def proj_manager(request):
     if request.method== "POST":
@@ -129,35 +129,6 @@ def proj_manager(request):
         profile_form= ProjectManagerForm()
     return render(request, "proj_manager_register.html",{"profile_form":profile_form,"form":form})
 
-def support_mentor(request):
-    if request.method== "POST":
-        form= Form(request.POST)
-        print(form)
-        profile_form=SupportMentorForm(request.POST)
-        print('not valid')
-        if form.is_valid() and profile_form.is_valid():
-            user=form.save()
-            print(user)
-            my_group = Group.objects.get(name='mentor') 
-            my_group.user_set.add(user)
-            profile= profile_form.save(commit=False)
-            profile.user=user
-            profile.save() 
-            messages.info(request,"User created")
-            firstname=form.cleaned_data['first_name']
-            username=form.cleaned_data['username']
-            email=form.cleaned_data['email']
-            password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
-            print(stuff_in_string)
-                # email=i.email }}
-            
-            print('user created')
-            return redirect('/after_login/')
-    else:
-        form= Form(request.POST)
-        profile_form= SupportMentorForm()
-    return render(request, "support_mentor_register.html",{"profile_form":profile_form,"form":form})
 
 
 
@@ -228,7 +199,7 @@ def student(request):
     if request.method== "POST":
         form= Form(request.POST)
         # print(form)
-        profile_form=StudentForm(request.POST)
+        profile_form=StudentForm(request.POST,request.FILES)
         
         # print('not valid')
         if form.is_valid() and profile_form.is_valid():
@@ -324,16 +295,18 @@ def anganwadi_workers_register(request):
         profile_form= AnganwadiWorkerForm()
     return render(request, "anganwadi_workers_register.html",{"profile_form":profile_form,"form":form})
 
-def adolescent_girl_register(request):
+
+
+def anemic_pregnant_woman_registration(request):
     if request.method== "POST":
         form= Form(request.POST)
         print(form)
-        profile_form=AdolescentGirlRegistrationForm(request.POST)
+        profile_form=AnemicPregnantWomanForm(request.POST,request.FILES)
         print('not valid')
         if form.is_valid() and profile_form.is_valid():
             user=form.save()
             print(user)
-            my_group = Group.objects.get(name='AdolescentGirl') 
+            my_group = Group.objects.get(name='icds_beneficiaries') 
             my_group.user_set.add(user)
             profile= profile_form.save(commit=False)
             profile.user=user
@@ -348,23 +321,22 @@ def adolescent_girl_register(request):
                 # email=i.email }}
             
             print('user created')
-            return redirect('/adolescent_girls/')
+            return redirect('/after_login')
     else:
         form= Form(request.POST)
-        profile_form= AdolescentGirlRegistrationForm()
-    return render(request,"adolescent_girl_register.html",{"profile_form":profile_form,"form":form})
+        profile_form= AnemicPregnantWomanForm()
+    return render(request,"anemic_pregnant_woman_register.html",{"profile_form":profile_form,"form":form})
 
-
-def anemic_woman_registration(request):
+def sam_mam_child_register(request):
     if request.method== "POST":
         form= Form(request.POST)
         print(form)
-        profile_form=AnemicWomanRegistrationForm(request.POST)
+        profile_form= SMChildForm(request.POST)
         print('not valid')
         if form.is_valid() and profile_form.is_valid():
             user=form.save()
             print(user)
-            my_group = Group.objects.get(name='AnemicWoman') 
+            my_group = Group.objects.get(name='icds_beneficiaries') 
             my_group.user_set.add(user)
             profile= profile_form.save(commit=False)
             profile.user=user
@@ -379,71 +351,11 @@ def anemic_woman_registration(request):
                 # email=i.email }}
             
             print('user created')
-            return redirect('/anemic_woman/')
+            return redirect('/sam_mam_child_register/')
     else:
         form= Form(request.POST)
-        profile_form= AnemicWomanRegistrationForm()
-    return render(request,"anemic_woman_registration.html",{"profile_form":profile_form,"form":form})
-
-def pregnant_woman_registration(request):
-    if request.method== "POST":
-        form= Form(request.POST)
-        print(form)
-        profile_form=PregnantWomanRegistrationForm(request.POST)
-        print('not valid')
-        if form.is_valid() and profile_form.is_valid():
-            user=form.save()
-            print(user)
-            my_group = Group.objects.get(name='PregnantWoman') 
-            my_group.user_set.add(user)
-            profile= profile_form.save(commit=False)
-            profile.user=user
-            profile.save() 
-            messages.info(request,"User created")
-            firstname=form.cleaned_data['first_name']
-            username=form.cleaned_data['username']
-            email=form.cleaned_data['email']
-            password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
-            print(stuff_in_string)
-                # email=i.email }}
-            
-            print('user created')
-            return redirect('/pregnant_woman/')
-    else:
-        form= Form(request.POST)
-        profile_form= PregnantWomanRegistrationForm()
-    return render(request,"pregnant_woman_registration.html",{"profile_form":profile_form,"form":form})
-
-# def sam_mam_child_registration(request):
-#     if request.method== "POST":
-    #     form= Form(request.POST)
-    #     print(form)
-    #     profile_form= SMChildRegistrationForm(request.POST)
-    #     print('not valid')
-    #     if form.is_valid() and profile_form.is_valid():
-    #         user=form.save()
-    #         print(user)
-    #         my_group = Group.objects.get(name='SMChild') 
-    #         my_group.user_set.add(user)
-    #         profile= profile_form.save(commit=False)
-    #         profile.user=user
-    #         profile.save() 
-    #         messages.info(request,"User created")
-    #         firstname=form.cleaned_data['first_name']
-    #         username=form.cleaned_data['username']
-    #         email=form.cleaned_data['email']
-    #         password= form.cleaned_data['password1']
-    #         stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
-    #         print(stuff_in_string)
-    #             # email=i.email }}
-            
-    #         print('user created')
-    #         return redirect('/sam_mam_child_registration/')
-    # else:
-    #     form= Form(request.POST)
-    #     profile_form= SMChildRegistrationForm()
-    # return render(request,"sam_mam_child_registration.html",{"profile_form":profile_form,"form":form})
+        profile_form= SMChildForm()
+    return render(request,"sam_mam_child_register.html",{"profile_form":profile_form,"form":form})
 
 def SMChildParentsRegister(request):
     if request.method== "POST":
@@ -739,7 +651,7 @@ def simple_upload_hm(request):
                 value.save()
                 my_group = Group.objects.get(name='mentor') 
                 my_group.user_set.add(value)
-                contact=HeadMentor(contact=data[6],address=data[7],mentortype=data[8],institute=data[9],qualification=data[10],user=value)
+                contact=Mentor(contact=data[6],address=data[7],mentortype=data[8],institute=data[9],qualification=data[10],user=value)
                 contact.save()
                 messages.info(request,"User created")
                 print('user created')
@@ -967,7 +879,7 @@ def headmentor_bulk(request):
                 value.save()
                 my_group = Group.objects.get(name='mentor') 
                 my_group.user_set.add(value)
-                contact=HeadMentor(contact=data[6],address=data[7],mentortype=data[8],institute=data[9],qualification=data[10],user=value)
+                contact=Mentor(contact=data[6],address=data[7],mentortype=data[8],institute=data[9],qualification=data[10],user=value)
                 contact.save()
                 messages.info(request,"User created")
                 print('user created')
@@ -1172,4 +1084,157 @@ def nutriexpert_bulk(request):
     else:
         return render(request,"bulk_reg_nutriexp.html")
 
+def principal_investigator_register(request):
+    if request.method== "POST":
+        form= Form(request.POST)
+        print(form)
+        profile_form= PrincipalInvestigatorsForm(request.POST)
+        print(profile_form)
+      
+        if form.is_valid() and profile_form.is_valid():
+            user=form.save()
+            print(user)
+            my_group = Group.objects.get(name='principal_investigator') 
+            my_group.user_set.add(user)
+            profile= profile_form.save(commit=False)
+            profile.user=user
+            profile.save() 
+            messages.info(request,"User created")
+            firstname=form.cleaned_data['first_name']
+            username=form.cleaned_data['username']
+            email=form.cleaned_data['email']
+            password= form.cleaned_data['password1']
+            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            print(stuff_in_string)
+                # email=i.email }}
+            
+            print('user created')
+            return redirect('/after_login/')
+    else:
+        form= Form(request.POST)
+        profile_form= PrincipalInvestigatorsForm()
+    return render(request, "principal_investigator_register.html",{"profile_form":profile_form,"form":form})
+
+def webgis_expert_register(request):
+    if request.method== "POST":
+        form= Form(request.POST)
+        print(form)
+        profile_form=  WebGISExpertForm(request.POST)
+        print(profile_form)
+      
+        if form.is_valid() and profile_form.is_valid():
+            user=form.save()
+            print(user)
+            my_group = Group.objects.get(name='webgis_expert') 
+            my_group.user_set.add(user)
+            profile= profile_form.save(commit=False)
+            profile.user=user
+            profile.save() 
+            messages.info(request,"User created")
+            firstname=form.cleaned_data['first_name']
+            username=form.cleaned_data['username']
+            email=form.cleaned_data['email']
+            password= form.cleaned_data['password1']
+            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            print(stuff_in_string)
+                # email=i.email }}
+            
+            print('user created')
+            return redirect('/after_login/')
+    else:
+        form= Form(request.POST)
+        profile_form=  WebGISExpertForm()
+    return render(request,"webgis_expert_register.html",{"profile_form":profile_form,"form":form})
+   
+def mentor_registration(request):
+    if request.method== "POST":
+        form= Form(request.POST)
+        print(form)
+        profile_form= MentorForm(request.POST)
+        print('not valid')
+        if form.is_valid() and profile_form.is_valid():
+            user=form.save()
+            print(user)
+            my_group = Group.objects.get(name='AnemicWoman') 
+            my_group.user_set.add(user)
+            profile= profile_form.save(commit=False)
+            profile.user=user
+            profile.save() 
+            messages.info(request,"User created")
+            firstname=form.cleaned_data['first_name']
+            username=form.cleaned_data['username']
+            email=form.cleaned_data['email']
+            password= form.cleaned_data['password1']
+            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            print(stuff_in_string)
+                # email=i.email }}
+            
+            print('user created')
+            return redirect('/mentor_register/')
+    else:
+        form= Form(request.POST)
+        profile_form= MentorForm()
+    return render(request,"mentor_register.html",{"profile_form":profile_form,"form":form})
     
+def anemic_adolescent_girl_register(request):
+    if request.method== "POST":
+        form= Form(request.POST)
+        print(form)
+        profile_form=  AnemicAdolescentGirlForm(request.POST,request.FILES)
+        print(profile_form)
+      
+        if form.is_valid() and profile_form.is_valid():
+            user=form.save()
+            print(user)
+            my_group = Group.objects.get(name='icds_beneficiaries') 
+            my_group.user_set.add(user)
+            profile= profile_form.save(commit=False)
+            profile.user=user
+            profile.save() 
+            messages.info(request,"User created")
+            firstname=form.cleaned_data['first_name']
+            username=form.cleaned_data['username']
+            email=form.cleaned_data['email']
+            password= form.cleaned_data['password1']
+            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            print(stuff_in_string)
+                # email=i.email }}
+            
+            print('user created')
+            return redirect('/after_login/')
+    else:
+        form= Form(request.POST)
+        profile_form=  AnemicAdolescentGirlForm()
+    return render(request,"anemic_adolescent_girl_register.html",{"profile_form":profile_form,"form":form})
+   
+def anemic_lactating_mother_resgiter(request):
+    if request.method== "POST":
+        form= Form(request.POST)
+        print(form)
+        profile_form=  AnemicLactatingMotherForm(request.POST,request.FILES)
+        print(profile_form)
+      
+        if form.is_valid() and profile_form.is_valid():
+            user=form.save()
+            print(user)
+            my_group = Group.objects.get(name='icds_beneficiaries') 
+            my_group.user_set.add(user)
+            profile= profile_form.save(commit=False)
+            profile.user=user
+            profile.save() 
+            messages.info(request,"User created")
+            firstname=form.cleaned_data['first_name']
+            username=form.cleaned_data['username']
+            email=form.cleaned_data['email']
+            password= form.cleaned_data['password1']
+            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            print(stuff_in_string)
+                # email=i.email }}
+            
+            print('user created')
+            return redirect('/after_login/')
+    else:
+        form= Form(request.POST)
+        profile_form=  AnemicLactatingMotherForm()
+    return render(request,".html",{"profile_form":profile_form,"form":form})
+   

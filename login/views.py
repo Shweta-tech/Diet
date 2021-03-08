@@ -2,10 +2,9 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .forms import StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,SupportMentorForm,HeadMentorForm,ProjectCoordinatorForm,TechnicalExpertForm,ProjectManagerForm,Form,AdolescentGirlRegistrationForm,AnemicWomanRegistrationForm,PregnantWomanRegistrationForm
+from .forms import StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,MentorForm,ProjectCoordinatorForm,TechnicalExpertForm,ProjectManagerForm,Form,PregnantWomanRegistrationForm,MentorForm,PrincipalInvestigatorsForm,WebGISExpertForm,NutritionExpertForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User,auth
-# from .models import bulk_reg,HeadMentor,SupportMentor,mukhya_sevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,Document,image_up,DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,AdolescentGirlRegistration,AnemicWomanRegistration,PregnantWomanRegistration,SMMotherRegistration
 from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
