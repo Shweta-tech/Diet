@@ -3,10 +3,10 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .forms import bulkreg,StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,MentorForm,ProjectCoordinatorForm,TechnicalExpertForm,ProjectManagerForm,Form,AnemicPregnantWomanForm,ConcentForm,NutriGardenExpertForm,SMChildParentsRegisterForm,PrincipalInvestigatorsForm,WebGISExpertForm,NutritionExpertForm,AnemicLactatingMotherForm,AnemicAdolescentGirlForm,SMChildForm
+from .forms import bulkreg,StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,MentorForm,ProjectManagerForm,Form,AnemicPregnantWomanForm,ConcentForm,NutriGardenExpertForm,SMChildParentsRegisterForm,PrincipalInvestigatorsForm,WebGISExpertForm,NutritionExpertForm,AnemicLactatingMotherForm,AnemicAdolescentGirlForm,SMChildForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User,auth
-from .models import bulk_reg,Mentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AnemicPregnantWoman,ConcentForm,NutriGardenExpert,SMChildParentsRegister,PrincipalInvestigators,WebGISExpert,NutritionExpert,AnemicLactatingMother,AnemicAdolescentGirl,SMChild
+from .models import bulk_reg,Mentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,ProjectManager,User,AnemicPregnantWoman,ConcentForm,NutriGardenExpert,SMChildParentsRegister,PrincipalInvestigators,WebGISExpert,NutritionExpert,AnemicLactatingMother,AnemicAdolescentGirl,SMChild
 from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -72,9 +72,9 @@ def register(request):
 
 def nutrition_expert(request):
     if request.method== "POST":
-        form= NutritionExpertForm(request.POST)
+        form= Form(request.POST)
         print(form)
-        profile_form=TechnicalExpertForm(request.POST)
+        profile_form=NutritionExpertForm(request.POST)
         print('not valid')
         if form.is_valid() and profile_form.is_valid():
             user=form.save()
@@ -331,8 +331,8 @@ def sam_mam_child_register(request):
     if request.method== "POST":
         form= Form(request.POST)
         print(form)
-        profile_form= SMChildForm(request.POST)
-        print('not valid')
+        profile_form= SMChildForm(request.POST,request.FILES)
+        print(profile_form)
         if form.is_valid() and profile_form.is_valid():
             user=form.save()
             print(user)
@@ -351,7 +351,7 @@ def sam_mam_child_register(request):
                 # email=i.email }}
             
             print('user created')
-            return redirect('/sam_mam_child_register/')
+            return redirect('/after_login/')
     else:
         form= Form(request.POST)
         profile_form= SMChildForm()
@@ -381,7 +381,7 @@ def SMChildParentsRegister(request):
                 # email=i.email }}
             
             print('user created')
-            return redirect('/sam_mam_child_details/')
+            return redirect('/after_login/')
     else:
         form= Form(request.POST)
         profile_form= SMChildParentsRegisterForm()

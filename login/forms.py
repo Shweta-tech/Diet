@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 import random
 import string
 from django.forms import Textarea
-from registration.models import Mentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,PregnantWomanRegistration,NutriGardenExpert,PrincipalInvestigators,WebGISExpert,NutritionExpert
+from registration.models import Mentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,ProjectManager,User,NutriGardenExpert,PrincipalInvestigators,WebGISExpert,NutritionExpert
 class Form(UserCreationForm):
     email=forms.EmailField(required=False)
     
@@ -36,19 +36,12 @@ class Form(UserCreationForm):
 #             'to_date': forms.DateInput(format=('%d/%m/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
 #         }
     
-class ProjectCoordinatorForm(forms.ModelForm):
-    class Meta:
-        model = ProjectCoordinator
-        fields = ('contact',)
-        
+
 class ProjectManagerForm(forms.ModelForm):
     class Meta:
         model = ProjectManager
         fields = ('contact',)
-class TechnicalExpertForm(forms.ModelForm):
-    class Meta:
-        model = TechnicalExpert
-        fields = ('contact',)
+
 class MentorForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='MT'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
     class Meta:
@@ -95,25 +88,6 @@ class MukhyaSevikaForm(forms.ModelForm):
 #         help_text='max. 42 megabytes'
 #     )
 # 
-
-class PregnantWomanRegistrationForm(forms.ModelForm):
-    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='PREG'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-    class Meta:
-        model = PregnantWomanRegistration
-        fields = ('contact','uid')
-# class SMChildRegistrationForm(forms.ModelForm):
-#     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='SMC'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-#     class Meta:
-#         model = SMChildRegistration
-#         fields = ('contact','uid')
-
-
-# class SMChildParentsDetailsForm(forms.ModelForm):
-#     class Meta:
-#         model = SMChildParentsDetails
-#         fields =  ['cuid','mothername','fathername','mage','fage','fatheroccupation','education','monthlyincome'] 
-
-
 class PrincipalInvestigatorsForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='PI'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
     class Meta:

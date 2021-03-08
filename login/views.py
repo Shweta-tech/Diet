@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .forms import StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,MentorForm,ProjectCoordinatorForm,TechnicalExpertForm,ProjectManagerForm,Form,PregnantWomanRegistrationForm,MentorForm,PrincipalInvestigatorsForm,WebGISExpertForm,NutritionExpertForm
+from .forms import StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,MentorForm,ProjectManagerForm,Form,MentorForm,PrincipalInvestigatorsForm,WebGISExpertForm,NutritionExpertForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User,auth
 from django.shortcuts import redirect

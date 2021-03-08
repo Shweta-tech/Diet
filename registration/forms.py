@@ -5,7 +5,7 @@ import random
 import string
 from django.forms import Textarea
 from bootstrap_datepicker_plus import DatePickerInput
-from .models import bulk_reg,Mentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,TechnicalExpert,ProjectManager,ProjectCoordinator,User,AnemicPregnantWoman,SMChildParentsRegister,ConcentForm,NutriGardenExpert,AnganwadiWorkerProfile,MukhyaSevikaProfile,PrincipalInvestigators,WebGISExpert,NutritionExpert,AnemicLactatingMother,AnemicAdolescentGirl,SMChild
+from .models import bulk_reg,Mentor,MukhyaSevika,AnganwadiWorker,Student,School,SchoolCoordinator,ProjectManager,User,AnemicPregnantWoman,SMChildParentsRegister,ConcentForm,NutriGardenExpert,PrincipalInvestigators,WebGISExpert,NutritionExpert,AnemicLactatingMother,AnemicAdolescentGirl,SMChild
 class Form(UserCreationForm):
     email=forms.EmailField(required=False)
     
@@ -36,10 +36,8 @@ class Form(UserCreationForm):
 #             'to_date': forms.DateInput(format=('%d/%m/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
 #         }
     
-class ProjectCoordinatorForm(forms.ModelForm):
-    class Meta:
-        model = ProjectCoordinator
-        fields = ('contact',)
+
+
         
 class ProjectManagerForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='PM'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
@@ -50,10 +48,7 @@ class ProjectManagerForm(forms.ModelForm):
                     'dob': DatePickerInput(format='%m/%d/%Y'), # default date-format %m/%d/%Y will be used
             
         }
-class TechnicalExpertForm(forms.ModelForm):
-    class Meta:
-        model = TechnicalExpert
-        fields = ('contact',)
+
 class MentorForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='MT'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
     class Meta:
