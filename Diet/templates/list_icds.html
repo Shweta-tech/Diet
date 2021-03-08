@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Minimal Django File Upload Example</title>
+    <style>
+        .myform {
+            margin-top: 200px;
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+        
+        h1 {
+            text-align: center;
+            color:black;
+        }
+    </style>
+</head>
+
+<body class="myform">
+    <!-- List of uploaded documents -->
+
+
+    <!-- Upload form. Note enctype attribute! -->
+    <form action="{% url 'list_icds' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Upload article for ICDS project</h1>
+        
+        {{ form|crispy }}
+        <p><button type="submit" class="btn btn-info"> Upload</button></p>
+    </form>
+</body>
+
+</html>{% endblock %}
