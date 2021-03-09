@@ -51,7 +51,7 @@ urlpatterns = [
 
 
     url(r'^mentor_register/', views.mentor_registration, name='mentor_register'),
-    url(r'^mentor_bulk/', views.mentor_bulk, name='mentor_bulk'),
+    url(r'^school_coordinator_bulk/', views.mentor_bulk, name='school_coordinator_bulk'),
     url(r'^school_bulk/', views.school_bulk, name='school_bulk'),
     url(r'^student_bulk/', views.student_bulk, name='student_bulk'),
     url(r'^anganwadi_bulk/', views.anganwadi_bulk, name='anganwadi_bulk'),
@@ -59,7 +59,7 @@ urlpatterns = [
     url(r'^headmentor_bulk/', views.headmentor_bulk, name='headmentor_bulk'),
     # url(r'^anemicwoman_bulk/', views.anemicwoman_bulk, name='anemicwoman_bulk'),
     url(r'^adolescent_bulk/', views.adolescent_bulk, name='adolescent_bulk'),
-    url(r'^sam-mam_parent_bulk/', views.sm_parent_bulk, name='parent_bulk'),
+    url(r'^sam_mam_parent_bulk/', views.sm_parent_bulk, name='parent_bulk'),
     url(r'^school_parent_bulk/', views.school_parent_bulk, name='parent_bulk'),
 
     url(r'^lactatingwoman_bulk/', views.lactatingwoman_bulk, name='lactatingwoman_bulk'),
