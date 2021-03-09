@@ -306,7 +306,7 @@ def anemic_pregnant_woman_registration(request):
         if form.is_valid() and profile_form.is_valid():
             user=form.save()
             print(user)
-            my_group = Group.objects.get(name='icds_beneficiaries') 
+            my_group = Group.objects.get(name='anemic_pregnant_woman') 
             my_group.user_set.add(user)
             profile= profile_form.save(commit=False)
             profile.user=user
@@ -326,6 +326,7 @@ def anemic_pregnant_woman_registration(request):
         form= Form(request.POST)
         profile_form= AnemicPregnantWomanForm()
     return render(request,"anemic_pregnant_woman_register.html",{"profile_form":profile_form,"form":form})
+    
 
 def sam_mam_child_register(request):
     if request.method== "POST":
@@ -336,7 +337,7 @@ def sam_mam_child_register(request):
         if form.is_valid() and profile_form.is_valid():
             user=form.save()
             print(user)
-            my_group = Group.objects.get(name='icds_beneficiaries') 
+            my_group = Group.objects.get(name='sam_mam_child') 
             my_group.user_set.add(user)
             profile= profile_form.save(commit=False)
             profile.user=user
@@ -1186,7 +1187,7 @@ def anemic_adolescent_girl_register(request):
         if form.is_valid() and profile_form.is_valid():
             user=form.save()
             print(user)
-            my_group = Group.objects.get(name='icds_beneficiaries') 
+            my_group = Group.objects.get(name='adolescent_girl') 
             my_group.user_set.add(user)
             profile= profile_form.save(commit=False)
             profile.user=user

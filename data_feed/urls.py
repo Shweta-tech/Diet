@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^nutrigarden/', views.nutrigarden, name='nutrigarden'),
     path('change_pass/<int:id>',views.chng_pass),
     path('change_pass_up/<int:id>',views.chng_pass_up),
+    url(r'^consent/', views.consent, name='consent'),
     
 ]
 if settings.DEBUG:

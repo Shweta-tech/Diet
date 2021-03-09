@@ -1,42 +1,53 @@
-{% extends 'base.html' %} {% load static%} {% block content %}
+{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}
 
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Registration</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="">
+<!DOCTYPE html>
+<html>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-<style>
-    .myform {
-        margin-top: 200px;
-        margin-left: 20%;
-        margin-right: 20%;
-    }
-    
-    h1 {
-        text-align: center;
-        color: rgb(36, 36, 68);
-        font-weight: bolder;
-    }
-</style>
-<form action="/login/" method="POST">
-    {% csrf_token %}
-
-    <div class="myform">
-        <h1>Concent Form</h1>
-        <table>
-        <tr>
-            <td>Do you consent? </td>
-            <td><input type="radio" id="concent" name="concent" value="Yes"> Yes</td>
-            <td><input type="radio" id="concent" name="concent" value="No"> No </td>
-           
-        </tr>
-    </table>
-</form>
-
-
-
-<script>
+<head>
+    <meta charset="utf-8">
+    <title>Minimal Django File Upload Example</title>
+    <style>
+        .myform {
+            margin-top: 200px;
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: rgb(32, 6, 75);
+            font-weight: bolder;
+        }
    
-</script>
-{% endblock %}
+
+    </style>
+</head>
+
+<body class="myform">
+    <!-- List of uploaded documents -->
+
+    <h1>Concent Form</h1>
+    <!-- Upload form. Note enctype attribute! -->
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- <div> -->
+    
+            <div>
+                <label for="yes_no_radio">Do you agree to the terms?</label>
+              <p>
+                  <br>
+              <input type="radio" name="yes_no" value="/personal/">Yes</input>
+              </p>
+              <p>
+                  <br>
+              <input type="radio" name="yes_no" value="/">No</input>
+              </p>
+              </div>
+        <!-- </div> -->
+    </form>
+</body>
+<script>$('input[type="radio"]').on('click', function() {
+    window.location = $(this).val();
+});</script>
+</html>{% endblock %}

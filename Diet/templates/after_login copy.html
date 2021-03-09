@@ -156,13 +156,10 @@
 
                 <tr id="somerow">
                     <td>{{user.username}}</td>
-                    <!-- <td type>{{user.id}}</td> -->
                     <td>{{user.email}}</td>
-                    
                     <td>{{user.schoolcoordinator.contact}}</td>
                     
-                    <!-- <td>{{i.ventbed}}</td> -->
-                    <!--<td>{{i.oxybed}}</td> -->
+                   
                     <td>
                         <a href="/change_pass/{{ user.id }}"><span class="glyphicon glyphicon-pencil" >Change Password</span></a>
                         <!-- <a href="/destroy/{{ user.id }}">Delete</a> -->
@@ -179,7 +176,7 @@
 {% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'student' %}
 
 <div class="container">
-    <button class="dropbtn" onclick="location.href = '/personal/'">Forms</button>
+    <button class="dropbtn" onclick="location.href = '/consent/'">Forms</button>
     <!-- <button class="dropbtn" onclick="openPage('About', this, 'orange')"></button> -->
     <!-- <div class="dropdown"> -->
     <!-- <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button> -->

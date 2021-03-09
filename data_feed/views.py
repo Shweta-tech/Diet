@@ -14,7 +14,8 @@ def chng_pass(request, id):
     #     return render(request,'bed_dash/confirmation.html', {'data':data})
     # else:
     return render(request,'pass_change.html', {'data':data})  
-
+def consent(request):
+    return render(request,'concentform.html')
 def chng_pass_up(request, id):
     data = User.objects.get(id=id) 
     # role=data.userprofile.role
