@@ -352,7 +352,7 @@
     </form>
 </div>
 {% endif %} {% endfor %}
-{% for group in user.groups.all %} {% if group.name == 'PregnantWoman' %}
+{% for group in user.groups.all %} {% if group.name == 'anemic_pregnant_woman' %}
 
 <div class="container">
     <button class="dropbtn" onclick="location.href = '/pregnant_woman_form/'">Forms</button>
@@ -412,7 +412,7 @@
     </form>
 </div>
 {% endif %} {% endfor %}
-{% for group in user.groups.all %} {% if group.name == 'AdolescentGirl' %}
+{% for group in user.groups.all %} {% if group.name == 'adolescent_girl' %}
 
 <div class="container">
     <button class="dropbtn" onclick="location.href = '/adolescent_anemic_girl_form/'">Forms</button>
@@ -472,10 +472,10 @@
     </form>
 </div>
 {% endif %} {% endfor %}
-{% for group in user.groups.all %} {% if group.name == 'AnemicWoman' %}
+{% for group in user.groups.all %} {% if group.name == 'anemic_lactating_mother' %}
 
 <div class="container">
-    <button class="dropbtn" onclick="location.href = '/personal/'">Forms</button>
+    <button class="dropbtn" onclick="location.href = ''">Forms</button>
     <!-- <button class="dropbtn" onclick="openPage('About', this, 'orange')"></button> -->
     <!-- <div class="dropdown"> -->
     <!-- <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button> -->
@@ -537,34 +537,34 @@
     <div class="dropdown">
         <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
         <div id="myDropdown" class="dropdown-content">
-            <a href="">Mentor</a>
-            <a href="/mentor_bulk/">School Coordinator</a>
-            <a href=" /student_register/">Student</a>
+            <a href="/headmentor_bulk/">Mentor</a>
+            <a href="/school_coordinator_bulk/">School Coordinator</a>
+            <a href=" /student_bulk/">Student</a>
             <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
-            <a href="/mentor_bulk/">Anganwadi Worker</a>
-           <a href="/anemic_woman_registration/">Anemic Women</a>
-            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
-            <a href="/pregnant_woman_registration/">Pregnant Women</a>
-            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
-            <a href=" /nutri_garden_expert_register/">Nutri-garden Expert</a>
-            <a href="/sam_mam_child_parents_register/">Parents</a>
+            <a href="/anganwadi_bulk/">Anganwadi Worker</a>
+            <a href="/pregnantwoman_bulk/">Anemic Pregnat Women</a>
+            <a href="/adolescent_bulk/">Adolescent Girl</a>
+            <a href="/lactatingwoman_bulk/">Lactating Mother</a>
+            <a href="/sam_mam_parent_bulk/">SAM/MAM Child Parent</a>
+            <a href=" /nutriexpert_bulk/">Nutri-garden Expert</a>
+            <a href="/school_parent_bulk/">Student's Parents</a>
         </div>
     </div>
 
     <div class="dropdown">
         <button onclick="individual()" class="dropbtn">Individual Register</button>
         <div id="individual" class="dropdown-content">
-            <a href="">Mentor</a>
-            <a href="/mentor_bulk/">School Coordinator</a>
+            <a href="/mentor_register/">Mentor</a>
+            <a href="/school_coordinator_register/">School Coordinator</a>
             <a href=" /student_register/">Student</a>
             <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
-            <a href="/mentor_bulk/">Anganwadi Worker</a>
-            <a href="/anemic_woman_registration/">Anemic Women</a>
-            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
-            <a href="/pregnant_woman_registration/">Pregnant Women</a>
-            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+            <a href="/anganwadi_workers_register/">Anganwadi Worker</a>
+            <a href="/anemic_pregnant_woman_registration/">Anemic Pregnat Women</a>
+            <a href="/anemic_adolescent_girl_register/">Adolescent Girl</a>
+            <a href="/anemic_lactating_mother_resgiter/">Lactating Mother</a>
+            <a href="/sam_mam_child_parents_register/">SAM/MAM Child Parent</a>
             <a href=" /nutri_garden_expert_register/">Nutri-garden Expert</a>
-            <a href="/sam_mam_child_parents_register/">Parents</a>
+            <a href="/school_student_parent_register/">Student's Parents</a>
         </div>
     </div>
     <!-- <div class="dropdown"> -->
@@ -630,32 +630,32 @@
     <div class="dropdown">
         <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
         <div id="myDropdown" class="dropdown-content">
-            <a href="/mentor_bulk/">School Coordinator</a>
-            <a href=" /student_register/">Student</a>
+            <a href="/school_coordinator_bulk/">School Coordinator</a>
+            <a href=" /student_bulk/">Student</a>
             <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
-            <a href="/mentor_bulk/">Anganwadi Worker</a>
-           <a href="/anemic_woman_registration/">Anemic Women</a>
-            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
-            <a href="/pregnant_woman_registration/">Pregnant Women</a>
-            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
-            <a href=" /nutri_garden_expert_register/">Nutri-garden Expert</a>
-            <a href="/sam_mam_child_parents_register/">Parents</a>
+            <a href="/anganwadi_bulk/">Anganwadi Worker</a>
+            <a href="/pregnantwoman_bulk/">Anemic Pregnat Women</a>
+            <a href="/adolescent_bulk/">Adolescent Girl</a>
+            <a href="/lactatingwoman_bulk/">Lactating Mother</a>
+            <a href="/sam_mam_parent_bulk/">SAM/MAM Child Parent</a>
+            <a href=" /nutriexpert_bulk/">Nutri-garden Expert</a>
+            <a href="/school_parent_bulk/">Student's Parents</a>
         </div>
     </div>
 
     <div class="dropdown">
         <button onclick="individual()" class="dropbtn">Individual Register</button>
         <div id="individual" class="dropdown-content">
-            <a href="/mentor_bulk/">School Coordinator</a>
+            <a href="/school_coordinator_register/">School Coordinator</a>
             <a href=" /student_register/">Student</a>
             <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
-            <a href="/mentor_bulk/">Anganwadi Worker</a>
-           <a href="/anemic_woman_registration/">Anemic Women</a>
-            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
-            <a href="/pregnant_woman_registration/">Pregnant Women</a>
-            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
+            <a href="/anganwadi_workers_register/">Anganwadi Worker</a>
+            <a href="/anemic_pregnant_woman_registration/">Anemic Pregnat Women</a>
+            <a href="/anemic_adolescent_girl_register/">Adolescent Girl</a>
+            <a href="/anemic_lactating_mother_resgiter/">Lactating Mother</a>
+            <a href="/sam_mam_child_parents_register/">SAM/MAM Child Parent</a>
             <a href=" /nutri_garden_expert_register/">Nutri-garden Expert</a>
-            <a href="/sam_mam_child_parents_register/">Parents</a>
+            <a href="/school_student_parent_register/">Student's Parents</a>
         </div>
     </div>
     <!-- <div class="dropdown"> -->
@@ -714,42 +714,21 @@
 </div>
 {% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'nutrition_expert' %}
 <div class="container">
-    <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
-        <div id="myDropdown" class="dropdown-content">
-            <a href="/mentor_bulk/">School Coordinator</a>
-            <a href=" /student_register/">Student</a>
-            <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
-            <a href="/mentor_bulk/">Anganwadi Worker</a>
-           <a href="/anemic_woman_registration/">Anemic Women</a>
-            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
-            <a href="/pregnant_woman_registration/">Pregnant Women</a>
-            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
-            <a href=" /nutri_garden_expert_register/">Nutri-garden Expert</a>
-            <a href="/sam_mam_child_parents_register/">Parents</a>
-        </div>
-    </div>
-
-    <div class="dropdown">
-        <button onclick="individual()" class="dropbtn">Individual Register</button>
-        <div id="individual" class="dropdown-content">
-            <a href="/mentor_bulk/">School Coordinator</a>
-            <a href=" /student_register/">Student</a>
-            <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
-            <a href="/mentor_bulk/">Anganwadi Worker</a>
-           <a href="/anemic_woman_registration/">Anemic Women</a>
-            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
-            <a href="/pregnant_woman_registration/">Pregnant Women</a>
-            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
-            <a href=" /nutri_garden_expert_register/">Nutri-garden Expert</a>
-            <a href="/sam_mam_child_parents_register/">Parents</a>
-        </div>
-    </div>
+      <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">View Data</button>
+    <!-- <button class="dropbtn" onclick="openPage('About', this, 'orange')"></button> -->
     <!-- <div class="dropdown"> -->
-    <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button>
+    <!-- <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button> -->
     <button class="dropbtn" onclick="openPage('About', this, 'orange')">User Profile</button>
 </div>
-
+<div id="Contact" class="tabcontent">
+    <h1>Select Role</h1>
+    <select id="lang" onchange="showDiv('hidden_div', this)">
+        <option>Select one</option>
+        <option value="1">School Coordinator</option>
+        <option value="parents ">Parents</option>
+        <option value="students ">Students</option>
+    </select>
+</div>
 <div id="About" class="tabcontent">
   
        
@@ -784,7 +763,7 @@
                     <!-- <td type>{{user.id}}</td> -->
                     <td>{{user.email}}</td>
                     
-                    <td>{{user.schoolcoordinator.contact}}</td>
+                    <td>{{user.nutritionexpert.contact}}</td>
                     
                     <!-- <td>{{i.ventbed}}</td> -->
                     <!--<td>{{i.oxybed}}</td> -->
@@ -804,40 +783,20 @@
  
 </div>{% endif %} {% endfor %} {% for group in user.groups.all %} {% if group.name == 'webgis_expert' %}
 <div class="container">
-    <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
-        <div id="myDropdown" class="dropdown-content">
-            <a href="/mentor_bulk/">School Coordinator</a>
-            <a href=" /student_register/">Student</a>
-            <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
-            <a href="/mentor_bulk/">Anganwadi Worker</a>
-           <a href="/anemic_woman_registration/">Anemic Women</a>
-            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
-            <a href="/pregnant_woman_registration/">Pregnant Women</a>
-            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
-            <a href=" /nutri_garden_expert_register/">Nutri-garden Expert</a>
-            <a href="/sam_mam_child_parents_register/">Parents</a>
-        </div>
-    </div>
-
-    <div class="dropdown">
-        <button onclick="individual()" class="dropbtn">Individual Register</button>
-        <div id="individual" class="dropdown-content">
-            <a href="/mentor_bulk/">School Coordinator</a>
-            <a href=" /student_register/">Student</a>
-            <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
-            <a href="/mentor_bulk/">Anganwadi Worker</a>
-           <a href="/anemic_woman_registration/">Anemic Women</a>
-            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
-            <a href="/pregnant_woman_registration/">Pregnant Women</a>
-            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
-            <a href=" /nutri_garden_expert_register/">Nutri-garden Expert</a>
-            <a href="/sam_mam_child_parents_register/">Parents</a>
-        </div>
-    </div>
+    <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">View Data</button>
+    <!-- <button class="dropbtn" onclick="openPage('About', this, 'orange')"></button> -->
     <!-- <div class="dropdown"> -->
-    <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button>
+    <!-- <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button> -->
     <button class="dropbtn" onclick="openPage('About', this, 'orange')">User Profile</button>
+</div>
+<div id="Contact" class="tabcontent">
+    <h1>Select Role</h1>
+    <select id="lang" onchange="showDiv('hidden_div', this)">
+        <option>Select one</option>
+        <option value="1">School Coordinator</option>
+        <option value="parents ">Parents</option>
+        <option value="students ">Students</option>
+    </select>
 </div>
 
 <div id="About" class="tabcontent">
@@ -874,7 +833,7 @@
                     <!-- <td type>{{user.id}}</td> -->
                     <td>{{user.email}}</td>
                     
-                    <td>{{user.schoolcoordinator.contact}}</td>
+                    <td>{{user.webgisexpert.contact}}</td>
                     
                     <!-- <td>{{i.ventbed}}</td> -->
                     <!--<td>{{i.oxybed}}</td> -->
@@ -898,9 +857,9 @@
     <div class="dropdown">
         <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
         <div id="myDropdown" class="dropdown-content">
-            <a href=" /student_register/">Student</a>
+            <a href=" /student_bulk/">Student</a>
             <!-- <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
-            <a href="/mentor_bulk/">Anganwadi Worker</a>
+            <a href="/anganwadi_bulk/">Anganwadi Worker</a>
            <a href="/anemic_woman_registration/">Anemic Women</a>
             <a href="/adolescent_girl_registration/">Adolescent Girl</a>
             <a href="/pregnant_woman_registration/">Pregnant Women</a>
@@ -980,13 +939,13 @@
         <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
         <div id="myDropdown" class="dropdown-content">
            
-            <a href="/mentor_bulk/">Anganwadi Worker</a>
-           <a href="/anemic_woman_registration/">Anemic Women</a>
-            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
-            <a href="/pregnant_woman_registration/">Pregnant Women</a>
-            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
-
-            <a href="/sam_mam_child_parents_register/">Parents</a>
+            <a href="/anganwadi_bulk/">Anganwadi Worker</a>
+            <a href="/pregnantwoman_bulk/">Anemic Pregnat Women</a>
+            <a href="/adolescent_bulk/">Adolescent Girl</a>
+            <a href="/lactatingwoman_bulk/">Lactating Mother</a>
+            <a href="/sam_mam_parent_bulk/">SAM/MAM Child Parent</a>
+            <a href=" /nutriexpert_bulk/">Nutri-garden Expert</a>
+            <a href="/school_parent_bulk/">Student's Parents</a>
         </div>
     </div>
 
@@ -994,13 +953,13 @@
         <button onclick="individual()" class="dropbtn">Individual Register</button>
         <div id="individual" class="dropdown-content">
         
-            <a href="/mentor_bulk/">Anganwadi Worker</a>
-           <a href="/anemic_woman_registration/">Anemic Women</a>
-            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
-            <a href="/pregnant_woman_registration/">Pregnant Women</a>
-            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
-          
-            <a href="/sam_mam_child_parents_register/">Parents</a>
+            <a href="/anganwadi_workers_register/">Anganwadi Worker</a>
+            <a href="/anemic_pregnant_woman_registration/">Anemic Pregnat Women</a>
+            <a href="/anemic_adolescent_girl_register/">Adolescent Girl</a>
+            <a href="/anemic_lactating_mother_resgiter/">Lactating Mother</a>
+            <a href="/sam_mam_child_parents_register/">SAM/MAM Child Parent</a>
+            <a href=" /nutri_garden_expert_register/">Nutri-garden Expert</a>
+            <a href="/school_student_parent_register/">Student's Parents</a>
         </div>
     </div>
     <!-- <div class="dropdown"> -->
@@ -1066,12 +1025,12 @@
         <button onclick="myFunction()" class="dropbtn">Bulk Register</button>
         <div id="myDropdown" class="dropdown-content">
            
-           <a href="/anemic_woman_registration/">Anemic Women</a>
-            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
-            <a href="/pregnant_woman_registration/">Pregnant Women</a>
-            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
-          
-            <a href="/sam_mam_child_parents_register/">Parents</a>
+            <a href="/pregnantwoman_bulk/">Anemic Pregnat Women</a>
+            <a href="/adolescent_bulk/">Adolescent Girl</a>
+            <a href="/lactatingwoman_bulk/">Lactating Mother</a>
+            <a href="/sam_mam_parent_bulk/">SAM/MAM Child Parent</a>
+            <a href=" /nutriexpert_bulk/">Nutri-garden Expert</a>
+            <a href="/school_parent_bulk/">Student's Parents</a>
         </div>
     </div>
 
@@ -1079,12 +1038,14 @@
         <button onclick="individual()" class="dropbtn">Individual Register</button>
         <div id="individual" class="dropdown-content">
             
-           <a href="/anemic_woman_registration/">Anemic Women</a>
-            <a href="/adolescent_girl_registration/">Adolescent Girl</a>
-            <a href="/pregnant_woman_registration/">Pregnant Women</a>
-            <a href="/sam_mam_mother_registration/">SAM/MAM Child</a>
             
-            <a href="/sam_mam_child_parents_register/">Parents</a>
+            <a href="/anemic_pregnant_woman_registration/">Anemic Pregnat Women</a>
+            <a href="/anemic_adolescent_girl_register/">Adolescent Girl</a>
+            <a href="/anemic_lactating_mother_resgiter/">Lactating Mother</a>
+            <a href="/sam_mam_child_parents_register/">SAM/MAM Child Parent</a>
+            <a href=" /nutri_garden_expert_register/">Nutri-garden Expert</a>
+            <a href="/school_student_parent_register/">Student's Parents</a>
+        </div>
         </div>
     </div>
     <!-- <div class="dropdown"> -->

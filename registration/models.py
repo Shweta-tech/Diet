@@ -364,6 +364,4 @@ class   SchoolStudentParent(models.Model):
     schoolcoordinatorincharge=models.CharField(max_length=1000,blank=True)
     foodhabits=models.CharField(max_length=1000,blank=True,choices = foodhabit)
     profile_photo=models.ImageField( upload_to='SchoolStudentParent/%Y/%m/%d',blank=True)
-    contact=models.CharField(max_length=10,blank=True)
-    schoolname=  models.CharField(max_length=200)
-    personaladdress = models.CharField(max_length=200,null=True)
+    

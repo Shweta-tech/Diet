@@ -41,6 +41,32 @@
 
 </div>
 <script>
+    // var $Name = $('.name');
+    // $Name.change(function() {
+    //     var $user = {
+    //         'user': $(this).val()
+    //     }
+    //     var $endpoint = window.location.href // or localhost/interface
+    //     $.ajax({
+    //         method: "GET",
+    //         url: $endpoint,
+    //         data: $name,
+    //         success: handleFormSuccess,
+    //         error: handleFormError,
+    //     })
+    // })
+
+    // function handleFormSuccess(data) {
+    //     console.log(data);
+    //     $("#contact").val(data.mobile);
+    //     $("#ward").val(data.unit);
+    // }
+
+    // function handleFormError(jqXHR, textStatus, errorThrown) {
+    //     console.log(jqXHR)
+    //     console.log(textStatus)
+    //     console.log(errorThrown)
+    // }
     function weightconverter(valnum) {
         var bla = $('#id_weight').val();
         if (valnum == "lbs") {
@@ -76,9 +102,9 @@
         } else {
             document.getElementById("waistcms").innerHTML = hp;
         }
-        var wcm = $("#id_waist").text();
+        var wcm = $("#waistcms").text();
         console.log(wcm)
-        var hcm = $("#id_hip").text();
+        var hcm = $("#hipcms").text();
         console.log(hcm)
 
         var wrh = (wcm / hcm).toFixed(3);
@@ -86,7 +112,7 @@
     }
 
     function lengthconverter(vallen) {
-        var len = $('#id_height').val();
+        var len = $('#height').val();
 
         if (vallen == "feet") {
 
