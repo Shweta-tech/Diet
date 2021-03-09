@@ -75,9 +75,10 @@ class SchoolForm(forms.ModelForm):
 
 class StudentForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='STU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     class Meta:
         model = Student
-        fields = ('contact','nutrileader','schoolname','schoolcordinatorincharge','schooladdress','schoolcontactinformation','weight','weightunit','height','heightunit','bmi','waist','waistunit','hip','hipunit','whratio','whratioderived','uploaded_photo','uid',)
+        fields = ('birthdate','age','contact','nutrileader','schoolname','schoolcordinatorincharge','schooladdress','schoolcontactinformation','weight','weightunit','height','heightunit','bmi','waist','waistunit','hip','hipunit','whratio','whratioderived','uploaded_photo','uid',)
 
 class AnganwadiWorkerForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='ANW'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
