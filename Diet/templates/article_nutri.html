@@ -1,0 +1,72 @@
+{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Minimal Django File Upload Example</title>
+    <style>
+        .myform {
+            margin-top: 200px;
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: rgb(11, 11, 36);
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<body class="myform">
+    <!-- List of uploaded documents -->
+    <h1>Articles</h1>
+    {% if document %}
+    <ul>
+        {% for doc in document %}
+        <li>
+            <h5>{{doc.title}}</h5>
+        </li>
+
+        <a href="{{ doc.document.url }}">View/Download</a> {% endfor %}
+    </ul>
+    {% else %}
+    <p>No documents.</p>
+    {% endif %}
+    <h1>Images</h1>
+    {% if image %}
+    <ul>
+        {% for img in image %}
+        <li>
+            <h5>{{img.title}}</h5>
+        </li>
+
+        <a href="{{ img.image.url }}">View/Download</a> {% endfor %}
+    </ul>
+    {% else %}
+    <p>No Images.</p>
+    {% endif %}
+
+    <h1>Videos</h1>
+    {% if video %}
+    <ul>
+        {% for vid in video %}
+        <li>
+            <h5>{{vid.title}}</h5>
+        </li>
+
+        <a href="{{ vid.video.url }}">View/Download</a> {% endfor %}
+    </ul>
+    {% else %}
+    <p>No Videos.</p>
+    {% endif %}
+  
+</body>
+<script>
+    console.log("{{ document.docfile.name }}")
+</script>
+
+</html>{% endblock %}

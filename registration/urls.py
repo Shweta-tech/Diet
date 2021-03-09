@@ -24,15 +24,13 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     
+    
     url(r'^principal_investigator_register/', views.principal_investigator_register, name='principal_investigator_register'),
     url(r'^webgis_expert_register/', views.webgis_expert_register, name='webgis_expert_register'),
     url(r'^nutrition_expert_register/', views.nutrition_expert, name='nutrition_expert_register'),
     url(r'^proj_manager_register/', views.proj_manager, name='proj_manager_register'),
     url(r'^school_register/', views.school, name='school_register'),
     url(r'^student_register/', views.student, name='student_register'),
-    url(r'^school_coordinator_register/', views.school_coordinator_register, name='school_coordinator_register'),
-    url(r'^mukhya_sevika_register/', views.mukhya_sevika_register, name='mukhya_sevika_register'),
-    url(r'^anganwadi_workers_register/', views.anganwadi_workers_register, name='anganwadi_workers_register'),
     # url(r'^adolescent_girl_registration/', views.adolescent_girl_register, name='adolescent_girl_registration'),
     url(r'^anemic_pregnant_woman_registration/', views.anemic_pregnant_woman_registration, name='anemic_pregnant_woman_registration'),
     url(r'^anemic_lactating_mother_resgiter/', views.anemic_lactating_mother_resgiter, name='anemic_lactating_mother_resgiter'),
@@ -42,6 +40,16 @@ urlpatterns = [
     url(r'^nutri_garden_expert_register/$', views.nutri_garden_expert, name='nutri_garden_expert_register'),
     #url(r'^nutri_garden_expert_bulk/', views.nutri_garden_expert_bulk, name='nutri_garden_expert_bulk'),
     url(r'^concentform/$', views.concentform, name='concentform'),
+    
+    url(r'^school_coordinator_register/', views.school_coordinator_register, name='school_coordinator_register'),
+    url(r'^school_student_parent_register/', views.school_student_parent_register, name='school_student_parent_register'),
+    url(r'^mukhya_sevika_register/', views.mukhya_sevika_register, name='mukhya_sevika_register'),
+    url(r'^anganwadi_workers_register/', views.anganwadi_workers_register, name='anganwadi_workers_register'),
+
+
+
+
+
     url(r'^mentor_register/', views.mentor_registration, name='mentor_register'),
     url(r'^mentor_bulk/', views.mentor_bulk, name='mentor_bulk'),
     url(r'^school_bulk/', views.school_bulk, name='school_bulk'),

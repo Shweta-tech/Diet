@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import DailySchedule,BodyForm,EatTodayForm,DietForm,FeedbackForm
-from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,PersonalInformationForms,AdolescentAnemicGirl,PregnantWoman,SMChildDetails,SMChildParentsDetails,AnganwadiWorkerProfile,MukhyaSevikaProfile
+from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,PersonalInformationForms,AdolescentAnemicGirl,PregnantWoman
 from registration.models import User
 from registration.forms import Form
 from django.shortcuts import redirect
@@ -239,59 +239,8 @@ def diet_recall_function(request):
 def nutrigarden(request):
     return render(request,'nutrigarden.html')  
 
-def AnganwadiWorkerprofile(request):
-    if request.method=="POST":
-        name = request.POST.get('name')
-        dob=request.POST.get('dob')
-        age=request.POST.get('age')
-        age_in_months=request.POST.get('age_in_months')
-        age_in_days= request.POST.get('age_in_days')
-        contact = request.POST.get('contact')
-        personaladdress = request.POST.get('personaladdress')
-        uploaded_image = request.FILES['myfile']
-        sub= AnganwadiWorkerProfile(name= name,dob=dob,age=age,age_in_months=age_in_months,age_in_days=age_in_days,contact=contact,personaladdress=personaladdress,uploaded_image=uploaded_image)
-        sub.save()
-        print('data submitted')
-    else:
-        return render(request,'anganwadi_workers_profile_form.html') 
-
-    return render(request,'anganwadi_workers_profile_form.html')
 
 
-def MukhyaSevikaprofile(request):
-    if request.method=="POST":
-        name = request.POST.get('name')
-        dob=request.POST.get('dob')
-        age=request.POST.get('age')
-        age_in_months=request.POST.get('age_in_months')
-        age_in_days= request.POST.get('age_in_days')
-        contact = request.POST.get('contact')
-        personaladdress = request.POST.get('personaladdress')
-        uploaded_image = request.FILES['myfile']
-        sub= MukhyaSevikaProfile(name= name,dob=dob,age=age,age_in_months=age_in_months,age_in_days=age_in_days,contact=contact,personaladdress=personaladdress,uploaded_image=uploaded_image)
-        sub.save()
-        print('data submitted')
-    else:
-        return render(request,'mukhya_sevika_profile_form.html') 
-
-    return render(request,'mukhya_sevika_profile_form.html')
-
-def SMChildParentsprofile(request):
-    if request.method=="POST":
-        mothername = request.POST.get('mothername')
-        fathername=request.POST.get('fathername')
-        motherage=request.POST.get('mage')
-        fatherage=request.POST.get('fage')
-        fatheroccupation= request.POST.get('fatheroccupation')
-        education = request.POST.get('education')
-        monthlyincome = request.POST.get('monthlyincome')
-        sub= SMChildParentsDetails(mothername=mothername,fathername=fathername,motherage=motherage,fatherage=fatherage,fatheroccupation=fatheroccupation,education=education,monthlyincome=monthlyincome)
-        sub.save()
-        print('data submitted')
-    else:
-        return render(request,'sam_mam_child_form.html') 
-
-    return render(request,'Parents.html')
 
 
 def adolescent_anemic_girl_form(request):
@@ -352,34 +301,5 @@ def pregnant_woman_form(request):
 
     return render(request,'Pregnant_woman_form.html')
 
-def sam_mam_child_details(request):
-    if request.method=="POST":
-        uniqueid = request.POST.get('uniqueid')
-        name=request.POST.get('name')
-        weight=request.POST.get('weight')
-        weightunit=request.POST.get('weightunit')
-        height = request.POST.get('height')
-        heightunit= request.POST.get('heightunit')
-        bmi =request.POST.get('bmi')
-        age=request.POST.get('age')
-        hemoglobinvalue= request.POST.get('hb')
-        hemoglobindate = request.POST.get('hbdate')
-        food= request.POST.get('food')
-        complication= request.POST.get('anemia')
-        education= request.POST.get('education')
-        medication= request.POST.get('medication')
-        health= request.POST.get('health')
-        medical = request.POST.get('medical')
-        uploaded_file = request.FILES['myfile']
-        feedback = request.POST.get('fb')
-        print(name)
-        print(uploaded_file)
-        sub= SMChildDetails(uniqueid=uniqueid,name=name,weight=weight,weightunit=weightunit,height=height,heightunit=heightunit,bmi=bmi,age=age,hemoglobinvalue=hemoglobinvalue,hemoglobindate=hemoglobindate,food = food,complication=complication,education=education,medication=medication,health=health,medical=medical,uploaded_file = uploaded_file,feedback=feedback)
-        sub.save()
-        print('data submitted')
-    else:
-        return render(request,'sam_mam_child_form.html') 
-
-    return render(request,'sam_mam_child_form.html')
 
 

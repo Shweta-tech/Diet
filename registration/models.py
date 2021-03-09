@@ -80,13 +80,13 @@ annualincome =  [ ('199,862','199,862'),
 
 class AnemicAdolescentGirl(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    uniqueid = models.CharField(max_length = 50)
+    uid = models.CharField(max_length = 50)
     birthdate= models.DateField(null=True, blank=True)
     age = models.IntegerField()
     personalcontact = models.CharField(max_length = 200)
-    icdsname = models.CharField(max_length = 200)
-    icdscenteraddress = models.CharField(max_length = 200)
-    icdscentercontact = models.CharField(max_length = 200)
+    ICDSname = models.CharField(max_length = 200)
+    ICDScenteraddress = models.CharField(max_length = 200)
+    ICDScentercontact = models.CharField(max_length = 200)
     occupation = models.CharField(choices=occupation,max_length = 100)
     education = models.CharField(choices=education,max_length = 50,null = True)
     annualincome = models.CharField(choices=annualincome,max_length = 50,null = True)
@@ -109,13 +109,13 @@ class AnemicAdolescentGirl(models.Model):
 
 class AnemicLactatingMother(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    uniqueid = models.CharField(max_length = 50)
-    dob = models.DateField(null=True, blank=True)
+    uid = models.CharField(max_length = 50)
+    birthdate = models.DateField(null=True, blank=True)
     age = models.IntegerField()
     personalcontact = models.CharField(max_length = 200)
-    icdsname = models.CharField(max_length = 200)
-    icdscenteraddress = models.CharField(max_length = 200)
-    icdscentercontact = models.CharField(max_length = 200)
+    ICDSname = models.CharField(max_length = 200)
+    ICDScenteraddress = models.CharField(max_length = 200)
+    ICDScentercontact = models.CharField(max_length = 200)
     occupation = models.CharField(choices=occupation,max_length = 100)
     education = models.CharField(choices=education,max_length = 50,null = True)
     annualincome = models.CharField(choices=annualincome,max_length = 50,null = True)
@@ -135,13 +135,13 @@ class AnemicLactatingMother(models.Model):
     
 class AnemicPregnantWoman(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    uniqueid = models.CharField(max_length = 50)
+    uid = models.CharField(max_length = 50)
     birthdate = models.DateField(null=True, blank=True)
     age = models.IntegerField()
     personalcontact = models.CharField(max_length = 200)
-    icdsname = models.CharField(max_length = 200)
-    icdscenteraddress = models.CharField(max_length = 200)
-    icdscentercontact = models.CharField(max_length = 200)
+    ICDSname = models.CharField(max_length = 200)
+    ICDScenteraddress = models.CharField(max_length = 200)
+    ICDScentercontact = models.CharField(max_length = 200)
     occupation = models.CharField(choices=occupation,max_length = 100)
     education = models.CharField(choices=education,max_length = 50,null = True)
     annualincome = models.CharField(choices=annualincome,max_length = 50,null = True)
@@ -160,59 +160,39 @@ class AnemicPregnantWoman(models.Model):
     uploaded_photo = models.FileField(upload_to='anemicpregnantwoman/%Y/%m/%d')
     feedback = models.CharField(max_length = 100)
 
-class PregnantWomanRegistration(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    contact=models.CharField(max_length=10,blank=True)
-
-
-
-class ProjectCoordinator(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    contact=models.CharField(max_length=10,blank=True)
 
 class ProjectManager(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     uid = models.CharField(max_length = 50,default = False)
-    dob = models.DateField(null=True, blank=True)
+    birthdate = models.DateField(null=True, blank=True)
     age = models.CharField(max_length = 50)
     contact=models.CharField(max_length=10,blank=True)
    
     def __str__(self):
         return self.user.username
-class TechnicalExpert(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    contact=models.CharField(max_length=10,blank=True)
 class NutritionExpert(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     uid = models.CharField(max_length = 50,default = False)
-    dob = models.DateField(null=True, blank=True)
+    birthdate = models.DateField(null=True, blank=True)
     age = models.CharField(max_length = 50)
     contact=models.CharField(max_length=10,blank=True)
 class NutriGardenExpert(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     uid = models.CharField(max_length = 50,default = False)
-    dob = models.DateField(null=True, blank=True)
+    birthdate = models.DateField(null=True, blank=True)
     age = models.CharField(max_length = 50)
     contact=models.CharField(max_length=10,blank=True)
 
 class Mentor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    uniqueid = models.CharField(max_length = 50)
-    dob = models.DateField(null=True, blank=True)
+    uid = models.CharField(max_length = 50)
+    birthdate = models.DateField(null=True, blank=True)
     age = models.CharField(max_length = 50)
     contact=models.CharField(max_length=10,blank=True)
     address = models.CharField(max_length=200, null=False, blank=False) 
     education = models.CharField(choices=education,max_length = 50,null = True)
    
-
-
-class   SchoolCoordinator(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    contact=models.CharField(max_length=10,blank=True)
-    schoolname=  models.CharField(max_length=200)
-    personaladdress = models.CharField(max_length=200,null=True)
 
 class School(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -245,58 +225,18 @@ class Student(models.Model):
 class bulk_reg(models.Model):
     name= models.CharField( max_length=50)
     mobile= models.CharField(max_length=10)
-    dob= models.DateField(auto_now=False, auto_now_add=False,null=True)
-class AnganwadiWorker(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    
-    anganwadiname = models.CharField(max_length=200, null=True)
+    birthdate= models.DateField(auto_now=False, auto_now_add=False,null=True)
    
-    anganwadiaddress = models.CharField(max_length=200,null=True)
-
-class AnganwadiWorkerProfile(models.Model):
-    name = models.CharField(max_length = 100)
-    dob = models.DateField(default=datetime.now)
-    age= models.CharField(max_length=6,)
-    age_in_months= models.CharField(max_length=6)
-    age_in_days= models.CharField(max_length=6)
-    contact=models.CharField(max_length=10)
-    personaladdress = models.CharField(max_length=200)
-    uploaded_image = models.ImageField( upload_to='anganwadiworkerid/%Y/%m/%d')
-
-class MukhyaSevika(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    uniqueid = models.CharField(max_length = 50)
-    dob = models.DateField(null=True, blank=True)
-    age = models.CharField(max_length = 50)
-    personalcontact = models.CharField(max_length = 200)
-    icdsname = models.CharField(max_length = 200)
-    icdscenteraddress = models.CharField(max_length = 200)
-    icdscentercontact = models.CharField(max_length = 200)
-    anganwadinumber = models.IntegerField(default=False)
-    profile_image = models.ImageField( upload_to='anganwadiworkerprofilepicture/%Y/%m/%d')
-    
-    
-
-class MukhyaSevikaProfile(models.Model):
-    name = models.CharField(max_length = 100,blank = True)
-    contact=models.CharField(max_length=10,blank=True)
-    dob = models.DateField(default=datetime.now, blank=True)
-    age= models.CharField(max_length=6,null = True,default = 0)
-    age_in_months= models.CharField(max_length=6,null = True,default = 0)
-    age_in_days= models.CharField(max_length=6,null = True,default=0)
-    personaladdress = models.CharField(max_length=200,null = True)
-    uploaded_image = models.ImageField( upload_to='mukhyasevikaid/%Y/%m/%d')
-    
 
 class SMChild(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    uniqueid = models.CharField(max_length = 50)
+    uid = models.CharField(max_length = 50)
     birthdate = models.DateField(null=True, blank=True)
     age = models.CharField(max_length = 50)
     personalcontact = models.CharField(max_length = 200)
-    icdsname = models.CharField(max_length = 200)
-    icdscenteraddress = models.CharField(max_length = 200)
-    icdscentercontact = models.CharField(max_length = 200)
+    ICDSname = models.CharField(max_length = 200)
+    ICDScenteraddress = models.CharField(max_length = 200)
+    ICDScentercontact = models.CharField(max_length = 200)
     weight = models.IntegerField()
     weightunit = models.CharField(max_length = 50,choices=unit )
     height = models.IntegerField()
@@ -314,7 +254,7 @@ class SMChild(models.Model):
 
 class SMChildParentsRegister(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
-    uniqueid = models.CharField(max_length = 50)
+    uid = models.CharField(max_length = 50)
     mothername = models.CharField(max_length = 50)
     fathername = models.CharField(max_length = 50)
     motherbirthdate = models.CharField(max_length = 50)
@@ -322,22 +262,14 @@ class SMChildParentsRegister(models.Model):
     motherage = models.IntegerField()
     fatherage = models.IntegerField()
     personalcontact = models.CharField(max_length = 200)
-    icdsname = models.CharField(max_length = 200)
-    icdscenteraddress = models.CharField(max_length = 200)
-    icdscentercontact = models.CharField(max_length = 200)
+    ICDSname = models.CharField(max_length = 200)
+    ICDScenteraddress = models.CharField(max_length = 200)
+    ICDScentercontact = models.CharField(max_length = 200)
     occupation = models.CharField(choices=occupation,max_length = 100)
     education = models.CharField(choices=education,max_length = 50,null = True)
     annualincome = models.CharField(choices=annualincome,max_length = 50,null = True)
     cuid  = models.CharField(max_length = 10)
 
-class SMChildParentsDetails(models.Model):
-    mothername = models.CharField(max_length = 50)
-    fathername = models.CharField(max_length = 50)
-    motherage = models.IntegerField()
-    fatherage = models.IntegerField()
-    education = models.CharField(choices=education,max_length = 50,null = True)
-    occupation = models.CharField(choices=occupation,max_length = 100)
-    annualincome = models.CharField(choices=annualincome,max_length = 50)
 
 class ConcentForm(models.Model):
     concent = models.CharField(max_length = 10)
@@ -346,7 +278,7 @@ class ConcentForm(models.Model):
 class PrincipalInvestigators(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     uid = models.CharField(max_length = 50,default = False)
-    dob = models.DateField(null=True, blank=True)
+    birthdate = models.DateField(null=True, blank=True)
     age = models.CharField(max_length = 50)
     contact = models.CharField(max_length = 50)
    
@@ -354,9 +286,74 @@ class PrincipalInvestigators(models.Model):
 class WebGISExpert(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     uid = models.CharField(max_length = 50,default = False)
-    dob = models.DateField(null=True, blank=True)
+    birthdate = models.DateField(null=True, blank=True)
     age = models.CharField(max_length = 50)
     contact = models.CharField(max_length = 50)
    
     
-   
+class   SchoolCoordinator(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    uid = models.CharField(max_length = 50,default=False)
+    contact=models.CharField(max_length=1000,blank=True)
+    schoolname=  models.CharField(max_length=2000)
+    personaladdress = models.CharField(max_length=2000,null=True)
+    birthdate=models.CharField(max_length=2000,null=True)
+    age=models.CharField(max_length=200,blank=True)
+    schooladdress = models.CharField(max_length=2000,null=True)
+    schoolcontact=models.CharField(max_length=1000,blank=True)
+    education=models.CharField(choices=education,max_length=2000,blank=True)
+    occupation=models.CharField(choices=occupation,max_length=2000,blank=True)
+    annualincome=models.CharField(choices=annualincome,max_length=1000,blank=True)
+    profile_photo=models.ImageField( upload_to='SchoolCoordinator/%Y/%m/%d',blank=True)   
+
+class MukhyaSevika(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    uid = models.CharField(max_length = 50,default=False)
+    anganwadinumber = models.IntegerField(default=False)
+    contact=models.CharField(max_length=1000,blank=True)
+    birthdate=models.CharField(max_length=2000,null=True)
+    age=models.CharField(max_length=200,blank=True)
+    education=models.CharField(choices=education,max_length=2000,blank=True)
+    occupation=models.CharField(choices=occupation,max_length=2000,blank=True)
+    annualincome=models.CharField(choices=annualincome,max_length=1000,blank=True)
+    ICDSname=  models.CharField(max_length=2000,null=True)
+    ICDScenteraddress = models.CharField(max_length=2000,null=True)
+    ICDScontact = models.CharField(max_length=2000,null=True)
+    profile_photo=models.ImageField( upload_to='MukhyaSevika/%Y/%m/%d',blank=True)
+
+
+class AnganwadiWorkersRegister(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    uid = models.CharField(max_length = 50,default=False)
+    contact=models.CharField(max_length=1000,blank=True)
+    birthdate=models.CharField(max_length=2000,null=True)
+    age=models.CharField(max_length=200,blank=True)
+    education=models.CharField(choices=education,max_length=2000,blank=True)
+    occupation=models.CharField(choices=occupation,max_length=2000,blank=True)
+    annualincome=models.CharField(choices=annualincome,max_length=1000,blank=True)
+    anganwadiname = models.CharField(max_length =100,null = True)
+    anganwadiaddress = models.CharField(max_length =100,null = True)
+    ICDSname=  models.CharField(max_length=2000,null=True)
+    ICDScenteraddress = models.CharField(max_length=2000,null=True)
+    ICDScontact = models.CharField(max_length=2000,null=True)
+    profile_photo=models.ImageField( upload_to='AnganwadiWorker/%Y/%m/%d',blank=True)
+
+class   SchoolStudentParent(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    uid = models.CharField(max_length = 50,default=False)
+    contact=models.CharField(max_length=1000,blank=True)
+    schoolname=  models.CharField(max_length=2000)
+    personaladdress = models.CharField(max_length=2000,null=True)
+    birthdate=models.CharField(max_length=2000,null=True)
+    age=models.CharField(max_length=200,blank=True)
+    schooladdress = models.CharField(max_length=2000,null=True)
+    schoolcontact=models.CharField(max_length=1000,blank=True)
+    education=models.CharField(choices=education,max_length=2000,blank=True)
+    occupation=models.CharField(choices=occupation,max_length=2000,blank=True)
+    annualincome=models.CharField(choices= annualincome,max_length=1000,blank=True)
+    schoolcoordinatorincharge=models.CharField(max_length=1000,blank=True)
+    foodhabits=models.CharField(max_length=1000,blank=True,choices = foodhabit)
+    profile_photo=models.ImageField( upload_to='SchoolStudentParent/%Y/%m/%d',blank=True)
+    contact=models.CharField(max_length=10,blank=True)
+    schoolname=  models.CharField(max_length=200)
+    personaladdress = models.CharField(max_length=200,null=True)
