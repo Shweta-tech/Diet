@@ -352,7 +352,7 @@
     </form>
 </div>
 {% endif %} {% endfor %}
-{% for group in user.groups.all %} {% if group.name == 'PregnantWoman' %}
+{% for group in user.groups.all %} {% if group.name == 'anemic_pregnant_woman' %}
 
 <div class="container">
     <button class="dropbtn" onclick="location.href = '/pregnant_woman_form/'">Forms</button>
@@ -412,7 +412,7 @@
     </form>
 </div>
 {% endif %} {% endfor %}
-{% for group in user.groups.all %} {% if group.name == 'AdolescentGirl' %}
+{% for group in user.groups.all %} {% if group.name == 'adolescent_girl' %}
 
 <div class="container">
     <button class="dropbtn" onclick="location.href = '/adolescent_anemic_girl_form/'">Forms</button>
@@ -472,10 +472,10 @@
     </form>
 </div>
 {% endif %} {% endfor %}
-{% for group in user.groups.all %} {% if group.name == 'AnemicWoman' %}
+{% for group in user.groups.all %} {% if group.name == 'anemic_lactating_mother' %}
 
 <div class="container">
-    <button class="dropbtn" onclick="location.href = '/personal/'">Forms</button>
+    <button class="dropbtn" onclick="location.href = ''">Forms</button>
     <!-- <button class="dropbtn" onclick="openPage('About', this, 'orange')"></button> -->
     <!-- <div class="dropdown"> -->
     <!-- <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button> -->
