@@ -67,6 +67,74 @@
     //     console.log(textStatus)
     //     console.log(errorThrown)
     // }
+    function weightconverter(valnum) {
+        var bla = $('#id_weight').val();
+        if (valnum == "lbs") {
+            document.getElementById("outputGrams").innerHTML = (bla / 2.2046).toFixed(2);
+        } else {
+            document.getElementById("outputGrams").innerHTML = bla;
+        }
+    }
+
+    function SetTime(LoadEvent) {
+        var Now = new Date();
+        var Seconds = Now.getSeconds();
+        var Minutes = Now.getMinutes() + Seconds / 60;
+        var Hours = Now.getHours() + Minutes / 60;
+        document.getElementById("seconds").setAttribute('transform', 'rotate(' + (Seconds * 6) + ')');
+        document.getElementById("minutes").setAttribute('transform', 'rotate(' + (Minutes * 6) + ')');
+        document.getElementById("hours").setAttribute('transform', 'rotate(' + (Hours * 15) + ')');
+    }
+
+    function waistconverter(valnum) {
+        var wst = $('#id_waist').val();
+        if (valnum == "inches") {
+            document.getElementById("hipcms").innerHTML = (wst * 2.54).toFixed(2);
+        } else {
+            document.getElementById("hipcms").innerHTML = wst;
+        }
+    }
+
+    function hipconverter(valnum) {
+        var hp = $('#id_hip').val();
+        if (valnum == "inches") {
+            document.getElementById("waistcms").innerHTML = (hp * 2.54).toFixed(2);
+        } else {
+            document.getElementById("waistcms").innerHTML = hp;
+        }
+        var wcm = $("#waistcms").text();
+        console.log(wcm)
+        var hcm = $("#hipcms").text();
+        console.log(hcm)
+
+        var wrh = (wcm / hcm).toFixed(3);
+        $('#whratio').val(wrh);
+    }
+
+    function lengthconverter(vallen) {
+        var len = $('#height').val();
+
+        if (vallen == "feet") {
+
+            document.getElementById("outputMeters").innerHTML = (len / 3.281).toFixed(2);
+        } else if (vallen == "inches") {
+
+            document.getElementById("outputMeters").innerHTML = (len / 100).toFixed(2);
+        } else if (vallen == "cms") {
+
+            document.getElementById("outputMeters").innerHTML = (len / 39.37).toFixed(2);
+        } else {
+            document.getElementById("outputMeters").innerHTML = len;
+        }
+
+        var kg = $("#outputGrams").text();
+        console.log(kg)
+        var mtr = $("#outputMeters").text();
+        console.log(mtr)
+
+        var calbmi = (kg / (mtr * mtr)).toFixed(3);
+        $('#bmi').val(calbmi);
+    }
     $(document).ready(function() {
         $(".some_class").change(function() {
             var mdate = $("#id_birthdate").val().toString();
@@ -92,7 +160,7 @@
 
 
 
-            $('#id_age').val(year_age+'yaers'+month_age+'months'+day_age+'days');
+            $('#id_age').val(year_age+'years'+month_age+'months'+day_age+'days');
             
         });
     });

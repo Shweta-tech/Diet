@@ -57,10 +57,13 @@ urlpatterns = [
     url(r'^anganwadi_bulk/', views.anganwadi_bulk, name='anganwadi_bulk'),
     url(r'^mukhyasevika_bulk/', views.mukhyasevika_bulk, name='mukhyasevika_bulk'),
     url(r'^headmentor_bulk/', views.headmentor_bulk, name='headmentor_bulk'),
-    url(r'^anemicwoman_bulk/', views.anemicwoman_bulk, name='anemicwoman_bulk'),
+    # url(r'^anemicwoman_bulk/', views.anemicwoman_bulk, name='anemicwoman_bulk'),
     url(r'^adolescent_bulk/', views.adolescent_bulk, name='adolescent_bulk'),
-    url(r'^parent_bulk/', views.parent_bulk, name='parent_bulk'),
-    url(r'^pregnantwoman_bulk/', views.pregnantwoman_bulk, name='pregnantwoman_bulk'),
+    url(r'^sam-mam_parent_bulk/', views.sm_parent_bulk, name='parent_bulk'),
+    url(r'^school_parent_bulk/', views.school_parent_bulk, name='parent_bulk'),
+
+    url(r'^lactatingwoman_bulk/', views.lactatingwoman_bulk, name='lactatingwoman_bulk'),
+    url(r'^pregnantwoman_bulk/', views.anemicwoman_bulk, name='pregnantwoman_bulk'),
     url(r'^nutriexpert_bulk/', views.nutriexpert_bulk, name='nutriexpert_bulk'),
 
 ]
