@@ -41,6 +41,7 @@ class Form(UserCreationForm):
         
 class ProjectManagerForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='PM'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     class Meta:
         model = ProjectManager
         fields = ('birthdate','age','contact','uid')
@@ -51,6 +52,7 @@ class ProjectManagerForm(forms.ModelForm):
 
 class MentorForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='MT'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     class Meta:
         model = Mentor
         fields = ('birthdate','age','contact','address','education')
@@ -58,6 +60,8 @@ class MentorForm(forms.ModelForm):
 
 class SchoolCoordinatorForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='SCU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
+
     class Meta:
         model = SchoolCoordinator
         fields = ('contact','personaladdress','birthdate','age','schoolname','schooladdress','schoolcontact','education','occupation','annualincome','profile_photo','uid')
@@ -77,15 +81,17 @@ class StudentForm(forms.ModelForm):
 
 class AnganwadiWorkerForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='ANW'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     class Meta:
         model = AnganwadiWorkersRegister
         fields = ('contact','birthdate','age','education','occupation','annualincome','anganwadiname','anganwadiaddress','ICDSname','ICDScenteraddress','ICDScontact','profile_photo','uid')
-        widgets = {
-                    'birthdate': DatePickerInput(format='%m/%d/%Y'), 
-                 }
+        # widgets = {
+        #             'birthdate': DatePickerInput(format='%Y/%m/%d'),
+        #          }
         
 class MukhyaSevikaForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='MSU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     class Meta:
         model = MukhyaSevika
         fields = ('anganwadinumber','contact','birthdate','age','education','occupation','annualincome','ICDSname','ICDScenteraddress','ICDScontact','profile_photo','uid')
@@ -94,6 +100,7 @@ class MukhyaSevikaForm(forms.ModelForm):
                  }
 class SchoolStudentParentForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='STUP'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     class Meta:
         model = SchoolStudentParent
         fields = ('contact','schoolname','personaladdress','birthdate','age','schooladdress','schoolcontact','education','occupation','annualincome','schoolcoordinatorincharge','foodhabits','profile_photo','uid')
@@ -101,6 +108,7 @@ class SchoolStudentParentForm(forms.ModelForm):
                     'birthdate': DatePickerInput(format='%m/%d/%Y'), 
                  }
 class bulkreg(forms.ModelForm):  
+    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     class Meta:  
         model = bulk_reg  
         fields = ['name','mobile','birthdate']  
@@ -116,6 +124,7 @@ class bulkreg(forms.ModelForm):
 #     )
 class AnemicLactatingMotherForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='ALM'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     class Meta:
         model = AnemicLactatingMother
         fields =  ['birthdate','age','personalcontact','ICDSname','ICDScenteraddress','ICDScentercontact','occupation','education','annualincome','weight','weightunit','height','heightunit','bmi','waist','waistunit','hip','hipunit','whratio','whratioderived','foodhabits','uploaded_photo','uid'] 
@@ -129,6 +138,7 @@ class AnemicLactatingMotherForm(forms.ModelForm):
 
 class AnemicAdolescentGirlForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='AAG'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     class Meta:
         model = AnemicAdolescentGirl
         fields = ['birthdate','age','personalcontact','ICDSname','ICDScenteraddress','ICDScentercontact','occupation','education','annualincome','weight','weightunit','height','heightunit','bmi','waist','waistunit','hip','hipunit','whratio','whratioderived','foodhabits','uploaded_photo','uid']
@@ -138,6 +148,7 @@ class AnemicAdolescentGirlForm(forms.ModelForm):
         }
 class AnemicPregnantWomanForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='APW'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     class Meta:
         model = AnemicPregnantWoman
         fields = ['birthdate','age','personalcontact','ICDSname','ICDScenteraddress','ICDScentercontact','occupation','education','annualincome','weight','weightunit','height','heightunit','bmi','waist','waistunit','hip','hipunit','whratio','whratioderived','foodhabits','uploaded_photo','uid']
@@ -148,6 +159,7 @@ class AnemicPregnantWomanForm(forms.ModelForm):
 
 class SMChildForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='SMC'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     class Meta:
         model = SMChild
         fields = ['birthdate','age','personalcontact','ICDSname','ICDScenteraddress','ICDScentercontact','weight','weightunit','height','heightunit','bmi','waist','waistunit','hip','hipunit','whratio','whratioderived','foodhabits','uploaded_photo','uid']
@@ -159,6 +171,8 @@ class SMChildForm(forms.ModelForm):
 
 class SMChildParentsRegisterForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='SMP'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    motherbirthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
+    fatherbirthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class1','placeholder':'yyyy/mm/dd'}))
     class Meta:
         model = SMChildParentsRegister
         fields =  ['mothername','fathername','motherbirthdate','fatherbirthdate','motherage','fatherage','personalcontact','ICDSname','ICDScenteraddress','ICDScentercontact','occupation','education','annualincome','cuid','uid'] 
@@ -172,6 +186,8 @@ class ConcentForm(forms.ModelForm):
         fields = ['concent']
 class NutriGardenExpertForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='NGE'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
+
     class Meta:
         model = NutriGardenExpert
         fields = ['birthdate','age','contact','uid']
@@ -182,6 +198,7 @@ class NutriGardenExpertForm(forms.ModelForm):
 
 class PrincipalInvestigatorsForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='PI'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     class Meta:
         model = PrincipalInvestigators
         fields = ['birthdate','age','contact','uid']
@@ -191,6 +208,8 @@ class PrincipalInvestigatorsForm(forms.ModelForm):
         }
 class WebGISExpertForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='WGE'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
+
     class Meta:
         model =  WebGISExpert
         fields = ['birthdate','age','contact','uid']
@@ -201,6 +220,8 @@ class WebGISExpertForm(forms.ModelForm):
 
 class NutritionExpertForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='NE'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
+    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
+    
     class Meta:
         model =  NutritionExpert
         fields = ['birthdate','age','contact','uid']
