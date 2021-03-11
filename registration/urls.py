@@ -40,7 +40,6 @@ urlpatterns = [
     url(r'^nutri_garden_expert_register/$', views.nutri_garden_expert, name='nutri_garden_expert_register'),
     #url(r'^nutri_garden_expert_bulk/', views.nutri_garden_expert_bulk, name='nutri_garden_expert_bulk'),
     url(r'^concentform/$', views.concentform, name='concentform'),
-    
     url(r'^school_coordinator_register/', views.school_coordinator_register, name='school_coordinator_register'),
     url(r'^school_student_parent_register/', views.school_student_parent_register, name='school_student_parent_register'),
     url(r'^mukhya_sevika_register/', views.mukhya_sevika_register, name='mukhya_sevika_register'),
