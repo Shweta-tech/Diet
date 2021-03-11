@@ -8,7 +8,7 @@ from bootstrap_datepicker_plus import DatePickerInput
 from .models import bulk_reg,Mentor,MukhyaSevika,AnganwadiWorkersRegister,Student,School,SchoolCoordinator,ProjectManager,User,AnemicPregnantWoman,SMChildParentsRegister,ConcentForm,NutriGardenExpert,PrincipalInvestigators,WebGISExpert,NutritionExpert,AnemicLactatingMother,AnemicAdolescentGirl,SMChild,SchoolStudentParent
 class Form(UserCreationForm):
     email=forms.EmailField(required=False)
-    
+    first_name=forms.CharField(max_length=255)
     def __init__(self, *args, **kwargs):
         super(Form, self).__init__(*args, **kwargs)
 
