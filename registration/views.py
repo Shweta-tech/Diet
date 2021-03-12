@@ -198,9 +198,9 @@ def student(request):
 
     if request.method== "POST":
         form= Form(request.POST)
-        # print(form)
+        print(form)
         profile_form=StudentForm(request.POST,request.FILES)
-        
+        print(profile_form)
         # print('not valid')
         if form.is_valid() and profile_form.is_valid():
             instance = form.save(commit=False)
@@ -1121,3 +1121,6 @@ def school_student_parent_register(request):
         form= Form()
         profile_form= SchoolStudentParentForm()
     return render(request, "school_student_parent_register.html",{"profile_form":profile_form,"form":form})
+
+
+

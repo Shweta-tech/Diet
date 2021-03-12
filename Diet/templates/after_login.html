@@ -302,55 +302,7 @@
             <option value="students ">Students</option>
         </select>
 
-        <!-- <div class="school_coordinator box ">
-            <form method="post " enctype="multipart/form-data " class="myform ">
-                {% csrf_token %}
-                <h1>Upload</h1>
-                <br>
-                <span>Please Upload Excel(.xlsx) File</span>
-                <br>
-                <br>
-                <input type="file " name="myFile "> <br> <br>
-                <button type="submit " class="btn btn-info ">Upload file</button>
-            </form>
-            {% if messages %} {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} " UserRole="alert ">
-                <p {% if message.tags %} class=" " {% endif %}>{{ message }}</p>
-            </div>{% endfor %} {% endif %}
         </div>
-        <div class="parents box ">
-            <form method="post " enctype="multipart/form-data " class="myform ">
-                {% csrf_token %}
-                <h1>Upload</h1>
-                <br>
-                <span>Please Upload Excel(.xlsx) File</span>
-                <br>
-                <br>
-                <input type="file " name="myFile "> <br> <br>
-                <button type="submit " class="btn btn-info ">Upload file</button>
-            </form>
-            {% if messages %} {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} " UserRole="alert ">
-                <p {% if message.tags %} class=" " {% endif %}>{{ message }}</p>
-            </div>{% endfor %} {% endif %}
-        </div>
-        <div class="students box " id="stubr ">
-            <form method="post " enctype="multipart/form-data " class="myform ">
-                {% csrf_token %}
-                <h1>Upload</h1>
-                <br>
-                <span>Please Upload Excel(.xlsx) File</span>
-                <br>
-                <br>
-                <input type="file " name="myFile "> <br> <br>
-                <button type="submit " class="btn btn-info ">Upload file</button>
-            </form>
-            {% if messages %} {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} " UserRole="alert ">
-                <p {% if message.tags %} class=" " {% endif %}>{{ message }}</p>
-            </div>{% endfor %} {% endif %}
-        </div> -->
-    </div>
 
     <div class="school_coordinator box " id="hidden_div ">
         <form method="post " enctype="multipart/form-data " class="myform ">

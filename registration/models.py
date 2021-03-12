@@ -31,16 +31,11 @@ Category = [
             ('Student', 'Student'),
 
 ]
-unit = [
-    ('kgs','kgs'),
-    ('lbs','lbs')]
-nutirleader = [
-    ('Nutri-Leader','Nutri-Leader'),
-    ('School-Student','School-Student')
-]
-foodhabit = [
-    ('Vegetarian','Vegetarian'),
-    ('Non-Vegetarian','Non-Vegetarian'),
+unit = [('kgs','kgs'),('lbs','lbs')]
+hunit = [('cms','cms'),('inches','inches')]
+hgtunit = [ ('feet','feet'), ('inches','inches'),('cms','cms'),('inches','inches')]
+nutirleader = [('Nutri-Leader','Nutri-Leader'),('School-Student','School-Student')]
+foodhabit = [('Vegetarian','Vegetarian'),('Non-Vegetarian','Non-Vegetarian'),
   
 ]
 occupation = [('Legislators,Senior Officials & Managers','Legislators,Senior Officials & Managers'),
@@ -93,13 +88,13 @@ class AnemicAdolescentGirl(models.Model):
     weight = models.IntegerField()
     weightunit = models.CharField(max_length=255,choices=unit )
     height = models.IntegerField()
-    heightunit = models.CharField(max_length=255,choices=unit)
-    bmi= models.DecimalField(max_digits = 5,decimal_places = 2)
+    heightunit = models.CharField(max_length = 50,choices=hgtunit)
+    bmi= models.DecimalField(max_digits = 10,decimal_places = 3)
     waist = models.IntegerField(null=True)
-    waistunit = models.CharField(max_length=20,choices=unit)
+    waistunit = models.CharField(max_length=20,choices=hunit)
     hip = models.IntegerField(null=True)
-    hipunit = models.CharField(max_length=20,choices=unit)
-    whratio = models.IntegerField(null=True)
+    hipunit = models.CharField(max_length=20,choices=hunit)
+    whratio = models.IntegerField(null=True,decimal_places = 3)
     whratioderived = models.IntegerField(null=True)
     foodhabits =  models.CharField(max_length = 20,choices=foodhabit,null = True)
     uploaded_photo = models.ImageField(upload_to='AnemicAdolescentGirl/%Y/%m/%d')
@@ -122,13 +117,13 @@ class AnemicLactatingMother(models.Model):
     weight = models.IntegerField()
     weightunit = models.CharField(max_length=255,choices=unit )
     height = models.IntegerField()
-    heightunit = models.CharField(max_length=255,choices=unit)
-    bmi= models.DecimalField(max_digits = 5,decimal_places = 2)
+    heightunit = models.CharField(max_length = 50,choices=hgtunit)
+    bmi= models.DecimalField(max_digits = 10,decimal_places = 3)
     waist = models.IntegerField(null=True)
-    waistunit = models.CharField(max_length=20,choices=unit)
+    waistunit = models.CharField(max_length=20,choices=hunit)
     hip = models.IntegerField(null=True)
-    hipunit = models.CharField(max_length=20,choices=unit)
-    whratio = models.IntegerField(null=True)
+    hipunit = models.CharField(max_length=20,choices=hunit)
+    whratio = models.IntegerField(null=True,decimal_places = 3)
     whratioderived = models.IntegerField(null=True)
     foodhabits =  models.CharField(max_length = 20,choices=foodhabit,null = True)
     uploaded_photo = models.ImageField(upload_to='AnemicLactatingMother/%Y/%m/%d')
@@ -148,13 +143,13 @@ class AnemicPregnantWoman(models.Model):
     weight = models.IntegerField()
     weightunit = models.CharField(max_length=255,choices=unit )
     height = models.IntegerField()
-    heightunit = models.CharField(max_length=255,choices=unit)
-    bmi= models.DecimalField(max_digits = 5,decimal_places = 2)
+    heightunit = models.CharField(max_length = 50,choices=hgtunit)
+    bmi= models.DecimalField(max_digits = 10,decimal_places = 3)
     waist = models.IntegerField(null=True)
-    waistunit = models.CharField(max_length=20,choices=unit)
+    waistunit = models.CharField(max_length=20,choices=hunit)
     hip = models.IntegerField(null=True)
-    hipunit = models.CharField(max_length=20,choices=unit)
-    whratio = models.IntegerField(null=True)
+    hipunit = models.CharField(max_length=20,choices=hunit)
+    whratio = models.IntegerField(null=True,decimal_places = 3)
     whratioderived = models.IntegerField(null=True)
     foodhabits =  models.CharField(max_length = 20,choices=foodhabit,null = True)
     uploaded_photo = models.FileField(upload_to='anemicpregnantwoman/%Y/%m/%d')
@@ -202,17 +197,19 @@ class School(models.Model):
     institute = models.CharField(choices=Institute,default=False,max_length=20)
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    uid =models.CharField(primary_key=True,max_length=25500)
+    uid =models.CharField(primary_key=True,max_length=1000)
+    birthdate = models.DateField(null=True, blank=True)
+    age = models.CharField(max_length = 50, null=True )
     weight = models.IntegerField(default = False)
     weightunit = models.CharField(max_length=255,choices=unit,default = False )
     height = models.IntegerField(default = False)
-    heightunit = models.CharField(max_length=255,choices=unit,default = False)
-    bmi= models.DecimalField(max_digits = 5,decimal_places = 2,default = False)
+    heightunit = models.CharField(max_length = 50,choices= hgtunit,default = False)
+    bmi= models.DecimalField(max_digits = 10,decimal_places = 3)
     waist = models.IntegerField(null=True)
-    waistunit = models.CharField(max_length=20,choices=unit,default = False)
+    waistunit = models.CharField(max_length=20,choices=hunit)
     hip = models.IntegerField(null=True)
-    hipunit = models.CharField(max_length=20,choices=unit,default = False)
-    whratio = models.IntegerField(null=True)
+    hipunit = models.CharField(max_length=20,choices=hunit)
+    whratio = models.IntegerField(default = 0,decimal_places = 3)
     whratioderived = models.IntegerField(null=True)
     nutrileader = models.CharField(choices=nutirleader,default=False,max_length=20)
     schoolname=  models.CharField(max_length=200,null = True)
@@ -240,13 +237,13 @@ class SMChild(models.Model):
     weight = models.IntegerField()
     weightunit = models.CharField(max_length=255,choices=unit )
     height = models.IntegerField()
-    heightunit = models.CharField(max_length=255,choices=unit)
-    bmi= models.DecimalField(max_digits = 5,decimal_places = 2)
+    heightunit = models.CharField(max_length = 50,choices=hgtunit)
+    bmi= models.DecimalField(max_digits = 10,decimal_places = 3)
     waist = models.IntegerField(null=True)
-    waistunit = models.CharField(max_length=20,choices=unit)
+    waistunit = models.CharField(max_length=20,choices=hunit)
     hip = models.IntegerField(null=True)
-    hipunit = models.CharField(max_length=20,choices=unit)
-    whratio = models.IntegerField(null=True)
+    hipunit = models.CharField(max_length=20,choices=hunit)
+    whratio = models.IntegerField(null=True,decimal_places = 3)
     whratioderived = models.IntegerField(null=True)
     foodhabits =  models.CharField(max_length = 20,choices=foodhabit,null = True)
     uploaded_photo = models.FileField(upload_to='smchilddocuments/%Y/%m/%d')
@@ -310,8 +307,8 @@ class MukhyaSevika(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     uid = models.CharField(max_length=255,default=False)
     anganwadinumber = models.IntegerField(default=False)
-    contact=models.CharField(max_length=25500,blank=True)
-    birthdate=models.CharField(max_length=2000,null=True)
+    contact=models.CharField(max_length=1000,blank=True)
+    birthdate=models.DateField(null=True, blank=True)
     age=models.CharField(max_length=200,blank=True)
     education=models.CharField(choices=education,max_length=2000,blank=True)
     occupation=models.CharField(choices=occupation,max_length=2000,blank=True)
@@ -354,4 +351,6 @@ class   SchoolStudentParent(models.Model):
     schoolcoordinatorincharge=models.CharField(max_length=25500,blank=True)
     foodhabits=models.CharField(max_length=25500,blank=True,choices = foodhabit)
     profile_photo=models.ImageField( upload_to='SchoolStudentParent/%Y/%m/%d',blank=True)
-    
+    contact=models.CharField(max_length=10,blank=True)
+    schoolname=  models.CharField(max_length=200)
+    personaladdress = models.CharField(max_length=200,null=True)

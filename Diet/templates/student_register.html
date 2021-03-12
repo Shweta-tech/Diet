@@ -67,74 +67,86 @@
     //     console.log(textStatus)
     //     console.log(errorThrown)
     // }
-    function weightconverter(valnum) {
-        var bla = $('#id_weight').val();
-        if (valnum == "lbs") {
-            document.getElementById("outputGrams").innerHTML = (bla / 2.2046).toFixed(2);
-        } else {
-            document.getElementById("outputGrams").innerHTML = bla;
-        }
-    }
+    
+    // function weightconverter(valnum) {
+    //    
+    // }
+    $(document).ready(function() {
+        $(".bmicalculateclass").change(function() {
+            var bla = $('#id_weight').val();
+            var valnum = $('#id_weightunit').val();
+            if (valnum == "lbs") {
+                var i = (bla / 2.2046).toFixed(2);
+                console.log(i)
+            } 
+            else {
+                var i = bla;
+                console.log(i)
+            }   
+            
+            var len = $('#id_height').val();
+            var vallen = $('#id_heightunit').val();
+            if (vallen == "feet") {
 
-    function SetTime(LoadEvent) {
-        var Now = new Date();
-        var Seconds = Now.getSeconds();
-        var Minutes = Now.getMinutes() + Seconds / 60;
-        var Hours = Now.getHours() + Minutes / 60;
-        document.getElementById("seconds").setAttribute('transform', 'rotate(' + (Seconds * 6) + ')');
-        document.getElementById("minutes").setAttribute('transform', 'rotate(' + (Minutes * 6) + ')');
-        document.getElementById("hours").setAttribute('transform', 'rotate(' + (Hours * 15) + ')');
-    }
+              var h = (len / 3.281).toFixed(2);
+               console.log(h)
 
-    function waistconverter(valnum) {
-        var wst = $('#id_waist').val();
-        if (valnum == "inches") {
-            document.getElementById("hipcms").innerHTML = (wst * 2.54).toFixed(2);
-        } else {
-            document.getElementById("hipcms").innerHTML = wst;
-        }
-    }
+            } else if (vallen == "inches") {
 
-    function hipconverter(valnum) {
-        var hp = $('#id_hip').val();
-        if (valnum == "inches") {
-            document.getElementById("waistcms").innerHTML = (hp * 2.54).toFixed(2);
-        } else {
-            document.getElementById("waistcms").innerHTML = hp;
-        }
-        var wcm = $("#waistcms").text();
-        console.log(wcm)
-        var hcm = $("#hipcms").text();
-        console.log(hcm)
+               var h = (len / 100).toFixed(2);
+                console.log(h)
 
-        var wrh = (wcm / hcm).toFixed(3);
-        $('#whratio').val(wrh);
-    }
+            } else if (vallen == "cms") {
 
-    function lengthconverter(vallen) {
-        var len = $('#height').val();
+               var h = (len / 39.37).toFixed(2);
+                console.log(h)
 
-        if (vallen == "feet") {
+            } else {
+               var h = len;
+                console.log(h)
 
-            document.getElementById("outputMeters").innerHTML = (len / 3.281).toFixed(2);
-        } else if (vallen == "inches") {
+            }
 
-            document.getElementById("outputMeters").innerHTML = (len / 100).toFixed(2);
-        } else if (vallen == "cms") {
+            var calbmi = (i / (h * h)).toFixed(3);
+            $('#id_bmi').val(calbmi);
 
-            document.getElementById("outputMeters").innerHTML = (len / 39.37).toFixed(2);
-        } else {
-            document.getElementById("outputMeters").innerHTML = len;
-        }
+        });
+    });
+   
+    $(document).ready(function() {
+        $(".whratiocalculateclass").change(function() {
+            var wst = $('#id_waist').val();
+            var valwst = $('#id_waistunit').val();
+            var hip = $('#id_hip').val();
+            var valhip = $('#id_hipunit').val();
 
-        var kg = $("#outputGrams").text();
-        console.log(kg)
-        var mtr = $("#outputMeters").text();
-        console.log(mtr)
+            if (valwst == "inches") {
+                var j = (wst * 2.54).toFixed(2);
+                console.log(i)
+            } 
+            else {
+                var j = wst;
+                console.log(i)
+            }   
+            
+           
 
-        var calbmi = (kg / (mtr * mtr)).toFixed(3);
-        $('#bmi').val(calbmi);
-    }
+            if (valhip == "inches") {
+                var i = (hip * 2.54).toFixed(2);
+                console.log(j)
+            } 
+            else {
+                var i = hip;
+                console.log(j)
+            }   
+           
+
+            var whratio = (i / j).toFixed(3);
+            $('#id_whratio').val(whratio);
+
+        });
+    });
+   
     $(document).ready(function() {
         $(".some_class").change(function() {
             var mdate = $("#id_birthdate").val().toString();
@@ -164,5 +176,6 @@
             
         });
     });
+   
 </script>
 {% endblock %}
