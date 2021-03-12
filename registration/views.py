@@ -462,7 +462,7 @@ def mentor_bulk(request):
                 value.save()
                 my_group = Group.objects.get(name='school_coordinator') 
                 my_group.user_set.add(value)
-                contact=SchoolCoordinator(uid=data[7],contact=data[8],schoolname=data[9],personaladdress=data[10],birthdate=data[11],age=data[12],schooladdress=data[13],schoolcontact=data[14],education=data[15],occupation=data[16],annualincome=data[17],profile_photo=data[18],user=value)
+                contact=SchoolCoordinator(uid=data[6],contact=encrypt(data[7]),schoolname=encryprt(data[8]),personaladdress=data[9],birthdate=data[10],age=data[11],schooladdress=data[12],schoolcontact=data[13],education=data[14],occupation=data[15],annualincome=data[16],profile_photo=data[17],user=value)
                 contact.save()
                 messages.info(request,"User created")
                 print('user created')
@@ -470,7 +470,7 @@ def mentor_bulk(request):
                 stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
                 print(stuff_in_string)
                 # email=i.email }}
-                send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
+                send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
         return render(request,"after_login copy.html")
@@ -513,7 +513,7 @@ def mentor_bulk(request):
 #                 stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
 #                 print(stuff_in_string)
 #                 # email=i.email }}
-#                 send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
+#                 send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
 #                     [data[4]], fail_silently=False)        
 #                 # messages.info(request,"data entered")       
 #         return render(request,"bulk_reg_nge.html")
@@ -532,7 +532,7 @@ def school_bulk(request):
 
         imported_data = dataset.load(bulk.read(),format='xlsx')
         print(imported_data)
-        user=User.objects.all();
+        user=User.objects.all()
         for data in imported_data:
             if User.objects.filter(username=data[3]).exists():
                 messages.info(request,"Username already entered")
@@ -551,7 +551,7 @@ def school_bulk(request):
                 stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
                 print(stuff_in_string)
                 # email=i.email }}
-                send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
+                send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
         return render(request,"bulk_reg_s.html")
@@ -589,7 +589,7 @@ def student_bulk(request):
                 stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
                 print(stuff_in_string)
                 # email=i.email }}
-                send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
+                send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
         return render(request,"bulk_reg_stu.html")
@@ -627,7 +627,7 @@ def anganwadi_bulk(request):
                 stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
                 print(stuff_in_string)
                 # email=i.email }}
-                send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
+                send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
         return render(request,"bulk_reg_aw.html")
@@ -665,7 +665,7 @@ def mukhyasevika_bulk(request):
                 stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
                 print(stuff_in_string)
                 # email=i.email }}
-                send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
+                send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
         return render(request,"bulk_reg_ms.html")
@@ -703,50 +703,14 @@ def headmentor_bulk(request):
                 stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
                 print(stuff_in_string)
                 # email=i.email }}
-                send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
+                send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
         return render(request,"bulk_reg_hm.html")
     else:
         return render(request,"bulk_reg_hm.html")
 
-def anemicwoman_bulk(request):
-    if request.method== "POST":
-        bulk_resource = bulkResource()
-        dataset = Dataset()
-        bulk =request.FILES['myFile']
-        print(bulk)
-        if not bulk.name.endswith('xlsx'):
-            messages.info(request,'wrong format')
-            return render(request, "bulk_reg_anemic.html")
 
-        imported_data = dataset.load(bulk.read(),format='xlsx')
-        print(imported_data)
-        user=User.objects.all()
-        for data in imported_data:
-            if User.objects.filter(username=data[3]).exists():
-                messages.info(request,"Username already entered")
-            
-            
-            else:
-                value = User.objects.create_user(id=data[0],first_name=data[1],last_name=data[2],username=data[3],email=data[4],password=data[5]) 
-                value.save()
-                my_group = Group.objects.get(name='anemic_woman') 
-                my_group.user_set.add(value)
-                contact=AnemicWoman(contact=data[6],personaladdress=data[7],anemicnumber=data[8],user=value)
-                contact.save()
-                messages.info(request,"User created")
-                print('user created')
-
-                stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
-                print(stuff_in_string)
-                # email=i.email }}
-                send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
-                    [data[4]], fail_silently=False)        
-                # messages.info(request,"data entered")       
-        return render(request,"bulk_reg_anemic.html")
-    else:
-        return render(request,"bulk_reg_anemic.html")
 
 def adolescent_bulk(request):
     if request.method== "POST":
@@ -779,7 +743,7 @@ def adolescent_bulk(request):
                 stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
                 print(stuff_in_string)
                 # email=i.email }}
-                send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
+                send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
         return render(request,"bulk_reg_adolescent.html")
@@ -809,7 +773,7 @@ def sm_parent_bulk(request):
                 value.save()
                 my_group = Group.objects.get(name='parents') 
                 my_group.user_set.add(value)
-                contact=Parent(uid=data[6],mothername=data[7],fathername=data[8],motherbirthdate=data[9],fatherbirthdate=data[10],motherage=data[11],fatherage=data[12],personalcontact=data[13],ICDSname=data[14],ICDScenteraddress=data[15],ICDScentercontact=data[16],occupation=data[17],education=data[18],annualincome=data[19],cuid=data[20],contact=data[6],personaladdress=data[7],number=data[8],user=value)
+                contact=Parent(uid=data[6],mothername=data[7],fathername=data[8],motherbirthdate=data[9],fatherbirthdate=data[10],motherage=data[11],fatherage=data[12],personalcontact=data[13],ICDSname=data[14],ICDScenteraddress=data[15],ICDScentercontact=data[16],occupation=data[17],education=data[18],annualincome=data[19],cuid=data[20],user=value)
                 contact.save()
                 messages.info(request,"User created")
                 print('user created')
@@ -817,7 +781,7 @@ def sm_parent_bulk(request):
                 stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
                 print(stuff_in_string)
                 # email=i.email }}
-                send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
+                send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
         return render(request,"bulk_reg_parent copy.html")
@@ -855,7 +819,7 @@ def school_parent_bulk(request):
                 stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
                 print(stuff_in_string)
                 # email=i.email }}
-                send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
+                send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
         return render(request,"bulk_reg_parent.html")
@@ -892,7 +856,7 @@ def lactatingwoman_bulk(request):
                 stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
                 print(stuff_in_string)
                 # email=i.email }}
-                send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
+                send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
         return render(request,"bulk_reg_pregnant copy.html")
@@ -929,7 +893,7 @@ def anemicwoman_bulk(request):
                 stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
                 print(stuff_in_string)
                 # email=i.email }}
-                send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
+                send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
         return render(request,"bulk_reg_pregnant.html")
@@ -967,7 +931,7 @@ def nutriexpert_bulk(request):
                 stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
                 print(stuff_in_string)
                 # email=i.email }}
-                send_mail('Community Diet Diversity', stuff_in_string, 'jitendra@communitygis.net',
+                send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
         return render(request,"bulk_reg_nutriexp.html")

@@ -19,6 +19,7 @@
 <form method="post" enctype="multipart/form-data" class="myform">
     {% csrf_token %}
     <h1>Bulk registration of Nutri-Garden Expert</h1>
+    <a href="{% static 'xlsxforms/Nutri_Garden_Experts_File.xlsx %}" target="_blank">Download Sample File</a>
     <br>
     <span>Please Upload Excel(.xlsx) File</span>
     <br>
