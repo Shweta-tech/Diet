@@ -7,7 +7,7 @@ import django_cryptography.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0008_auto_20210309_0859'),
+        ('registration', '0006_auto_20210310_0323'),
     ]
 
     operations = [
