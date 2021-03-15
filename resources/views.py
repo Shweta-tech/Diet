@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 
 
 # Create your views here.
+
 def list_school(request):
     if request.method == 'POST':
         form = DocumentForm_school(request.POST,request.FILES)
@@ -62,7 +63,20 @@ def article_school(request):
     image = image_up_sch.objects.all()
     video = video_sch.objects.all()
     return render(request,'article_school.html',{'document': document,'image':image,'video':video})
-
+def resources(request):
+    document = document_sch.objects.all()
+    # print(documents)
+    image = image_up_sch.objects.all()
+    video = video_sch.objects.all()
+    document1 = document_nutri.objects.all()
+    # print(documents)
+    image1 = image_up_nutri.objects.all()
+    video1= video_nutri.objects.all()
+    document2 = document_icds.objects.all()
+   # print(documents)
+    image2 = image_up_icds.objects.all()
+    video2 = video_icds.objects.all()
+    return render(request,'article.html',{'document': document,'image':image,'video':video,'document1': document1,'image1':image1,'video1':video1,'document2': document2,'image2':image2,'video2':video2})
 def list_nutri(request):
     if request.method == 'POST':
         form = DocumentForm_nutri(request.POST,request.FILES)
