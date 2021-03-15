@@ -18,7 +18,7 @@ def consent(request):
     return render(request,'concentform.html')
 def chng_pass_up(request, id):
     data = User.objects.get(id=id) 
-    # role=data.userprofile.role
+    
     print(data) 
     form = Form(request.POST, instance= data) 
     # profile_form= UserProfile(request.POST, instance= form) 
