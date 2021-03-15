@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 import random
 import string
 from django.forms import Textarea
-from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel
+from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,studentprof
 class DailySchedule(forms.ModelForm):
     class Meta:
         model = DailyScheduleForm
@@ -26,6 +26,11 @@ class DietForm(forms.ModelForm):
         model = DietModel
         fields = ['mealtype','timefrom','timeto','rotiquantity','rotiunit','ricequantity','riceunit','pohaquantity','pohaunit','upmaquantity','upmaunit','teaquantity','teaunit','coffeequantity','coffeeunit','milkquantity','milkunit','vadaquantity','biscuitquantity','dalquantity','dalunit','gujratidalquantity','gujratidalunit','toordalquantity','toordalunit','moongdalquantity','moongdalunit','palakquantity','palakunit']
 
+class studentprofForm(forms.ModelForm):
+    
+    class Meta:
+        model = studentprof
+        fields = ('uid','birthdate','age','contact','schoolname','schoolcordinatorincharge','schooladdress','schoolcontactinformation','weight','weightunit','height','heightunit','bmi','waist','waistunit','hip','hipunit','whratio','whratioderived','uploaded_photo',)
 
 class FeedbackForm(forms.ModelForm):
     class Meta:

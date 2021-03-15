@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import datetime
-
+from registration.models import Student
 fatheroccupation = [('Legislators,Senior Officials & Managers','Legislators,Senior Officials & Managers'),
     ('Professionals','Professionals'),
     ('Technicians and Associate Professionals','Technicians and Associate Professionals'),
@@ -19,6 +19,9 @@ fatheroccupation = [('Legislators,Senior Officials & Managers','Legislators,Seni
 
 
 ]
+unit = [('kgs','kgs'),('lbs','lbs')]
+hunit = [('cms','cms'),('inches','inches')]
+hgtunit = [ ('feet','feet'), ('inches','inches'),('cms','cms'),('inches','inches')]
 education = [ ('Professionaldegree','Professionaldegree'),
     ('Graduate','Graduate (Bachelors)'),
     ('Middleschool','Middle school (5th to 10th std)'),
@@ -35,6 +38,30 @@ monthlyincome =  [ ('199,862','199,862'),
 ]
 
 # Create your models here.
+class studentprof(models.Model):
+    user = models.OneToOneField(Student, on_delete = models.CASCADE)
+    uid=models.CharField(max_length=10,null=True)
+    birthdate = models.DateField(null=True, blank=True)
+    age = models.CharField(max_length = 50, null=True )
+    weight = models.IntegerField(default = False)
+    weightunit = models.CharField(max_length=255,choices=unit,default = False )
+    height = models.IntegerField(default = False)
+    heightunit = models.CharField(max_length = 50,choices= hgtunit,default = False)
+    bmi= models.DecimalField(max_digits = 10,decimal_places = 3)
+    waist = models.IntegerField(null=True)
+    waistunit = models.CharField(max_length=20,choices=hunit)
+    hip = models.IntegerField(null=True)
+    hipunit = models.CharField(max_length=20,choices=hunit)
+    whratio = models.DecimalField(max_digits = 10,default = 0,null=True,decimal_places = 3)
+    whratioderived = models.IntegerField(null=True)
+    schoolname=  models.CharField(max_length=200,null = True)
+    schoolcordinatorincharge=  models.CharField(max_length=200,null = True)
+    schooladdress=  models.CharField(max_length=200,null = True)
+    schoolcontactinformation=  models.CharField(max_length=200,null = True)
+    contact=models.CharField(max_length=25500,blank=True)
+    uploaded_photo= models.ImageField( upload_to='student/%Y/%m/%d',default = False)
+    personaladdress = models.CharField(max_length=200,null=True)
+
 class PersonalInformationForms(models.Model):
     uniqueid = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
@@ -51,6 +78,7 @@ class PersonalInformationForms(models.Model):
    
 
 class DailyScheduleForm(models.Model):
+    user = models.OneToOneField(PersonalInformationForms, on_delete = models.CASCADE)
     activity=models.CharField(max_length=100,null=True)
     sleepfrom = models.TimeField(null=True)
     sleepto = models.TimeField(null=True)
@@ -64,6 +92,7 @@ class DailyScheduleForm(models.Model):
     activities = models.CharField(max_length=500)
 
 class BodyModel(models.Model):
+    user = models.OneToOneField(DailyScheduleForm, on_delete = models.CASCADE)
     weight = models.IntegerField(null=True)
     weightunit = models.CharField(max_length=20)
     height = models.IntegerField(null=True)
@@ -75,7 +104,13 @@ class BodyModel(models.Model):
     hipunit = models.CharField(max_length=20)
     whratio = models.IntegerField(null=True)
 
+class EatTodayModel(models.Model):
+    user = models.OneToOneField(BodyModel, on_delete = models.CASCADE)
+    foodhabbits = models.CharField(max_length=200)
+    foodallergies = models.CharField(max_length=200)
+
 class DietModel(models.Model):
+    user = models.OneToOneField(EatTodayModel, on_delete = models.CASCADE)
     mealtype = models.CharField(max_length=200)
     timefrom = models.TimeField()
     timeto = models.TimeField()
@@ -106,10 +141,6 @@ class DietModel(models.Model):
     moongdalunit  = models.CharField(max_length=200,blank=True,null = True)
     palakquantity = models.IntegerField(default = 0,blank=True,null = True)
     palakunit  = models.CharField(max_length=200,blank=True,null = True)
-
-class EatTodayModel(models.Model):
-    foodhabbits = models.CharField(max_length=200)
-    foodallergies = models.CharField(max_length=200)
 
 
 

@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^feedbackform/', views.feedbackform, name='feedbackform'),
     url(r'^nutrigarden/', views.nutrigarden, name='nutrigarden'),
     path('change_pass/<int:id>',views.chng_pass),
+    path('add_info/<int:id>',views.add_info),
     path('change_pass_up/<int:id>',views.chng_pass_up),
     url(r'^consent/', views.consent, name='consent'),
     

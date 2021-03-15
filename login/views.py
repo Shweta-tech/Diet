@@ -19,6 +19,7 @@ from django.contrib.auth.models import Group
 from django.http import HttpResponse
 # from DemoDiet.resources import bulkResource
 # import exiftool
+from data_feed.forms import studentprof
 from cryptography.fernet import Fernet
 key = Fernet.generate_key()
 f = Fernet(key)
@@ -63,7 +64,8 @@ def login(request):
                     return redirect('/after_login/')
                 if group.name ==  'student':
                     auth.login(request,user)
-                    return redirect('/after_login/')
+                    profile=studentprof()
+                    return redirect('/after_login/',{'profile':profile})
 
                 if group.name ==  'anganwadi_worker':
                     auth.login(request,user)

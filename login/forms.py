@@ -62,7 +62,7 @@ class StudentForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='STU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
     class Meta:
         model = Student
-        fields = ('contact','uid','nutrileader')
+        fields = ('uid','nutrileader')
 
 class AnganwadiWorkerForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='ANW'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))

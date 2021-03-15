@@ -23,6 +23,8 @@ from cryptography.fernet import Fernet
 key = Fernet.generate_key()
 f = Fernet(key)
 import hashlib
+import random
+import string
 from .encryption_util import encrypt, decrypt
 # Create your views here.
 def register(request):
@@ -204,7 +206,7 @@ def student(request):
         # print('not valid')
         if form.is_valid() and profile_form.is_valid():
             instance = form.save(commit=False)
-            profile=profile_form.save(commit=False)
+            # profile=profile_form.save(commit=False)
             # instance.first_name=f.encrypt(b"form.cleaned_data['first_name']")
             # instance.last_name=f.encrypt(b"form.cleaned_data['last_name']")
             # instance.email=f.encrypt(b"form.cleaned_data['email']")
@@ -213,9 +215,9 @@ def student(request):
             instance.save()
             print(instance.first_name)
             
-            profile.user=instance
+            # profile.user=instance
             print("working")
-            profile.save() 
+            # profile.save() 
             my_group = Group.objects.get(name='student') 
             my_group.user_set.add(instance)
             messages.info(request,"User created")
@@ -581,7 +583,7 @@ def student_bulk(request):
                 value.save()
                 my_group = Group.objects.get(name='student') 
                 my_group.user_set.add(value)
-                contact=Student(uid=data[6],weight=data[7],weightunit=data[8],height=data[9],heightunit=data[10],bmi=data[10],waist=data[11],waistunit=data[12],hip=data[13],hipunit=data[14],whratio=data[15],whratioderived=data[16],nutirleader=data[17],schoolname=data[18],schoolcordinatorincharge=data[19],schooladdress=data[20],schoolcontactinformation=data[21],contact=data[22],uploaded_photo=data[23],user=value)
+                contact=Student(uid='STU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)),user=value)
                 contact.save()
                 messages.info(request,"User created")
                 print('user created')
