@@ -42,7 +42,12 @@
 
 </div>
 <script>
-    console.log({{ user.student.uid }})
-    document.getElementById("id_uid").value = "{{user.student.uid }}";
+    $(document).ready(function() {
+            var val_uid='{{data.student.uid}}';
+
+            $('#id_uid').val(val_uid);
+            
+        });
+
 </script>
 {% endblock %}

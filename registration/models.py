@@ -200,7 +200,6 @@ class Student(models.Model):
     uid =models.CharField(primary_key=True,max_length=1000)
     nutrileader = models.CharField(choices=nutirleader,default=False,max_length=20)
 
-
 class bulk_reg(models.Model):
     name= models.CharField( max_length=255)
     mobile= models.CharField(max_length=255)

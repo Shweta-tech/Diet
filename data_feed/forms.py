@@ -30,7 +30,7 @@ class studentprofForm(forms.ModelForm):
     
     class Meta:
         model = studentprof
-        fields = ('uid','birthdate','age','contact','schoolname','schoolcordinatorincharge','schooladdress','schoolcontactinformation','weight','weightunit','height','heightunit','bmi','waist','waistunit','hip','hipunit','whratio','whratioderived','uploaded_photo',)
+        fields = ('uid','birthdate','age','contact','schoolname','schoolcordinatorincharge','schooladdress','schoolcontactinformation','uploaded_photo',)
 
 class FeedbackForm(forms.ModelForm):
     class Meta:

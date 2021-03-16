@@ -16,14 +16,20 @@ def chng_pass(request, id):
     return render(request,'pass_change.html', {'data':data}) 
 def add_info(request,id):  
     data = User.objects.get(id=id)
+    profile_form=studentprofForm()
     # docdata  = Student.objects.all()
-    print(data.student.uid)
+    if request.method == 'POST':
+        print(data.student.uid)
+        if profile_form.is_valid() :
+            user=profile_form.save()
+            return redirect('/after_login/')
     # if data.userprofile.role=='admin' and 'custodian':
     #     return render(request,'bed_dash/confirmation.html', {'data':data})
     # else:
-    profile_form=studentprofForm()
-    print(profile_form)
-    return render(request,'article_icds.html', {'data':data,'studata':docdata,'profile_form':profile_form})  
+    
+        print(profile_form)
+    else:
+        return render(request,'article_icds.html', {'data':data,'profile_form':profile_form})  
 def consent(request):
     return render(request,'concentform.html')
 def chng_pass_up(request, id):

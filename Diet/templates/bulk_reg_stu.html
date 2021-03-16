@@ -10,6 +10,9 @@
     h1 {
         text-align: center;
     }
+    span{
+        color: brown;
+    }
 </style>
 
 
@@ -19,7 +22,7 @@
 <form method="post" enctype="multipart/form-data" class="myform">
     {% csrf_token %}
     <h1>Bulk registration for student</h1>
-        <a href="{% static 'xlsxforms/School_Student_File.xlsx' %}" target="_blank">Download Student Sample File</a>
+        <a href="{% static 'xlsxforms/School_Student_File.xlsx' %}" target="_blank">Download Student Sample File</a><span>(Leave id column empty).</span>
     <br>
     <span>Please Upload Excel(.xlsx) File</span>
     <br>

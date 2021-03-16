@@ -206,7 +206,7 @@ def student(request):
         # print('not valid')
         if form.is_valid() and profile_form.is_valid():
             instance = form.save(commit=False)
-            # profile=profile_form.save(commit=False)
+            profile=profile_form.save(commit=False)
             # instance.first_name=f.encrypt(b"form.cleaned_data['first_name']")
             # instance.last_name=f.encrypt(b"form.cleaned_data['last_name']")
             # instance.email=f.encrypt(b"form.cleaned_data['email']")
@@ -215,9 +215,9 @@ def student(request):
             instance.save()
             print(instance.first_name)
             
-            # profile.user=instance
+            profile.user=instance
             print("working")
-            # profile.save() 
+            profile.save() 
             my_group = Group.objects.get(name='student') 
             my_group.user_set.add(instance)
             messages.info(request,"User created")
@@ -231,7 +231,7 @@ def student(request):
             
     
             print('user created')
-            return redirect('/personal')
+            return redirect('/after_login/')
     else:
         form= Form()
         profile_form= StudentForm()
