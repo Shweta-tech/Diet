@@ -5,7 +5,7 @@ import random
 import string
 from django.forms import Textarea
 from bootstrap_datepicker_plus import DatePickerInput
-from .models import bulk_reg,Mentor,MukhyaSevika,AnganwadiWorkersRegister,Student,School,SchoolCoordinator,ProjectManager,User,AnemicPregnantWoman,SMChildParentsRegister,ConcentForm,NutriGardenExpert,PrincipalInvestigators,WebGISExpert,NutritionExpert,AnemicLactatingMother,AnemicAdolescentGirl,SMChild,SchoolStudentParent
+from .models import Mentor,MukhyaSevika,AnganwadiWorkersRegister,Student,SchoolCoordinator,User,AnemicPregnantWoman,SMChildParentsRegister,ConcentForm,NutriGardenExpert,AnemicLactatingMother,AnemicAdolescentGirl,SMChild,SchoolStudentParent
 class Form(UserCreationForm):
     email=forms.EmailField(required=False)
     first_name=forms.CharField(max_length=255)
@@ -39,39 +39,26 @@ class Form(UserCreationForm):
 
 
         
-class ProjectManagerForm(forms.ModelForm):
-    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='PM'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
-    class Meta:
-        model = ProjectManager
-        fields = ('birthdate','age','contact','uid')
-        widgets = {
-                    'birthdate': DatePickerInput(format='%m/%d/%Y'), # default date-format %m/%d/%Y will be used
-            
-        }
 
 class MentorForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='MT'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
+    # birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     class Meta:
         model = Mentor
-        fields = ('birthdate','age','contact','address','education')
+        fields = ('contact','uid')
 
 
 class SchoolCoordinatorForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='SCU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
+    # birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
 
     class Meta:
         model = SchoolCoordinator
-        fields = ('contact','personaladdress','birthdate','age','schoolname','schooladdress','schoolcontact','education','occupation','annualincome','profile_photo','uid')
-        widgets = {
-                    'birthdate': DatePickerInput(format='%m/%d/%Y'), 
-                 }
-class SchoolForm(forms.ModelForm):
-    class Meta:
-        model = School
-        fields = ('contact','name','institute',)
+        fields = ('contact','position','schoolname','schoolcontact','uid')
+        # widgets = {
+        #             'birthdate': DatePickerInput(format='%m/%d/%Y'), 
+        #          }
+
 
 class StudentForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='STU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
@@ -84,27 +71,27 @@ class StudentForm(forms.ModelForm):
     # waistunit=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'whratiocalculateclass','placeholder':'in cms/inches'}))
     # hip=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'whratiocalculateclass'}))
     # hipunit=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'whratiocalculateclass','placeholder':'in cms/inches'}))
-    
+    # contact=forms.CharField(required=True)
     class Meta:
         model = Student
-        fields = ('nutrileader','uid',)
+        fields = ('nutrileader','uid','contact',)
 
 class AnganwadiWorkerForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='ANW'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
     birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     class Meta:
         model = AnganwadiWorkersRegister
-        fields = ('contact','birthdate','age','education','occupation','annualincome','anganwadiname','anganwadiaddress','ICDSname','ICDScenteraddress','ICDScontact','profile_photo','uid')
+        fields = ('contact','ICDSname','ICDScenteraddress','ICDScontact','uid')
         # widgets = {
         #             'birthdate': DatePickerInput(format='%Y/%m/%d'),
         #          }
         
 class MukhyaSevikaForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='MSU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     class Meta:
         model = MukhyaSevika
-        fields = ('anganwadinumber','contact','birthdate','age','education','occupation','annualincome','ICDSname','ICDScenteraddress','ICDScontact','profile_photo','uid')
+        fields = ('contact','ICDSname','ICDScenteraddress','ICDScontact','uid')
+
         widgets = {
                     'birthdate': DatePickerInput(format='%m/%d/%Y'), 
                  }
@@ -117,21 +104,7 @@ class SchoolStudentParentForm(forms.ModelForm):
         widgets = {
                     'birthdate': DatePickerInput(format='%m/%d/%Y'), 
                  }
-class bulkreg(forms.ModelForm):  
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
-    class Meta:  
-        model = bulk_reg  
-        fields = ['name','mobile','birthdate']  
-        widgets = {
-            'birthdate':forms.DateInput(format=('%d/%m/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
-            # 'to_date': forms.DateInput(format=('%d/%m/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
-        }
-# class DocumentForm(forms.Form):
-#     title=forms.CharField(max_length=150, required=False)
-#     docfile = forms.FileField(
-#         label='Select a file',
-#         help_text='max. 42 megabytes'
-#     )
+
 class AnemicLactatingMotherForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='ALM'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
     birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
@@ -226,46 +199,16 @@ class ConcentForm(forms.ModelForm):
         fields = ['concent']
 class NutriGardenExpertForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='NGE'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
+    # birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
 
     class Meta:
         model = NutriGardenExpert
-        fields = ['birthdate','age','contact','uid']
-        widgets = {
-                    'birthdate': DatePickerInput(format='%m/%d/%Y'), # default date-format %m/%d/%Y will be used
+        fields = ['contact','uid']
+        # widgets = {
+        #             'birthdate': DatePickerInput(format='%m/%d/%Y'), # default date-format %m/%d/%Y will be used
             
-        }
+        # }
 
-class PrincipalInvestigatorsForm(forms.ModelForm):
-    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='PI'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
-    class Meta:
-        model = PrincipalInvestigators
-        fields = ['birthdate','age','contact','uid']
-        widgets = {
-                    'birthdate': DatePickerInput(format='%m/%d/%Y'), # default date-format %m/%d/%Y will be used
-            
-        }
-class WebGISExpertForm(forms.ModelForm):
-    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='WGE'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
 
-    class Meta:
-        model =  WebGISExpert
-        fields = ['birthdate','age','contact','uid']
-        widgets = {
-                    'birthdate': DatePickerInput(format='%Y/%m/%d'), # default date-format %m/%d/%Y will be used
             
-        }
-
-class NutritionExpertForm(forms.ModelForm):
-    uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='NE'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
-    
-    class Meta:
-        model =  NutritionExpert
-        fields = ['birthdate','age','contact','uid']
-        widgets = {
-                    'birthdate': DatePickerInput(format='%m/%d/%Y'), # default date-format %m/%d/%Y will be used
-            
-        }
+        

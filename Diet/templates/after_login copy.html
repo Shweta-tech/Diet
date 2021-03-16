@@ -709,7 +709,7 @@
             </tbody>
         </table>
 
-
+        <a href="/add_info/{{ user.id }}">Add Information</a>
        
     </form>
 </div>
@@ -1155,5 +1155,5 @@
     $('.close-div').on('click', function() {
         $(this).closest("Home").remove();
     });
-    console.log({{ user }})
+    console.log({{ user}})
 </script>{% endblock %}

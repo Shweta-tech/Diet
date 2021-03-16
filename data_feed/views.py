@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .forms import DailySchedule,BodyForm,EatTodayForm,DietForm,FeedbackForm,studentprofForm
-from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,PersonalInformationForms,AdolescentAnemicGirl,PregnantWoman,studentprof
+from .forms import DailySchedule,BodyForm,EatTodayForm,DietForm,FeedbackForm,studentprofForm,mentorprofForm,scprofForm,ngprofForm,msprofForm,awprofForm
+from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,PersonalInformationForms,mentorprof,AdolescentAnemicGirl,PregnantWoman,studentprof,ngprof,scprof,msprof,awprof
 from registration.models import User,Student
 from registration.forms import Form
 from django.shortcuts import redirect
@@ -15,21 +15,96 @@ def chng_pass(request, id):
     # else:
     return render(request,'pass_change.html', {'data':data}) 
 def add_info(request,id):  
-    data = User.objects.get(id=id)
-    profile_form=studentprofForm()
-    # docdata  = Student.objects.all()
-    if request.method == 'POST':
-        print(data.student.uid)
-        if profile_form.is_valid() :
-            user=profile_form.save()
-            return redirect('/after_login/')
-    # if data.userprofile.role=='admin' and 'custodian':
-    #     return render(request,'bed_dash/confirmation.html', {'data':data})
-    # else:
     
-        print(profile_form)
-    else:
-        return render(request,'article_icds.html', {'data':data,'profile_form':profile_form})  
+    data=User.objects.get(id=id)
+    
+    for group in data.groups.all():
+        if group.name ==  'principal_investigator':
+            return redirect('/after_login/')
+        if group.name ==  'project_manager':
+            return redirect('/after_login/')
+        if group.name ==  'nutrition_expert':
+            return redirect('/after_login/')
+        if group.name ==  'webgis_expert':
+            return redirect('/after_login/')
+        if group.name ==  'mentor':
+            profile_form=mentorprofForm()
+            if request.method == 'POST':
+                print(data.student.uid)
+                if profile_form.is_valid() :
+                    user=profile_form.save()
+                    return redirect('/after_login/')
+        
+            
+                print(profile_form)
+            else:
+                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
+        if group.name ==  'school_coordinator':
+            profile_form=scprofForm()
+            if request.method == 'POST':
+                print(data.student.uid)
+                if profile_form.is_valid() :
+                    user=profile_form.save()
+                    return redirect('/after_login/')
+        
+            
+                print(profile_form)
+            else:
+                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
+        if group.name ==  'parents':
+            return redirect('/after_login/')
+        if group.name ==  'student':
+            print(data.student.uid)
+            profile_form=studentprofForm()
+            if request.method == 'POST':
+                print(data.student.uid)
+                if profile_form.is_valid() :
+                    user=profile_form.save()
+                    return redirect('/after_login/')
+        
+            
+                print(profile_form)
+            else:
+                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
+        if group.name ==  'anganwadi_worker':
+            profile_form=awprofForm()
+            if request.method == 'POST':
+                print(data.student.uid)
+                if profile_form.is_valid() :
+                    user=profile_form.save()
+                    return redirect('/after_login/')
+        
+            
+                print(profile_form)
+            else:
+                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
+        if group.name ==  'mukhya_sevika':
+            profile_form=msprofForm()
+            if request.method == 'POST':
+                print(data.student.uid)
+                if profile_form.is_valid() :
+                    user=profile_form.save()
+                    return redirect('/after_login/')
+        
+            
+                print(profile_form)
+            else:
+                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
+        if group.name ==  'icds_beneficiaries':
+            return redirect('/after_login/')
+        if group.name ==  'nutrigarden_expert':
+            profile_form=ngprofForm()
+            if request.method == 'POST':
+                print(data.student.uid)
+                if profile_form.is_valid() :
+                    user=profile_form.save()
+                    return redirect('/after_login/')
+        
+            
+                print(profile_form)
+            else:
+                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})  
+      
 def consent(request):
     return render(request,'concentform.html')
 def chng_pass_up(request, id):
