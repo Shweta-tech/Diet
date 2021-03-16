@@ -25,11 +25,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     
     
-    url(r'^principal_investigator_register/', views.principal_investigator_register, name='principal_investigator_register'),
-    url(r'^webgis_expert_register/', views.webgis_expert_register, name='webgis_expert_register'),
-    url(r'^nutrition_expert_register/', views.nutrition_expert, name='nutrition_expert_register'),
-    url(r'^proj_manager_register/', views.proj_manager, name='proj_manager_register'),
-    url(r'^school_register/', views.school, name='school_register'),
+ 
     url(r'^student_register/', views.student, name='student_register'),
     # url(r'^adolescent_girl_registration/', views.adolescent_girl_register, name='adolescent_girl_registration'),
     url(r'^anemic_pregnant_woman_registration/', views.anemic_pregnant_woman_registration, name='anemic_pregnant_woman_registration'),
@@ -38,7 +34,7 @@ urlpatterns = [
     url(r'^sam_mam_child_register/$',views.sam_mam_child_register, name='sam_mam_child_register'),
     url(r'^sam_mam_child_parents_register/$',views.SMChildParentsRegister, name='sam_mam_child_parents_register'),
     url(r'^nutri_garden_expert_register/$', views.nutri_garden_expert, name='nutri_garden_expert_register'),
-    #url(r'^nutri_garden_expert_bulk/', views.nutri_garden_expert_bulk, name='nutri_garden_expert_bulk'),
+    url(r'^nutri_garden_expert_bulk/', views.nutri_garden_expert_bulk, name='nutri_garden_expert_bulk'),
     url(r'^concentform/$', views.concentform, name='concentform'),
     url(r'^school_coordinator_register/', views.school_coordinator_register, name='school_coordinator_register'),
     url(r'^school_student_parent_register/', views.school_student_parent_register, name='school_student_parent_register'),
@@ -50,8 +46,8 @@ urlpatterns = [
 
 
     url(r'^mentor_register/', views.mentor_registration, name='mentor_register'),
-    url(r'^school_coordinator_bulk/', views.mentor_bulk, name='school_coordinator_bulk'),
-    url(r'^school_bulk/', views.school_bulk, name='school_bulk'),
+    url(r'^school_coordinator_bulk/', views.sc_bulk, name='school_coordinator_bulk'),
+    # url(r'^school_bulk/', views.school_bulk, name='school_bulk'),
     url(r'^student_bulk/', views.student_bulk, name='student_bulk'),
     url(r'^anganwadi_bulk/', views.anganwadi_bulk, name='anganwadi_bulk'),
     url(r'^mukhyasevika_bulk/', views.mukhyasevika_bulk, name='mukhyasevika_bulk'),
@@ -63,7 +59,6 @@ urlpatterns = [
 
     url(r'^lactatingwoman_bulk/', views.lactatingwoman_bulk, name='lactatingwoman_bulk'),
     url(r'^pregnantwoman_bulk/', views.anemicwoman_bulk, name='pregnantwoman_bulk'),
-    url(r'^nutriexpert_bulk/', views.nutriexpert_bulk, name='nutriexpert_bulk'),
 
 ]
 if settings.DEBUG:

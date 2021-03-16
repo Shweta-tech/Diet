@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .forms import StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,MentorForm,ProjectManagerForm,Form,MentorForm,PrincipalInvestigatorsForm,WebGISExpertForm,NutritionExpertForm,SchoolStudentParentForm
+from registration.forms import StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolCoordinatorForm,MentorForm,Form,MentorForm,SchoolStudentParentForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User,auth
 from django.shortcuts import redirect
@@ -101,7 +101,7 @@ def redirectd(request,username):
         print(username)
         selected_field=username
         print(selected_field)
-        data=User.objects.get(username=selected_field);
+        data=User.objects.get(username=selected_field)
         print(data.groups.all())
         role =data.groups.all()
         print(role)

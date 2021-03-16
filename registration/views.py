@@ -3,10 +3,10 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .forms import bulkreg,StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolForm,SchoolCoordinatorForm,MentorForm,ProjectManagerForm,Form,AnemicPregnantWomanForm,ConcentForm,NutriGardenExpertForm,SMChildParentsRegisterForm,PrincipalInvestigatorsForm,WebGISExpertForm,NutritionExpertForm,AnemicLactatingMotherForm,AnemicAdolescentGirlForm,SMChildForm,SchoolStudentParentForm
+from .forms import StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolCoordinatorForm,MentorForm,Form,AnemicPregnantWomanForm,ConcentForm,NutriGardenExpertForm,SMChildParentsRegisterForm,AnemicLactatingMotherForm,AnemicAdolescentGirlForm,SMChildForm,SchoolStudentParentForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User,auth
-from .models import bulk_reg,Mentor,MukhyaSevika,AnganwadiWorkersRegister,Student,School,SchoolCoordinator,ProjectManager,User,AnemicPregnantWoman,ConcentForm,NutriGardenExpert,SMChildParentsRegister,PrincipalInvestigators,WebGISExpert,NutritionExpert,AnemicLactatingMother,AnemicAdolescentGirl,SMChild,SchoolStudentParent
+from .models import Mentor,MukhyaSevika,AnganwadiWorkersRegister,Student,SchoolCoordinator,User,AnemicPregnantWoman,ConcentForm,NutriGardenExpert,SMChildParentsRegister,AnemicLactatingMother,AnemicAdolescentGirl,SMChild,SchoolStudentParent
 from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -15,6 +15,8 @@ from tablib import Dataset
 from django.http import JsonResponse
 import openpyxl
 from django.contrib.auth.models import Group
+from django.core.mail import EmailMessage
+
 from django.core.mail import send_mail
 from django.contrib.auth.models import Group
 from .resources import bulkResource
@@ -71,99 +73,6 @@ def register(request):
     else:
         profile_form= SchoolForm()
         return render(request, "register.html",{"profile_form":profile_form})
-
-def nutrition_expert(request):
-    if request.method== "POST":
-        form= Form(request.POST)
-        print(form)
-        profile_form=NutritionExpertForm(request.POST)
-        print('not valid')
-        if form.is_valid() and profile_form.is_valid():
-            user=form.save()
-            print(user)
-            my_group = Group.objects.get(name='nutrition_expert') 
-            my_group.user_set.add(user)
-            profile= profile_form.save(commit=False)
-            profile.user=user
-            profile.save() 
-            messages.info(request,"User created")
-            firstname=form.cleaned_data['first_name']
-            username=form.cleaned_data['username']
-            email=form.cleaned_data['email']
-            password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
-            print(stuff_in_string)
-                # email=i.email }}
-            
-            print('user created')
-            return redirect('/after_login/')
-    else:
-        form= Form(request.POST)
-        profile_form= NutritionExpertForm()
-    return render(request, "nutri_expert_register.html",{"profile_form":profile_form,"form":form})
-def proj_manager(request):
-    if request.method== "POST":
-        form= Form(request.POST)
-        print(form)
-        profile_form=ProjectManagerForm(request.POST)
-        print('not valid')
-        if form.is_valid() and profile_form.is_valid():
-            user=form.save()
-            print(user)
-            my_group = Group.objects.get(name='project_manager') 
-            my_group.user_set.add(user)
-            profile= profile_form.save(commit=False)
-            profile.user=user
-            profile.save() 
-            messages.info(request,"User created")
-            firstname=form.cleaned_data['first_name']
-            username=form.cleaned_data['username']
-            email=form.cleaned_data['email']
-            password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
-            print(stuff_in_string)
-                # email=i.email }}
-            
-            print('user created')
-            return redirect('/after_login/')
-    else:
-        form= Form(request.POST)
-        profile_form= ProjectManagerForm()
-    return render(request, "proj_manager_register.html",{"profile_form":profile_form,"form":form})
-
-
-
-
-
-def school(request):
-    if request.method== "POST":
-        form= Form(request.POST)
-        print(form)
-        profile_form=SchoolForm(request.POST)
-        print('not valid')
-        if form.is_valid() and profile_form.is_valid():
-            user=form.save()
-            print(user)
-            my_group = Group.objects.get(name='school') 
-            my_group.user_set.add(user)
-            profile= profile_form.save(commit=False)
-            profile.user=user
-            profile.save() 
-            messages.info(request,"User created")
-            firstname=form.cleaned_data['first_name']
-            username=form.cleaned_data['username']
-            email=form.cleaned_data['email']
-            password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
-            print(stuff_in_string)
-                # email=i.email }}
-            
-            print('user created')
-            return redirect('/after_login/')
-    else:
-        form= Form()
-        profile_form= SchoolForm()
-    return render(request, "school_register.html",{"profile_form":profile_form,"form":form})
 
 def school_coordinator_register(request):
     if request.method== "POST":
@@ -435,7 +344,7 @@ def nutri_garden_expert(request):
         profile_form=  NutriGardenExpertForm()
     return render(request, "nutri_garden_expert.html",{"profile_form":profile_form,"form":form}) 
 
-def mentor_bulk(request):
+def sc_bulk(request):
     if request.method== "POST":
         bulk_resource = bulkResource()
         dataset = Dataset()
@@ -464,7 +373,7 @@ def mentor_bulk(request):
                 value.save()
                 my_group = Group.objects.get(name='school_coordinator') 
                 my_group.user_set.add(value)
-                contact=SchoolCoordinator(uid=data[6],contact=encrypt(data[7]),schoolname=encryprt(data[8]),personaladdress=data[9],birthdate=data[10],age=data[11],schooladdress=data[12],schoolcontact=data[13],education=data[14],occupation=data[15],annualincome=data[16],profile_photo=data[17],user=value)
+                contact=SchoolCoordinator(uid='SCU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)),contact=encrypt(data[6]),schoolname=encryprt(data[7]),schoolcontact=data[8],position=data[9],user=value)
                 contact.save()
                 messages.info(request,"User created")
                 print('user created')
@@ -484,45 +393,7 @@ def mentor_bulk(request):
 
 
 
-# def nutri_garden_expert_bulk(request):
-#     if request.method== "POST":
-#         bulk_resource = bulkResource()
-#         dataset = Dataset()
-#         bulk =request.FILES['myFile']
-#         print(bulk)
-#         if not bulk.name.endswith('xlsx'):
-#             messages.info(request,'wrong format')
-#             return render(request, "bulk_reg_nge.html")
-
-#         imported_data = dataset.load(bulk.read(),format='xlsx')
-#         print(imported_data)
-#         user=User.objects.all()
-#         for data in imported_data:
-#             if User.objects.filter(username=data[3]).exists():
-#                 messages.info(request,"Username already entered")
-            
-            
-#             else:
-#                 value = User.objects.create_user(id=data[0],first_name=data[1],last_name=data[2],username=data[3],email=data[4],password=data[5]) 
-#                 value.save()
-#                 my_group = Group.objects.get(name='nutrigarden_expert') 
-#                 my_group.user_set.add(value)
-#                 contact=NutriGardenExpert(contact=data[6])
-#                 contact.save()
-#                 messages.info(request,"User created")
-#                 print('user created')
-
-#                 stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
-#                 print(stuff_in_string)
-#                 # email=i.email }}
-#                 send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
-#                     [data[4]], fail_silently=False)        
-#                 # messages.info(request,"data entered")       
-#         return render(request,"bulk_reg_nge.html")
-#     else:
-#         return render(request,"bulk_reg_nge.html")
-    
-def school_bulk(request):
+def nutri_garden_expert_bulk(request):
     if request.method== "POST":
         bulk_resource = bulkResource()
         dataset = Dataset()
@@ -530,7 +401,7 @@ def school_bulk(request):
         print(bulk)
         if not bulk.name.endswith('xlsx'):
             messages.info(request,'wrong format')
-            return render(request, "bulk_reg_s.html")
+            return render(request, "bulk_reg_nge.html")
 
         imported_data = dataset.load(bulk.read(),format='xlsx')
         print(imported_data)
@@ -543,9 +414,9 @@ def school_bulk(request):
             else:
                 value = User.objects.create_user(id=data[0],first_name=data[1],last_name=data[2],username=data[3],email=data[4],password=data[5]) 
                 value.save()
-                my_group = Group.objects.get(name='school') 
+                my_group = Group.objects.get(name='nutrigarden_expert') 
                 my_group.user_set.add(value)
-                contact=School(contact=data[6],name=data[7],institute=data[8],user=value)
+                contact=NutriGardenExpert(contact=data[6],uid='NGE'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
                 contact.save()
                 messages.info(request,"User created")
                 print('user created')
@@ -556,9 +427,10 @@ def school_bulk(request):
                 send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
                     [data[4]], fail_silently=False)        
                 # messages.info(request,"data entered")       
-        return render(request,"bulk_reg_s.html")
+        return render(request,"bulk_reg_nge.html")
     else:
-        return render(request,"bulk_reg_s.html")
+        return render(request,"bulk_reg_nge.html")
+
     
 def student_bulk(request):
     if request.method== "POST":
@@ -583,17 +455,23 @@ def student_bulk(request):
                 value.save()
                 my_group = Group.objects.get(name='student') 
                 my_group.user_set.add(value)
-                contact=Student(uid='STU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)),user=value)
+                contact=Student(uid='STU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)),contact=data[6],user=value)
                 contact.save()
                 messages.info(request,"User created")
                 print('user created')
 
-                stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
                 print(stuff_in_string)
                 # email=i.email }}
+           
+                # msg = EmailMessage('Request Callback',
+                #                     stuff_in_string, to=[data[4]])
+                # msg.send()
+                print(data[4])
                 send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
-                    [data[4]], fail_silently=False)        
-                # messages.info(request,"data entered")       
+                    [data[4]], fail_silently=False)   
+                print("yay")     
+                messages.info(request,"data entered")       
         return render(request,"bulk_reg_stu.html")
     else:
         return render(request,"bulk_reg_stu.html")
@@ -621,7 +499,7 @@ def anganwadi_bulk(request):
                 value.save()
                 my_group =  Group.objects.get(name='anganwadi_worker') 
                 my_group.user_set.add(value)
-                contact=AnganwadiWorker(uid=data[6],contact=data[7],birthdate=data[8],age=data[9],education=data[10],occupation=data[11],annualincome=data[12],anganwadiname=data[13],anganwadiaddress=data[14],ICDSname=data[15],ICDScenteraddress=data[16],ICDScontact=data[17],profile_photo=data[18],user=value)
+                contact=AnganwadiWorker(uid='ANW'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)),contact=data[6],ICDSname=data[7],ICDScenteraddress=data[8],ICDScontact=data[9],user=value)
                 contact.save()
                 messages.info(request,"User created")
                 print('user created')
@@ -659,7 +537,7 @@ def mukhyasevika_bulk(request):
                 value.save()
                 my_group = Group.objects.get(name='mukhya_sevika') 
                 my_group.user_set.add(value)
-                contact=MukhyaSevika(uid=data[6],anganwadinumber=data[7],contact=data[8],birthdate=data[9],age=data[10],education=data[11],occupation=data[12],annualincome=data[13],ICDSname=data[14],ICDScenteraddress=data[15],ICDScontact=data[16],profile_photo=data[17],user=value)
+                contact=MukhyaSevika(uid='MSU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)),contact=data[7],ICDSname=data[8],ICDScenteraddress=data[9],ICDScontact=data[16],user=value)
                 contact.save()
                 messages.info(request,"User created")
                 print('user created')
@@ -674,7 +552,7 @@ def mukhyasevika_bulk(request):
     else:
         return render(request,"bulk_reg_ms.html")
 
-def headmentor_bulk(request):
+def mentor_bulk(request):
     if request.method== "POST":
         bulk_resource = bulkResource()
         dataset = Dataset()
@@ -697,7 +575,7 @@ def headmentor_bulk(request):
                 value.save()
                 my_group = Group.objects.get(name='mentor') 
                 my_group.user_set.add(value)
-                contact=Mentor(uid=data[6],birthdate=data[7],age=data[8],contact=data[9],address=data[10],education=data[11],user=value)
+                contact=Mentor(uid='MT'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)),contact=data[6],user=value)
                 contact.save()
                 messages.info(request,"User created")
                 print('user created')
@@ -902,105 +780,7 @@ def anemicwoman_bulk(request):
     else:
         return render(request,"bulk_reg_pregnant.html")
 
-def nutriexpert_bulk(request):
-    if request.method== "POST":
-        bulk_resource = bulkResource()
-        dataset = Dataset()
-        bulk =request.FILES['myFile']
-        print(bulk)
-        if not bulk.name.endswith('xlsx'):
-            messages.info(request,'wrong format')
-            return render(request, "bulk_reg_nutriexp.html")
 
-        imported_data = dataset.load(bulk.read(),format='xlsx')
-        print(imported_data)
-        user=User.objects.all()
-        for data in imported_data:
-            if User.objects.filter(username=data[3]).exists():
-                messages.info(request,"Username already entered")
-            
-            
-            else:
-                value = User.objects.create_user(id=data[0],first_name=data[1],last_name=data[2],username=data[3],email=data[4],password=data[5]) 
-                value.save()
-                my_group = Group.objects.get(name='nutri_garden_expert') 
-                my_group.user_set.add(value)
-                contact=NutriGardenExpert(uid=data[6],birthdate=data[7],age=data[8],contact=data[9],user=value)
-                contact.save()
-                messages.info(request,"User created")
-                print('user created')
-
-                stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
-                print(stuff_in_string)
-                # email=i.email }}
-                send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
-                    [data[4]], fail_silently=False)        
-                # messages.info(request,"data entered")       
-        return render(request,"bulk_reg_nutriexp.html")
-    else:
-        return render(request,"bulk_reg_nutriexp.html")
-
-def principal_investigator_register(request):
-    if request.method== "POST":
-        form= Form(request.POST)
-        print(form)
-        profile_form= PrincipalInvestigatorsForm(request.POST)
-        print(profile_form)
-      
-        if form.is_valid() and profile_form.is_valid():
-            user=form.save()
-            print(user)
-            my_group = Group.objects.get(name='principal_investigator') 
-            my_group.user_set.add(user)
-            profile= profile_form.save(commit=False)
-            profile.user=user
-            profile.save() 
-            messages.info(request,"User created")
-            firstname=form.cleaned_data['first_name']
-            username=form.cleaned_data['username']
-            email=form.cleaned_data['email']
-            password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
-            print(stuff_in_string)
-                # email=i.email }}
-            
-            print('user created')
-            return redirect('/after_login/')
-    else:
-        form= Form(request.POST)
-        profile_form= PrincipalInvestigatorsForm()
-    return render(request, "principal_investigator_register.html",{"profile_form":profile_form,"form":form})
-
-def webgis_expert_register(request):
-    if request.method== "POST":
-        form= Form(request.POST)
-        print(form)
-        profile_form=  WebGISExpertForm(request.POST)
-        print(profile_form)
-      
-        if form.is_valid() and profile_form.is_valid():
-            user=form.save()
-            print(user)
-            my_group = Group.objects.get(name='webgis_expert') 
-            my_group.user_set.add(user)
-            profile= profile_form.save(commit=False)
-            profile.user=user
-            profile.save() 
-            messages.info(request,"User created")
-            firstname=form.cleaned_data['first_name']
-            username=form.cleaned_data['username']
-            email=form.cleaned_data['email']
-            password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
-            print(stuff_in_string)
-                # email=i.email }}
-            
-            print('user created')
-            return redirect('/after_login/')
-    else:
-        form= Form(request.POST)
-        profile_form=  WebGISExpertForm()
-    return render(request,"webgis_expert_register.html",{"profile_form":profile_form,"form":form})
    
 def mentor_registration(request):
     if request.method== "POST":

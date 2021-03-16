@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import datetime
-from registration.models import Student
+from registration.models import Student,Mentor,SchoolCoordinator,MukhyaSevika,AnganwadiWorkersRegister
 fatheroccupation = [('Legislators,Senior Officials & Managers','Legislators,Senior Officials & Managers'),
     ('Professionals','Professionals'),
     ('Technicians and Associate Professionals','Technicians and Associate Professionals'),
@@ -36,7 +36,38 @@ monthlyincome =  [ ('199,862','199,862'),
     ('10,002-29,97','10,002-29,97'),
     ('10,001','10,001'),
 ]
+occupation = [('Legislators,Senior Officials & Managers','Legislators,Senior Officials & Managers'),
+    ('Professionals','Professionals'),
+    ('Technicians and Associate Professionals','Technicians and Associate Professionals'),
+    ('Clerks','Clerks'),
+    ('Skilled workers and Shop & Market sales workers ','Skilled workers and Shop & Market sales workers '),
+    ('Skilled Agricultural','Skilled Agricultural and Fishery workers'), 
+    ('Craft and Related Trade Workers','Craft and Related Trade Workers'),
+    ('Plant and Machine Operators and Assemblers','Plant and Machine Operators and Assemblers'),
+    ('Elementary Occupation','Elementary Occupation'), 
+    ('Security guard','Security guard'),
+    ('Housekeeper or Housemaid','Housekeeper or Housemaid'),
+    ('Nurse','Nurse'),
+    ('Anganwadi Worker','Anganwadi Worker'),
+    ('Retired','Retired'),
+    ('Others','Others'),
 
+
+]
+education = [ ('Professionaldegree','Professionaldegree'),
+    ('Graduate','Graduate (Bachelors)'),
+    ('Middleschool','Middle school (5th to 10th std)'),
+    ('Primaryschool','Primary school (1st to 4th std)'),
+    ('Illiterate','Illiterate (No education)'),
+]
+annualincome =  [ ('199,862','199,862'),
+    ('99,931-199,861','99,931-199,861'),
+    ('74,755-99,930','74,755-99,930'),
+    ('49,962-74,755','49,962-74,755'),
+    ('29,973-49,961','29,973-49,961'),
+    ('10,002-29,97','10,002-29,97'),
+    ('10,001','10,001'),
+]
 # Create your models here.
 class studentprof(models.Model):
     user = models.OneToOneField(Student, on_delete = models.CASCADE)
@@ -58,10 +89,33 @@ class studentprof(models.Model):
     schoolcordinatorincharge=  models.CharField(max_length=200,null = True)
     schooladdress=  models.CharField(max_length=200,null = True)
     schoolcontactinformation=  models.CharField(max_length=200,null = True)
-    contact=models.CharField(max_length=25500,blank=True)
     uploaded_photo= models.ImageField( upload_to='student/%Y/%m/%d',default = False)
     personaladdress = models.CharField(max_length=200,null=True)
+class ngprof(models.Model):
+    user = models.OneToOneField(Mentor, on_delete = models.CASCADE)
+    uid=models.CharField(max_length=100,null=True)
+    birthdate = models.DateField(null=True, blank=True)
+    age = models.CharField(max_length=255)
 
+class scprof(models.Model):
+    user = models.OneToOneField(SchoolCoordinator, on_delete = models.CASCADE)
+    uid=models.CharField(max_length=100,null=True)
+    personaladdress = models.CharField(max_length=2000,null=True)
+    birthdate=models.CharField(max_length=2000,null=True)
+    age=models.CharField(max_length=200,blank=True)
+    schooladdress = models.CharField(max_length=2000,null=True)
+    education=models.CharField(choices=education,max_length=2000,blank=True)
+    occupation=models.CharField(choices=occupation,max_length=2000,blank=True)
+    annualincome=models.CharField(choices=annualincome,max_length=25500,blank=True)
+    profile_photo=models.ImageField( upload_to='SchoolCoordinator/%Y/%m/%d',blank=True)   
+
+class mentorprof(models.Model):
+    user = models.OneToOneField(Mentor, on_delete = models.CASCADE)
+    uid=models.CharField(max_length=100,null=True)
+    birthdate = models.DateField(null=True, blank=True)
+    age = models.CharField(max_length=255)
+    address = models.CharField(max_length=200, null=False, blank=False) 
+    education = models.CharField(choices=education,max_length=255,null = True)
 class PersonalInformationForms(models.Model):
     uniqueid = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
@@ -75,7 +129,28 @@ class PersonalInformationForms(models.Model):
     email = models.EmailField()
     address = models.CharField(max_length=2000)
     profileimage = models.ImageField( upload_to='profileimages/%Y/%m/%d')
-   
+
+class msprof(models.Model):
+    user = models.OneToOneField(MukhyaSevika, on_delete = models.CASCADE)
+    uid=models.CharField(max_length=100,null=True)
+    anganwadinumber = models.IntegerField(default=False)
+    birthdate=models.DateField(null=True, blank=True)
+    age=models.CharField(max_length=200,blank=True)
+    education=models.CharField(choices=education,max_length=2000,blank=True)
+    occupation=models.CharField(choices=occupation,max_length=2000,blank=True)
+    annualincome=models.CharField(choices=annualincome,max_length=25500,blank=True)
+    profile_photo=models.ImageField( upload_to='MukhyaSevika/%Y/%m/%d',blank=True)
+class awprof(models.Model):
+    user = models.OneToOneField(AnganwadiWorkersRegister, on_delete = models.CASCADE)
+    uid=models.CharField(max_length=100,null=True)
+    birthdate=models.CharField(max_length=2000,null=True)
+    age=models.CharField(max_length=200,blank=True)
+    education=models.CharField(choices=education,max_length=2000,blank=True)
+    occupation=models.CharField(choices=occupation,max_length=2000,blank=True)
+    annualincome=models.CharField(choices=annualincome,max_length=25500,blank=True)
+    anganwadiname = models.CharField(max_length=255,null = True)
+    anganwadiaddress = models.CharField(max_length=255,null = True)
+    profile_photo=models.ImageField( upload_to='AnganwadiWorker/%Y/%m/%d',blank=True)
 
 class DailyScheduleForm(models.Model):
     user = models.OneToOneField(PersonalInformationForms, on_delete = models.CASCADE)
