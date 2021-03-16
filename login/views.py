@@ -134,7 +134,7 @@ def redirectd(request,username):
 
 
 def after_login(request):
-    profile_form= SchoolCoordinatorForm()
-    stu_form=StudentForm()
+    # profile_form= SchoolCoordinatorForm()
+    # stu_form=StudentForm()
     data= User.objects.all()
-    return render(request, 'after_login copy.html',{'profile_form':profile_form, 'stu_form':stu_form,'data':data})
+    return render(request, 'after_login copy.html',{'data':data})
