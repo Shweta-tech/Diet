@@ -378,7 +378,7 @@ def sc_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
 
                 print(stuff_in_string)
                 # email=i.email }}
@@ -422,7 +422,7 @@ def nutri_garden_expert_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
 
                 print(stuff_in_string)
                 # email=i.email }}
@@ -506,7 +506,7 @@ def anganwadi_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
 
                 print(stuff_in_string)
                 # email=i.email }}
@@ -545,7 +545,7 @@ def mukhyasevika_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
 
                 print(stuff_in_string)
                 # email=i.email }}
@@ -584,7 +584,7 @@ def mentor_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
 
                 print(stuff_in_string)
                 # email=i.email }}
@@ -625,7 +625,7 @@ def adolescent_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
 
                 print(stuff_in_string)
                 # email=i.email }}
@@ -664,7 +664,7 @@ def sm_parent_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
 
                 print(stuff_in_string)
                 # email=i.email }}
@@ -703,7 +703,7 @@ def school_parent_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
 
                 print(stuff_in_string)
                 # email=i.email }}
@@ -741,7 +741,7 @@ def lactatingwoman_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
 
                 print(stuff_in_string)
                 # email=i.email }}
@@ -779,7 +779,7 @@ def anemicwoman_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
 
                 print(stuff_in_string)
                 # email=i.email }}
