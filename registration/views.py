@@ -453,8 +453,11 @@ def student_bulk(request):
             
             
             else:
-                value = User.objects.create_user(id=data[0],first_name=data[1],last_name=data[2],username=data[3],email=data[4],password=data[5]) 
+                value = User.objects.create_user(id=data[0],first_name=encrypt(data[1]),last_name=encrypt(data[2]),username=data[3],email=data[4],password=data[5]) 
                 value.save()
+                last =encrypt(data[2])
+                print(last)
+                print(decrypt(last))
                 my_group = Group.objects.get(name='student') 
                 my_group.user_set.add(value)
                 contact=Student(uid='STU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)),contact=data[6],user=value)
