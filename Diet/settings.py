@@ -28,7 +28,7 @@ SECRET_KEY = '7po=w($if%^)(rthq9qvrgda=+!93oo2l+8qt3$_$f&jlh&uoh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['dietdiversity.communitygis.net','*']
 
 BOOTSTRAP4 = {
     'include_jquery': True,
