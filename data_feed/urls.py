@@ -36,6 +36,7 @@ urlpatterns = [
     path('add_info/<int:id>',views.add_info),
     path('change_pass_up/<int:id>',views.chng_pass_up),
     url(r'^consent/', views.consent, name='consent'),
+    url(r'^student_data/', views.student_data, name='student_data'),
     
 ]
 if settings.DEBUG:

@@ -107,6 +107,12 @@ def add_info(request,id):
       
 def consent(request):
     return render(request,'concentform.html')
+
+def student_data(request):
+    user=User.objects.all()
+    student= Student.objects.all()
+    context={'user':user,'student':student}
+    return render(request,'show_data_student.html',context)
 def chng_pass_up(request, id):
     data = User.objects.get(id=id)
     
