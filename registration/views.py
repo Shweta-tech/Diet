@@ -18,7 +18,7 @@ from django.contrib.auth.models import Group
 from django.core.mail import EmailMessage
 
 from django.core.mail import send_mail
-from django.contrib.auth.models import Group
+# from django.contrib.auth.models import Group
 from .resources import bulkResource
 from django.http import HttpResponse
 from cryptography.fernet import Fernet
@@ -460,7 +460,7 @@ def student_bulk(request):
                 print(decrypt(last))
                 my_group = Group.objects.get(name='student') 
                 my_group.user_set.add(value)
-                contact=Student(uid='STU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)),contact=encrypt(data[6]),nutrileader=encrypt(data[7]),user=value)
+                contact=Student(uid='STU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)),contact=encrypt(data[6]),nutrileader=data[7],user=value)
                 contact.save()
                 messages.info(request,"User created")
                 print('user created')

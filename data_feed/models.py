@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
 from registration.models import Student,Mentor,SchoolCoordinator,MukhyaSevika,AnganwadiWorkersRegister
 fatheroccupation = [('Legislators,Senior Officials & Managers','Legislators,Senior Officials & Managers'),
     ('Professionals','Professionals'),
@@ -70,7 +71,7 @@ annualincome =  [ ('199,862','199,862'),
 ]
 # Create your models here.
 class studentprof(models.Model):
-    user = models.OneToOneField(Student, on_delete = models.CASCADE)
+    user = models.OneToOneField(User, on_delete = models.CASCADE)
     uid=models.CharField(max_length=100,null=True)
     birthdate = models.DateField(null=True, blank=True)
     age = models.CharField(max_length = 50, null=True )
@@ -89,7 +90,7 @@ class studentprof(models.Model):
     schoolcordinatorincharge=  models.CharField(max_length=200,null = True)
     schooladdress=  models.CharField(max_length=200,null = True)
     schoolcontactinformation=  models.CharField(max_length=200,null = True)
-    uploaded_photo= models.ImageField( upload_to='student/%Y/%m/%d',default = False)
+    uploaded_photo = models.ImageField(upload_to='studentpp/%Y/%m/%d')    
     personaladdress = models.CharField(max_length=200,null=True)
 class ngprof(models.Model):
     user = models.OneToOneField(Mentor, on_delete = models.CASCADE)

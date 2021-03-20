@@ -2,8 +2,11 @@ from django.shortcuts import render
 from .forms import DailySchedule,BodyForm,EatTodayForm,DietForm,FeedbackForm,studentprofForm,mentorprofForm,scprofForm,ngprofForm,msprofForm,awprofForm
 from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,PersonalInformationForms,mentorprof,AdolescentAnemicGirl,PregnantWoman,studentprof,ngprof,scprof,msprof,awprof
 from registration.models import User,Student
+from django.contrib.auth.models import Group, User
 from registration.forms import Form
 from django.shortcuts import redirect
+from registration.encryption_util import encrypt, decrypt
+from django.contrib import messages
 
 # Create your views here.
 def chng_pass(request, id):  
@@ -28,90 +31,156 @@ def add_info(request,id):
         if group.name ==  'webgis_expert':
             return redirect('/after_login/')
         if group.name ==  'mentor':
-            profile_form=mentorprofForm()
             if request.method == 'POST':
-                print(data.student.uid)
-                if profile_form.is_valid() :
-                    user=profile_form.save()
+                form = mentorprofForm(request.POST,request.FILES)
+                print(form)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
                     return redirect('/after_login/')
-        
+                else:
+                    print("fail")
+                    return redirect('/')
+
             
-                print(profile_form)
+                # print(profile_form)
             else:
+                profile_form=mentorprofForm()
                 return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
         if group.name ==  'school_coordinator':
-            profile_form=scprofForm()
             if request.method == 'POST':
-                print(data.student.uid)
-                if profile_form.is_valid() :
-                    user=profile_form.save()
+                form = scprofForm(request.POST,request.FILES)
+                print(form)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
                     return redirect('/after_login/')
-        
+                else:
+                    print("fail")
+                    return redirect('/')
+
             
-                print(profile_form)
+                # print(profile_form)
             else:
+                profile_form=scprofForm()
                 return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
         if group.name ==  'parents':
             return redirect('/after_login/')
         if group.name ==  'student':
-            print(data.student.uid)
-            profile_form=studentprofForm()
+            # print(data.student.uid)
             if request.method == 'POST':
-                print(data.student.uid)
-                if profile_form.is_valid() :
-                    user=profile_form.save()
+                form = studentprofForm(request.POST,request.FILES)
+                print(form)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
                     return redirect('/after_login/')
-        
+                else:
+                    print("fail")
+                    return redirect('/')
+
             
-                print(profile_form)
+                # print(profile_form)
             else:
+                profile_form=studentprofForm()
                 return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
         if group.name ==  'anganwadi_worker':
-            profile_form=awprofForm()
             if request.method == 'POST':
-                print(data.student.uid)
-                if profile_form.is_valid() :
-                    user=profile_form.save()
+                form = awprofForm(request.POST,request.FILES)
+                print(form)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
                     return redirect('/after_login/')
-        
+                else:
+                    print("fail")
+                    return redirect('/')
+
             
-                print(profile_form)
+                # print(profile_form)
             else:
+                profile_form=awprofForm()
                 return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
         if group.name ==  'mukhya_sevika':
-            profile_form=msprofForm()
             if request.method == 'POST':
-                print(data.student.uid)
-                if profile_form.is_valid() :
-                    user=profile_form.save()
+                form = msprofForm(request.POST,request.FILES)
+                print(form)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
                     return redirect('/after_login/')
-        
+                else:
+                    print("fail")
+                    return redirect('/')
+
             
-                print(profile_form)
+                # print(profile_form)
             else:
+                profile_form=msprofForm()
                 return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
         if group.name ==  'icds_beneficiaries':
             return redirect('/after_login/')
         if group.name ==  'nutrigarden_expert':
-            profile_form=ngprofForm()
             if request.method == 'POST':
-                print(data.student.uid)
-                if profile_form.is_valid() :
-                    user=profile_form.save()
+                form = ngprofForm(request.POST,request.FILES)
+                print(form)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
                     return redirect('/after_login/')
-        
+                else:
+                    print("fail")
+                    return redirect('/')
+
             
-                print(profile_form)
+                # print(profile_form)
             else:
-                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})  
-      
+                profile_form=ngprofForm()
+                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
 def consent(request):
     return render(request,'concentform.html')
 
 def student_data(request):
-    user=User.objects.all()
-    student= Student.objects.all()
-    context={'user':user,'student':student}
+    user=User.objects.filter(groups__name='student')
+    # user.groups.
+    
+    # stu= Student.objects.all()
+    
+    # hulk=Group.objects.get(name='student')
+    # print(hulk)
+    for i in user:
+        # stu= Student.objects.get(user_id=i.id)
+
+        # print(stu.c/ontact)
+        print(i.id)
+        i.first_name= decrypt(i.first_name)
+        i.last_name=decrypt(i.last_name)
+        i.username=i.username
+        i.email=decrypt(i.email)
+        i.student.contact=decrypt(i.student.contact)
+
+    # for st in stu:
+    #     # print(st.contact)
+    #     st.contact=decrypt(st.contact)
+    context={'user':user}
     return render(request,'show_data_student.html',context)
 def chng_pass_up(request, id):
     data = User.objects.get(id=id)

@@ -29,59 +29,59 @@ class DietForm(forms.ModelForm):
         fields = ['mealtype','timefrom','timeto','rotiquantity','rotiunit','ricequantity','riceunit','pohaquantity','pohaunit','upmaquantity','upmaunit','teaquantity','teaunit','coffeequantity','coffeeunit','milkquantity','milkunit','vadaquantity','biscuitquantity','dalquantity','dalunit','gujratidalquantity','gujratidalunit','toordalquantity','toordalunit','moongdalquantity','moongdalunit','palakquantity','palakunit']
 
 class studentprofForm(forms.ModelForm):
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
+    # birthdate=forms.DateField(widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class'}))
     
     class Meta:
         model = studentprof
         fields = ('uid','birthdate','age','schoolname','schoolcordinatorincharge','schooladdress','schoolcontactinformation','uploaded_photo',)
         widgets = {
-                    'birthdate': DatePickerInput(format='%m/%d/%Y'), 
+                    'birthdate': forms.DateInput(format=('%Y/%m/%d'), attrs={'class':'some_class', 'placeholder':'Select a date', 'type':'date'}),
                  }
 class ngprofForm(forms.ModelForm):
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
+    # birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     
     class Meta:
         model = ngprof
         fields = '__all__'
         widgets = {
-                    'birthdate': DatePickerInput(format='%m/%d/%Y'), 
+                    'birthdate': forms.DateInput(format=('%Y/%m/%d'), attrs={'class':'some_class', 'placeholder':'Select a date', 'type':'date'}),
                  }
 class mentorprofForm(forms.ModelForm):
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
+    # birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     
     class Meta:
         model = mentorprof
         fields = '__all__'
         widgets = {
-                    'birthdate': DatePickerInput(format='%m/%d/%Y'), 
+                    'birthdate': forms.DateInput(format=('%Y/%m/%d'), attrs={'class':'some_class', 'placeholder':'Select a date', 'type':'date'}),
                  }
 class msprofForm(forms.ModelForm):
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
+    # birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     
     class Meta:
         model = msprof
         fields = '__all__'
         widgets = {
-                    'birthdate': DatePickerInput(format='%m/%d/%Y'), 
+                    'birthdate': forms.DateInput(format=('%Y/%m/%d'), attrs={'class':'some_class', 'placeholder':'Select a date', 'type':'date'}),
                  }
 class awprofForm(forms.ModelForm):
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
+    # birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     
     class Meta:
         model = awprof
         fields = '__all__'
         widgets = {
-                    'birthdate': DatePickerInput(format='%m/%d/%Y'), 
+                    'birthdate': forms.DateInput(format=('%Y/%m/%d'), attrs={'class':'some_class', 'placeholder':'Select a date', 'type':'date'}),
                  }
 
 class scprofForm(forms.ModelForm):
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
+    # birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
     
     class Meta:
         model = scprof
         fields = '__all__'
         widgets = {
-                    'birthdate': DatePickerInput(format='%m/%d/%Y'), 
+                    'birthdate': forms.DateInput(format=('%Y/%m/%d'), attrs={'class':'some_class', 'placeholder':'Select a date', 'type':'date'}),
                  }
 class FeedbackForm(forms.ModelForm):
     class Meta:

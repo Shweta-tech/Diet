@@ -21,7 +21,8 @@
         font-weight: bolder;
     }
 </style>
-<form action="/student_register/" method="POST" enctype="multipart/form-data">
+<form action="/add_info/{{user.id}}" enctype='multipart/form-data' method="POST">
+    
     {% csrf_token %}
 
     <div class="myform">
@@ -47,7 +48,35 @@
 console.log(val_uid)
             $('#id_uid').val(val_uid);
             
-        });
+        $(".some_class").change(function() {
+            var mdate = $("#id_birthdate").val().toString();
+            console.log(mdate)
+            var yearThen = parseInt(mdate.substring(0, 4), 10);
+            var monthThen = parseInt(mdate.substring(5, 7), 10);
+            var dayThen = parseInt(mdate.substring(8, 10), 10);
 
+            var today = new Date();
+            var birthday = new Date(yearThen, monthThen - 1, dayThen);
+
+            var differenceInMilisecond = today.valueOf() - birthday.valueOf();
+
+            var year_age = Math.floor(differenceInMilisecond / 31536000000);
+            console.log(year_age)
+            var day_age = Math.floor((differenceInMilisecond % 31536000000) / 86400000);
+
+            if ((today.getMonth() == birthday.getMonth()) && (today.getDate() == birthday.getDate())) {
+                alert("Happy B'day!!!");
+            }
+
+            var month_age = Math.floor(day_age / 30);
+
+
+
+            $('#id_age').val(year_age+'years'+month_age+'months'+day_age+'days');
+            
+  
+    });
+        });
+console.log({{user.id}})
 </script>
 {% endblock %}
