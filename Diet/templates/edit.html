@@ -1,0 +1,105 @@
+{% extends 'base.html' %} {% load static%} {% block content %}
+{% load i18n %}
+
+<div class="container mb-5 text-center">
+
+    <form method="POST" class="post-form" action="/update/{{data.id}}" style="margin-top: 80px;">
+        {% csrf_token %}
+
+
+        <div>
+            <label class="col-sm-1 col-form-label"></label>
+            <div>
+                <h3>{% trans "Update Details" %}</h3>
+            </div>
+        </div>
+        <div>
+            <label> {% trans "ID" %}:</label>
+            <div>
+                <input type="text" name="id" id="id_id" required value="{{ data.id }}" disabled =True readonly/>
+            </div>
+        </div>
+        <div>
+            <label> {% trans "First name:" %}</label>
+            <div>
+                <input type="text" name="first_name" id="id_first_name" required value="{{ data.first_name }}" />
+            </div>
+        </div>
+        <div>
+            <label> {% trans "Last name:" %}</label>
+            <div>
+                <input type="text" name="last_name" id="id_last_name" required value="{{ data.last_name }}" />
+            </div>
+        </div>
+        <div>
+            <label> {% trans "Username:" %}</label>
+            <div>
+                <input type="text" name="username" id="id_username" required value="{{ data.username }}" readonly />
+            </div>
+        </div>
+        <div>
+            <label>{% trans "Email:" %}</label>
+            <div>
+                <input type="text" name="email" id="id_email" required value="{{ data.email }}" />
+            </div>
+        </div>
+        <div>
+            <label>{% trans "Contact:" %}</label>
+            <div>
+                <input type="text" name="contact" id="id_contact" required value="{{ student.contact }}" />
+            </div>
+        </div>
+        <div>
+            <label>{% trans "Role:" %}</label>
+            <div>
+                <input type="text" name="nutrileader" id="id_nutrileader" required value="{{ student.nutrileader }}" />
+            </div>
+        </div>
+         <div>
+            <label>{% trans "Unique ID:" %}</label>
+            <div>
+                <input type="text" name="uid" id="id_uid" required value="{{ student.uid }}" readonly/>
+            </div>
+        </div>
+        <div>
+            <label hidden>{% trans "Password:" %}</label>
+            <div>
+                <input type="text" name="password1" id="id_password1" required value="{{ data.password }}" hidden/>
+            </div>
+        </div> 
+        <div>
+            <label hidden>{% trans "Confirm Password:" %}</label>
+            <div>
+                <input type="text" name="password2" id="id_password2" required value="{{ data.password }}" hidden/>
+            </div>
+        </div>
+        <!-- <div>
+            <label>{% trans "Supervisor Name:" %}</label>
+            <div>
+                <input type="text" name="supervisor_name" id="id_supervisor_name" required value="{{ data.supervisor_name }}" />
+            </div>
+        </div>
+        <div>
+            <label>{% trans "Rejected:" %}</label>
+            <div>
+                <input type="text" name="rejected" id="id_rejected" required value="{{ data.rejected }}" />
+            </div>
+        </div>
+        <div style="display:none;">
+            <label>{% trans "Zone ID:" %}</label>
+            <div>
+                <input type="text" name="zone_id_id" id="id_zone_id_id" required value="{{ data.zone_id_id }}" />
+            </div>
+        </div> -->
+        <div class="form-group row">
+            <label class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-success">{% trans "Update" %}</button>
+            </div>
+        </div> 
+    </form>
+</div>
+<script>
+    // console.log("{{ data.zone_id_id }}")
+</script>
+{% endblock %}

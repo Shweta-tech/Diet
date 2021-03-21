@@ -25,21 +25,21 @@ key = Fernet.generate_key()
 f = Fernet(key)
 
 
-def show(request):
-    hm= HeadMentor.objects.all()
-    sm= SupportMentor.objects.all()
-    aw= AnganwadiWorker.objects.all()
-    stu= Student.objects.all()
-    sch= School.objects.all()
-    sc= SchoolCoordinator.objects.all()
-    te= TechnicalExpert.objects.all()
-    pm= ProjectManager.objects.all()
-    # print(stu[0].contact)
-    context={'hm':hm,'sm':sm,'aw':aw,'stu':stu,'sch':sch,'sc':sc,'te':te,'pm':pm}
-    return render(request,'select.html',context)
+# def show(request):
+#     hm= HeadMentor.objects.all()
+#     sm= SupportMentor.objects.all()
+#     aw= AnganwadiWorker.objects.all()
+#     stu= Student.objects.all()
+#     sch= School.objects.all()
+#     sc= SchoolCoordinator.objects.all()
+#     te= TechnicalExpert.objects.all()
+#     pm= ProjectManager.objects.all()
+#     # print(stu[0].contact)
+#     context={'hm':hm,'sm':sm,'aw':aw,'stu':stu,'sch':sch,'sc':sc,'te':te,'pm':pm}
+#     return render(request,'select.html',context)
 
-def bulk_register(request):
-    return render(request,'bulk_register.html')
+# def bulk_register(request):
+#     return render(request,'bulk_register.html')
 
 # Create your views here.
 

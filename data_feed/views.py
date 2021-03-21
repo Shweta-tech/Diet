@@ -3,7 +3,7 @@ from .forms import DailySchedule,BodyForm,EatTodayForm,DietForm,FeedbackForm,stu
 from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,PersonalInformationForms,mentorprof,AdolescentAnemicGirl,PregnantWoman,studentprof,ngprof,scprof,msprof,awprof
 from registration.models import User,Student
 from django.contrib.auth.models import Group, User
-from registration.forms import Form
+from registration.forms import Form,StudentForm
 from django.shortcuts import redirect
 from registration.encryption_util import encrypt, decrypt
 from django.contrib import messages
@@ -11,11 +11,10 @@ from django.contrib import messages
 # Create your views here.
 def chng_pass(request, id):  
     data = User.objects.get(id=id)
-    # docdata  = doctor.objects.get(id=id)  
-    # print(data.userprofile.role)
-    # if data.userprofile.role=='admin' and 'custodian':
-    #     return render(request,'bed_dash/confirmation.html', {'data':data})
-    # else:
+    data.first_name=decrypt(data.first_name)
+    data.last_name=decrypt(data.last_name)
+    data.email=decrypt(data.email)
+    data.student.contact=decrypt(data.student.contact)
     return render(request,'pass_change.html', {'data':data}) 
 def add_info(request,id):  
     
@@ -469,4 +468,55 @@ def pregnant_woman_form(request):
     return render(request,'Pregnant_woman_form.html')
 
 
+def edit(request, id):  
+    data = User.objects.get(id=id)
+    # docdata  = doctor.objects.get(id=id)  
+    # print(data.date)
+    # for i in data:
+    student=Student.objects.get(user_id=id)
+    data.first_name=decrypt(data.first_name)
+    data.last_name=decrypt(data.last_name)
+    data.email=decrypt(data.email)
+    data.student.contact=decrypt(data.student.contact)
+    return render(request,'edit.html', {'data':data,'student':student}) 
 
+def update(request, id):
+    # print(id)
+    user=User.objects.get(id=id)
+    data = Student.objects.get(user_id=id) 
+    # print(user)
+    user.first_name=request.POST.get('first_name')
+    print(user.first_name)
+    # user.last_name=request.POST.get('last_name')
+    # user.email=request.POST.get('email')
+    # user.student.contact=request.POST.get('contact')
+    # user.first_name=request.POST.get('first_name')
+    # data.first_name=decrypt(data.first_name)
+    # user.save()
+    profile=Form(request.POST,instance = user)
+    
+    print(profile)
+    form = StudentForm(request.POST, instance = data)  
+    # print(form.contact)
+    if form.is_valid() and profile.is_valid() : 
+        new=profile.save()
+        # print(user)
+        # my_group = Group.objects.get(name='s') 
+        # my_group.user_set.add(user)
+        profile= form.save(commit=False)
+        profile.user=new
+        profile.save()
+        return redirect("/student_data/")  
+    else:
+        print("fail")
+        data.first_name=decrypt(data.first_name)
+    return render(request, 'edit.html', {'user':user,'data': data}) 
+
+
+def destroy(request, id):  
+    data = User.objects.get(id=id)  
+    stu= Student.objects.get(user_id=id)
+    data.delete()
+    stu.delete()
+    return redirect("/student_data/")  
+ 

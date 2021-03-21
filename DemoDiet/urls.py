@@ -30,7 +30,7 @@ urlpatterns = [
     
     
 
-    url(r'^show/', views.show, name='show'),
+    # url(r'^show/', views.show, name='show'),
     
     url(r'^recorder/', views.recorder, name='recorder'),
    
