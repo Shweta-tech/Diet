@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
-from registration.models import Student,Mentor,SchoolCoordinator,MukhyaSevika,AnganwadiWorkersRegister
+from registration.models import Student,Mentor,SchoolCoordinator,MukhyaSevika,AnganwadiWorkersRegister,anemicadolescentgirl
 fatheroccupation = [('Legislators,Senior Officials & Managers','Legislators,Senior Officials & Managers'),
     ('Professionals','Professionals'),
     ('Technicians and Associate Professionals','Technicians and Associate Professionals'),
@@ -20,6 +20,7 @@ fatheroccupation = [('Legislators,Senior Officials & Managers','Legislators,Seni
 
 
 ]
+foodhabit = [('Vegetarian','Vegetarian'),('Non-Vegetarian','Non-Vegetarian')]
 unit = [('kgs','kgs'),('lbs','lbs')]
 hunit = [('cms','cms'),('inches','inches')]
 hgtunit = [ ('feet','feet'), ('inches','inches'),('cms','cms'),('inches','inches')]
@@ -141,6 +142,7 @@ class msprof(models.Model):
     occupation=models.CharField(choices=occupation,max_length=2000,blank=True)
     annualincome=models.CharField(choices=annualincome,max_length=25500,blank=True)
     profile_photo=models.ImageField( upload_to='MukhyaSevika/%Y/%m/%d',blank=True)
+
 class awprof(models.Model):
     user = models.OneToOneField(AnganwadiWorkersRegister, on_delete = models.CASCADE)
     uid=models.CharField(max_length=100,null=True)
@@ -152,6 +154,67 @@ class awprof(models.Model):
     anganwadiname = models.CharField(max_length=255,null = True)
     anganwadiaddress = models.CharField(max_length=255,null = True)
     profile_photo=models.ImageField( upload_to='AnganwadiWorker/%Y/%m/%d',blank=True)
+
+class anemicadolescentgirlprof(models.Model):
+    user = models.OneToOneField(User,on_delete = models.CASCADE)
+    uid= models.CharField(max_length=100,null=True)
+    birthdate= models.DateField(null=True, blank=True)
+    age = models.CharField(max_length = 50)
+    occupation = models.CharField(choices=occupation,max_length=2550)
+    education = models.CharField(choices=education,max_length=255,null = True)
+    annualincome = models.CharField(choices=annualincome,max_length=255,null = True)
+    weight = models.IntegerField()
+    weightunit = models.CharField(max_length=255,choices=unit )
+    height = models.IntegerField()
+    heightunit = models.CharField(max_length = 50,choices=hgtunit)
+    bmi= models.DecimalField(max_digits = 10,decimal_places = 3)
+    waist = models.IntegerField(null=True)
+    waistunit = models.CharField(max_length=20,choices=hunit)
+    hip = models.IntegerField(null=True)
+    hipunit = models.CharField(max_length=20,choices=hunit)
+    whratio = models.DecimalField(max_digits = 10,null=True,decimal_places = 3)
+    whratioderived = models.IntegerField(null=True)
+    foodhabits =  models.CharField(max_length = 20,choices=foodhabit,null = True)
+    profile_photo = models.FileField(upload_to='anemicadolescentgirl/%Y/%m/%d')
+    feedback = models.CharField(max_length=2550)  
+    
+class anemiclactatingmotherprof(models.Model):
+    user = models.OneToOneField(User,on_delete = models.CASCADE)
+    uid= models.CharField(max_length=100,null=True)
+    birthdate= models.DateField(null=True, blank=True)
+    age = models.CharField(max_length = 50)
+    occupation = models.CharField(choices=occupation,max_length=2550)
+    education = models.CharField(choices=education,max_length=255,null = True)
+    annualincome = models.CharField(choices=annualincome,max_length=255,null = True)
+    weight = models.IntegerField()
+    weightunit = models.CharField(max_length=255,choices=unit )
+    height = models.IntegerField()
+    heightunit = models.CharField(max_length = 50,choices=hgtunit)
+    bmi= models.DecimalField(max_digits = 10,decimal_places = 3)
+    waist = models.IntegerField(null=True)
+    waistunit = models.CharField(max_length=20,choices=hunit)
+    hip = models.IntegerField(null=True)
+    hipunit = models.CharField(max_length=20,choices=hunit)
+    whratio = models.DecimalField(max_digits = 10,null=True,decimal_places = 3)
+    whratioderived = models.IntegerField(null=True)
+    foodhabits =  models.CharField(max_length = 20,choices=foodhabit,null = True)
+    profile_photo = models.FileField(upload_to='anemicadolescentgirl/%Y/%m/%d')
+    feedback = models.CharField(max_length=2550)  
+
+
+class smparentsprof(models.Model):
+    user = models.OneToOneField(User, on_delete = models.CASCADE)
+    uid=models.CharField(max_length=100,null=True)
+    birthdate=models.CharField(max_length=2000,null=True)
+    age=models.CharField(max_length=200,blank=True)
+    education=models.CharField(choices=education,max_length=2000,blank=True)
+    occupation=models.CharField(choices=occupation,max_length=2000,blank=True)
+    annualincome=models.CharField(choices=annualincome,max_length=25500,blank=True)
+    ICDSname = models.CharField(max_length = 200)
+    ICDScenteraddress = models.CharField(max_length = 200)
+    ICDScentercontact = models.CharField(max_length = 200)
+    foodhabits =  models.CharField(max_length = 20,choices=foodhabit,null = True)
+    profile_photo=models.ImageField( upload_to='SMParents/%Y/%m/%d',blank=True)
 
 class DailyScheduleForm(models.Model):
     user = models.OneToOneField(PersonalInformationForms, on_delete = models.CASCADE)
@@ -227,42 +290,26 @@ class FeedbackModel(models.Model):
     issues = models.TextField(max_length = 2000)
     suggestions = models.TextField(max_length  = 2000)
 
-class AdolescentAnemicGirl(models.Model):
-    uniqueid = models.CharField(max_length = 50)
-    name = models.CharField(max_length = 50)
-    weight = models.IntegerField()
-    weightunit = models.CharField(max_length = 50)
-    height = models.IntegerField()
-    heightunit = models.CharField(max_length = 50)
-    bmi= models.DecimalField(max_digits = 5,decimal_places = 2)
-    age = models.IntegerField()
-    hemoglobinvalue = models.IntegerField()
-    hemoglobindate = models.DateField(default=datetime.now, blank=True)
-    food = models.CharField(max_length = 50)
-    complication = models.CharField(max_length = 50)
-    education= models.CharField(max_length = 50)
-    medication = models.CharField(max_length = 50)
-    health = models.CharField(max_length = 50)
-    medical= models.CharField(max_length = 50)
-    uploaded_file = models.FileField(upload_to='adolescentgirldocuments/%Y/%m/%d')
-    feedback = models.CharField(max_length = 100)
 
-class PregnantWoman(models.Model):
-    uniqueid = models.CharField(max_length = 50)
-    name = models.CharField(max_length = 50)
+class pregnantwomanprof(models.Model):
+    user = models.OneToOneField(User,on_delete = models.CASCADE)
+    uid= models.CharField(max_length=100,null=True)
+    birthdate= models.DateField(null=True, blank=True)
+    age = models.CharField(max_length = 50)
+    occupation = models.CharField(choices=occupation,max_length=2550)
+    education = models.CharField(choices=education,max_length=255,null = True)
+    annualincome = models.CharField(choices=annualincome,max_length=255,null = True)
     weight = models.IntegerField()
-    weightunit = models.CharField(max_length = 50)
+    weightunit = models.CharField(max_length=255,choices=unit )
     height = models.IntegerField()
-    heightunit = models.CharField(max_length = 50)
-    bmi= models.DecimalField(max_digits = 5,decimal_places = 2)
-    age = models.IntegerField()
-    hemoglobinvalue = models.IntegerField()
-    hemoglobindate = models.DateField(default=datetime.now, blank=True)
-    food = models.CharField(max_length = 50, blank=True)
-    complication = models.CharField(max_length = 50)
-    medication = models.CharField(max_length = 50)
-    health = models.CharField(max_length = 50, blank = True)
-    medical= models.CharField(max_length = 50)
-    uploaded_file = models.FileField(upload_to='pregnantwomandocuments/%Y/%m/%d')
-    feedback = models.CharField(max_length = 100)
-
+    heightunit = models.CharField(max_length = 50,choices=hgtunit)
+    bmi= models.DecimalField(max_digits = 10,decimal_places = 3)
+    waist = models.IntegerField(null=True)
+    waistunit = models.CharField(max_length=20,choices=hunit)
+    hip = models.IntegerField(null=True)
+    hipunit = models.CharField(max_length=20,choices=hunit)
+    whratio = models.DecimalField(max_digits = 10,null=True,decimal_places = 3)
+    whratioderived = models.IntegerField(null=True)
+    foodhabits =  models.CharField(max_length = 20,choices=foodhabit,null = True)
+    profile_photo = models.FileField(upload_to='anemicpregnantwoman/%Y/%m/%d')
+    feedback = models.CharField(max_length=2550)

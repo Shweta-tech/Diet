@@ -3,10 +3,10 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .forms import StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolCoordinatorForm,MentorForm,Form,AnemicPregnantWomanForm,ConcentForm,NutriGardenExpertForm,SMChildParentsRegisterForm,AnemicLactatingMotherForm,AnemicAdolescentGirlForm,SMChildForm,SchoolStudentParentForm
+from .forms import StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolCoordinatorForm,MentorForm,Form,AnemicPregnantWomanForm,ConcentForm,NutriGardenExpertForm,SMChildParentsRegisterForm,AnemicLactatingMotherForm,anemicadolescentgirlForm,SMChildForm,SchoolStudentParentForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User,auth
-from .models import Mentor,MukhyaSevika,AnganwadiWorkersRegister,Student,SchoolCoordinator,User,AnemicPregnantWoman,ConcentForm,NutriGardenExpert,SMChildParentsRegister,AnemicLactatingMother,AnemicAdolescentGirl,SMChild,SchoolStudentParent
+from .models import Mentor,MukhyaSevika,AnganwadiWorkersRegister,Student,SchoolCoordinator,User,AnemicPregnantWoman,ConcentForm,NutriGardenExpert,SMChildParentsRegister,AnemicLactatingMother,anemicadolescentgirl,SMChild,SchoolStudentParent
 from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -208,20 +208,22 @@ def anganwadi_workers_register(request):
 
 
 
-def anemic_pregnant_woman_registration(request):
+def anemic_pregnant_woman_register(request):
     if request.method== "POST":
         form= Form(request.POST)
         print(form)
         profile_form=AnemicPregnantWomanForm(request.POST,request.FILES)
         print('not valid')
         if form.is_valid() and profile_form.is_valid():
-            user=form.save()
-            print(user)
-            my_group = Group.objects.get(name='anemic_pregnant_woman') 
-            my_group.user_set.add(user)
-            profile= profile_form.save(commit=False)
-            profile.user=user
+            instance = form.save(commit=False)
+            profile=profile_form.save(commit=False)
+            instance.save()
+            print(instance.first_name)
+            profile.user=instance
+            print("working")
             profile.save() 
+            my_group = Group.objects.get(name='anemic_pregnant_woman') 
+            my_group.user_set.add(instance)
             messages.info(request,"User created")
             firstname=form.cleaned_data['first_name']
             username=form.cleaned_data['username']
@@ -276,13 +278,15 @@ def SMChildParentsRegister(request):
         profile_form= SMChildParentsRegisterForm(request.POST)
         print(profile_form)
         if form.is_valid() and profile_form.is_valid():
-            user=form.save()
-            print(user)
-            my_group = Group.objects.get(name='parents') 
-            my_group.user_set.add(user)
-            profile= profile_form.save(commit=False)
-            profile.user=user
+            instance = form.save(commit=False)
+            profile=profile_form.save(commit=False)
+            instance.save()
+            print(instance.first_name)
+            profile.user=instance
+            print("working")
             profile.save() 
+            my_group = Group.objects.get(name='sam_mam_parents') 
+            my_group.user_set.add(instance)
             messages.info(request,"User created")
             firstname=form.cleaned_data['first_name']
             username=form.cleaned_data['username']
@@ -623,7 +627,7 @@ def adolescent_bulk(request):
                 value.save()
                 my_group = Group.objects.get(name='adolescent_girl') 
                 my_group.user_set.add(value)
-                contact=AnemicAdolescentGirl(uid=data[6],birthdate=data[7],age=data[8],personalcontact=data[9],ICDSname=data[10],ICDScenteraddress=data[11],ICDScentercontact=data[12],occupation=data[13],education=data[14],annualincome=data[15],weight=data[16],weightunit=data[17],height=data[18],heightunit=data[17],bmi=data[18],waist=data[19],waistunit=data[20],hip=data[21],hipunit=data[22],whratio=data[23],whratioderived=data[24],foodhabbits=data[25],uploaded_photo=data[26],user=value)
+                contact=anemicadolescentgirl(uid=data[6],birthdate=data[7],age=data[8],personalcontact=data[9],ICDSname=data[10],ICDScenteraddress=data[11],ICDScentercontact=data[12],occupation=data[13],education=data[14],annualincome=data[15],weight=data[16],weightunit=data[17],height=data[18],heightunit=data[17],bmi=data[18],waist=data[19],waistunit=data[20],hip=data[21],hipunit=data[22],whratio=data[23],whratioderived=data[24],foodhabbits=data[25],uploaded_photo=data[26],user=value)
                 contact.save()
                 messages.info(request,"User created")
                 print('user created')
@@ -829,17 +833,19 @@ def anemic_adolescent_girl_register(request):
     if request.method== "POST":
         form= Form(request.POST)
         print(form)
-        profile_form=  AnemicAdolescentGirlForm(request.POST,request.FILES)
+        profile_form=  anemicadolescentgirlForm(request.POST,request.FILES)
         print(profile_form)
       
         if form.is_valid() and profile_form.is_valid():
-            user=form.save()
-            print(user)
-            my_group = Group.objects.get(name='adolescent_girl') 
-            my_group.user_set.add(user)
-            profile= profile_form.save(commit=False)
-            profile.user=user
+            instance = form.save(commit=False)
+            profile=profile_form.save(commit=False)
+            instance.save()
+            print(instance.first_name)
+            profile.user=instance
+            print("working")
             profile.save() 
+            my_group = Group.objects.get(name='adolescent_girl') 
+            my_group.user_set.add(instance)
             messages.info(request,"User created")
             firstname=form.cleaned_data['first_name']
             username=form.cleaned_data['username']
@@ -853,7 +859,7 @@ def anemic_adolescent_girl_register(request):
             return redirect('/after_login/')
     else:
         form= Form(request.POST)
-        profile_form=  AnemicAdolescentGirlForm()
+        profile_form=  anemicadolescentgirlForm()
     return render(request,"anemic_adolescent_girl_register.html",{"profile_form":profile_form,"form":form})
    
 def anemic_lactating_mother_resgiter(request):
@@ -864,13 +870,15 @@ def anemic_lactating_mother_resgiter(request):
         print(profile_form)
       
         if form.is_valid() and profile_form.is_valid():
-            user=form.save()
-            print(user)
-            my_group = Group.objects.get(name='anemic_lactating_mother') 
-            my_group.user_set.add(user)
-            profile= profile_form.save(commit=False)
-            profile.user=user
+            instance = form.save(commit=False)
+            profile=profile_form.save(commit=False)
+            instance.save()
+            print(instance.first_name)
+            profile.user=instance
+            print("working")
             profile.save() 
+            my_group = Group.objects.get(name='anemic_lactating_mother') 
+            my_group.user_set.add(instance)
             messages.info(request,"User created")
             firstname=form.cleaned_data['first_name']
             username=form.cleaned_data['username']

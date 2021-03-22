@@ -19,7 +19,7 @@ from django.contrib.auth.models import Group
 from django.http import HttpResponse
 # from DemoDiet.resources import bulkResource
 # import exiftool
-from data_feed.forms import studentprof
+from data_feed.forms import studentprof,anemicadolescentgirlprof,anemiclactatingmotherprof
 from cryptography.fernet import Fernet
 key = Fernet.generate_key()
 f = Fernet(key)
@@ -80,7 +80,23 @@ def login(request):
                     auth.login(request,user)
                     return redirect('/after_login/')
                 # if group.name ==  'after_login':
-
+                if group.name ==  'anemic_pregnant_woman':
+                    auth.login(request,user)
+                    profile=()
+                    return redirect('/after_login/',{'profile':profile})
+                if group.name ==  'adolescent_girl':
+                    auth.login(request,user)
+                    profile=anemicadolescentgirlprof()
+                    return redirect('/after_login/',{'profile':profile})
+                if group.name ==  'anemic_lactating_mother':
+                    auth.login(request,user)
+                    profile=anemiclactatingmotherprof()
+                    return redirect('/after_login/',{'profile':profile})
+                if group.name ==  'sam_mam_parents':
+                    auth.login(request,user)
+                    profile=anemiclactatingmotherprof()
+                    return redirect('/after_login/',{'profile':profile})
+                   
             
         else:
             messages.info(request,'invalid credentials')
@@ -129,6 +145,14 @@ def redirectd(request,username):
                 if group.name ==  'icds_beneficiaries':
                     return redirect('/after_login/')
                 if group.name ==  'nutrigarden_expert':
+                    return redirect('/after_login/')
+                if group.name ==  'anemic_pregnant_woman':
+                    return redirect('/after_login/')
+                if group.name ==  'adolescent_girl':
+                    return redirect('/after_login/')
+                if group.name ==  'anemic_lactating_mother':
+                    return redirect('/after_login/')
+                if group.name ==  'sam_mam_parents':
                     return redirect('/after_login/')
 
 
