@@ -5,7 +5,7 @@ import random
 import string
 from django.forms import Textarea
 from bootstrap_datepicker_plus import DatePickerInput
-from .models import Mentor,MukhyaSevika,AnganwadiWorkersRegister,Student,SchoolCoordinator,User,AnemicPregnantWoman,SMChildParentsRegister,ConcentForm,NutriGardenExpert,AnemicLactatingMother,AnemicAdolescentGirl,SMChild,SchoolStudentParent
+from .models import Mentor,MukhyaSevika,AnganwadiWorkersRegister,Student,SchoolCoordinator,User,AnemicPregnantWoman,SMChildParentsRegister,ConcentForm,NutriGardenExpert,AnemicLactatingMother,anemicadolescentgirl,SMChild,SchoolStudentParent
 class Form(UserCreationForm):
     email=forms.EmailField(required=False)
     first_name=forms.CharField(max_length=255)
@@ -107,60 +107,27 @@ class SchoolStudentParentForm(forms.ModelForm):
 
 class AnemicLactatingMotherForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='ALM'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
-    weight=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'bmicalculateclass'}))
-    weightunit=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'bmicalculateclass','placeholder':'in kgs/lbs'}))
-    height=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'bmicalculateclass'}))
-    heightunit=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'bmicalculateclass','placeholder':'in feet/inches/cms/meters'}))
-    waist=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'whratiocalculateclass'}))
-    waistunit=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'whratiocalculateclass','placeholder':'in cms/inches'}))
-    hip=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'whratiocalculateclass'}))
-    hipunit=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'whratiocalculateclass','placeholder':'in cms/inches'}))
+  
     class Meta:
         model = AnemicLactatingMother
-        fields =  ['birthdate','age','personalcontact','ICDSname','ICDScenteraddress','ICDScentercontact','occupation','education','annualincome','weight','weightunit','height','heightunit','bmi','waist','waistunit','hip','hipunit','whratio','whratioderived','foodhabits','uploaded_photo','uid'] 
+        fields =   ['personalcontact','childbirthdate','ICDSname','uid']
         widgets = {
-                    'birthdate': DatePickerInput(format='%m/%d/%Y'), 
+                    'childbirthdate': DatePickerInput(format='%m/%d/%Y'), 
                   
         }
-class AnemicAdolescentGirlForm(forms.ModelForm):
+class anemicadolescentgirlForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='AAG'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
-    weight=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'bmicalculateclass'}))
-    weightunit=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'bmicalculateclass','placeholder':'in kgs/lbs'}))
-    height=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'bmicalculateclass'}))
-    heightunit=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'bmicalculateclass','placeholder':'in feet/inches/cms/meters'}))
-    waist=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'whratiocalculateclass'}))
-    waistunit=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'whratiocalculateclass','placeholder':'in cms/inches'}))
-    hip=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'whratiocalculateclass'}))
-    hipunit=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'whratiocalculateclass','placeholder':'in cms/inches'}))
-    
     class Meta:
-        model = AnemicAdolescentGirl
-        fields = ['birthdate','age','personalcontact','ICDSname','ICDScenteraddress','ICDScentercontact','occupation','education','annualincome','weight','weightunit','height','heightunit','bmi','waist','waistunit','hip','hipunit','whratio','whratioderived','foodhabits','uploaded_photo','uid']
-        widgets = {
-                    'birthdate': DatePickerInput(format='%m/%d/%Y'), 
-                  
-        }
+        model = anemicadolescentgirl
+        fields = ['personalcontact','ICDSname','uid']
+
+        
 class AnemicPregnantWomanForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='APW'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-    birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
-    weight=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'bmicalculateclass'}))
-    weightunit=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'bmicalculateclass','placeholder':'in kgs/lbs'}))
-    height=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'bmicalculateclass'}))
-    heightunit=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'bmicalculateclass','placeholder':'in feet/inches/cms/meters'}))
-    waist=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'whratiocalculateclass'}))
-    waistunit=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'whratiocalculateclass','placeholder':'in cms/inches'}))
-    hip=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'whratiocalculateclass'}))
-    hipunit=forms.CharField(widget=forms.TextInput(attrs={'autocomplete':'off','class':'whratiocalculateclass','placeholder':'in cms/inches'}))
     class Meta:
         model = AnemicPregnantWoman
-        fields = ['birthdate','age','personalcontact','ICDSname','ICDScenteraddress','ICDScentercontact','occupation','education','annualincome','weight','weightunit','height','heightunit','bmi','waist','waistunit','hip','hipunit','whratio','whratioderived','foodhabits','uploaded_photo','uid']
-        widgets = {
-                    'birthdate': DatePickerInput(format='%m/%d/%Y'), 
-                  
-        }
+        fields =  ['personalcontact','ICDSname','trimester','uid']
+        
 
 class SMChildForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='SMC'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
@@ -184,15 +151,14 @@ class SMChildForm(forms.ModelForm):
 
 class SMChildParentsRegisterForm(forms.ModelForm):
     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='SMP'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
-    motherbirthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
-    fatherbirthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class1','placeholder':'yyyy/mm/dd'}))
+  
     class Meta:
         model = SMChildParentsRegister
-        fields =  ['mothername','fathername','motherbirthdate','fatherbirthdate','motherage','fatherage','personalcontact','ICDSname','ICDScenteraddress','ICDScentercontact','occupation','education','annualincome','cuid','uid'] 
+        fields =  ['personalcontact','ICDSname','childis','childfirstname','childlastname','childbirthdate','uid'] 
         widgets = {
-                    'motherbirthdate': DatePickerInput(format='%m/%d/%Y'), 
-                    'fatherbirthdate': DatePickerInput(format='%m/%d/%Y'),
+                        'childbirthdate': DatePickerInput(format='%m/%d/%Y'), 
         }
+
 class ConcentForm(forms.ModelForm):
     class Meta:
         model = ConcentForm

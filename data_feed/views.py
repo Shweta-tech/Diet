@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .forms import DailySchedule,BodyForm,EatTodayForm,DietForm,FeedbackForm,studentprofForm,mentorprofForm,scprofForm,ngprofForm,msprofForm,awprofForm
-from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,PersonalInformationForms,mentorprof,AdolescentAnemicGirl,PregnantWoman,studentprof,ngprof,scprof,msprof,awprof
+from .forms import DailySchedule,BodyForm,EatTodayForm,DietForm,FeedbackForm,studentprofForm,mentorprofForm,scprofForm,ngprofForm,msprofForm,awprofForm,anemicadolescentgirlprofForm,anemiclactatingmotherprofForm,pregnantwomanprofForm,smparentsprofForm
+from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,PersonalInformationForms,mentorprof,studentprof,ngprof,scprof,msprof,awprof,anemicadolescentgirlprof,anemiclactatingmotherprof,pregnantwomanprof,smparentsprof
 from registration.models import User,Student
 from django.contrib.auth.models import Group, User
 from registration.forms import Form
@@ -17,6 +17,7 @@ def chng_pass(request, id):
     #     return render(request,'bed_dash/confirmation.html', {'data':data})
     # else:
     return render(request,'pass_change.html', {'data':data}) 
+
 def add_info(request,id):  
     
     data=User.objects.get(id=id)
@@ -155,6 +156,87 @@ def add_info(request,id):
             else:
                 profile_form=ngprofForm()
                 return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
+
+        if group.name ==  'adolescent_girl':
+            if request.method == 'POST':
+                form = anemicadolescentgirlprofForm(request.POST,request.FILES)
+                print(form)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
+                    return redirect('/after_login/')
+                else:
+                    print("fail")
+                    return redirect('/')
+
+            
+                # print(profile_form)
+            else:
+                profile_form=  anemicadolescentgirlprofForm()
+                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
+        if group.name ==  'anemic_lactating_mother':
+            if request.method == 'POST':
+                form = anemiclactatingmotherprofForm(request.POST,request.FILES)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
+                    return redirect('/after_login/')
+                else:
+                    print("fail")
+                    return redirect('/')
+
+            
+                # print(profile_form)
+            else:
+                profile_form=  anemiclactatingmotherprofFrom()
+                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})                
+        if group.name ==  'anemic_pregnant_woman':
+            if request.method == 'POST':
+                form = pregnantwomanprofForm(request.POST,request.FILES)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
+                    return redirect('/after_login/')
+                else:
+                    print("fail")
+                    return redirect('/')
+
+            
+                # print(profile_form)
+            else:
+                profile_form=  pregnantwomanprofForm()
+                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})                
+        if group.name ==  'sam_mam_parents':
+            if request.method == 'POST':
+                form = smparentsprofForm(request.POST,request.FILES)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
+                    return redirect('/after_login/')
+                else:
+                    print("fail")
+                    return redirect('/')
+
+            
+                # print(profile_form)
+            else:
+                profile_form=  smparentsprofForm()
+                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})                
+
+
+
 def consent(request):
     return render(request,'concentform.html')
 
@@ -410,63 +492,6 @@ def nutrigarden(request):
 
 
 
-def adolescent_anemic_girl_form(request):
-    if request.method=="POST":
-        uniqueid = request.POST.get('uniqueid')
-        name=request.POST.get('name')
-        weight=request.POST.get('weight')
-        weightunit=request.POST.get('weightunit')
-        height = request.POST.get('height')
-        heightunit= request.POST.get('heightunit')
-        bmi =request.POST.get('bmi')
-        age=request.POST.get('age')
-        hemoglobinvalue= request.POST.get('hb')
-        hemoglobindate = request.POST.get('hbdate')
-        food= request.POST.get('food')
-        complication= request.POST.get('anemia')
-        education= request.POST.get('education')
-        medication= request.POST.get('medication')
-        health= request.POST.get('health')
-        medical = request.POST.get('medical')
-        uploaded_file = request.FILES['myfile']
-        feedback = request.POST.get('fb')
-        print(name)
-        print(uploaded_file)
-        sub= AdolescentAnemicGirl(uniqueid=uniqueid,name=name,weight=weight,weightunit=weightunit,height=height,heightunit=heightunit,bmi=bmi,age=age,hemoglobinvalue=hemoglobinvalue,hemoglobindate=hemoglobindate,food = food,complication=complication,education=education,medication=medication,health=health,medical=medical,uploaded_file = uploaded_file,feedback=feedback)
-        sub.save()
-        print('submitted')
-    else:
-        return render(request,'adolescent_anemic_girl_form.html') 
-
-    return render(request,'adolescent_anemic_girl_form.html')
-def pregnant_woman_form(request):
-    if request.method=="POST":
-        uniqueid = request.POST.get('uniqueid')
-        name=request.POST.get('name')
-        weight=request.POST.get('weight')
-        weightunit=request.POST.get('weightunit')
-        height = request.POST.get('height')
-        heightunit= request.POST.get('heightunit')
-        bmi =request.POST.get('bmi')
-        age=request.POST.get('age')
-        hemoglobinvalue= request.POST.get('hb')
-        hemoglobindate = request.POST.get('hbdate')
-        food= request.POST.get('food')
-        complication= request.POST.get('anemia')
-        medication= request.POST.get('medication')
-        health= request.POST.get('health')
-        medical = request.POST.get('medical')
-        uploaded_file = request.FILES['myfile']
-        feedback = request.POST.get('fb')
-        print(name)
-        print(uploaded_file)
-        sub= PregnantWoman(uniqueid=uniqueid,name=name,weight=weight,weightunit=weightunit,height=height,heightunit=heightunit,bmi=bmi,age=age,hemoglobinvalue=hemoglobinvalue,hemoglobindate=hemoglobindate,complication=complication,medication=medication,health=health,medical=medical,uploaded_file = uploaded_file,feedback=feedback)
-        sub.save()
-        print('submitted')
-    else:
-        return render(request,'Pregnant_woman_form.html') 
-
-    return render(request,'Pregnant_woman_form.html')
 
 
 

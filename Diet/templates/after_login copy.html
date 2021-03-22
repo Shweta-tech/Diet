@@ -295,7 +295,7 @@
        
     </form>
 </div>
-{% endif %} {% endfor %}{% for group in user.groups.all %} {% if group.name == 'parents' %}
+{% endif %} {% endfor %}{% for group in user.groups.all %} {% if group.name == 'sam_mam_parents' %}
 
 <div class="container">
     <button class="dropbtn" onclick="location.href = '/sam_mam_child_parents_profile/'">Forms</button>
@@ -337,7 +337,7 @@
                     <!-- <td type>{{user.id}}</td> -->
                     <td>{{user.email}}</td>
                     
-                    <td>{{user.student.contact}}</td>
+                    <td>{{user.smchildparentsregister.personalcontact}}</td>
                     
                     <!-- <td>{{i.ventbed}}</td> -->
                     <!--<td>{{i.oxybed}}</td> -->
@@ -350,7 +350,7 @@
             </tbody>
         </table>
 
-
+        <a href="/add_info/{{ user.id }}">Add Information</a>
        
     </form>
 </div>
@@ -397,7 +397,7 @@
                     <!-- <td type>{{user.id}}</td> -->
                     <td>{{user.email}}</td>
                     
-                    <td>{{user.student.contact}}</td>
+                    <td>{{user.anemicpregnantwoman.personalcontact}}</td>
                     
                     <!-- <td>{{i.ventbed}}</td> -->
                     <!--<td>{{i.oxybed}}</td> -->
@@ -410,7 +410,7 @@
             </tbody>
         </table>
 
-
+        <a href="/add_info/{{ user.id }}">Add Information</a>
        
     </form>
 </div>
@@ -457,7 +457,7 @@
                     <!-- <td type>{{user.id}}</td> -->
                     <td>{{user.email}}</td>
                     
-                    <td>{{user.student.contact}}</td>
+                    <td>{{user.anemicadolescentgirl.personalcontact}}</td>
                     
                     <!-- <td>{{i.ventbed}}</td> -->
                     <!--<td>{{i.oxybed}}</td> -->
@@ -469,7 +469,7 @@
                
             </tbody>
         </table>
-
+        <a href="/add_info/{{ user.id }}">Add Information</a>
 
        
     </form>
@@ -517,7 +517,7 @@
                     <!-- <td type>{{user.id}}</td> -->
                     <td>{{user.email}}</td>
                     
-                    <td>{{user.student.contact}}</td>
+                    <td>{{user.anemiclactatingmother.personalcontact}}</td>
                     
                     <!-- <td>{{i.ventbed}}</td> -->
                     <!--<td>{{i.oxybed}}</td> -->
@@ -529,7 +529,7 @@
                
             </tbody>
         </table>
-
+        <a href="/add_info/{{ user.id }}">Add Information</a>
 
        
     </form>

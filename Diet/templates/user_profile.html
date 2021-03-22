@@ -26,7 +26,7 @@
     {% csrf_token %}
 
     <div class="myform">
-        <h1> Student  Add Info</h1>
+        <h1>  Add Information </h1>
         <table>{{profile_form.as_table}}</table>
         <button type="submit" class="btn btn-info">Submit</button>
         <br>
@@ -45,9 +45,20 @@
 <script>
     $(document).ready(function() {
             var val_uid='{{data.student.uid}}';
-console.log(val_uid)
+            console.log(val_uid)
             $('#id_uid').val(val_uid);
-            
+            var val_uid='{{data.anemicadolescentgirl.uid}}';
+            console.log(val_uid)
+            $('#id_uid').val(val_uid);
+            var val_uid='{{data.anemiclactatingmother.uid}}';
+            console.log(val_uid)
+            $('#id_uid').val(val_uid);
+            var val_uid='{{data.anemicpregnantwoman.uid}}';
+            console.log(val_uid)
+            $('#id_uid').val(val_uid);
+            var val_uid='{{data.smchildparentsregister.uid}}';
+            console.log(val_uid)
+            $('#id_uid').val(val_uid);
         $(".some_class").change(function() {
             var mdate = $("#id_birthdate").val().toString();
             console.log(mdate)
@@ -77,6 +88,85 @@ console.log(val_uid)
   
     });
         });
+
+
+        $(document).ready(function() {
+        $(".bmicalculateclass").change(function() {
+            var bla = $('#id_weight').val();
+            var valnum = $('#id_weightunit').val();
+            if (valnum == "lbs") {
+                var i = (bla / 2.2046).toFixed(2);
+                console.log(i)
+            } 
+            else {
+                var i = bla;
+                console.log(i)
+            }   
+            
+            var len = $('#id_height').val();
+            var vallen = $('#id_heightunit').val();
+            if (vallen == "feet") {
+
+              var h = (len / 3.281).toFixed(2);
+               console.log(h)
+
+            } else if (vallen == "inches") {
+
+               var h = (len / 100).toFixed(2);
+                console.log(h)
+
+            } else if (vallen == "cms") {
+
+               var h = (len / 39.37).toFixed(2);
+                console.log(h)
+
+            } else {
+               var h = len;
+                console.log(h)
+
+            }
+
+            var calbmi = (i / (h * h)).toFixed(3);
+            $('#id_bmi').val(calbmi);
+
+        });
+    });
+   
+    $(document).ready(function() {
+        $(".whratiocalculateclass").change(function() {
+            var wst = $('#id_waist').val();
+            var valwst = $('#id_waistunit').val();
+            var hip = $('#id_hip').val();
+            var valhip = $('#id_hipunit').val();
+
+            if (valwst == "inches") {
+                var j = (wst * 2.54).toFixed(2);
+                console.log(i)
+            } 
+            else {
+                var j = wst;
+                console.log(i)
+            }   
+            
+           
+
+            if (valhip == "inches") {
+                var i = (hip * 2.54).toFixed(2);
+                console.log(j)
+            } 
+            else {
+                var i = hip;
+                console.log(j)
+            }   
+           
+
+            var whratio = (i / j).toFixed(3);
+            $('#id_whratio').val(whratio);
+
+        });
+    });
+   
+  
 console.log({{user.id}})
 </script>
 {% endblock %}
