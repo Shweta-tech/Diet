@@ -256,7 +256,7 @@ def student_data(request):
         i.last_name=decrypt(i.last_name)
         i.username=i.username
         i.email=decrypt(i.email)
-        i.student.contact=decrypt(i.student.contact)
+        # i.student.contact=decrypt(i.student.contact)
 
     # for st in stu:
     #     # print(st.contact)
