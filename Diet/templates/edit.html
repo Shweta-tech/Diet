@@ -3,7 +3,7 @@
 
 <div class="container mb-5 text-center">
 
-    <form method="POST" class="post-form" action="/update/{{data.id}}" style="margin-top: 80px;">
+    <form method="POST" class="post-form" action="/update/{{student.user_id}}" style="margin-top: 80px;">
         {% csrf_token %}
 
 
@@ -16,10 +16,10 @@
         <div>
             <label> {% trans "ID" %}:</label>
             <div>
-                <input type="text" name="id" id="id_id" required value="{{ data.id }}" disabled =True readonly/>
+                <input type="text" name="user_id" id="id_user_id" required value="{{ student.user_id }}"  readonly/>
             </div>
         </div>
-        <div>
+        <!-- <div>
             <label> {% trans "First name:" %}</label>
             <div>
                 <input type="text" name="first_name" id="id_first_name" required value="{{ data.first_name }}" />
@@ -42,7 +42,7 @@
             <div>
                 <input type="text" name="email" id="id_email" required value="{{ data.email }}" />
             </div>
-        </div>
+        </div> -->
         <div>
             <label>{% trans "Contact:" %}</label>
             <div>
@@ -61,7 +61,7 @@
                 <input type="text" name="uid" id="id_uid" required value="{{ student.uid }}" readonly/>
             </div>
         </div>
-        <div>
+        <!-- <div>
             <label hidden>{% trans "Password:" %}</label>
             <div>
                 <input type="text" name="password1" id="id_password1" required value="{{ data.password }}" hidden/>
@@ -72,7 +72,7 @@
             <div>
                 <input type="text" name="password2" id="id_password2" required value="{{ data.password }}" hidden/>
             </div>
-        </div>
+        </div> -->
         <!-- <div>
             <label>{% trans "Supervisor Name:" %}</label>
             <div>
@@ -100,6 +100,6 @@
     </form>
 </div>
 <script>
-    // console.log("{{ data.zone_id_id }}")
+    console.log({{ data.user_id }})
 </script>
 {% endblock %}

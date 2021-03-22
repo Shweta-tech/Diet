@@ -5,7 +5,7 @@ from registration.models import User,Student
 from django.contrib.auth.models import Group, User
 from registration.forms import Form,StudentForm
 from django.shortcuts import redirect
-from registration.encryption_util import encrypt, decrypt
+from .encryption_util import encrypt, decrypt
 from django.contrib import messages
 
 # Create your views here.
@@ -507,35 +507,39 @@ def edit(request, id):
 
 def update(request, id):
     # print(id)
-    user=User.objects.get(id=id)
+    # user=User.objects.get(id=id)
     data = Student.objects.get(user_id=id) 
     # print(user)
-    user.first_name=request.POST.get('first_name')
-    print(user.first_name)
+    # user.first_name=request.POST.get('first_name')
+    # print(user.first_name)
     # user.last_name=request.POST.get('last_name')
     # user.email=request.POST.get('email')
-    # user.student.contact=request.POST.get('contact')
+    x=request.POST.get('contact')
+    print(x)
     # user.first_name=request.POST.get('first_name')
     # data.first_name=decrypt(data.first_name)
     # user.save()
-    profile=Form(request.POST,instance = user)
+    # profile=Form(request.POST,instance = user)
     
-    print(profile)
+    # print(profile)
     form = StudentForm(request.POST, instance = data)  
     # print(form.contact)
-    if form.is_valid() and profile.is_valid() : 
-        new=profile.save()
-        # print(user)
-        # my_group = Group.objects.get(name='s') 
-        # my_group.user_set.add(user)
-        profile= form.save(commit=False)
-        profile.user=new
-        profile.save()
+    if form.is_valid(): 
+        new=form.cleaned_data["contact"]
+        # print(new)
+        contact=decrypt(new)
+        # print(contact)
+        form.cleaned_data["contact"]=new
+        # # my_group = Group.objects.get(name='s') 
+        # # my_group.user_set.add(user)
+        # profile= form.save(commit=False)
+        # profile.user=new
+        form.save()
         return redirect("/student_data/")  
     else:
         print("fail")
-        data.first_name=decrypt(data.first_name)
-    return render(request, 'edit.html', {'user':user,'data': data}) 
+        # data.first_name=decrypt(data.first_name)
+    return render(request, 'edit.html', {'data': data}) 
 
 
 def destroy(request, id):  
