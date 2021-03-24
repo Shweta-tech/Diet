@@ -39,6 +39,9 @@ urlpatterns = [
     url(r'^video_icds/',views.video_upload_icds,name='video_icds'),
     # Display Resources 
     url(r'^resources/', views.resources, name='resources'),
+    url(r'^schoolresources/', views.schoolresources, name='schoolresources'),
+    url(r'^poshanvatikaresources/', views.poshanvatikaresources, name='poshanvatikaresources'),
+    url(r'^icdsresources/', views.icdsresources, name='icdsresources'),
 
     url(r'^article_school/', views.article_school, name='article_school'),
     url(r'^resources_nutrigarden/', views.resources_nutrigarden, name='resources_nutrigarden'),
