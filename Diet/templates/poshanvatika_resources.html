@@ -5,9 +5,9 @@
 <head>
     <meta charset="utf-8">
     <title>jQuery Show Hide Elements Using Select Box</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
 
-
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <style>
         body {
             background: aliceblue;
@@ -119,21 +119,7 @@
             box-sizing: border-box;
         } */
     </style>
-    <script>
-        $(document).ready(function() {
-            $("#lang").change(function() {
-                $(this).find("option:selected").each(function() {
-                    var optionValue = $(this).attr("value");
-                    if (optionValue) {
-                        $(".box").not("." + optionValue).hide();
-                        $("." + optionValue).show();
-                    } else {
-                        $(".box").hide();
-                    }
-                });
-            }).change();
-        });
-    </script>
+   
 </head>
 
 
@@ -243,6 +229,19 @@
 </div>
 
 <script>
-    </script>
+    $(document).ready(function() {
+        $("#lang").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                if (optionValue) {
+                    $(".box").not("." + optionValue).hide();
+                    $("." + optionValue).show();
+                } else {
+                    $(".box").hide();
+                }
+            });
+        }).change();
+    });
+</script>
 
 </html>{% endblock %}}
