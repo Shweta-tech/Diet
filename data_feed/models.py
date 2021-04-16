@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from multiselectfield import MultiSelectField
 from registration.models import Student,Mentor,SchoolCoordinator,MukhyaSevika,AnganwadiWorkersRegister
 fatheroccupation = [('Legislators,Senior Officials & Managers','Legislators,Senior Officials & Managers'),
     ('Professionals','Professionals'),
@@ -265,3 +266,13 @@ class PregnantWoman(models.Model):
     uploaded_file = models.FileField(upload_to='pregnantwomandocuments/%Y/%m/%d')
     feedback = models.CharField(max_length = 100)
 
+# class DietRecallModel(models.Model):
+#     uid = models.CharField(max_length=255,default=False)
+#     eathabit=models.CharField(max_length=200,default=False)
+#     # TIMING TABLE
+#     glasseswater=models.CharField(max_length=200,default=False)
+#     # FOOD ITEM TABLE
+#     foodtime=models.CharField(max_length=200,default=False)
+#     beforelock=models.CharField(max_length=200,default=False)
+#     middaymeal=models.CharField(max_length=200,default=False) #add typing choice
+#     # MANY TABLES

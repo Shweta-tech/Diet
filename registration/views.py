@@ -3,10 +3,10 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .forms import StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolCoordinatorForm,MentorForm,Form,AnemicPregnantWomanForm,ConcentForm,NutriGardenExpertForm,SMChildParentsRegisterForm,AnemicLactatingMotherForm,AnemicAdolescentGirlForm,SMChildForm,SchoolStudentParentForm
+from .forms import StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolCoordinatorForm,MentorForm,Form,AnemicPregnantWomanForm,ConcentForm,NutriGardenExpertForm,SMChildParentsRegisterForm,AnemicLactatingMotherForm,AnemicAdolescentGirlForm,SMChildForm,SchoolStudentParentForm,NutriInfotainmentSurveyForm,NutriSocioDemographicForm,NutriAnthropometricParametersForm,FoodHabitsForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User,auth
-from .models import Mentor,MukhyaSevika,AnganwadiWorkersRegister,Student,SchoolCoordinator,User,AnemicPregnantWoman,ConcentForm,NutriGardenExpert,SMChildParentsRegister,AnemicLactatingMother,AnemicAdolescentGirl,SMChild,SchoolStudentParent
+from .models import Mentor,MukhyaSevika,AnganwadiWorkersRegister,Student,SchoolCoordinator,User,AnemicPregnantWoman,ConcentForm,NutriGardenExpert,SMChildParentsRegister,AnemicLactatingMother,AnemicAdolescentGirl,SMChild,SchoolStudentParent,NutriInfotainmentSurveyModel,NutriSocioDemographicModel,NutriAnthropometricParametersModel,FoodHabitsModel
 from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -905,4 +905,55 @@ def school_student_parent_register(request):
     return render(request, "school_student_parent_register.html",{"profile_form":profile_form,"form":form})
 
 
+def nutri_info_views(request):
+    if request.method == 'POST':
+        print("after post")
+        form = NutriInfotainmentSurveyForm(request.POST)
+        print(form)
+        if form.is_valid():
+                form.save()
+                print("saved")
+        return render(request,'nutri_info.html',{'form':form})  
+    else:
+        form = NutriInfotainmentSurveyForm()
+    return render(request,'nutri_info.html',{'form':form})
 
+
+def nutri_socio_demo_views(request):
+    if request.method == 'POST':
+        print("after post")
+        form = NutriSocioDemographicForm(request.POST)
+        print(form)
+        if form.is_valid():
+                form.save()
+                print("saved")
+        return render(request,'nutri_socio_demo.html',{'form':form})  
+    else:
+        form = NutriSocioDemographicForm()
+    return render(request,'nutri_socio_demo.html',{'form':form})
+
+def nutri_anthro_para_views(request):
+    if request.method == 'POST':
+        print("after post")
+        form = NutriAnthropometricParametersForm(request.POST)
+        print(form)
+        if form.is_valid():
+                form.save()
+                print("saved")
+        return render(request,'nutri_anthro_para.html',{'form':form})  
+    else:
+        form = NutriAnthropometricParametersForm()
+    return render(request,'nutri_anthro_para.html',{'form':form})
+
+def food_habits_views(request):
+    if request.method == 'POST':
+        print("after post")
+        form = FoodHabitsForm(request.POST)
+        print(form)
+        if form.is_valid():
+                form.save()
+                print("saved")
+        return render(request,'food_habits.html',{'form':form})  
+    else:
+        form = FoodHabitsForm()
+    return render(request,'food_habits.html',{'form':form})

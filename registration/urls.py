@@ -41,10 +41,6 @@ urlpatterns = [
     url(r'^mukhya_sevika_register/', views.mukhya_sevika_register, name='mukhya_sevika_register'),
     url(r'^anganwadi_workers_register/', views.anganwadi_workers_register, name='anganwadi_workers_register'),
 
-
-
-
-
     url(r'^mentor_register/', views.mentor_registration, name='mentor_register'),
     url(r'^school_coordinator_bulk/', views.sc_bulk, name='school_coordinator_bulk'),
     # url(r'^school_bulk/', views.school_bulk, name='school_bulk'),
@@ -59,6 +55,12 @@ urlpatterns = [
 
     url(r'^lactatingwoman_bulk/', views.lactatingwoman_bulk, name='lactatingwoman_bulk'),
     url(r'^pregnantwoman_bulk/', views.anemicwoman_bulk, name='pregnantwoman_bulk'),
+
+    url(r'^nutri_infotainment_survey/', views.nutri_info_views, name='nutri_infotainment_survey'),
+    url(r'^nutri_socio_demographic/', views.nutri_socio_demo_views, name='nutri_socio_demographic'),
+    url(r'^nutri_anthropometric_parameters/', views.nutri_anthro_para_views, name='nutri_anthropometric_parameters'),   
+    url(r'^food_habits/', views.food_habits_views, name='food_habits'),   
+
 
 ]
 if settings.DEBUG:

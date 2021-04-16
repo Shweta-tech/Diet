@@ -171,27 +171,46 @@
             </h2>
             <table border="0" align="center" cellspacing="10">
                 {% csrf_token %}
-                <tr>
-                    <td>Meal Type</td>
-                    <td>
+                <tr><td>What is your dietary habit?</td></tr>
+                <tr><td>
                         <!-- <input type="number" class="form-control" name="oxybed" id="exampleInputPassword1" placeholder="in cms" disabled> -->
-                        <select class="drop-down" name = "mealtype">
+                        <select class="drop-down" name = "diethabit">
                             <option value="">--- Please Select ---</option>
-                            <option value="early_morning">Early Morning</option>
-                            <option value="breakfast">Breakfast</option>
-                            <option value="mid_morning">Mid-Morning</option>
-                            <option value="lunch">Lunch</option>
-                            <option value="afternoon">Afternoon</option>
-                            <option value="evening_snacks">Evening Snacks</option>
-                            <option value="dinner">Dinner</option>
-                            <option value="bed_time">Bed Time</option>
-                            <option value="late_night">Late Night</option>
-                        </select></td>
-                </tr>
+                            <option value="Vegan">I eat only vegetables. I DO NOT eat milk, eggs, chiken, mutton or fish. (Vegan)</option>
+                            <option value="Lacto-Vegetarian">I eat only Milk and vegetables. I DO NOT eat eggs, chicken, mutton, fish. (Lacto-Vegetarian)</option>
+                            <option value="Eggetarian">I eat Only eggs and vegetables. I DO NOT eat milk, chicken, mutton or fish. (Eggetarian)</option>
+                            <option value="Lacto-ova-vegetarian">I eat milk, eggs and vegetables. I DO NOT eat chicken, mutton, fish.(Lacto-ova-vegetarian)</option>
+                            <option value="Non-vegetarian">I eat vegetables, milk, egg, chicken, mutton, fish. (Non-vegetarian)</option>
+                            <option value="Pescatarian">I eat vegetables, milk and fish. I DO NOT eat eggs, chicken and mutton. (Pescatarian)</option>
+                        </select>
+                    </td></tr>
                 <tr>
                     <td> Time : </td>
                     <td> <input type='textbox' placeholder='Time From' name = "timefrom"> </td>
                     <td> <input type='textbox' placeholder='Time To'  name = "timeto"> </td>
+                </tr>
+                <tr>
+                    <td>Meal :</td>
+                    <td>
+                        <select class="drop-down" name="mealtype">
+                            <option value="">--- Please Select ---</option>
+                            <option value="Breakfast">Breakfast</option>
+                            <option value="Mid-morning">Mid-morning</option>
+                            <option value="Lunch">Lunch</option>
+                            <option value="Afternoon-snack">Afternoon snack</option>
+                            <option value="Evening-snack">Evening snack</option>
+                            <option value="Dinner">Dinner</option>
+                            <option value="Bedtime-snack">Bedtime snack</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form action="/action_page.php">
+                            <input type="file" id="myFile" name="filename">
+                            <input type="submit">
+                        </form>
+                    </td>
                 </tr>
                 <tr>
                     <td>Recipies :</td>
