@@ -30,12 +30,14 @@ urlpatterns = [
     url(r'^daily_schedule/', views.daily_schedule_function, name='daily_schedule'),
     url(r'^feedbackform/', views.feedbackform, name='feedbackform'),
     url(r'^nutrigarden/', views.nutrigarden, name='nutrigarden'),
+    url(r'^generalinfo/', views.generalinfo, name='generalinfo'),
+    url(r'^sociodemorgraphicdetails', views.sociodemographicdetails, name='sociodemorgraphicdetails'),
     path('change_pass/<int:id>',views.chng_pass),
     path('add_info/<int:id>',views.add_info),
     path('change_pass_up/<int:id>',views.chng_pass_up),
     url(r'^consent/', views.consent, name='consent'),
     url(r'^student_data/', views.student_data, name='student_data'),
-    
+    url(r'^form_status/', views.form_status, name='form_status'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

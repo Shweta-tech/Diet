@@ -21,6 +21,12 @@ from wagtail.documents import urls as wagtaildocs_urls
 from django.conf.urls.static import static
 from django.conf import settings
 
+
+wagtail_urlpatterns = [
+    path('cms/', include(wagtailadmin_urls)),
+    path('documents/', include(wagtaildocs_urls)),
+    path('pages/', include(wagtail_urls)),
+]
 urlpatterns =[
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),
@@ -31,7 +37,7 @@ urlpatterns =[
     path('',include('resources.urls')),
     path('',include('data_feed.urls')),
     # path('',include('base.urls')),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + wagtail_urlpatterns
 
 
 # urlpatterns = [

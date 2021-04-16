@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 import random
 import string
 from django.forms import Textarea
-from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,studentprof,ngprof,msprof,awprof,mentorprof,scprof,anemicadolescentgirlprof,anemiclactatingmotherprof,pregnantwomanprof,smparentsprof
+from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,studentprof,ngprof,msprof,awprof,mentorprof,scprof,anemicadolescentgirlprof,anemiclactatingmotherprof,pregnantwomanprof,smparentsprof,GeneralInformation,SocioDemographicModel
 
 
 
@@ -165,3 +165,19 @@ class FeedbackForm(forms.ModelForm):
             'issues': Textarea(attrs={'cols': 5, 'rows': 5}),
             'suggestions': Textarea(attrs={'cols': 5, 'rows': 5}),
         }
+
+class GeneralInformationForm(forms.ModelForm):
+    # birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
+    
+    class Meta:
+        model = GeneralInformation
+        fields = ['name_of_volunteer','name_of_student','gender','birthdate','residential_address','pincode','name_of_school','address_of_school','pincode_of_school','personal_contact_number','religion']
+        widgets = {
+                    'birthdate': forms.DateInput(format=('%Y/%m/%d'), attrs={'class':'some_class', 'placeholder':'Select a date', 'type':'date'}),
+        }
+class SocioDemographicForm(forms.ModelForm):
+       
+    class Meta:
+        model = SocioDemographicModel
+        fields = ['i_live_with','number_of_family_members','guardian_name','guardian_age','guardian_education','guardian_occupation','monthly_family_income','ration_card_color']
+        

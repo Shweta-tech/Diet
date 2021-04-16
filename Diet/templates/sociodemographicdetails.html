@@ -1,0 +1,128 @@
+{% extends 'base.html' %} {% load static%}{% block content %} {% load bootstrap4 %}  {% bootstrap_css %}  {% bootstrap_javascript jquery='full' %} 
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Registration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    .myform {
+        margin-top: 200px;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+    
+    h1 {
+        text-align: center;
+        color: rgb(36, 36, 68);
+        font-weight: bolder;
+    }
+    #ac-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        /* width: 100%;
+        height: 100%;  */
+        /* background: rgba(255, 255, 255, .6); */
+        z-index: 1001;
+    }
+    #popup {
+        width: 500px;
+        height: 200px;
+        background: #FFFFFF;
+        border: 5px solid #000;
+        border-radius: 25px;
+        /* -moz-border-radius: 25px;
+        -webkit-border-radius: 25px;
+        box-shadow: #64686e 0px 0px 3px 3px;
+        -moz-box-shadow: #64686e 0px 0px 3px 3px;
+        -webkit-box-shadow: #64686e 0px 0px 3px 3px; */
+        text-decoration: none;
+        position: relative;
+        top: 250px;
+        left: 400px; 
+    }
+</style>
+ 
+<form action="/sociodemorgraphicdetails/" method="POST">
+
+    {% csrf_token %}
+  
+    <div class="myform">
+        <h1> Socio-Demographic Details</h1>
+        <table>{{form.media}} {{form.as_table}}</table>
+        <button type="submit" class="btn btn-info">Submit</button>
+        <br>
+        <br>
+        <!-- <span>New User?</span>
+        <a href="/register/">Create new account</a> -->
+    </div>
+</form>
+
+
+<!-- <div>
+    {% for message in messages %}
+    <h3>{{message}}</h3>{% endfor %}
+
+</div> -->
+
+<script>
+    // var $Name = $('.name');
+    // $Name.change(function() {
+    //     var $user = {
+    //         'user': $(this).val()
+    //     }
+    //     var $endpoint = window.location.href // or localhost/interface
+    //     $.ajax({
+    //         method: "GET",
+    //         url: $endpoint,
+    //         data: $name,
+    //         success: handleFormSuccess,
+    //         error: handleFormError,
+    //     })
+    // })
+
+    // function handleFormSuccess(data) {
+    //     console.log(data);
+    //     $("#contact").val(data.mobile);
+    //     $("#ward").val(data.unit);
+    // }
+
+    // function handleFormError(jqXHR, textStatus, errorThrown) {
+    //     console.log(jqXHR)
+    //     console.log(textStatus)
+    //     console.log(errorThrown)
+    // }
+    $(document).ready(function() {
+        $(".some_class").change(function() {
+            var mdate = $("#id_birthdate").val().toString();
+            console.log(mdate)
+            var yearThen = parseInt(mdate.substring(0, 4), 10);
+            var monthThen = parseInt(mdate.substring(5, 7), 10);
+            var dayThen = parseInt(mdate.substring(8, 10), 10);
+
+            var today = new Date();
+            var birthday = new Date(yearThen, monthThen - 1, dayThen);
+
+            var differenceInMilisecond = today.valueOf() - birthday.valueOf();
+
+            var year_age = Math.floor(differenceInMilisecond / 31536000000);
+            console.log(year_age)
+            var day_age = Math.floor((differenceInMilisecond % 31536000000) / 86400000);
+
+            if ((today.getMonth() == birthday.getMonth()) && (today.getDate() == birthday.getDate())) {
+                alert("Happy B'day!!!");
+            }
+
+            var month_age = Math.floor(day_age / 30);
+
+
+
+            $('#id_age').val(year_age+'years'+month_age+'months'+day_age+'days');
+            
+        });
+    });
+
+    
+</script>
+{% endblock %}

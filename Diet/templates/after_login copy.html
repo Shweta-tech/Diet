@@ -181,8 +181,8 @@
     <button class="dropbtn" onclick="location.href = '/consent/'">Forms</button>
     <!-- <button class="dropbtn" onclick="openPage('About', this, 'orange')"></button> -->
     <!-- <div class="dropdown"> -->
-    <!-- <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button> -->
-    <button class="dropbtn" onclick="openPage('About', this, 'orange')">User Profile</button>
+    <button class="dropbtn" onclick="location.href = '/student_register/'">back</button>
+    <button class="dropbtn" onclick="location.href = '/form_status/'">Forms Status</button>
 </div>
 
 <div id="About"class="tabcontent">
@@ -874,9 +874,10 @@
 {% for group in user.groups.all %} {% if group.name == 'school_coordinator' %}
 <div class="container">
     <div class="dropdown">
-        <button onclick="myFunction()"class="dropbtn">Bulk Register</button>
+        <button onclick="myFunction()"class="dropbtn">Register</button>
         <div id="myDropdown"class="dropdown-content">
-            <a href="/student_bulk/">Student</a>
+            <a href="/student_bulk/"> Bulk Register Student</a>
+            <a href="/student_register/">Individual Register Student</a>
             <!-- <a href="/mukhya_sevika_register/">Mukhya Sevika</a>
             <a href="/anganwadi_bulk/">Anganwadi Worker</a>
            <a href="/anemic_woman_registration/">Anemic Women</a>
@@ -888,14 +889,14 @@
         </div>
     </div>
 
-    <div class="dropdown">
+    <!-- <div class="dropdown">
         <button onclick="individual()"class="dropbtn">Individual Register</button>
         <div id="individual"class="dropdown-content">
            
             <a href="/student_register/">Student</a>
           
         </div>
-    </div>
+    </div> -->
     <!-- <div class="dropdown"> -->
     <button class="dropbtn" onclick="openPage('Contact', this, 'blue')">Verify Uploads</button>
     <button class="dropbtn" onclick="openPage('About', this, 'orange')">User Profile</button>

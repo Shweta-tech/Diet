@@ -1,0 +1,33 @@
+{% block content %}
+ <style>
+.blinking {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+</style>
+{% for card in self.cards%}
+
+
+<div class="row" style="width: 400px;">
+    <div class="col">
+      <div class="card" style="text-align: justify; color :#FF8816;">
+        <div class="card-content">
+          <span class="card-title"><b>{{ card.title }}</b></span>
+
+          <p >{{ card.description }}</p>
+         
+        </div>
+        <div class="card-action blinking">
+          <a href="#" target='_blank' ><b>{{ card.link }}</b></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{%endfor%}
+{% endblock %}

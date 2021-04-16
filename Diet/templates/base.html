@@ -35,12 +35,15 @@ https://templatemo.com/tm-529-ramayana
 
         <!-- Main -->
         <div id="main">
+            
             <div class="inner">
 
                 <!-- Header -->
                 <header id="header">
+                   
                     <div class="logo">
-                        <a href="/">Community Diet Diversity</a>
+                        
+                        <a href="/" style="font-size:30px;margin-right: 30px;float: right;">Community Diet Diversity</a>
                     </div>
                 </header>
                 {% block content %} {% block feature %}
@@ -129,25 +132,7 @@ https://templatemo.com/tm-529-ramayana
                         </div>
                     </div>
                 </section>
-                <section class="left-image">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <img src="{% static 'assets/images/icds.gif' %}"  alt="">
-                            </div>
-                            <div class="col-md-6">
-                                <div class="right-content">
-                                    <h4>ICDS</h4>
-                                    <p>The ICDS services focus on providing adequate nutrition to reduce malnutrition among the vulnerable population within the community. These include SAM/MAM children, pregnant women, lactating mothers and adolescent girls. The ICDS cadre (Mukhya sevikas and Anganwadi workers) strive to achieve this goal. With the help of this platform, we aim to train the beneficiaries in the concepts of nutrition to bring about a behavior change. The beneficiaries will have direct and quick access where their queries and feedback will reach the ICDS cadre and monitoring their health and nutritional status is easier.
-                                    </p>
-                                    <!-- <div class="primary-button">
-                                        <a href="#">Read More</a>
-                                    </div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+               
             </div>
         </div>
 
@@ -166,15 +151,30 @@ https://templatemo.com/tm-529-ramayana
                 <!-- Menu -->
                 <nav id="menu">
                     <ul>
+                       
+                        {% if user.is_authenticated %}
+
+                        <li class="active"><a href="/logout/">Logout</li>
+                            {% else %}
+                        <li><a href="/login/">Login/Register</a></li>
+                        {% endif %}
+                    
                         <li><a href="/">{% trans "Home" %}</a></li>
-                        <li><a href="/aboutus/">{% trans "About Us" %}</a></li>
+                        <li>
+                        <span class="opener">About US</span>
+                            <ul>
+                                <li><a href="{% static 'Community Diet Diversity Project Changes done26nov.docx.pdf' %}">Concept Note on site</a></li>
+                                <li><a href="{% static 'concept_note_DietDiversityScore_for_children.pdf' %}">Concept Note on Diet Score</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li><a href="/aboutus/">{% trans "About Us" %}</a></li> -->
                         <li><a href="mailto:info@communitygis.net">Contact Us</a></li>
                         <li>
                             <span class="opener">School Project</span>
                             <ul>
-                                <li><a href="{% static 'Community Diet Diversity Project Changes done26nov.docx.pdf' %}">Concept Note on site</a></li>
-                                <li><a href="{% static 'concept_note_DietDiversityScore_for_children.pdf' %}">Concept Note on Diet Score</a></li>
-                                <li>
+                                <!-- <li><a href="{% static 'Community Diet Diversity Project Changes done26nov.docx.pdf' %}">Concept Note on site</a></li>
+                                <li><a href="{% static 'concept_note_DietDiversityScore_for_children.pdf' %}">Concept Note on Diet Score</a></li> -->
+                                <li> 
                                     <a href="/register/">Partners</a>
                                 </li>
                                 <li><a href="{% static 'Overview for Community DIet Diversity Project.pdf' %}">Narrative</a></li>
@@ -194,8 +194,7 @@ https://templatemo.com/tm-529-ramayana
                                 <li><a href="https://poshanvatika.communitygis.net/">Maps</a></li>
                             </ul>
                         </li>
-                        <li><a href="https://www.google.com">ICDS Project</a></li>
-
+                      
                         <li><a href="/resources/">Resources</a></li>
                             <!-- <ul> 
                             
@@ -231,19 +230,19 @@ https://templatemo.com/tm-529-ramayana
                             </ul>
                         </li> -->
                     
-                        {% if user.is_authenticated %}
+                        <!-- {% if user.is_authenticated %}
 
-                        <!-- <li class="active"><a href="/map/">Maps</li> -->
+                        <li class="active"><a href="/map/">Maps</li>
                         <li class="active"><a href="/logout/">Logout</li>
                             {% else %}
                             <li><a href="/login/">Login/Register</a></li>
-                        {% endif %}
+                        {% endif %} -->
 
                     </ul>
                 </nav>
                 <div class="header-content">
             
-                    <form action="{% url 'set_language' %}" method="post">
+                    <form action="" method="post">
                         {% csrf_token %}
                         <input name="next" type="hidden" value="{{ redirect_to }}" />
                 
@@ -312,6 +311,7 @@ https://templatemo.com/tm-529-ramayana
     <script src="{% static 'assets/js/transition.js' %}"></script>
     <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
     <script src="{% static 'assets/js/custom.js' %}"></script>
+   
 </body>
 
 

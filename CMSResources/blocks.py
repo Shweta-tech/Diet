@@ -66,3 +66,24 @@ class VideoCardBlock(blocks.StructBlock):
         template="CMSResources/video_card.html"
         icon="media"
         label="Video Cards"
+
+
+class ResourcesLinkBlock(blocks.StructBlock):
+    
+    title = blocks.CharBlock(required = True, help_text  = 'Add Title')
+    cards = blocks.ListBlock(
+        blocks.StructBlock(
+            [   
+                ("title", blocks.CharBlock(required = True, help_text  = 'Title')),
+                ("description", blocks.TextBlock(required = True, help_text = 'Description')),
+                ("link", blocks.RichTextBlock(required=True,help_text = 'Resources Link')),
+            ]
+            
+       )
+    )
+    
+   
+    class Meta:
+        template="CMSResources/resourceslinks.html"
+        icon="media"
+        label="Resources Link"
