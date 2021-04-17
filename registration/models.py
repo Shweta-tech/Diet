@@ -13,8 +13,6 @@ from django_cryptography.fields import encrypt
 from uuid import UUID
 from fernet_fields import EncryptedTextField
 
-
-
 Qualification = [
             ('BSc', 'BSc'),
             ('BSW', 'BSW'),
@@ -237,3 +235,193 @@ class   SchoolStudentParent(models.Model):
     contact=models.CharField(max_length=10,blank=True)
     schoolname=  models.CharField(max_length=200)
     personaladdress = models.CharField(max_length=200,null=True)
+
+sex=[
+            ('male', 'male'),
+            ('female', 'female'),
+    ]
+religious=[
+    ('Hinduism','Hinduism'),
+    ('Islam','Islam'),
+    ('Christianity','Christianity'),
+    ('Sikhism','Sikhism'),
+    ('Jainism','Jainism'),
+    ('Buddhism','Buddhism'),
+    ('Other','Other'),
+]
+class NutriInfotainmentSurveyModel(models.Model):
+    name_of_volunteer=models.CharField(max_length=255,blank=True)
+    name_of_student=models.CharField(max_length=255,blank=True)
+    gender=models.CharField(blank=True,choices=sex,max_length=20)
+    birthdate=models.DateField(max_length=20,null=True)
+    residential_address=models.CharField(max_length=2000,null=True)
+    pincode=models.CharField(max_length=10,blank=True)
+    name_of_school=models.CharField(max_length=255,blank=True)
+    address_of_school=models.CharField(max_length=255,blank=True)
+    pincode_of_school=models.CharField(max_length=10,blank=True)
+    personal_contact_number=models.CharField(max_length=20,blank=True)
+    religion=models.CharField(blank=True,choices=religious,max_length=20)
+
+family=[('My parents','My parents'),
+        ('My parents and siblings','My parents and siblings'),
+        ('My parents, siblings and grandparents','My parents, siblings and grandparents'),
+        ('My parents, siblings, grandparents, aunts, uncles and cousins','My parents, siblings, grandparents, aunts, uncles and cousins'),
+        ('Others','Others'),
+        ]
+edu_guar=[('Professional degree (Post graduate)','Professional degree (Post graduate)'),
+        ('Graduate (Bachelors)','Graduate (Bachelors)'),
+        ('Higher Secondary certificate (12th Std)','Higher Secondary certificate (12th Std)'),
+        ('Secondary school certificate (SSC - 10th Std)','Secondary school certificate (SSC - 10th Std)'),
+        ('Middle school (5th to 10th std)','Middle school (5th to 10th std)'),
+        ('Primary school (1st to 4th std)','Primary school (1st to 4th std)'),
+        ('Illiterate (No education)','Illiterate (No education)'),
+        ('Other','Other'),
+        ]
+
+income=[('>199,862','>199,862'),
+        ('99,931- 199,861','99,931- 199,861'),
+        ('74,755 - 99,930','74,755 - 99,930'),
+        ('49,962- 74,755','49,962- 74,755'),
+        ('29,973- 49,961','29,973- 49,961'),
+        ('10,002- 29,972','10,002- 29,972'),
+        ('< 10,001','< 10,001'),
+        ]
+ration=[('Red color','Red color'),
+        ('Orange color','Orange color'),
+        ('White color','White color'),
+        ('No ration card','No ration card'),
+]
+occu_guar=[
+('Accountants','Accountants'),
+('Administrative Assistants','Administrative Assistants'), 
+('Advocates','Advocates'), 
+('Anganwadi Worker','Anganwadi Worker'),
+('Architects','Architects'),
+('Assemblers','Assemblers'),
+('Auditors','Auditors'), 
+('Business Person','Business Person'),
+('Cleaners (Washing Windows And Other Glass Surfaces Of Buildings)','Cleaners (Washing Windows And Other Glass Surfaces Of Buildings)'), 
+('College Principals','College Principals'), 
+('Commercial Truck Drivers','Commercial Truck Drivers'), 
+('Cooks','Cooks'),
+('Craftsmen','Craftsmen'), 
+('Crane Operators','Crane Operators'), 
+('Doctors','Doctors'), 
+('Engineers','Engineers'), 
+('Expert Musicians','Expert Musicians'), 
+('Farmers','Farmers'), 
+('Fishermen','Fishermen'),
+('Garbage Collector','Garbage Collector'), 
+('General Office Clerks','General Office Clerks'), 
+('Housekeeper/ Housemaid (Hotels/ House)','Housekeeper/ Housemaid (Hotels/ House)'), 
+('Lecturers','Lecturers'), 
+('Mechanist','Mechanist'), 
+('Newspaper Editors','Newspaper Editors'), 
+('Nurse','Nurse'),
+('Office Assistants','Office Assistants'), 
+('Paramedics','Paramedics'), 
+('Plant And Machine Operators','Plant And Machine Operators'), 
+('Plumbers','Plumbers'), 
+('Police Officers','Police Officers'), 
+('Reading And Emptying Meters','Reading And Emptying Meters'), 
+('Receptionists','Receptionists'), 
+('Retired','Retired'),
+('Salesman','Salesman'), 
+('Scientists','Scientists'), 
+('Security Guard (Housing Societies/Company/Banks/Land)','Security Guard (Housing Societies/Company/Banks/Land)'), 
+('Senior Administrative Officers','Senior Administrative Officers'), 
+('Software Development','Software Development'), 
+('Soldiers','Soldiers'), 
+('Stocking Vending Machines','Stocking Vending Machines'),
+('Street Vendor','Street Vendor'), 
+('Sweeper','Sweeper'),
+('Unemployed','Unemployed'),
+('OTHERS','OTHERS'),
+]
+
+class NutriSocioDemographicModel(models.Model):
+    i_live_with=models.CharField(blank=True,choices=family,max_length=100)
+    number_of_family_members=models.CharField(blank=True,max_length=100)
+    name_of_the_guardian=models.CharField(blank=True,max_length=100)
+    age_of_the_guardian=models.CharField(blank=True,max_length=100)
+    education_of_the_guardian=models.CharField(blank=True,max_length=100,choices=edu_guar)
+    occupation_of_the_guardian=models.CharField(blank=True,max_length=300,choices=occu_guar)
+    monthly_family_income=models.CharField(blank=True,max_length=100,choices=income)
+    ration_card_color_is=models.CharField(blank=True,max_length=100,choices=ration)
+
+class NutriAnthropometricParametersModel(models.Model):
+    Enter_your_weight=models.CharField(blank=True,max_length=100)
+    Enter_your_height=models.CharField(blank=True,max_length=100)
+    Enter_your_waist_circumference=models.CharField(blank=True,max_length=100)
+    Enter_your_hip_circumference=models.CharField(blank=True,max_length=100)
+
+dietary_habit=[
+    ('Please select:','Please select:'),
+    ('I eat only vegetables. I DO NOT eat milk, eggs, chiken, mutton or fish. (Vegan)','I eat only vegetables. I DO NOT eat milk, eggs, chiken, mutton or fish. (Vegan)'),
+    ('I eat only milk and vegetables. I DO NOT eat eggs, chicken, mutton, fish. (Lacto-Vegetarian)','I eat only milk and vegetables. I DO NOT eat eggs, chicken, mutton, fish. (Lacto-Vegetarian)'),
+    ('I eat only eggs and vegetables. I DO NOT eat milk, chicken, mutton or fish. (Eggetarian)','I eat only eggs and vegetables. I DO NOT eat milk, chicken, mutton or fish. (Eggetarian)'),
+    ('I eat milk, eggs and vegetables. I DO NOT eat chicken, mutton, fish.(Lacto-ova-vegetarian)','I eat milk, eggs and vegetables. I DO NOT eat chicken, mutton, fish.(Lacto-ova-vegetarian)'),
+    ('I eat vegetables, milk, egg, chicken, mutton, fish. (Non-vegetarian)','I eat vegetables, milk, egg, chicken, mutton, fish. (Non-vegetarian)'),
+    ('I eat vegetables, milk and fish. I DO NOT eat eggs, chicken and mutton. (Pescatarian)','I eat vegetables, milk and fish. I DO NOT eat eggs, chicken and mutton. (Pescatarian)'),
+]
+
+meal_time=[
+    ('Breakfast','Breakfast'),
+    ('Mid-morning snack','Mid-morning snack'),
+    ('Lunch','Lunch'),
+    ('Afternoon snack','Afternoon snack'),
+    ('Evening snack','Evening snack'),
+    ('Dinner','Dinner'),
+    ('Bed-time snack','Bed-time snack'),
+    ('Other','Other'),
+]
+tiffin_ch=[
+    ('Please select:','Please select:'),
+    ('I carry my tiffin daily','I carry my tiffin daily'),
+    ('I carry my tiffin only once a week','I carry my tiffin only once a week'),
+    ('I carry my tiffin 2-3 times a week','I carry my tiffin 2-3 times a week'),
+    ('I carry my tiffin more than 3 times a week','I carry my tiffin more than 3 times a week'),
+    ('I never carry my tiffin','I never carry my tiffin'),
+]
+midday_meal_ch=[
+    ('Please select:','Please select:'),
+    ('Yes, I get it and I love it','Yes, I get it and I love it'),
+    ('Yes, I get it but I dont Like it so I eat something else','Yes, I get it but I dont Like it so I eat something else'),
+    ('No, I dont get Mid-day meal in my school','No, I dont get Mid-day meal in my school'),
+]
+soyabean_ch=[
+    ('Please select:','Please select:'),
+    ('Daily','Daily'),
+    ('Thrice in a week','Thrice in a week'),
+    ('Once in a week','Once in a week'),
+    ('Twice in a month','Twice in a month'),
+    ('Monthly','Monthly'),
+    ('Never','Never'),
+]
+# binary=[
+#     ('yes','yes'),
+#     ('no','no'),
+# ]
+yesno=[
+    ('yes','yes'),
+    ('no','no'),
+]
+class FoodHabitsModel(models.Model):
+    Choose_your_dietary_habit=models.CharField(blank=True,max_length=100,choices=dietary_habit)
+    #Choose_meals_consumed_in_a_day=models.CharField(blank=True,max_length=100,choices=meal_time)
+    Choose_meals_consumed_in_a_day=MultiSelectField(blank=True,choices=meal_time)
+    other_meal=models.CharField(blank=True,max_length=1000)
+    breakfast=models.CharField(blank=True,max_length=1000)
+    lunch=models.CharField(blank=True,max_length=1000)
+    dinner=models.CharField(blank=True,max_length=1000)
+    snack=models.CharField(blank=True,max_length=1000)
+    canteen=models.CharField(blank=True,max_length=1000)
+    tiffin=models.CharField(blank=True,max_length=100,choices=tiffin_ch)
+    midday_meal=models.CharField(blank=True,max_length=100,choices=midday_meal_ch)
+    soyabean=models.CharField(blank=True,max_length=100,choices=soyabean_ch)
+    bananapeel=models.CharField(blank=True,max_length=100,choices=yesno)
+    bottlegourd=models.CharField(blank=True,max_length=100,choices=yesno)
+    
+
+
+
