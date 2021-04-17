@@ -109,3 +109,6 @@ def RecipePage(request):
    
 def clock(request):
     return render(request,'new.html')
+
+def aboutus(request):
+    return render(request,'about.html')

@@ -111,7 +111,7 @@ ENCRYPT_KEY=b'e6P0yF7QPoszzM1FmMrfKs8yPDZ1OAHl-jhHRDYpD6g='
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'c_diet',
+        'NAME': 'c_diet2',
         'USER' : 'postgres',
         'PASSWORD' : 'postgres',
         'HOST': 'localhost',
