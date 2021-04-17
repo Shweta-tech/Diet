@@ -1,8 +1,16 @@
 from django.db import models
 from datetime import datetime
+<<<<<<< HEAD
 from django.conf import settings
+=======
+<<<<<<< HEAD
+from multiselectfield import MultiSelectField
+from registration.models import Student,Mentor,SchoolCoordinator,MukhyaSevika,AnganwadiWorkersRegister
+=======
+>>>>>>> 1961275a2d43ba6a3a5ad7daf6320a2bf419ed50
 from django.contrib.auth.models import User
 from registration.models import Student,Mentor,SchoolCoordinator,MukhyaSevika,AnganwadiWorkersRegister,anemicadolescentgirl
+>>>>>>> 97f532dadca856a2f108235854001be68d4cbc17
 fatheroccupation = [('Legislators,Senior Officials & Managers','Legislators,Senior Officials & Managers'),
     ('Professionals','Professionals'),
     ('Technicians and Associate Professionals','Technicians and Associate Professionals'),
@@ -380,6 +388,31 @@ class pregnantwomanprof(models.Model):
     weight = models.IntegerField()
     weightunit = models.CharField(max_length=255,choices=unit )
     height = models.IntegerField()
+<<<<<<< HEAD
+    heightunit = models.CharField(max_length = 50)
+    bmi= models.DecimalField(max_digits = 5,decimal_places = 2)
+    age = models.IntegerField()
+    hemoglobinvalue = models.IntegerField()
+    hemoglobindate = models.DateField(default=datetime.now, blank=True)
+    food = models.CharField(max_length = 50, blank=True)
+    complication = models.CharField(max_length = 50)
+    medication = models.CharField(max_length = 50)
+    health = models.CharField(max_length = 50, blank = True)
+    medical= models.CharField(max_length = 50)
+    uploaded_file = models.FileField(upload_to='pregnantwomandocuments/%Y/%m/%d')
+    feedback = models.CharField(max_length = 100)
+
+# class DietRecallModel(models.Model):
+#     uid = models.CharField(max_length=255,default=False)
+#     eathabit=models.CharField(max_length=200,default=False)
+#     # TIMING TABLE
+#     glasseswater=models.CharField(max_length=200,default=False)
+#     # FOOD ITEM TABLE
+#     foodtime=models.CharField(max_length=200,default=False)
+#     beforelock=models.CharField(max_length=200,default=False)
+#     middaymeal=models.CharField(max_length=200,default=False) #add typing choice
+#     # MANY TABLES
+=======
     heightunit = models.CharField(max_length = 50,choices=hgtunit)
     bmi= models.DecimalField(max_digits = 10,decimal_places = 3)
     waist = models.IntegerField(null=True)
@@ -391,6 +424,7 @@ class pregnantwomanprof(models.Model):
     foodhabits =  models.CharField(max_length = 20,choices=foodhabit,null = True)
     profile_photo = models.FileField(upload_to='anemicpregnantwoman/%Y/%m/%d')
     feedback = models.CharField(max_length=2550)
+<<<<<<< HEAD
 
 class GeneralInformation(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default = 1)
@@ -416,3 +450,6 @@ class SocioDemographicModel(models.Model):
     guardian_occupation=models.CharField(blank=True,max_length=300,choices=occu_guar)
     monthly_family_income=models.CharField(blank=True,max_length=100,choices=annualincome)
     ration_card_color=models.CharField(blank=True,max_length=100,choices=ration)
+=======
+>>>>>>> 97f532dadca856a2f108235854001be68d4cbc17
+>>>>>>> 1961275a2d43ba6a3a5ad7daf6320a2bf419ed50

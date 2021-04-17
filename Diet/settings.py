@@ -67,7 +67,8 @@ INSTALLED_APPS = [
     'resources',
     'data_feed',
     'bootstrap_datepicker_plus',
-    'bootstrap4'
+    'bootstrap4',
+    'multiselectfield'
 ]
 
 MIDDLEWARE = [
@@ -111,9 +112,13 @@ ENCRYPT_KEY=b'e6P0yF7QPoszzM1FmMrfKs8yPDZ1OAHl-jhHRDYpD6g='
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+<<<<<<< HEAD
+         'NAME': 'cdd-again',
+=======
         'NAME': 'c_diet',
+>>>>>>> 97f532dadca856a2f108235854001be68d4cbc17
         'USER' : 'postgres',
-        'PASSWORD' : 'postgres',
+        'PASSWORD' : 'Matku2k18',
         'HOST': 'localhost',
         'PORT':'5432'
     }
