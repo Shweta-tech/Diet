@@ -28,7 +28,7 @@ urlpatterns = [
  
     url(r'^student_register/', views.student, name='student_register'),
     # url(r'^adolescent_girl_registration/', views.adolescent_girl_register, name='adolescent_girl_registration'),
-    url(r'^anemic_pregnant_woman_registration/', views.anemic_pregnant_woman_registration, name='anemic_pregnant_woman_registration'),
+    url(r'^anemic_pregnant_woman_register/', views.anemic_pregnant_woman_register, name='anemic_pregnant_woman_register'),
     url(r'^anemic_lactating_mother_resgiter/', views.anemic_lactating_mother_resgiter, name='anemic_lactating_mother_resgiter'),
     url(r'^anemic_adolescent_girl_register/', views.anemic_adolescent_girl_register, name='anemic_adolescent_girl_register'),
     url(r'^sam_mam_child_register/$',views.sam_mam_child_register, name='sam_mam_child_register'),

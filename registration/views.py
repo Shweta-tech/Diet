@@ -3,10 +3,17 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
+<<<<<<< HEAD
 from .forms import StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolCoordinatorForm,MentorForm,Form,AnemicPregnantWomanForm,ConcentForm,NutriGardenExpertForm,SMChildParentsRegisterForm,AnemicLactatingMotherForm,AnemicAdolescentGirlForm,SMChildForm,SchoolStudentParentForm,NutriInfotainmentSurveyForm,NutriSocioDemographicForm,NutriAnthropometricParametersForm,FoodHabitsForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User,auth
 from .models import Mentor,MukhyaSevika,AnganwadiWorkersRegister,Student,SchoolCoordinator,User,AnemicPregnantWoman,ConcentForm,NutriGardenExpert,SMChildParentsRegister,AnemicLactatingMother,AnemicAdolescentGirl,SMChild,SchoolStudentParent,NutriInfotainmentSurveyModel,NutriSocioDemographicModel,NutriAnthropometricParametersModel,FoodHabitsModel
+=======
+from .forms import StudentForm,MukhyaSevikaForm,AnganwadiWorkerForm,SchoolCoordinatorForm,MentorForm,Form,AnemicPregnantWomanForm,ConcentForm,NutriGardenExpertForm,SMChildParentsRegisterForm,AnemicLactatingMotherForm,anemicadolescentgirlForm,SMChildForm,SchoolStudentParentForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User,auth
+from .models import Mentor,MukhyaSevika,AnganwadiWorkersRegister,Student,SchoolCoordinator,User,AnemicPregnantWoman,ConcentForm,NutriGardenExpert,SMChildParentsRegister,AnemicLactatingMother,anemicadolescentgirl,SMChild,SchoolStudentParent
+>>>>>>> 97f532dadca856a2f108235854001be68d4cbc17
 from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -18,7 +25,7 @@ from django.contrib.auth.models import Group
 from django.core.mail import EmailMessage
 
 from django.core.mail import send_mail
-from django.contrib.auth.models import Group
+# from django.contrib.auth.models import Group
 from .resources import bulkResource
 from django.http import HttpResponse
 from cryptography.fernet import Fernet
@@ -93,7 +100,7 @@ def school_coordinator_register(request):
             username=form.cleaned_data['username']
             email=form.cleaned_data['email']
             password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            stuff_in_string ="Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(firstname,username, password)
             print(stuff_in_string)
                 # email=i.email }}
             
@@ -134,7 +141,7 @@ def student(request):
             username=form.cleaned_data['username']
             email=form.cleaned_data['email']
             password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            stuff_in_string ="Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(firstname,username, password)
             print(stuff_in_string)
                 # email=i.email }}
             
@@ -165,7 +172,7 @@ def mukhya_sevika_register(request):
             username=form.cleaned_data['username']
             email=form.cleaned_data['email']
             password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            stuff_in_string ="Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(firstname,username, password)
             print(stuff_in_string)
                 # email=i.email }}
             
@@ -195,7 +202,7 @@ def anganwadi_workers_register(request):
             username=form.cleaned_data['username']
             email=form.cleaned_data['email']
             password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            stuff_in_string ="Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(firstname,username, password)
             print(stuff_in_string)
                 # email=i.email }}
             
@@ -208,26 +215,28 @@ def anganwadi_workers_register(request):
 
 
 
-def anemic_pregnant_woman_registration(request):
+def anemic_pregnant_woman_register(request):
     if request.method== "POST":
         form= Form(request.POST)
         print(form)
         profile_form=AnemicPregnantWomanForm(request.POST,request.FILES)
         print('not valid')
         if form.is_valid() and profile_form.is_valid():
-            user=form.save()
-            print(user)
-            my_group = Group.objects.get(name='anemic_pregnant_woman') 
-            my_group.user_set.add(user)
-            profile= profile_form.save(commit=False)
-            profile.user=user
+            instance = form.save(commit=False)
+            profile=profile_form.save(commit=False)
+            instance.save()
+            print(instance.first_name)
+            profile.user=instance
+            print("working")
             profile.save() 
+            my_group = Group.objects.get(name='anemic_pregnant_woman') 
+            my_group.user_set.add(instance)
             messages.info(request,"User created")
             firstname=form.cleaned_data['first_name']
             username=form.cleaned_data['username']
             email=form.cleaned_data['email']
             password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            stuff_in_string ="Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(firstname,username, password)
             print(stuff_in_string)
                 # email=i.email }}
             
@@ -258,7 +267,7 @@ def sam_mam_child_register(request):
             username=form.cleaned_data['username']
             email=form.cleaned_data['email']
             password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            stuff_in_string ="Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(firstname,username, password)
             print(stuff_in_string)
                 # email=i.email }}
             
@@ -276,19 +285,21 @@ def SMChildParentsRegister(request):
         profile_form= SMChildParentsRegisterForm(request.POST)
         print(profile_form)
         if form.is_valid() and profile_form.is_valid():
-            user=form.save()
-            print(user)
-            my_group = Group.objects.get(name='parents') 
-            my_group.user_set.add(user)
-            profile= profile_form.save(commit=False)
-            profile.user=user
+            instance = form.save(commit=False)
+            profile=profile_form.save(commit=False)
+            instance.save()
+            print(instance.first_name)
+            profile.user=instance
+            print("working")
             profile.save() 
+            my_group = Group.objects.get(name='sam_mam_parents') 
+            my_group.user_set.add(instance)
             messages.info(request,"User created")
             firstname=form.cleaned_data['first_name']
             username=form.cleaned_data['username']
             email=form.cleaned_data['email']
             password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            stuff_in_string ="Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(firstname,username, password)
             print(stuff_in_string)
                 # email=i.email }}
             
@@ -333,7 +344,7 @@ def nutri_garden_expert(request):
             username=form.cleaned_data['username']
             email=form.cleaned_data['email']
             password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            stuff_in_string ="Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(firstname,username, password)
             print(stuff_in_string)
                 # email=i.email }}
             
@@ -378,7 +389,8 @@ def sc_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+
                 print(stuff_in_string)
                 # email=i.email }}
                 send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
@@ -421,7 +433,8 @@ def nutri_garden_expert_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+
                 print(stuff_in_string)
                 # email=i.email }}
                 send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
@@ -451,11 +464,14 @@ def student_bulk(request):
             
             
             else:
-                value = User.objects.create_user(id=data[0],first_name=data[1],last_name=data[2],username=data[3],email=data[4],password=data[5]) 
+                value = User.objects.create_user(id=data[0],first_name=encrypt(data[1]),last_name=encrypt(data[2]),username=data[3],email=encrypt(data[4]),password=data[5]) 
                 value.save()
+                last =encrypt(data[2])
+                print(last)
+                print(decrypt(last))
                 my_group = Group.objects.get(name='student') 
                 my_group.user_set.add(value)
-                contact=Student(uid='STU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)),contact=data[6],user=value)
+                contact=Student(uid='STU'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)),contact=encrypt(data[6]),nutrileader=data[7],user=value)
                 contact.save()
                 messages.info(request,"User created")
                 print('user created')
@@ -504,7 +520,8 @@ def anganwadi_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+
                 print(stuff_in_string)
                 # email=i.email }}
                 send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
@@ -542,7 +559,8 @@ def mukhyasevika_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+
                 print(stuff_in_string)
                 # email=i.email }}
                 send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
@@ -580,7 +598,8 @@ def mentor_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+
                 print(stuff_in_string)
                 # email=i.email }}
                 send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
@@ -615,12 +634,13 @@ def adolescent_bulk(request):
                 value.save()
                 my_group = Group.objects.get(name='adolescent_girl') 
                 my_group.user_set.add(value)
-                contact=AnemicAdolescentGirl(uid=data[6],birthdate=data[7],age=data[8],personalcontact=data[9],ICDSname=data[10],ICDScenteraddress=data[11],ICDScentercontact=data[12],occupation=data[13],education=data[14],annualincome=data[15],weight=data[16],weightunit=data[17],height=data[18],heightunit=data[17],bmi=data[18],waist=data[19],waistunit=data[20],hip=data[21],hipunit=data[22],whratio=data[23],whratioderived=data[24],foodhabbits=data[25],uploaded_photo=data[26],user=value)
+                contact=anemicadolescentgirl(uid=data[6],birthdate=data[7],age=data[8],personalcontact=data[9],ICDSname=data[10],ICDScenteraddress=data[11],ICDScentercontact=data[12],occupation=data[13],education=data[14],annualincome=data[15],weight=data[16],weightunit=data[17],height=data[18],heightunit=data[17],bmi=data[18],waist=data[19],waistunit=data[20],hip=data[21],hipunit=data[22],whratio=data[23],whratioderived=data[24],foodhabbits=data[25],uploaded_photo=data[26],user=value)
                 contact.save()
                 messages.info(request,"User created")
                 print('user created')
 
-                stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+
                 print(stuff_in_string)
                 # email=i.email }}
                 send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
@@ -658,7 +678,8 @@ def sm_parent_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+
                 print(stuff_in_string)
                 # email=i.email }}
                 send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
@@ -696,7 +717,8 @@ def school_parent_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+
                 print(stuff_in_string)
                 # email=i.email }}
                 send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
@@ -733,7 +755,8 @@ def lactatingwoman_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+
                 print(stuff_in_string)
                 # email=i.email }}
                 send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
@@ -770,7 +793,8 @@ def anemicwoman_bulk(request):
                 messages.info(request,"User created")
                 print('user created')
 
-                stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+                stuff_in_string = "Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(data[1],data[3], data[5])
+
                 print(stuff_in_string)
                 # email=i.email }}
                 send_mail('Community Diet Diversity', stuff_in_string, 'communitygis.dietdiversity@gmail.com',
@@ -801,7 +825,7 @@ def mentor_registration(request):
             username=form.cleaned_data['username']
             email=form.cleaned_data['email']
             password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            stuff_in_string ="Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(firstname,username, password)
             print(stuff_in_string)
                 # email=i.email }}
             
@@ -816,23 +840,25 @@ def anemic_adolescent_girl_register(request):
     if request.method== "POST":
         form= Form(request.POST)
         print(form)
-        profile_form=  AnemicAdolescentGirlForm(request.POST,request.FILES)
+        profile_form=  anemicadolescentgirlForm(request.POST,request.FILES)
         print(profile_form)
       
         if form.is_valid() and profile_form.is_valid():
-            user=form.save()
-            print(user)
-            my_group = Group.objects.get(name='adolescent_girl') 
-            my_group.user_set.add(user)
-            profile= profile_form.save(commit=False)
-            profile.user=user
+            instance = form.save(commit=False)
+            profile=profile_form.save(commit=False)
+            instance.save()
+            print(instance.first_name)
+            profile.user=instance
+            print("working")
             profile.save() 
+            my_group = Group.objects.get(name='adolescent_girl') 
+            my_group.user_set.add(instance)
             messages.info(request,"User created")
             firstname=form.cleaned_data['first_name']
             username=form.cleaned_data['username']
             email=form.cleaned_data['email']
             password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            stuff_in_string ="Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(firstname,username, password)
             print(stuff_in_string)
                 # email=i.email }}
             
@@ -840,7 +866,7 @@ def anemic_adolescent_girl_register(request):
             return redirect('/after_login/')
     else:
         form= Form(request.POST)
-        profile_form=  AnemicAdolescentGirlForm()
+        profile_form=  anemicadolescentgirlForm()
     return render(request,"anemic_adolescent_girl_register.html",{"profile_form":profile_form,"form":form})
    
 def anemic_lactating_mother_resgiter(request):
@@ -851,19 +877,21 @@ def anemic_lactating_mother_resgiter(request):
         print(profile_form)
       
         if form.is_valid() and profile_form.is_valid():
-            user=form.save()
-            print(user)
-            my_group = Group.objects.get(name='anemic_lactating_mother') 
-            my_group.user_set.add(user)
-            profile= profile_form.save(commit=False)
-            profile.user=user
+            instance = form.save(commit=False)
+            profile=profile_form.save(commit=False)
+            instance.save()
+            print(instance.first_name)
+            profile.user=instance
+            print("working")
             profile.save() 
+            my_group = Group.objects.get(name='anemic_lactating_mother') 
+            my_group.user_set.add(instance)
             messages.info(request,"User created")
             firstname=form.cleaned_data['first_name']
             username=form.cleaned_data['username']
             email=form.cleaned_data['email']
             password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            stuff_in_string ="Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(firstname,username, password)
             print(stuff_in_string)
                 # email=i.email }}
             
@@ -893,7 +921,7 @@ def school_student_parent_register(request):
             username=form.cleaned_data['username']
             email=form.cleaned_data['email']
             password= form.cleaned_data['password1']
-            stuff_in_string = "Hello {} Your username is {} and Password is {}.Thanks!!".format(firstname,username, password)
+            stuff_in_string ="Hello {} Your username for Community Diet Diversity(dietdiversity.communitygis.net) site is {} and Password is {}.Thanks!!".format(firstname,username, password)
             print(stuff_in_string)
                 # email=i.email }}
             

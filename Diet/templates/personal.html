@@ -140,14 +140,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-<!-- <div><label>Select Language:</label>
+<div><label>Select Language:</label>
     <select id="lang">
             <option>Choose Language</option>
             <option value="english">English</option>
             <option value="hindi">Hindi</option>
             <option value="marathi">Marathi</option>
         </select>
-</div> -->
+</div>
 <div >
     <form action="/personal/" method="POST">
         {% csrf_token %}
@@ -346,9 +346,14 @@
 <script>
     $(document).ready(function() {
         $("#calculate").click(function() {
-            var mdate = $("#birth_date").val().toString();
-            var yearThen = parseInt(mdate.substring(0, 4), 10);
-            var monthThen = parseInt(mdate.substring(5, 7), 10);
+            <div><label>Select Language:</label>
+    <select id="lang">
+            <option>Choose Language</option>
+            <option value="english">English</option>
+            <option value="hindi">Hindi</option>
+            <option value="marathi">Marathi</option>
+        </select>
+</div>;
             var dayThen = parseInt(mdate.substring(8, 10), 10);
 
             var today = new Date();

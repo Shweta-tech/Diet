@@ -28,7 +28,7 @@ SECRET_KEY = '7po=w($if%^)(rthq9qvrgda=+!93oo2l+8qt3$_$f&jlh&uoh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['dietdiversity.communitygis.net','*']
 
 BOOTSTRAP4 = {
     'include_jquery': True,
@@ -112,11 +112,15 @@ ENCRYPT_KEY=b'e6P0yF7QPoszzM1FmMrfKs8yPDZ1OAHl-jhHRDYpD6g='
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+<<<<<<< HEAD
          'NAME': 'cdd-again',
+=======
+        'NAME': 'c_diet',
+>>>>>>> 97f532dadca856a2f108235854001be68d4cbc17
         'USER' : 'postgres',
         'PASSWORD' : 'Matku2k18',
         'HOST': 'localhost',
-         'PORT':'5432'
+        'PORT':'5432'
     }
 }
 
@@ -171,18 +175,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/static/'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'communitygis.dietdiversity@gmail.com'
-EMAIL_HOST_PASSWORD = 'cdd@2021'
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
-
-# EMAIL_HOST_USER="communitygis.dietdiversity@gmail.com"
-# EMAIL_HOST='smtp.gmail.com'
-# EMAIL_PORT=80
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_PASSWORD= "cdd@2021"
+EMAIL_HOST_USER="communitygis.dietdiversity@gmail.com"
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=465
+EMAIL_USE_TLS = True
+EMAIL_HOST_PASSWORD= "cdd@2021"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]

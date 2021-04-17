@@ -29,139 +29,40 @@ color: lavenderblush;        }
 
 <body class="myform">
     <!-- List of uploaded documents -->
-    <h1>School Project</h1>
-    <h2>Articles</h2>
-    <button onclick="location.href = '/list_school/'">Upload</button>
-    {% if document %}
-    <ul>
-        {% for doc in document %}
-        <li>
-            <h5>{{doc.title}}</h5>
-        </li>
-
-        <a href="{{ doc.document.url }}">View/Download</a> {% endfor %}
-    </ul>
-    {% else %}
-    <p>No documents.</p>    
-    {% endif %}
-
-    <h2>Images</h2>
-    <button onclick="location.href = '/image_school/'">Upload</button>
-    {% if image %}
-    <ul>
-        {% for img in image %}
-        <li>
-            <h5>{{img.title}}</h5>
-        </li>
-
-        <a href="{{ img.image.url }}">View/Download</a> {% endfor %}
-    </ul>
-    {% else %}
-    <p>No Images.</p>
-    {% endif %}
-
-    <h2>Videos</h2>
-    <button onclick="location.href = '/video_school/'">Upload</button>
-    {% if video %}
-    <ul>
-        {% for vid in video %}
-        <li>
-            <h5>{{vid.title}}</h5>
-        </li>
-
-        <a href="{{ vid.video.url }}">View/Download</a> {% endfor %}
-    </ul>
-    {% else %}
-    <p>No Videos.</p>
-    {% endif %}
-   <h1>Poshanvatika(Nutri-garden) Project</h1>
-   <h2>Articles</h2>
-   <button onclick="location.href = '/list_nutri/'">Upload</button>
-   {% if document1 %}
-   <ul>
-       {% for doc1 in document1 %}
-       <li>
-           <h5>{{doc1.title}}</h5>
-       </li>
-
-       <a href="{{ doc1.document1.url }}">View/Download</a> {% endfor %}
-   </ul>
-   {% else %}
-   <p>No documents.</p>
-   {% endif %}
-   <h2>Images</h2>
-   <button onclick="location.href = '/image_nutri/'">Upload</button>
-   {% if image1 %}
-   <ul>
-       {% for img1 in image1 %}
-       <li>
-           <h5>{{img1.title}}</h5>
-       </li>
-
-       <a href="{{ img1.image1.url }}">View/Download</a> {% endfor %}
-   </ul>
-   {% else %}
-   <p>No Images.</p>
-   {% endif %}
-
-   <h2>Videos</h2>
-   <button onclick="location.href = '/video_nutri/'">Upload</button>
-   {% if video1 %}
-   <ul>
-       {% for vid1 in video1 %}
-       <li>
-           <h5>{{vid1.title}}</h5>
-       </li>
-
-       <a href="{{ vid1.video1.url }}">View/Download</a> {% endfor %}
-   </ul>
-   {% else %}
-   <p>No Videos.</p>
-   {% endif %}
-   <h1>ICDS Project</h1>
-   <h2>Articles</h2>
-   <button onclick="location.href = '/list_icds/'">Upload</button>
-   {% if document2 %}
-   <ul>
-       {% for doc2 in document2 %}
-       <li>
-           <h5>{{doc2.title}}</h5>
-       </li>
-
-       <a href="{{ doc2.document2.url }}">View/Download</a> {% endfor %}
-   </ul>
-   {% else %}
-   <p>No documents.</p>
-   {% endif %}
-   <h2>Images</h2>
-   <button onclick="location.href = '/image_icds/'">Upload</button>
-   {% if image2 %}
-   <ul>
-       {% for img2 in image2 %}
-       <li>
-           <h5>{{img2.title}}</h5>
-       </li>
-
-       <a href="{{ img2.image2.url }}">View/Download</a> {% endfor %}
-   </ul>
-   {% else %}
-   <p>No Images.</p>
-   {% endif %}
-
-   <h2>Videos</h2>
-   <button onclick="location.href = '/video_icds/'">Upload</button>
-   {% if video2 %}
-   <ul>
-       {% for vid2 in video2 %}
-       <li>
-           <h5>{{vid2.title}}</h5>
-       </li>
-
-       <a href="{{ vid2.video2.url }}">View/Download</a> {% endfor %}
-   </ul>
-   {% else %}
-   <p>No Videos.</p>
-   {% endif %}
+    <div class="container">
+        <div class="row" style="margin-top: 150px;">
+    
+    
+            <div class="col-sm-3">
+                <div class="card" style="width: 15rem;">
+                    <img src="{% static 'img/bulk.jpeg' %}" class=" card-img-top " alt="... ">
+                    <div class="card-body">
+                        <h5 class="card-title">School Resources</h5>
+                        <a href="/schoolresources/ " class="btn btn-info ">Continue</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card" style="width: 15rem; margin-left: 85px; ">
+                    <img src="{% static 'img/bulk.jpeg' %}" class=" card-img-top " alt="... ">
+                    <div class="card-body">
+                        <h5 class="card-title">Poshanvatika</h5>
+                        <a href="/poshanvatikaresources/ " class="btn btn-info ">Continue</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card" style="width: 15rem; margin-left: 170px;">
+                    <img src="{% static 'img/bulk.jpeg' %}" class=" card-img-top " alt="... ">
+                    <div class="card-body">
+                        <h5 class="card-title">ICDS Project</h5>
+                        <a href="/icdsresources/ " class="btn btn-info ">Continue</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
 </body>
 <script>
     console.log("{{ document.docfile.name }}")

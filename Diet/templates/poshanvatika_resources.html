@@ -1,0 +1,247 @@
+{% extends 'base.html' %} {% load static%} {% block content %} {% load crispy_forms_tags %}{% load wagtailcore_tags %}{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>jQuery Show Hide Elements Using Select Box</title>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
+
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <style>
+        body {
+            background: aliceblue;
+        }
+        
+        form span {
+            color: red;
+            font-size: 15px;
+        }
+        /*         
+        h1 {
+            background-color: #066f95;
+            padding: 20px 20px 20px 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            font-weight: bolder;
+            padding-bottom: 10px;
+        } */
+        
+        .button {
+            width: 20%;
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #066f95;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px #999;
+        }
+        
+        .button:hover {
+            background-color: #568088
+        }
+        
+        #map {
+            width: 1000px;
+            height: 600px;
+        }
+        
+        .button:active {
+            background-color: #55a5b5;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+        
+        h2 {
+            padding-bottom: 10px;
+            padding-top: 10px;
+            color: #066f95;
+            text-decoration: underline;
+            font-weight: 400;
+            text-align: center;
+        }
+        
+        h3 {
+            padding-top: 20px;
+        }
+        
+        label {
+            font-weight: bold;
+            font-size: 20px;
+            color: black;
+        }
+        
+        #calculate {
+            cursor: pointer;
+            text-align: center;
+            width: 200px;
+            padding: 5px;
+            margin: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #999;
+            border-radius: 10px;
+            background: rgb(245, 243, 243);
+            background: -moz-linear-gradient(top, #FFD119, #E6B800);
+            font-weight: bold;
+            height: 28px;
+        }
+        
+        #calculate:hover {
+            background: -webkit-gradient(linear, left top, left bottom, from(#E6B800), to(#FFD119));
+            background: -moz-linear-gradient(top, #E6B800, #FFD119);
+            margin-top: 13px;
+            height: 25px;
+        }
+        
+        #calculate:active {
+            background: #403300;
+            padding-top: 10px;
+            height: 20px;
+        }
+        
+        /* input,
+        select {
+            width: 100%;
+            color: rgb(39, 22, 22);
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 4px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        } */
+    </style>
+   
+</head>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div><label>Select Resources:</label>
+    <select id="lang">
+            <option>Choose Resources</option>
+            <option value="articles">Articles</option>
+            <option value="images">Images</option>
+            <option value="videos">Videos</option>
+        </select>
+</div>
+<div >
+    <div class="articles box" >
+        <form action="">
+            <h2> Uploaded Articles </h2>
+            {% if document1 %}
+            <ul style="list-style-type: none;">
+               
+                <table>
+                    <tr><th>Group</th><th>Title</th><th colspan="2">Action</th></tr>
+                    {% for doc in document1 %}
+                    <tr>   
+                       <td></td>
+                    <td>{{doc.title}} </td>
+                    <td><a href="{{ doc.document1.url }}" download>Download</a> </td>
+                    <td><a href="{{ doc.document1.url }}" >View</a> </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+                       
+             
+            </ul>
+            {% else %}
+            <p>No documents.</p>    
+            {% endif %}
+            <div class="myform" style="align-items: right;">
+               <a href="/list_nutri/" class="btn btn-info">Upload Articles</a>
+            </div>
+        </form>
+    
+    </div>
+</div>
+<div class="images box">
+    <form action="">
+        <h2> Uploaded Images   </h2>
+        {% if image1 %}
+        <ul style="list-style-type: none;">
+            <table>
+                <tr><th>Group</th><th>Image Title</th><th colspan="2">Action</th></tr>
+
+           
+            {% for img in image1 %}
+                
+            <tr>   
+                <td></td>
+                <td>{{img.title}} </td>
+                <td><a href="{{ img.image.url}}" download>Download</a> </td>
+                <td><a href="{{ img.image.url}}" >View</a> </td>
+                </tr>
+                          
+    
+            {% endfor %}
+        </table>
+        </ul>
+        {% else %}
+        <p>No Images.</p>
+        {% endif %}
+   
+        <div class="myform" style="align-items: right;">
+            <a href="/image_nutri/" class="btn btn-info">Upload Images</a>
+        </div>
+    </form>
+
+</div>
+<div class="videos box">
+    <form action="">
+        <h2> Uploaded Videos   </h2>
+        {% if video1 %}
+   <ul style="list-style-type: none;">
+    <table>
+        <tr><th>Group</th><th>Video Title</th><th colspan="2">Action</th></tr>
+ 
+        {% for vid in video1 %}
+        
+        <tr>   
+               <td></td>
+        <td>{{vid.title}} </td>
+        <td><a href="{{ vid.video.url }}" download>Download</a> </td>
+        <td><a href="{{ vid.video.url }}" >View</a> </td>
+        </tr>
+                  
+
+    {% endfor %}
+    </table>
+      
+      </ul>
+   {% else %}
+   <p>No Videos.</p>
+   {% endif %}
+    </form>
+    <div class="myform" style="align-items: right;">
+        <a href="/video_nutri/" class="btn btn-info">Upload Videos</a>
+     </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#lang").change(function() {
+            $(this).find("option:selected").each(function() {
+                var optionValue = $(this).attr("value");
+                if (optionValue) {
+                    $(".box").not("." + optionValue).hide();
+                    $("." + optionValue).show();
+                } else {
+                    $(".box").hide();
+                }
+            });
+        }).change();
+    });
+</script>
+
+</html>{% endblock %}}

@@ -5,7 +5,10 @@
 <title>Registration</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="">
-
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
 <style>
     .myform {
         margin-top: 200px;
@@ -48,20 +51,20 @@
           <option value="50">50</option>
         </select>
     </div>
-    <h2>Tracksheet Form Details</h2>
+    <h2>Student Details</h2>
 
     <div class="table-responsive">
         <table class="table table-striped table-bordered table-sm" id="myTable">
             <thead class="thead-dark">
 
                 <tr>
-                    <th>Houses Reached </th>
-                    <th>Houses Doing Seggregation</th>
-                    <th>Houses Giving Mixed Wasted</th>
-                    <th>Dry Waste BF</th>
-                    <th>Dry Waste AF </th>
-                    <th>Waste Waste BF</th>
-                    <th>Waste Waste AF</th>
+                    <th>ID </th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                    <th>Email address</th>
+                    <th>Contact Number</th>
+                    <th>Role</th>
                     <!-- <th>Lane Name</th>
                     <th>Attendants</th>
                     <th>First Attendant </th>
@@ -71,37 +74,30 @@
                     <th>Date</th>
                     <th>Supervisor Name</th>
                     <th>Rejected</th>
-                    <th>Zone ID</th>
-                    <th>Update</th> -->
+                    <th>Zone ID</th>-->
+                    <th>Update</th>
                 </tr>
             </thead>
             <tbody>
-                {% for i in datas %}
+                
+                {% for i in user %}
 
                 <tr id="somerow">
-                    <td>{{i.num_houses_reached}}</td>
-                    <td>{{i.num_houses_doing_segg}}</td>
-                    <td>{{i.num_houses_giving_mixwaste}}</td>
-                    <td>{{i.drywaste_bf}}</td>
-                    <td>{{i.drywaste_af}}</td>
-                    <td>{{i.wetwaste_bf}}</td>
-                    <td>{{i.wetwaste_af}}</td>
-                    <td>{{i.lane_name}}</td>
-                    <td>{{i.num_attendants}}</td>
-                    <td>{{i.first_attendants_name}}</td>
-                    <td>{{i.second_attendants_name}}</td>
-                    <td>{{i.time_of_visit}}</td>
-                    <td>{{i.track_id}}</td>
-                    <td>{{i.date}}</td>
-                    <td>{{i.supervisor_name}}</td>
-                    <td>{{i.rejected}}</td>
-                    <td>{{i.zone_id_id}}</td>
+                    <td>{{i.student.uid}}</td>
+                    <td>{{i.first_name}}</td>
+                    <td>{{i.last_name}}</td>
+                    <td>{{i.username}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.student.contact}}</td>
+                    <td>{{i.student.nutrileader}}</td>
+                    
                     <td>
-                        <!-- <a href="/edit/{{ i.track_id }}" style="color: rgb(168, 4, 4);"><span class="glyphicon glyphicon-pencil" >Edit</span></a> -->
-                        <a href="/delete/{{ i.track_id }}" style="color: rgb(122, 23, 23);">Delete</a>
+                        <!-- <a href="/edit/{{ i.id }}" style="color: rgb(168, 4, 4);"><span class="glyphicon glyphicon-pencil" >Edit</span></a> -->
+                        <a href="/delete/{{ i.id }}" style="color: rgb(122, 23, 23);">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
+               
             </tbody>
         </table>
         <nav>
@@ -112,7 +108,7 @@
     <br>
 
 
-    <center><a href="/trackform/" class="btn btn-primary">Add New Record</a></center>
+    <center><a href="/student_register/" class="btn btn-primary">Add New Record</a></center>
     <p></p>
     <!-- <hr> {% for row in excel_data %} {% for cell in row %} {{ cell }}&nbsp;&nbsp; {% endfor %}
     <br> {% endfor %}
@@ -155,7 +151,7 @@
     </table>
 </form>
 </div>
-<!-- </form> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                         </form> -->
 
 
 
@@ -215,5 +211,8 @@
                 }); // end of for each tr in table
             }); // end of on click pagination list
         }
+        console.log({{user.student.contact}})
     </script>
     {% endblock %}
+
+    

@@ -71,89 +71,29 @@ annualincome =  [ ('199,862','199,862'),
 pos =[('teaching-staff','Teaching Staff'),('non-teaching-staff','Non-Teaching Staff'),('principal','Principal')
 ]
 # Create your models here.
-
-
-class AnemicAdolescentGirl(models.Model):
+trimester = [('1st','1st'),('2nd','2nd'),('3rd','3rd')]
+child = [('SAM','SAM'),('MAM','MAM')]
+class anemicadolescentgirl(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     uid = models.CharField(max_length=255,primary_key=True,default=False)
-    birthdate= models.DateField(null=True, blank=True)
-    age = models.IntegerField()
     personalcontact = models.CharField(max_length = 200)
-    ICDSname = models.CharField(max_length = 200)
-    ICDScenteraddress = models.CharField(max_length = 200)
-    ICDScentercontact = models.CharField(max_length = 200)
-    occupation = models.CharField(choices=occupation,max_length=2550)
-    education = models.CharField(choices=education,max_length=255,null = True)
-    annualincome = models.CharField(choices=annualincome,max_length=255,null = True)
-    weight = models.IntegerField()
-    weightunit = models.CharField(max_length=255,choices=unit )
-    height = models.IntegerField()
-    heightunit = models.CharField(max_length = 50,choices=hgtunit)
-    bmi= models.DecimalField(max_digits = 10,decimal_places = 3)
-    waist = models.IntegerField(null=True)
-    waistunit = models.CharField(max_length=20,choices=hunit)
-    hip = models.IntegerField(null=True)
-    hipunit = models.CharField(max_length=20,choices=hunit)
-    whratio = models.DecimalField(max_digits = 10,null=True,decimal_places = 3)
-    whratioderived = models.IntegerField(null=True)
-    foodhabits =  models.CharField(max_length = 20,choices=foodhabit,null = True)
-    uploaded_photo = models.ImageField(upload_to='AnemicAdolescentGirl/%Y/%m/%d')
-    
-    
-
-
+    ICDSname = models.CharField(max_length = 200)   
+   
 class AnemicLactatingMother(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     uid = models.CharField(max_length=255,primary_key=True,default=False)
-    birthdate = models.DateField(null=True, blank=True)
-    age = models.IntegerField()
     personalcontact = models.CharField(max_length = 200)
-    ICDSname = models.CharField(max_length = 200)
-    ICDScenteraddress = models.CharField(max_length = 200)
-    ICDScentercontact = models.CharField(max_length = 200)
-    occupation = models.CharField(choices=occupation,max_length=2550)
-    education = models.CharField(choices=education,max_length=255,null = True)
-    annualincome = models.CharField(choices=annualincome,max_length=255,null = True)
-    weight = models.IntegerField()
-    weightunit = models.CharField(max_length=255,choices=unit )
-    height = models.IntegerField()
-    heightunit = models.CharField(max_length = 50,choices=hgtunit)
-    bmi= models.DecimalField(max_digits = 10,decimal_places = 3)
-    waist = models.IntegerField(null=True)
-    waistunit = models.CharField(max_length=20,choices=hunit)
-    hip = models.IntegerField(null=True)
-    hipunit = models.CharField(max_length=20,choices=hunit)
-    whratio = models.DecimalField(max_digits = 10,null=True,decimal_places = 3)
-    whratioderived = models.IntegerField(null=True)
-    foodhabits =  models.CharField(max_length = 20,choices=foodhabit,null = True)
-    uploaded_photo = models.ImageField(upload_to='AnemicLactatingMother/%Y/%m/%d')
+    childbirthdate = models.DateField(null=True, blank=True)
+    ICDSname = models.CharField(max_length = 200)   
     
 class AnemicPregnantWoman(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     uid = models.CharField(max_length=255,primary_key=True,default=False)
-    birthdate = models.DateField(null=True, blank=True)
-    age = models.IntegerField()
     personalcontact = models.CharField(max_length = 200)
-    ICDSname = models.CharField(max_length = 200)
-    ICDScenteraddress = models.CharField(max_length = 200)
-    ICDScentercontact = models.CharField(max_length = 200)
-    occupation = models.CharField(choices=occupation,max_length=2550)
-    education = models.CharField(choices=education,max_length=255,null = True)
-    annualincome = models.CharField(choices=annualincome,max_length=255,null = True)
-    weight = models.IntegerField()
-    weightunit = models.CharField(max_length=255,choices=unit )
-    height = models.IntegerField()
-    heightunit = models.CharField(max_length = 50,choices=hgtunit)
-    bmi= models.DecimalField(max_digits = 10,decimal_places = 3)
-    waist = models.IntegerField(null=True)
-    waistunit = models.CharField(max_length=20,choices=hunit)
-    hip = models.IntegerField(null=True)
-    hipunit = models.CharField(max_length=20,choices=hunit)
-    whratio = models.DecimalField(max_digits = 10,null=True,decimal_places = 3)
-    whratioderived = models.IntegerField(null=True)
-    foodhabits =  models.CharField(max_length = 20,choices=foodhabit,null = True)
-    uploaded_photo = models.FileField(upload_to='anemicpregnantwoman/%Y/%m/%d')
-    feedback = models.CharField(max_length=2550)
+    ICDSname = models.CharField(max_length = 200)   
+    trimester = models.CharField(choices = trimester,max_length = 10,null = True)
+
+ 
 
 
 # class ProjectManager(models.Model):
@@ -225,21 +165,12 @@ class SMChild(models.Model):
 class SMChildParentsRegister(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
     uid = models.CharField(max_length=255,primary_key=True,default=False)
-    mothername = models.CharField(max_length=255)
-    fathername = models.CharField(max_length=255)
-    motherbirthdate = models.CharField(max_length=255)
-    fatherbirthdate = models.CharField(max_length=255)
-    motherage = models.IntegerField()
-    fatherage = models.IntegerField()
     personalcontact = models.CharField(max_length = 200)
     ICDSname = models.CharField(max_length = 200)
-    ICDScenteraddress = models.CharField(max_length = 200)
-    ICDScentercontact = models.CharField(max_length = 200)
-    occupation = models.CharField(choices=occupation,max_length=2550)
-    education = models.CharField(choices=education,max_length=255,null = True)
-    annualincome = models.CharField(choices=annualincome,max_length=255,null = True)
-    cuid  = models.CharField(max_length=255)
-
+    childis= models.CharField(max_length = 50,choices = child,null = True)
+    childfirstname = models.CharField(max_length = 200,null = True)
+    childlastname = models.CharField(max_length = 200,null = True)
+    childbirthdate = models.DateField(null=True, blank=True)
 
 class ConcentForm(models.Model):
     concent = models.CharField(max_length=255)

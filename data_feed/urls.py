@@ -28,16 +28,21 @@ urlpatterns = [
     url(r'^body/', views.body_function, name='body'),
     url(r'^dietrecall/', views.diet_recall_function, name='dietrecall'),
     url(r'^daily_schedule/', views.daily_schedule_function, name='daily_schedule'),
-    url(r'^adolescent_anemic_girl_form/', views.adolescent_anemic_girl_form, name='adolescent_anemic_girl_form'),
-    url(r'^pregnant_woman_form/', views.pregnant_woman_form, name='pregnant_woman_form'),
     url(r'^feedbackform/', views.feedbackform, name='feedbackform'),
     url(r'^nutrigarden/', views.nutrigarden, name='nutrigarden'),
     path('change_pass/<int:id>',views.chng_pass),
     path('add_info/<int:id>',views.add_info),
     path('change_pass_up/<int:id>',views.chng_pass_up),
     url(r'^consent/', views.consent, name='consent'),
+<<<<<<< HEAD
 
 
+=======
+    url(r'^student_data/', views.student_data, name='student_data'),
+    path('edit/<int:id>', views.edit),  
+    path('update/<int:id>', views.update),  
+    path('delete/<int:id>', views.destroy),  
+>>>>>>> 97f532dadca856a2f108235854001be68d4cbc17
     
 ]
 if settings.DEBUG:

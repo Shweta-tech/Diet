@@ -21,11 +21,12 @@
         font-weight: bolder;
     }
 </style>
-<form action="/student_register/" method="POST" enctype="multipart/form-data">
+<form action="/add_info/{{user.id}}" enctype='multipart/form-data' method="POST">
+    
     {% csrf_token %}
 
     <div class="myform">
-        <h1> Student  Add Info</h1>
+        <h1>  Add Information </h1>
         <table>{{profile_form.as_table}}</table>
         <button type="submit" class="btn btn-info">Submit</button>
         <br>
@@ -44,10 +45,128 @@
 <script>
     $(document).ready(function() {
             var val_uid='{{data.student.uid}}';
-console.log(val_uid)
+            console.log(val_uid)
             $('#id_uid').val(val_uid);
+            var val_uid='{{data.anemicadolescentgirl.uid}}';
+            console.log(val_uid)
+            $('#id_uid').val(val_uid);
+            var val_uid='{{data.anemiclactatingmother.uid}}';
+            console.log(val_uid)
+            $('#id_uid').val(val_uid);
+            var val_uid='{{data.anemicpregnantwoman.uid}}';
+            console.log(val_uid)
+            $('#id_uid').val(val_uid);
+            var val_uid='{{data.smchildparentsregister.uid}}';
+            console.log(val_uid)
+            $('#id_uid').val(val_uid);
+        $(".some_class").change(function() {
+            var mdate = $("#id_birthdate").val().toString();
+            console.log(mdate)
+            var yearThen = parseInt(mdate.substring(0, 4), 10);
+            var monthThen = parseInt(mdate.substring(5, 7), 10);
+            var dayThen = parseInt(mdate.substring(8, 10), 10);
+
+            var today = new Date();
+            var birthday = new Date(yearThen, monthThen - 1, dayThen);
+
+            var differenceInMilisecond = today.valueOf() - birthday.valueOf();
+
+            var year_age = Math.floor(differenceInMilisecond / 31536000000);
+            console.log(year_age)
+            var day_age = Math.floor((differenceInMilisecond % 31536000000) / 86400000);
+
+            if ((today.getMonth() == birthday.getMonth()) && (today.getDate() == birthday.getDate())) {
+                alert("Happy B'day!!!");
+            }
+
+            var month_age = Math.floor(day_age / 30);
+
+
+
+            $('#id_age').val(year_age+'years'+month_age+'months'+day_age+'days');
             
+  
+    });
         });
 
+
+        $(document).ready(function() {
+        $(".bmicalculateclass").change(function() {
+            var bla = $('#id_weight').val();
+            var valnum = $('#id_weightunit').val();
+            if (valnum == "lbs") {
+                var i = (bla / 2.2046).toFixed(2);
+                console.log(i)
+            } 
+            else {
+                var i = bla;
+                console.log(i)
+            }   
+            
+            var len = $('#id_height').val();
+            var vallen = $('#id_heightunit').val();
+            if (vallen == "feet") {
+
+              var h = (len / 3.281).toFixed(2);
+               console.log(h)
+
+            } else if (vallen == "inches") {
+
+               var h = (len / 100).toFixed(2);
+                console.log(h)
+
+            } else if (vallen == "cms") {
+
+               var h = (len / 39.37).toFixed(2);
+                console.log(h)
+
+            } else {
+               var h = len;
+                console.log(h)
+
+            }
+
+            var calbmi = (i / (h * h)).toFixed(3);
+            $('#id_bmi').val(calbmi);
+
+        });
+    });
+   
+    $(document).ready(function() {
+        $(".whratiocalculateclass").change(function() {
+            var wst = $('#id_waist').val();
+            var valwst = $('#id_waistunit').val();
+            var hip = $('#id_hip').val();
+            var valhip = $('#id_hipunit').val();
+
+            if (valwst == "inches") {
+                var j = (wst * 2.54).toFixed(2);
+                console.log(i)
+            } 
+            else {
+                var j = wst;
+                console.log(i)
+            }   
+            
+           
+
+            if (valhip == "inches") {
+                var i = (hip * 2.54).toFixed(2);
+                console.log(j)
+            } 
+            else {
+                var i = hip;
+                console.log(j)
+            }   
+           
+
+            var whratio = (i / j).toFixed(3);
+            $('#id_whratio').val(whratio);
+
+        });
+    });
+   
+  
+console.log({{user.id}})
 </script>
 {% endblock %}

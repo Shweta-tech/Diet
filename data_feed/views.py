@@ -1,19 +1,22 @@
 from django.shortcuts import render
-from .forms import DailySchedule,BodyForm,EatTodayForm,DietForm,FeedbackForm,studentprofForm,mentorprofForm,scprofForm,ngprofForm,msprofForm,awprofForm
-from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,PersonalInformationForms,mentorprof,AdolescentAnemicGirl,PregnantWoman,studentprof,ngprof,scprof,msprof,awprof
+from .forms import DailySchedule,BodyForm,EatTodayForm,DietForm,FeedbackForm,studentprofForm,mentorprofForm,scprofForm,ngprofForm,msprofForm,awprofForm,anemicadolescentgirlprofForm,anemiclactatingmotherprofForm,pregnantwomanprofForm,smparentsprofForm
+from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,PersonalInformationForms,mentorprof,studentprof,ngprof,scprof,msprof,awprof,anemicadolescentgirlprof,anemiclactatingmotherprof,pregnantwomanprof,smparentsprof
 from registration.models import User,Student
-from registration.forms import Form
+from django.contrib.auth.models import Group, User
+from registration.forms import Form,StudentForm
 from django.shortcuts import redirect
+from .encryption_util import encrypt, decrypt
+from django.contrib import messages
 
 # Create your views here.
 def chng_pass(request, id):  
     data = User.objects.get(id=id)
-    # docdata  = doctor.objects.get(id=id)  
-    # print(data.userprofile.role)
-    # if data.userprofile.role=='admin' and 'custodian':
-    #     return render(request,'bed_dash/confirmation.html', {'data':data})
-    # else:
+    data.first_name=decrypt(data.first_name)
+    data.last_name=decrypt(data.last_name)
+    data.email=decrypt(data.email)
+    data.student.contact=decrypt(data.student.contact)
     return render(request,'pass_change.html', {'data':data}) 
+
 def add_info(request,id):  
     
     data=User.objects.get(id=id)
@@ -28,85 +31,238 @@ def add_info(request,id):
         if group.name ==  'webgis_expert':
             return redirect('/after_login/')
         if group.name ==  'mentor':
-            profile_form=mentorprofForm()
             if request.method == 'POST':
-                print(data.student.uid)
-                if profile_form.is_valid() :
-                    user=profile_form.save()
+                form = mentorprofForm(request.POST,request.FILES)
+                print(form)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
                     return redirect('/after_login/')
-        
+                else:
+                    print("fail")
+                    return redirect('/')
+
             
-                print(profile_form)
+                # print(profile_form)
             else:
+                profile_form=mentorprofForm()
                 return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
         if group.name ==  'school_coordinator':
-            profile_form=scprofForm()
             if request.method == 'POST':
-                print(data.student.uid)
-                if profile_form.is_valid() :
-                    user=profile_form.save()
+                form = scprofForm(request.POST,request.FILES)
+                print(form)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
                     return redirect('/after_login/')
-        
+                else:
+                    print("fail")
+                    return redirect('/')
+
             
-                print(profile_form)
+                # print(profile_form)
             else:
+                profile_form=scprofForm()
                 return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
         if group.name ==  'parents':
             return redirect('/after_login/')
         if group.name ==  'student':
-            print(data.student.uid)
-            profile_form=studentprofForm()
+            # print(data.student.uid)
             if request.method == 'POST':
-                print(data.student.uid)
-                if profile_form.is_valid() :
-                    user=profile_form.save()
+                form = studentprofForm(request.POST,request.FILES)
+                print(form)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
                     return redirect('/after_login/')
-        
+                else:
+                    print("fail")
+                    return redirect('/')
+
             
-                print(profile_form)
+                # print(profile_form)
             else:
+                profile_form=studentprofForm()
                 return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
         if group.name ==  'anganwadi_worker':
-            profile_form=awprofForm()
             if request.method == 'POST':
-                print(data.student.uid)
-                if profile_form.is_valid() :
-                    user=profile_form.save()
+                form = awprofForm(request.POST,request.FILES)
+                print(form)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
                     return redirect('/after_login/')
-        
+                else:
+                    print("fail")
+                    return redirect('/')
+
             
-                print(profile_form)
+                # print(profile_form)
             else:
+                profile_form=awprofForm()
                 return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
         if group.name ==  'mukhya_sevika':
-            profile_form=msprofForm()
             if request.method == 'POST':
-                print(data.student.uid)
-                if profile_form.is_valid() :
-                    user=profile_form.save()
+                form = msprofForm(request.POST,request.FILES)
+                print(form)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
                     return redirect('/after_login/')
-        
+                else:
+                    print("fail")
+                    return redirect('/')
+
             
-                print(profile_form)
+                # print(profile_form)
             else:
+                profile_form=msprofForm()
                 return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
         if group.name ==  'icds_beneficiaries':
             return redirect('/after_login/')
         if group.name ==  'nutrigarden_expert':
-            profile_form=ngprofForm()
             if request.method == 'POST':
-                print(data.student.uid)
-                if profile_form.is_valid() :
-                    user=profile_form.save()
+                form = ngprofForm(request.POST,request.FILES)
+                print(form)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
                     return redirect('/after_login/')
-        
+                else:
+                    print("fail")
+                    return redirect('/')
+
             
-                print(profile_form)
+                # print(profile_form)
             else:
-                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})  
-      
+                profile_form=ngprofForm()
+                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
+
+        if group.name ==  'adolescent_girl':
+            if request.method == 'POST':
+                form = anemicadolescentgirlprofForm(request.POST,request.FILES)
+                print(form)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
+                    return redirect('/after_login/')
+                else:
+                    print("fail")
+                    return redirect('/')
+
+            
+                # print(profile_form)
+            else:
+                profile_form=  anemicadolescentgirlprofForm()
+                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})
+        if group.name ==  'anemic_lactating_mother':
+            if request.method == 'POST':
+                form = anemiclactatingmotherprofForm(request.POST,request.FILES)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
+                    return redirect('/after_login/')
+                else:
+                    print("fail")
+                    return redirect('/')
+
+            
+                # print(profile_form)
+            else:
+                profile_form=  anemiclactatingmotherprofFrom()
+                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})                
+        if group.name ==  'anemic_pregnant_woman':
+            if request.method == 'POST':
+                form = pregnantwomanprofForm(request.POST,request.FILES)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
+                    return redirect('/after_login/')
+                else:
+                    print("fail")
+                    return redirect('/')
+
+            
+                # print(profile_form)
+            else:
+                profile_form=  pregnantwomanprofForm()
+                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})                
+        if group.name ==  'sam_mam_parents':
+            if request.method == 'POST':
+                form = smparentsprofForm(request.POST,request.FILES)
+                if form.is_valid():
+                    user= User.objects.get(id=id)
+                    profile= form.save(commit=False)
+                    profile.user=user
+                    profile.save() 
+                    messages.info(request,"File is saved.")
+                    return redirect('/after_login/')
+                else:
+                    print("fail")
+                    return redirect('/')
+
+            
+                # print(profile_form)
+            else:
+                profile_form=  smparentsprofForm()
+                return render(request,'user_profile.html', {'data':data,'profile_form':profile_form})                
+
+
+
 def consent(request):
     return render(request,'concentform.html')
+
+def student_data(request):
+    user=User.objects.filter(groups__name='student')
+    # user.groups.
+    
+    # stu= Student.objects.all()
+    
+    # hulk=Group.objects.get(name='student')
+    # print(hulk)
+    for i in user:
+        # stu= Student.objects.get(user_id=i.id)
+
+        # print(stu.c/ontact)
+        print(i.id)
+        i.first_name= decrypt(i.first_name)
+        i.last_name=decrypt(i.last_name)
+        i.username=i.username
+        i.email=decrypt(i.email)
+        # i.student.contact=decrypt(i.student.contact)
+
+    # for st in stu:
+    #     # print(st.contact)
+    #     st.contact=decrypt(st.contact)
+    context={'user':user}
+    return render(request,'show_data_student.html',context)
 def chng_pass_up(request, id):
     data = User.objects.get(id=id)
     
@@ -335,63 +491,61 @@ def nutrigarden(request):
 
 
 
-def adolescent_anemic_girl_form(request):
-    if request.method=="POST":
-        uniqueid = request.POST.get('uniqueid')
-        name=request.POST.get('name')
-        weight=request.POST.get('weight')
-        weightunit=request.POST.get('weightunit')
-        height = request.POST.get('height')
-        heightunit= request.POST.get('heightunit')
-        bmi =request.POST.get('bmi')
-        age=request.POST.get('age')
-        hemoglobinvalue= request.POST.get('hb')
-        hemoglobindate = request.POST.get('hbdate')
-        food= request.POST.get('food')
-        complication= request.POST.get('anemia')
-        education= request.POST.get('education')
-        medication= request.POST.get('medication')
-        health= request.POST.get('health')
-        medical = request.POST.get('medical')
-        uploaded_file = request.FILES['myfile']
-        feedback = request.POST.get('fb')
-        print(name)
-        print(uploaded_file)
-        sub= AdolescentAnemicGirl(uniqueid=uniqueid,name=name,weight=weight,weightunit=weightunit,height=height,heightunit=heightunit,bmi=bmi,age=age,hemoglobinvalue=hemoglobinvalue,hemoglobindate=hemoglobindate,food = food,complication=complication,education=education,medication=medication,health=health,medical=medical,uploaded_file = uploaded_file,feedback=feedback)
-        sub.save()
-        print('submitted')
+
+
+def edit(request, id):  
+    data = User.objects.get(id=id)
+    # docdata  = doctor.objects.get(id=id)  
+    # print(data.date)
+    # for i in data:
+    student=Student.objects.get(user_id=id)
+    data.first_name=decrypt(data.first_name)
+    data.last_name=decrypt(data.last_name)
+    data.email=decrypt(data.email)
+    data.student.contact=decrypt(data.student.contact)
+    return render(request,'edit.html', {'data':data,'student':student}) 
+
+def update(request, id):
+    # print(id)
+    # user=User.objects.get(id=id)
+    data = Student.objects.get(user_id=id) 
+    # print(user)
+    # user.first_name=request.POST.get('first_name')
+    # print(user.first_name)
+    # user.last_name=request.POST.get('last_name')
+    # user.email=request.POST.get('email')
+    x=request.POST.get('contact')
+    print(x)
+    # user.first_name=request.POST.get('first_name')
+    # data.first_name=decrypt(data.first_name)
+    # user.save()
+    # profile=Form(request.POST,instance = user)
+    
+    # print(profile)
+    form = StudentForm(request.POST, instance = data)  
+    # print(form.contact)
+    if form.is_valid(): 
+        new=form.cleaned_data["contact"]
+        # print(new)
+        contact=decrypt(new)
+        # print(contact)
+        form.cleaned_data["contact"]=new
+        # # my_group = Group.objects.get(name='s') 
+        # # my_group.user_set.add(user)
+        # profile= form.save(commit=False)
+        # profile.user=new
+        form.save()
+        return redirect("/student_data/")  
     else:
-        return render(request,'adolescent_anemic_girl_form.html') 
-
-    return render(request,'adolescent_anemic_girl_form.html')
-def pregnant_woman_form(request):
-    if request.method=="POST":
-        uniqueid = request.POST.get('uniqueid')
-        name=request.POST.get('name')
-        weight=request.POST.get('weight')
-        weightunit=request.POST.get('weightunit')
-        height = request.POST.get('height')
-        heightunit= request.POST.get('heightunit')
-        bmi =request.POST.get('bmi')
-        age=request.POST.get('age')
-        hemoglobinvalue= request.POST.get('hb')
-        hemoglobindate = request.POST.get('hbdate')
-        food= request.POST.get('food')
-        complication= request.POST.get('anemia')
-        medication= request.POST.get('medication')
-        health= request.POST.get('health')
-        medical = request.POST.get('medical')
-        uploaded_file = request.FILES['myfile']
-        feedback = request.POST.get('fb')
-        print(name)
-        print(uploaded_file)
-        sub= PregnantWoman(uniqueid=uniqueid,name=name,weight=weight,weightunit=weightunit,height=height,heightunit=heightunit,bmi=bmi,age=age,hemoglobinvalue=hemoglobinvalue,hemoglobindate=hemoglobindate,complication=complication,medication=medication,health=health,medical=medical,uploaded_file = uploaded_file,feedback=feedback)
-        sub.save()
-        print('submitted')
-    else:
-        return render(request,'Pregnant_woman_form.html') 
-
-    return render(request,'Pregnant_woman_form.html')
+        print("fail")
+        # data.first_name=decrypt(data.first_name)
+    return render(request, 'edit.html', {'data': data}) 
 
 
-
+def destroy(request, id):  
+    data = User.objects.get(id=id)  
+    stu= Student.objects.get(user_id=id)
+    data.delete()
+    stu.delete()
+    return redirect("/student_data/")  
+ 
