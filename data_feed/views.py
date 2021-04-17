@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .forms import DailySchedule,BodyForm,EatTodayForm,DietForm,FeedbackForm,studentprofForm,mentorprofForm,scprofForm,ngprofForm,msprofForm,awprofForm,anemicadolescentgirlprofForm,anemiclactatingmotherprofForm,pregnantwomanprofForm,smparentsprofForm
-from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,PersonalInformationForms,mentorprof,studentprof,ngprof,scprof,msprof,awprof,anemicadolescentgirlprof,anemiclactatingmotherprof,pregnantwomanprof,smparentsprof
+from .forms import DailySchedule,BodyForm,EatTodayForm,DietForm,FeedbackForm,studentprofForm,mentorprofForm,scprofForm,ngprofForm,msprofForm,awprofForm,anemicadolescentgirlprofForm,anemiclactatingmotherprofForm,pregnantwomanprofForm,smparentsprofForm,GeneralInformationForm,SocioDemographicForm
+from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,PersonalInformationForms,mentorprof,studentprof,ngprof,scprof,msprof,awprof,anemicadolescentgirlprof,anemiclactatingmotherprof,pregnantwomanprof,smparentsprof,GeneralInformation,SocioDemographicModel
 from registration.models import User,Student
 from django.contrib.auth.models import Group, User
 from registration.forms import Form,StudentForm
@@ -487,10 +487,66 @@ def diet_recall_function(request):
 def nutrigarden(request):
     return render(request,'nutrigarden.html')  
 
+def generalinfo(request):
+    
+    if request.method == 'POST':
+        print("after post")
+        form = GeneralInformationForm(request.POST)
+        print(form)
+      
+        if form.is_valid():
+            instance = form.save()
+            instance.user = request.user
+            instance.save()
+            # messages.success(request, 'Form submission successful please fill Socio-Demographic details')
+            print('filled successfuly')
+            return render(request,'form_status.html',{'form':form,'flag':True})  
+        
+    else:
+       
+        # messages.error(request, 'wrong')
+        form = GeneralInformationForm()
+    return render(request,'generalinformation.html',{'form':form,'flag':False})  
+
+def sociodemographicdetails(request):
+    if request.method == 'POST':
+        form =  SocioDemographicForm(request.POST)
+        print(form)
+        
+        if form.is_valid():
+            instance = form.save()
+            instance.user = request.user
+            instance.save()
+            # messages.success(request, 'Form submission successful please fill Next Details')
+            print('filled successfuly')
+            return render(request,'form_status.html',{'form':form,'s_flag':True})  
+    else:
+       
+        # messages.error(request, 'wrong')
+        form = SocioDemographicForm()
+    return render(request,'sociodemographicdetails.html',{'form':form,'s_flag':False})
 
 
-
-
+def form_status(request):
+    current_user = request.user.get_username()
+    user = User.objects.filter(username=current_user).first()
+    output = GeneralInformation.objects.filter(user_id=user.id).first()
+    # print(output.name_of_volunteer)
+    so =  SocioDemographicModel.objects.filter(user_id=user.id).first()
+    # print(so.guardian_name)
+    if output is not None:
+        
+        return render(request,'form_status.html',{'flag':True})  
+    
+    else:
+        
+        return render(request,'form_status.html',{'flag':False})
+    if so is not None:
+        return render(request,'form_status.html',{'s_flag':True})  
+    # print(output.name_of_volunteer)
+    else:
+        
+        return render(request,'form_status.html',{'s_flag':False})
 
 
 def edit(request, id):  

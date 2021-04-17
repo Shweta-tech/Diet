@@ -1,9 +1,13 @@
 from django.db import models
 from datetime import datetime
 <<<<<<< HEAD
+from django.conf import settings
+=======
+<<<<<<< HEAD
 from multiselectfield import MultiSelectField
 from registration.models import Student,Mentor,SchoolCoordinator,MukhyaSevika,AnganwadiWorkersRegister
 =======
+>>>>>>> 1961275a2d43ba6a3a5ad7daf6320a2bf419ed50
 from django.contrib.auth.models import User
 from registration.models import Student,Mentor,SchoolCoordinator,MukhyaSevika,AnganwadiWorkersRegister,anemicadolescentgirl
 >>>>>>> 97f532dadca856a2f108235854001be68d4cbc17
@@ -67,14 +71,91 @@ education = [ ('Professionaldegree','Professionaldegree'),
     ('Primaryschool','Primary school (1st to 4th std)'),
     ('Illiterate','Illiterate (No education)'),
 ]
-annualincome =  [ ('199,862','199,862'),
+annualincome =  [ ('>199,862','>199,862'),
     ('99,931-199,861','99,931-199,861'),
     ('74,755-99,930','74,755-99,930'),
     ('49,962-74,755','49,962-74,755'),
     ('29,973-49,961','29,973-49,961'),
     ('10,002-29,97','10,002-29,97'),
-    ('10,001','10,001'),
+    ('< 10,001','< 10,001'),
 ]
+sex = [('Male','Male'),('Female','Female')]
+religious=[
+    ('Hinduism','Hinduism'),
+    ('Islam','Islam'),
+    ('Christianity','Christianity'),
+    ('Sikhism','Sikhism'),
+    ('Jainism','Jainism'),
+    ('Buddhism','Buddhism'),
+    ('Other','Other'),
+]
+edu_guar=[('Professional degree (Post graduate)','Professional degree (Post graduate)'),
+        ('Graduate (Bachelors)','Graduate (Bachelors)'),
+        ('Higher Secondary certificate (12th Std)','Higher Secondary certificate (12th Std)'),
+        ('Secondary school certificate (SSC - 10th Std)','Secondary school certificate (SSC - 10th Std)'),
+        ('Middle school (5th to 10th std)','Middle school (5th to 10th std)'),
+        ('Primary school (1st to 4th std)','Primary school (1st to 4th std)'),
+        ('Illiterate (No education)','Illiterate (No education)'),
+        ('Other','Other'),
+]
+ration=[('Red color','Red color'),
+        ('Orange color','Orange color'),
+        ('White color','White color'),
+        ('No ration card','No ration card'),
+]
+occu_guar=[
+('Accountants','Accountants'),
+('Administrative Assistants','Administrative Assistants'), 
+('Advocates','Advocates'), 
+('Anganwadi Worker','Anganwadi Worker'),
+('Architects','Architects'),
+('Assemblers','Assemblers'),
+('Auditors','Auditors'), 
+('Business Person','Business Person'),
+('Cleaners','Cleaners'), 
+('College Principals','College Principals'), 
+('Commercial Truck Drivers','Commercial Truck Drivers'), 
+('Cooks','Cooks'),
+('Craftsmen','Craftsmen'), 
+('Crane Operators','Crane Operators'), 
+('Doctors','Doctors'), 
+('Engineers','Engineers'), 
+('Expert Musicians','Expert Musicians'), 
+('Farmers','Farmers'), 
+('Fishermen','Fishermen'),
+('Garbage Collector','Garbage Collector'), 
+('General Office Clerks','General Office Clerks'), 
+('Housekeeper/ Housemaid (Hotels/ House)','Housekeeper/ Housemaid (Hotels/ House)'), 
+('Lecturers','Lecturers'), 
+('Mechanist','Mechanist'), 
+('Newspaper Editors','Newspaper Editors'), 
+('Nurse','Nurse'),
+('Office Assistants','Office Assistants'), 
+('Paramedics','Paramedics'), 
+('Plant And Machine Operators','Plant And Machine Operators'), 
+('Plumbers','Plumbers'), 
+('Police Officers','Police Officers'), 
+('Reading And Emptying Meters','Reading And Emptying Meters'), 
+('Receptionists','Receptionists'), 
+('Retired','Retired'),
+('Salesman','Salesman'), 
+('Scientists','Scientists'), 
+('Security Guard (Housing Societies/Company/Banks/Land)','Security Guard (Housing Societies/Company/Banks/Land)'), 
+('Senior Administrative Officers','Senior Administrative Officers'), 
+('Software Development','Software Development'), 
+('Soldiers','Soldiers'), 
+('Stocking Vending Machines','Stocking Vending Machines'),
+('Street Vendor','Street Vendor'), 
+('Sweeper','Sweeper'),
+('Unemployed','Unemployed'),
+('OTHERS','OTHERS'),
+]
+family=[('My parents','My parents'),
+        ('My parents and siblings','My parents and siblings'),
+        ('My parents, siblings and grandparents','My parents, siblings and grandparents'),
+        ('My parents, siblings, grandparents, aunts, uncles and cousins','My parents, siblings, grandparents, aunts, uncles and cousins'),
+        ('Others','Others'),
+        ]
 # Create your models here.
 class studentprof(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
@@ -343,4 +424,32 @@ class pregnantwomanprof(models.Model):
     foodhabits =  models.CharField(max_length = 20,choices=foodhabit,null = True)
     profile_photo = models.FileField(upload_to='anemicpregnantwoman/%Y/%m/%d')
     feedback = models.CharField(max_length=2550)
+<<<<<<< HEAD
+
+class GeneralInformation(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default = 1)
+    name_of_volunteer=models.CharField(max_length=255,blank=True)
+    name_of_student=models.CharField(max_length=255,blank=True)
+    gender=models.CharField(blank=True,choices=sex,max_length=20)
+    birthdate=models.DateField(max_length=20,null=True)
+    residential_address=models.CharField(max_length=2000,null=True)
+    pincode=models.CharField(max_length=10,blank=True)
+    name_of_school=models.CharField(max_length=255,blank=True)
+    address_of_school=models.CharField(max_length=255,blank=True)
+    pincode_of_school=models.CharField(max_length=10,blank=True)
+    personal_contact_number=models.CharField(max_length=20,blank=True)
+    religion=models.CharField(blank=True,choices=religious,max_length=20)
+
+class SocioDemographicModel(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default = 1)
+    i_live_with=models.CharField(blank=True,choices=family,max_length=100)
+    number_of_family_members=models.CharField(blank=True,max_length=100)
+    guardian_name=models.CharField(blank=True,max_length=100)
+    guardian_age=models.CharField(blank=True,max_length=100)
+    guardian_education=models.CharField(blank=True,max_length=100,choices=edu_guar)
+    guardian_occupation=models.CharField(blank=True,max_length=300,choices=occu_guar)
+    monthly_family_income=models.CharField(blank=True,max_length=100,choices=annualincome)
+    ration_card_color=models.CharField(blank=True,max_length=100,choices=ration)
+=======
 >>>>>>> 97f532dadca856a2f108235854001be68d4cbc17
+>>>>>>> 1961275a2d43ba6a3a5ad7daf6320a2bf419ed50

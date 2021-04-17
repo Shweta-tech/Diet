@@ -7,6 +7,9 @@ import random
 import string
 from django.forms import Textarea
 <<<<<<< HEAD
+from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,studentprof,ngprof,msprof,awprof,mentorprof,scprof,anemicadolescentgirlprof,anemiclactatingmotherprof,pregnantwomanprof,smparentsprof,GeneralInformation,SocioDemographicModel
+=======
+<<<<<<< HEAD
 from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,studentprof,ngprof,msprof,awprof,mentorprof,scprof
 
 eathabit_c=[
@@ -44,6 +47,7 @@ beforelock_c=[
 ]
 =======
 from .models import DailyScheduleForm,BodyModel,EatTodayModel,DietModel,FeedbackModel,studentprof,ngprof,msprof,awprof,mentorprof,scprof,anemicadolescentgirlprof,anemiclactatingmotherprof,pregnantwomanprof,smparentsprof
+>>>>>>> 1961275a2d43ba6a3a5ad7daf6320a2bf419ed50
 
 >>>>>>> 97f532dadca856a2f108235854001be68d4cbc17
 
@@ -203,6 +207,24 @@ class FeedbackForm(forms.ModelForm):
             'issues': Textarea(attrs={'cols': 5, 'rows': 5}),
             'suggestions': Textarea(attrs={'cols': 5, 'rows': 5}),
         }
+<<<<<<< HEAD
+
+class GeneralInformationForm(forms.ModelForm):
+    # birthdate=forms.DateField(input_formats='%Y/%m/%d',widget=forms.DateInput(attrs={'autocomplete':'off','class':'some_class','placeholder':'yyyy/mm/dd'}))
+    
+    class Meta:
+        model = GeneralInformation
+        fields = ['name_of_volunteer','name_of_student','gender','birthdate','residential_address','pincode','name_of_school','address_of_school','pincode_of_school','personal_contact_number','religion']
+        widgets = {
+                    'birthdate': forms.DateInput(format=('%Y/%m/%d'), attrs={'class':'some_class', 'placeholder':'Select a date', 'type':'date'}),
+        }
+class SocioDemographicForm(forms.ModelForm):
+       
+    class Meta:
+        model = SocioDemographicModel
+        fields = ['i_live_with','number_of_family_members','guardian_name','guardian_age','guardian_education','guardian_occupation','monthly_family_income','ration_card_color']
+        
+=======
         
 # class DietRecallForm(forms.ModelForm):
 #     uid =forms.CharField( widget=forms.TextInput(attrs={'readonly':'readonly'}),initial='SMP'+''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(5)))
@@ -214,3 +236,4 @@ class FeedbackForm(forms.ModelForm):
 #     class Meta:
 #         model=DietRecallModel
 #         fields=['eathabit','glasseswater','foodtime','beforelock','middaymeal','uid']
+>>>>>>> 1961275a2d43ba6a3a5ad7daf6320a2bf419ed50
